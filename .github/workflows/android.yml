@@ -34,9 +34,15 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: |
-            frontend/package-lock.json
-            package-lock.json
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Wails Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgtk-4-dev \
+            libwebkitgtk-6.0-dev \
+            pkg-config
 
       - name: Install Wails CLI
         run: |
@@ -71,10 +77,23 @@ jobs:
         run: |
           echo "ANDROID_HOME=$ANDROID_HOME"
           echo "ANDROID_NDK_HOME=$ANDROID_NDK_HOME"
+
           java -version
           go version
           node --version
           npm --version
+
+          echo "Android SDK:"
+          sdkmanager --version
+
+          echo "Android NDK:"
+          test -d "$ANDROID_NDK_HOME"
+          ls -la "$ANDROID_NDK_HOME"
+
+          echo "Wails:"
+          wails3 version
+
+          echo "Wails Doctor:"
           wails3 doctor
 
       - name: Install frontend dependencies
@@ -84,6 +103,9 @@ jobs:
             npm ci
           elif [ -f package-lock.json ]; then
             npm ci
+          else
+            echo "No package-lock.json found"
+            exit 1
           fi
 
       - name: Build Android APK
@@ -103,4 +125,3 @@ jobs:
             **/*.apk
           if-no-files-found: error
           retention-days: 14
-
