@@ -1,0 +1,330 @@
+--------- beginning of main
+10-07 12:20:02.608  6164  6164 I adbd    : adbd service requested 'shell,v2,TERM=xterm-256color,raw:am force-stop com.wails.app'
+--------- beginning of system
+10-07 12:20:02.798  1721 25041 I ActivityManager: Force stopping com.wails.app appid=10335 user=0: from pid 10563
+10-07 12:20:02.808  1721 25041 W ProcessStats: Tracking association SourceState{200035a system/1000 BFgs #546653} whose proc state 4 is better than process ProcessState{da739d8 com.google.android.tts/10180 pkg=com.google.android.tts} proc state 14 (5 skipped)
+10-07 12:20:02.816  1721 25041 I AppsFilter: interaction: PackageSetting{41a3aad com.google.android.microdroid.empty_payload/10246} -> PackageSetting{17a5b8d com.wails.app/10335} BLOCKED
+10-07 12:20:02.849  3096  3096 D CarrierSvcBindHelper: onHandleForceStop: [com.wails.app]
+10-07 12:20:02.849  3096  3359 D EuiccConnector: handleMessage: E msg.what=1
+10-07 12:20:02.849  3096  3359 D EuiccConnector: processMsg: AvailableState
+10-07 12:20:02.849  3096  3359 D EuiccConnector: processMsg: UnavailableState
+10-07 12:20:02.852  3096  3359 D EuiccConnector: transitionTo: destState=AvailableState
+10-07 12:20:02.854  3096  3096 D CarrierSvcBindHelper: No carrier app for: 0
+10-07 12:20:02.855  3096  3096 D CarrierSvcBindHelper: No carrier app for: 1
+10-07 12:20:02.858  6164  6164 I adbd    : adbd service requested 'shell,v2,TERM=xterm-256color,raw:monkey -p com.wails.app 1'
+10-07 12:20:02.862  3096  3359 D EuiccConnector: handleMessage: new destination call exit/enter
+10-07 12:20:02.862  3096  3359 D EuiccConnector: setupTempStateStackWithStatesToEnter: X mTempStateStackCount=1,curStateInfo: state=UnavailableState,active=true,parent=null
+10-07 12:20:02.862  3096  3359 D EuiccConnector: invokeExitMethods: AvailableState
+10-07 12:20:02.862  3096  3359 D EuiccConnector: moveTempStackToStateStack: i=0,j=1
+10-07 12:20:02.862  3096  3359 D EuiccConnector: moveTempStackToStateStack: X mStateStackTop=1,startingIndex=1,Top=AvailableState
+10-07 12:20:02.862  3096  3359 D EuiccConnector: invokeEnterMethods: AvailableState
+10-07 12:20:02.862  3096  3359 D EuiccConnector: handleMessage: X
+10-07 12:20:02.864  3096  3359 D EuiccConnector: handleMessage: E msg.what=103
+10-07 12:20:02.865  3096  3359 D EuiccConnector: processMsg: AvailableState
+10-07 12:20:02.865  3096  3359 D EuiccConnector: deferMessage: msg=103
+10-07 12:20:02.865  3096  3359 D EuiccConnector: transitionTo: destState=BindingState
+10-07 12:20:02.865  3096  3359 D EuiccConnector: handleMessage: new destination call exit/enter
+10-07 12:20:02.865  3096  3359 D EuiccConnector: setupTempStateStackWithStatesToEnter: X mTempStateStackCount=1,curStateInfo: null
+10-07 12:20:02.865  3096  3359 D EuiccConnector: invokeExitMethods: AvailableState
+10-07 12:20:02.865  3096  3359 D EuiccConnector: invokeExitMethods: UnavailableState
+10-07 12:20:02.865  3096  3359 D EuiccConnector: moveTempStackToStateStack: i=0,j=0
+10-07 12:20:02.865  3096  3359 D EuiccConnector: moveTempStackToStateStack: X mStateStackTop=0,startingIndex=0,Top=BindingState
+10-07 12:20:02.865  3096  3359 D EuiccConnector: invokeEnterMethods: BindingState
+10-07 12:20:02.884  1721 25041 D ActivityManager: sync unfroze 28156 com.google.android.euicc for 6
+10-07 12:20:02.896  3096  3359 D EuiccConnector: transitionTo: destState=DisconnectedState
+10-07 12:20:02.896  3096  3359 D EuiccConnector: moveDeferredMessageAtFrontOfQueue; what=103
+10-07 12:20:02.896  3096  3359 D EuiccConnector: handleMessage: new destination call exit/enter
+10-07 12:20:02.896  3096  3359 D EuiccConnector: setupTempStateStackWithStatesToEnter: X mTempStateStackCount=1,curStateInfo: null
+10-07 12:20:02.896  3096  3359 D EuiccConnector: invokeExitMethods: BindingState
+10-07 12:20:02.896  3096  3359 D EuiccConnector: moveTempStackToStateStack: i=0,j=0
+10-07 12:20:02.896  3096  3359 D EuiccConnector: moveTempStackToStateStack: X mStateStackTop=0,startingIndex=0,Top=DisconnectedState
+10-07 12:20:02.896  3096  3359 D EuiccConnector: invokeEnterMethods: DisconnectedState
+10-07 12:20:02.897  3096  3359 D EuiccConnector: handleMessage: X
+10-07 12:20:02.897  3096  3359 D EuiccConnector: handleMessage: E msg.what=103
+10-07 12:20:02.897  3096  3359 D EuiccConnector: processMsg: DisconnectedState
+10-07 12:20:02.897  3096  3359 D EuiccConnector: deferMessage: msg=103
+10-07 12:20:02.897  3096  3359 D EuiccConnector: handleMessage: X
+10-07 12:20:02.904 28156 28280 I PhenotypeProcessReaper: Memory state is: 125
+10-07 12:20:02.920 28156 28156 I EuiccGoogle: [2] NetworkFetcher.getFirstActiveEuiccSlotId: isRemovableEsimDefault: false
+10-07 12:20:02.924 28156 28156 I EuiccGoogle: [2] EuiccServiceImpl.onCreate: onCreate DSDS mode: simCardState is 11
+10-07 12:20:02.927 28156 10568 I EuiccGoogle: [441] Partner.getResourceEntry$ar$ds$ar$class_merging$ar$class_merging$ar$class_merging: Partner app=com.google.android.euiccoverlay, Resource name=esim_supported_countries, type=string, partnerResId = 0
+10-07 12:20:02.927 28156 10568 I EuiccGoogle: [441] Partner.getResourceEntry$ar$ds$ar$class_merging$ar$class_merging$ar$class_merging: Partner app=com.google.android.euiccoverlay, Resource name=esim_unsupported_countries, type=string, partnerResId = 2131755062
+10-07 12:20:02.932  3096  3359 D EuiccConnector: handleMessage: E msg.what=4
+10-07 12:20:02.932  3096  3359 D EuiccConnector: processMsg: DisconnectedState
+10-07 12:20:02.932  3096  3359 D EuiccConnector: transitionTo: destState=ConnectedState
+10-07 12:20:02.932  3096  3359 D EuiccConnector: handleMessage: new destination call exit/enter
+10-07 12:20:02.932  3096  3359 D EuiccConnector: setupTempStateStackWithStatesToEnter: X mTempStateStackCount=1,curStateInfo: state=DisconnectedState,active=true,parent=null
+10-07 12:20:02.932  3096  3359 D EuiccConnector: moveTempStackToStateStack: i=0,j=1
+10-07 12:20:02.933  3096  3359 D EuiccConnector: moveTempStackToStateStack: X mStateStackTop=1,startingIndex=1,Top=ConnectedState
+10-07 12:20:02.933  3096  3359 D EuiccConnector: invokeEnterMethods: ConnectedState
+10-07 12:20:02.933  3096  3359 D EuiccConnector: moveDeferredMessageAtFrontOfQueue; what=103
+10-07 12:20:02.933  3096  3359 D EuiccConnector: handleMessage: X
+10-07 12:20:02.933  3096  3359 D EuiccConnector: handleMessage: E msg.what=103
+10-07 12:20:02.933  3096  3359 D EuiccConnector: processMsg: ConnectedState
+10-07 12:20:02.934 28156 10568 I EuiccGoogle: [441] RecyclerView$Api35Impl.getOverrideCarrierInfoListForConversion: enableNewConversionApi: true, enableConversionXosCarrierIdFromTransferConfig: false
+10-07 12:20:02.934 28156 10568 I EuiccGoogle: [441] RecyclerView$Api35Impl.getCarrierInfos: All carrier info overrides: []
+10-07 12:20:02.935  3096  3359 D EuiccConnector: handleMessage: X
+10-07 12:20:02.935 28156 10568 I EuiccGoogle: [441] PhenotypeUpdatedReceiver.setPsimConversionSupportedCarriers: setPsimConversionSupportedCarriers:[1, 3, 16, 576, 1404, 2020, 2021, 2122, 850, 27, 32, 959, 1187, 1480, 1670, 2119, 2120, 2018, 2536, 1895, 1492]
+10-07 12:20:02.935 28156 10571 I EuiccGoogle: [444] EuiccServiceImpl.onGetEuiccProfileInfoList: onGetEuiccProfileInfoList: slotId = 0
+10-07 12:20:02.938 28156 10571 I EuiccGoogle: [444] EuiccServiceImpl.onGetEuiccProfileInfoList: slotId = 0, isRemovable = false
+10-07 12:20:02.938 28156 10571 I EuiccGoogle: [444] EuiccServiceImpl.onGetEuiccProfileInfoList: onGetEuiccProfileInfoList: isRemovable = false.
+10-07 12:20:02.938 28156 10571 I EuiccGoogle: [444] EuiccServiceImpl.onGetEuiccProfileInfoList: getSimCardState for slotId: 0
+10-07 12:20:02.941 28156 10571 I EuiccGoogle: [444] EuiccServiceImpl.onGetEuiccProfileInfoList: GetEuiccProfileInfoListResult: simCardState :11and simCardStateAtTelephony:11 for slot:0
+10-07 12:20:02.941 28156 10571 I EuiccGoogle: [444] EuiccServiceImpl.getProfileInfoList: getProfileInfoList: slotId = 0, includeTestProfiles = false
+10-07 12:20:02.943 28156 10571 I EuiccGoogle: [444] EuiccServiceImpl.getProfileInfoList: getProfileInfoList: slotId = 0, includeTestProfiles = false.
+10-07 12:20:02.943 28156 10571 I EuiccGoogle: [444] EuiccServiceImpl.getEidFromSlotId: getEidFromSlotId: slotId = 0.
+10-07 12:20:02.944 28156 10571 I EuiccGoogle: [444] NetworkFetcher.getEidForSlot: getEidForSlot: 0
+10-07 12:20:02.946 28156 10571 I EuiccGoogle: [444] BlockingEuiccCardManager.requestAllProfiles: requestAllProfiles: cardId = [f8HS9T6f3TG0sIzbiNr112tAlYw]
+10-07 12:20:03.057  3096  3359 D EuiccConnector: handleMessage: E msg.what=6
+10-07 12:20:03.058  3096  3359 D EuiccConnector: processMsg: ConnectedState
+10-07 12:20:03.058  3096  3359 D EuiccConnector: handleMessage: X
+10-07 12:20:03.224  1391  1391 W TracingMuxer: type=1400 audit(0.0:16778): avc:  denied  { write } for  name="traced_producer" dev="tmpfs" ino=1471 scontext=u:r:gxp_logging:s0 tcontext=u:object_r:traced_producer_socket:s0 tclass=sock_file permissive=0
+10-07 12:20:03.341 17724 10572 I NearbySharing: Got package event: PackageReplaced(packageName=com.wails.app)
+10-07 12:20:04.314 10566 10566 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-07 12:20:04.428 10566 10566 I AndroidRuntime: Using default boot image
+10-07 12:20:04.428 10566 10566 I AndroidRuntime: Leaving lock profiling enabled
+10-07 12:20:04.464 10566 10566 I app_process: Core platform API enforcement reporting only by runtime option
+10-07 12:20:04.469 10566 10566 I app_process: Using generational CollectorTypeCMC GC.
+10-07 12:20:04.841  1270  1301 D PixelGnssPowerWD: MonitorLoop: woke up, state_changed_on_wakeup=false
+10-07 12:20:04.850  1270  1301 D PixelGnssPowerWD: IsHalActive: active=0, meas_active=0, nav_active=0
+10-07 12:20:04.850  1270  1301 D PixelGnssPowerWD: Standby Progress Check: Elapsed=601s, Delta=0 (Stage1 limit=6666 in 1200s, Stage2 limit=13333 in 2400s, Fatal limit=20000 in 3600s)
+10-07 12:20:04.958 10566 10566 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+10-07 12:20:05.116 10566 10566 D nativeloader: Load libicu_jni.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+10-07 12:20:05.117 10566 10566 D app_process: u_setTimeZoneFilesDirectory("/apex/com.android.tzdata/etc/tz/versioned/10/icu") succeeded. 
+10-07 12:20:05.118 10566 10566 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt78l.dat
+10-07 12:20:05.132 10566 10566 D nativeloader: Load libjavacore.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+10-07 12:20:05.142 10566 10566 D nativeloader: Load libopenjdk.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+10-07 12:20:05.152 10566 10566 I app_process: Priority-to-niceness mapping: 19, 16, 13, 10, 0, -2, -4, -5, -6, -8
+10-07 12:20:05.384 10566 10566 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+10-07 12:20:05.385 10566 10566 D AndroidRuntime: Calling main entry com.android.commands.monkey.Monkey
+10-07 12:20:05.393 10566 10566 D nativeloader: Load /system/lib64/libmonkey_jni.so using ns default for caller /system/framework/monkey.jar in same partition (is_bridged=0): ok
+10-07 12:20:05.394 10566 10566 W Monkey  : args: [-p, com.wails.app, 1]
+10-07 12:20:05.420 10566 10566 I AconfigPackage: com.android.wifi.flags is mapped to com.android.wifi
+10-07 12:20:05.421 10566 10566 I AconfigPackage: com.android.adservices.ondevicepersonalization.flags is mapped to com.android.ondevicepersonalization
+10-07 12:20:05.423 10566 10566 I AconfigPackage: com.android.signature.flags is mapped to com.android.mediaprovider
+10-07 12:20:05.423 10566 10566 I AconfigPackage: com.android.providers.media.flags is mapped to com.android.mediaprovider
+10-07 12:20:05.423 10566 10566 I AconfigPackage: android.graphics.pdf.flags is mapped to com.android.mediaprovider
+10-07 12:20:05.423 10566 10566 I AconfigPackage: android.graphics.pdf.flags.readonly is mapped to com.android.mediaprovider
+10-07 12:20:05.425 10566 10566 I AconfigPackage: com.android.art.flags is mapped to com.android.art
+10-07 12:20:05.425 10566 10566 I AconfigPackage: com.android.art.rw.flags is mapped to com.android.art
+10-07 12:20:05.425 10566 10566 I AconfigPackage: com.android.libcore is mapped to com.android.art
+10-07 12:20:05.427 10566 10566 I AconfigPackage: com.android.tethering.mainline.beta is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: android.net.http is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: com.android.tethering.readonly.flags is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: android.net.vcn is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: com.android.net.flags is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: com.android.tethering.flags is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: com.android.tethering.beta.test is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: com.android.nearby.flags is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: com.android.net.thread.flags is mapped to com.android.tethering
+10-07 12:20:05.427 10566 10566 I AconfigPackage: android.net.http.flags is mapped to com.android.tethering
+10-07 12:20:05.429 10566 10566 I AconfigPackage: android.os.profiling is mapped to com.android.profiling
+10-07 12:20:05.429 10566 10566 I AconfigPackage: android.os.profiling.anomaly.beta.flags is mapped to com.android.profiling
+10-07 12:20:05.429 10566 10566 I AconfigPackage: android.os.profiling.anomaly.flags is mapped to com.android.profiling
+10-07 12:20:05.431 10566 10566 I AconfigPackage: com.android.media.extractor.flags is mapped to com.android.media
+10-07 12:20:05.431 10566 10566 I AconfigPackage: com.android.media.metrics.flags is mapped to com.android.media
+10-07 12:20:05.431 10566 10566 I AconfigPackage: com.android.media.mainline.flags is mapped to com.android.media
+10-07 12:20:05.432 10566 10566 I AconfigPackage: com.android.cellbroadcastreceiver.flags is mapped to com.android.cellbroadcast
+10-07 12:20:05.434 10566 10566 I AconfigPackage: com.android.bluetooth.beta.flags is mapped to com.android.bt
+10-07 12:20:05.434 10566 10566 I AconfigPackage: com.android.bluetooth.flags is mapped to com.android.bt
+10-07 12:20:05.435 10566 10566 I AconfigPackage: com.android.os.statsd.flags is mapped to com.android.os.statsd
+10-07 12:20:05.437 10566 10566 I AconfigPackage: android.media.swcodec.flags is mapped to com.android.media.swcodec
+10-07 12:20:05.438 10566 10566 I AconfigPackage: com.android.nfc.module.flags is mapped to com.android.nfcservices
+10-07 12:20:05.438 10566 10566 I AconfigPackage: com.android.nfc.module.nonexported.flags is mapped to com.android.nfcservices
+10-07 12:20:05.440 10566 10566 I AconfigPackage: com.android.uwb.flags is mapped to com.android.uwb
+10-07 12:20:05.440 10566 10566 I AconfigPackage: com.android.ranging.flags is mapped to com.android.uwb
+10-07 12:20:05.442 10566 10566 I AconfigPackage: com.android.healthfitness.flags is mapped to com.android.healthfitness
+10-07 12:20:05.442 10566 10566 I AconfigPackage: com.android.healthfitness.beta is mapped to com.android.healthfitness
+10-07 12:20:05.444 10566 10566 I AconfigPackage: android.telecom.flags is mapped to com.android.telephonycore
+10-07 12:20:05.444 10566 10566 I AconfigPackage: com.android.internal.telecom.flags is mapped to com.android.telephonycore
+10-07 12:20:05.444 10566 10566 I AconfigPackage: com.android.telephony.flags is mapped to com.android.telephonycore
+10-07 12:20:05.445 10566 10566 I AconfigPackage: com.android.permission.flags is mapped to com.android.permission
+10-07 12:20:05.445 10566 10566 I AconfigPackage: com.android.permissioncontroller.flags is mapped to com.android.permission
+10-07 12:20:05.447 10566 10566 I AconfigPackage: com.android.adservices.flags is mapped to com.android.adservices
+10-07 12:20:05.447 10566 10566 I AconfigPackage: com.android.sdksandbox.flags is mapped to com.android.adservices
+10-07 12:20:05.447 10566 10566 I AconfigPackage: android.app.sdksandbox.flags is mapped to com.android.adservices
+10-07 12:20:05.448 10566 10566 I AconfigPackage: com.android.rkpd.flags is mapped to com.android.rkpd
+10-07 12:20:05.450 10566 10566 I AconfigPackage: com.android.ipsec.flags is mapped to com.android.ipsec
+10-07 12:20:05.451 10566 10566 I AconfigPackage: com.android.system.virtualmachine.flags is mapped to com.android.virt
+10-07 12:20:05.453 10566 10566 I AconfigPackage: com.android.icu is mapped to com.android.i18n
+10-07 12:20:05.455 10566 10566 I AconfigPackage: com.android.devicelock.flags is mapped to com.android.devicelock
+10-07 12:20:05.457 10566 10566 I AconfigPackage: com.android.crashrecovery.flags is mapped to com.android.crashrecovery
+10-07 12:20:05.459 10566 10566 I AconfigPackage: com.android.adbd.flags is mapped to com.android.adbd
+10-07 12:20:05.460 10566 10566 I AconfigPackage: com.android.org.conscrypt.flags is mapped to com.android.conscrypt
+10-07 12:20:05.460 10566 10566 I AconfigPackage: com.android.org.conscrypt.net.flags is mapped to com.android.conscrypt
+10-07 12:20:05.462 10566 10566 I AconfigPackage: com.android.compos.flags is mapped to com.android.compos
+10-07 12:20:05.463 10566 10566 I AconfigPackage: com.android.webapp.flags is mapped to com.android.webapp
+10-07 12:20:05.465 10566 10566 I AconfigPackage: com.android.uprobestats.flags is mapped to com.android.uprobestats
+10-07 12:20:05.465 10566 10566 I AconfigPackage: android.uprobestats.mainline.flags is mapped to com.android.uprobestats
+10-07 12:20:05.467 10566 10566 I AconfigPackage: com.android.appsearch.flags is mapped to com.android.appsearch
+10-07 12:20:05.468 10566 10566 I AconfigPackage: android.provider.flags is mapped to com.android.configinfrastructure
+10-07 12:20:05.469 10566 10566 I AconfigPackage: com.android.server.deviceconfig is mapped to com.android.configinfrastructure
+10-07 12:20:05.471 10566 10566 I AconfigPackage: com.android.npumanager is mapped to com.android.npumanager
+10-07 12:20:05.472 10566 10566 I AconfigPackage: com.google.android.widevine.flags is mapped to com.google.android.widevine
+10-07 12:20:05.474 10566 10566 I AconfigPackage: com.android.scheduling.flags is mapped to com.android.scheduling
+10-07 12:20:05.475 10566 10566 E FeatureFlagsImplExport: android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.xr cannot be found on the device
+10-07 12:20:05.484 10566 10566 W libc    : Access denied finding property "qemu.sf.lcd_density"
+10-07 12:20:05.484 10566 10566 W libc    : Access denied finding property "qemu.sf.lcd_density"
+10-07 12:20:05.480 10566 10566 W commands.monkey: type=1400 audit(0.0:16779): avc:  denied  { read } for  name="u:object_r:qemu_sf_lcd_density_prop:s0" dev="tmpfs" ino=426 scontext=u:r:shell:s0 tcontext=u:object_r:qemu_sf_lcd_density_prop:s0 tclass=file permissive=0 bug=b/522481487
+10-07 12:20:05.480 10566 10566 W commands.monkey: type=1400 audit(0.0:16780): avc:  denied  { read } for  name="u:object_r:qemu_sf_lcd_density_prop:s0" dev="tmpfs" ino=426 scontext=u:r:shell:s0 tcontext=u:object_r:qemu_sf_lcd_density_prop:s0 tclass=file permissive=0 bug=b/522481487
+10-07 12:20:05.506 10566 10566 W Monkey  :  arg: "-p"
+10-07 12:20:05.506 10566 10566 W Monkey  :  arg: "com.wails.app"
+10-07 12:20:05.506 10566 10566 W Monkey  :  arg: "1"
+10-07 12:20:05.506 10566 10566 W Monkey  : data="com.wails.app"
+10-07 12:20:05.524  1721  2292 D EventHub: No input device configuration file found for device 'Monkey touch'.
+10-07 12:20:05.526  1721  2292 E EventHub: Could not open directory /sys/devices/virtual/power_supply: No such file or directory
+10-07 12:20:05.526  1721  2292 E EventHub: Could not open directory /sys/devices/power_supply: No such file or directory
+10-07 12:20:05.526  1721  2292 E EventHub: Could not open directory /sys/power_supply: No such file or directory
+10-07 12:20:05.526  1721  2292 E EventHub: Could not open directory /sys/devices/virtual/leds: No such file or directory
+10-07 12:20:05.526  1721  2292 E EventHub: Could not open directory /sys/devices/leds: No such file or directory
+10-07 12:20:05.526  1721  2292 E EventHub: Could not open directory /sys/leds: No such file or directory
+10-07 12:20:05.535  1721  2292 I EventHub: usingClockIoctl=true
+10-07 12:20:05.535  1721  2292 I EventHub: New device: id=5, fd=871, path='/dev/input/event4', name='Monkey touch', classes=TOUCH | TOUCH_MT, configuration='', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-07 12:20:05.538  1721  2292 I InputReader: Disabling Monkey touch (device 5) because the associated viewport is not active
+10-07 12:20:05.538  1721  2292 I InputReader: Device reconfigured: id=5, name='Monkey touch', size 1080x2400, orientation Rotation0, mode DISABLED, display id 0
+10-07 12:20:05.538  1721  2292 I InputReader: Disabling Monkey touch (device 5) because the associated viewport is not active
+10-07 12:20:05.538  1721  2292 I InputReader: Device added: id=5, eventHubId=5, name='Monkey touch', descriptor='e1fe28b90f915c7d1febbd52c1ef84b3c4cbed9f',sources=TOUCHSCREEN
+10-07 12:20:05.559  1721  1925 D WindowManager: Direct invocation of sendNewConfiguration: Display{#0 state=OFF size=1080x2400 ROTATION_0}
+10-07 12:20:05.563  2873  2910 V ShellDesktopMode: DesktopDisplayModeController: canDesktopFirstModeBeEnabledOnDefaultDisplay: isDefaultDisplayDesktopEligible=false
+10-07 12:20:05.564  1721 25041 E TransitionChain: Can't collect into a chain with no transition
+10-07 12:20:05.567 19615 19615 I PkModeUpdater: PkModeUpdater.refreshDevices():212 refreshing devices
+10-07 12:20:05.651  1721 25041 W ActivityManager: registerReceiverWithFeature: no app for null
+10-07 12:20:05.693  1721  2301 W ActivityTaskManager: callingPackage for (uid=2000, pid=10566) has no WPC
+10-07 12:20:05.696  1721  2301 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@c357ff96 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+10-07 12:20:05.700  1721  2301 D ActivityTaskManager: Temporarily retain top process state for launching app
+10-07 12:20:05.710  1721  2301 I AppsFilter: interaction: PackageSetting{41a3aad com.google.android.microdroid.empty_payload/10246} -> PackageSetting{68769fa com.wails.app/10335} BLOCKED
+10-07 12:20:05.712  1721  2301 D CorePackageUpdate: onRecentTaskRemoved Removing task: 20018
+10-07 12:20:05.712  1721  2301 D CorePackageUpdate: Couldn't find a persistent state for task= 20018
+10-07 12:20:05.713  2986  8077 W Binder  : Caught a RuntimeException from the binder stub implementation.
+10-07 12:20:05.713  2986  8077 W Binder  : java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Class java.lang.Object.getClass()' on a null object reference
+10-07 12:20:05.713  2986  8077 W Binder  : 	at com.google.android.apps.pixel.impulse.statesources.AppTaskStateSource$AppTaskPlatformConnection$AppTaskListener.onTaskCreated(go/retraceme 590b7d2993084ebf911cb725f8905b3670f7596b1adfc25c06f51c501b0fc8c0:0)
+10-07 12:20:05.713  2986  8077 W Binder  : 	at android.app.ITaskStackListener$Stub.onTransact(ITaskStackListener.java:443)
+10-07 12:20:05.713  2986  8077 W Binder  : 	at android.os.Binder.execTransactInternal(Binder.java:1328)
+10-07 12:20:05.713  2986  8077 W Binder  : 	at android.os.Binder.execTransact(Binder.java:1282)
+10-07 12:20:05.713  1721  2301 V ActivityTaskManager: TaskLaunchParamsModifier: phase=2 task=Task{320f01c #20019 type=standard A=10335:com.wails.app} activity=ActivityRecord{18617743 u0 com.wails.app/.MainActivity t-1} display-from-task=0 display-id=0 task-display-area-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@223603875 inherit-from-task=fullscreen non-freeform-task-display-area display-area=DefaultTaskDisplayArea@223603875 skip-bounds-fullscreen
+10-07 12:20:05.713  1721  2301 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.wails.app/.MainActivity} with LAUNCH_MULTIPLE from uid 2000 (com.android.shell) (BAL_ALLOW_ALLOWLISTED_UID) result code=0
+10-07 12:20:05.714 10566 10566 I Monkey  : Events injected: 1
+10-07 12:20:05.714  2873  2910 V WindowManagerShell: Transition requested (#8219): android.os.BinderProxy@98ff9a TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=20019 effectiveUid=10335 seqId=0 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.wails.app/.MainActivity } baseActivity=ComponentInfo{com.wails.app/com.wails.app.MainActivity} topActivity=ComponentInfo{com.wails.app/com.wails.app.MainActivity} origActivity=null realActivity=ComponentInfo{com.wails.app/com.wails.app.MainActivity} realActivityIsAppLockEnabled=false numActivities=1 lastActiveTime=1305521883 supportsMultiWindow=true supportsMultiWindowWithoutConstraints=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.os.BinderProxy@a21f0cb} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 121 - 0, 0) topActivityInfo=ActivityInfo{fd390a8 com.wails.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isInteractive=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=true locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=null leafTaskBoundsFromOptions= false capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=503 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false isLeafTask= true eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2400) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null topNonResizableActivityAspectRatio=-1.0} topActivityMainWindowFrame=null isAppBubble=false}, pipChange = null, remoteTransitionInfo = null, displayChanges = null, requestedLocation = null, userChange = null, windowingLayerChange = null, fullscreenRequestChange = null, flags = 0, debugId = 8219 }
+10-07 12:20:05.714  2873  2910 V ShellDesktopMode: DesktopTasksController: skipping handleRequest reason=triggerTask's display doesn't support desktop mode
+10-07 12:20:05.714  2873  2910 D ShellSplitScreen: logExit: no-op, mLoggerSessionId is null
+10-07 12:20:05.715  3166  3166 D RecentsView: onTaskDisplayChanged: 20019, new displayId = 0
+10-07 12:20:05.719  1721  1925 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@c357ff96 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+10-07 12:20:05.720 10566 10566 I Monkey  : ## Network stats: elapsed time=30ms (0ms mobile, 0ms wifi, 30ms not connected)
+10-07 12:20:05.720  2873  2910 V RecentTasksController: Notify recent tasks changed: 1
+10-07 12:20:05.720  2873  2910 V RecentTasksController: onRecentTaskRemovedForAddTask; removing task=20018
+10-07 12:20:05.720  2873  2910 D ShellDesktopMode: DesktopRepository(0): Removes freeform task: taskId=20018
+10-07 12:20:05.720  2873  2910 W ShellDesktopMode: DesktopRepository(0): No display id found for task: taskId=20018
+10-07 12:20:05.720  2873  2910 V RecentTasksController: Notify recent tasks changed: 1
+10-07 12:20:05.721 10566 10566 I app_process: System.exit called, status: 0
+10-07 12:20:05.721 10566 10566 I AndroidRuntime: VM exiting with result code 0.
+10-07 12:20:05.721  3166  3166 D RecentTasksList: invalidateLoadedTasks - previous requestLoadId: -1
+10-07 12:20:05.721  3166  3166 D RecentTasksList: invalidateLoadedTasks - previous requestLoadId: -1
+10-07 12:20:05.731  1122  1122 D Zygote  : Forked child process 10588
+10-07 12:20:05.731  1721  1935 I ActivityManager: Start proc 10588:com.wails.app/u0a335 for top-activity {com.wails.app/com.wails.app.MainActivity}
+10-07 12:20:05.735 10588 10588 I libprocessgroup: Created cgroup /sys/fs/cgroup/apps/uid_10335/pid_10588
+10-07 12:20:05.741 10588 10588 I Zygote  : Process 10588 created for com.wails.app
+10-07 12:20:05.741 10588 10588 I com.wails.app: Using generational CollectorTypeCMC GC.
+10-07 12:20:05.744  1721  1953 E libprocessgroup: Unable to find usable controller for (uid, pid, v2_path): (10127, 11147, 1)
+10-07 12:20:05.745  1721  1953 E libprocessgroup: Unable to find usable controller for (uid, pid, v2_path): (10194, 9423, 1)
+10-07 12:20:05.747 10588 10588 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+10-07 12:20:05.761 10588 10588 D nativeloader: Configuring clns-9 for other apk /data/app/~~JOqvA7nuKYRq96p-ih1wGQ==/com.wails.app-9iasrgr3HnxD3Yu4RbzoSQ==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~JOqvA7nuKYRq96p-ih1wGQ==/com.wails.app-9iasrgr3HnxD3Yu4RbzoSQ==/lib/arm64:/data/app/~~JOqvA7nuKYRq96p-ih1wGQ==/com.wails.app-9iasrgr3HnxD3Yu4RbzoSQ==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.wails.app
+10-07 12:20:05.762 10588 10588 D CompatChangeReporter: Compat change id reported: 202956589; UID 10335; state: ENABLED
+10-07 12:20:05.765  1721  2292 I EventHub: Removing device Monkey touch due to epoll hang-up event.
+10-07 12:20:05.766  1721  2292 I EventHub: Removed device: path=/dev/input/event4 name=Monkey touch id=5 fd=871 classes=TOUCH | TOUCH_MT
+10-07 12:20:05.766 10588 10588 D ActivityThread: Set OS env TMPDIR to /data/user/0/com.wails.app/cache
+10-07 12:20:05.767 10588 10588 V GraphicsEnvironment: Currently set values for:
+10-07 12:20:05.767 10588 10588 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[com.android.angle]
+10-07 12:20:05.767 10588 10588 V GraphicsEnvironment:   angle_gl_driver_selection_values=[angle]
+10-07 12:20:05.767 10588 10588 V GraphicsEnvironment: com.wails.app is not listed in per-application setting
+10-07 12:20:05.767 10588 10588 V GraphicsEnvironment: No special selections for ANGLE, returning default driver choice
+10-07 12:20:05.768 10588 10588 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+10-07 12:20:05.768  1721  2292 I InputReader: Device removed: id=5, eventHubId=5, name='Monkey touch', descriptor='e1fe28b90f915c7d1febbd52c1ef84b3c4cbed9f', sources=TOUCHSCREEN
+10-07 12:20:05.774 10588 10588 D CompatChangeReporter: Compat change id reported: 312399441; UID 10335; state: ENABLED
+10-07 12:20:05.774  1721  2292 I EventHub: Removing device '/dev/input/event4' due to inotify event
+10-07 12:20:05.775  2873  2910 V ShellDesktopMode: DesktopDisplayModeController: canDesktopFirstModeBeEnabledOnDefaultDisplay: isDefaultDisplayDesktopEligible=false
+10-07 12:20:05.775  1721  2301 D CorePackageUpdate: Couldn't find a persistent state for task= 20019
+10-07 12:20:05.776  1721 25041 V WindowManager: deferTransitionReady deferReadyDepth=1 stack=com.android.server.wm.WindowOrganizerController.applyTransaction:720 com.android.server.wm.WindowOrganizerController.applyTransaction:253 android.window.IWindowOrganizerController$Stub.onTransact:219 com.android.server.wm.WindowOrganizerController.onTransact:236 android.os.Binder.execTransactInternal:1328 
+10-07 12:20:05.776  1721 25041 E TransitionChain: Mismatch between current collecting (TransitionRecord{994087e id=8219 type=OPEN flags=0x0 parallelCollectType=NONE recentsDisplayId=-1 c=[
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{e1231df container=ActivityRecord{18617743 u0 com.wails.app/.MainActivity t20019} flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{a6b5e2c container=Task{320f01c #20019 type=standard A=10335:com.wails.app} flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{870b0f5 container=WindowedMagnification:0:31@85224994 flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{642e8a container=AppZoomOut:2:14@143255303 flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{9920cfb container=Display{#0 state=OFF size=1080x2400 ROTATION_0} flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{8463118 container=DefaultTaskDisplayArea@223603875 flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain: ]
+10-07 12:20:05.776  1721 25041 E TransitionChain: }) and chain (TransitionRecord{994087e id=8219 type=OPEN flags=0x0 parallelCollectType=NONE recentsDisplayId=-1 c=[
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{e1231df container=ActivityRecord{18617743 u0 com.wails.app/.MainActivity t20019} flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{a6b5e2c container=Task{320f01c #20019 type=standard A=10335:com.wails.app} flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{870b0f5 container=WindowedMagnification:0:31@85224994 flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{642e8a container=AppZoomOut:2:14@143255303 flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{9920cfb container=Display{#0 state=OFF size=1080x2400 ROTATION_0} flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain:    ChangeInfo{8463118 container=DefaultTaskDisplayArea@223603875 flags=0x0}
+10-07 12:20:05.776  1721 25041 E TransitionChain: ]
+10-07 12:20:05.776  1721 25041 E TransitionChain: })
+10-07 12:20:05.776  1721 25041 V WindowManager: continueTransitionReady deferReadyDepth=0 stack=com.android.server.wm.WindowOrganizerController.applyTransaction:861 com.android.server.wm.WindowOrganizerController.applyTransaction:253 android.window.IWindowOrganizerController$Stub.onTransact:219 com.android.server.wm.WindowOrganizerController.onTransact:236 android.os.Binder.execTransactInternal:1328 
+10-07 12:20:05.777 19615 19615 I PkModeUpdater: PkModeUpdater.refreshDevices():212 refreshing devices
+10-07 12:20:05.778 10588 10600 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+10-07 12:20:05.778 10588 10600 D vulkan  : searching for layers in '/data/app/~~JOqvA7nuKYRq96p-ih1wGQ==/com.wails.app-9iasrgr3HnxD3Yu4RbzoSQ==/lib/arm64'
+10-07 12:20:05.779 10588 10600 D vulkan  : searching for layers in '/data/app/~~JOqvA7nuKYRq96p-ih1wGQ==/com.wails.app-9iasrgr3HnxD3Yu4RbzoSQ==/base.apk!/lib/arm64-v8a'
+10-07 12:20:05.780  2031  2031 I pixel-thermal: VIRTUAL-USB-UI:0 raw data: USB-MINUS-CHARGER:-2582 VIRTUAL-USB-UI:0 charger_therm:32418 usb_conn_therm:29836 
+10-07 12:20:05.780  2031  2031 I pixel-thermal: VIRTUAL-USB-THROTTLING:0 raw data: USB-MINUS-CHARGER:-2582 VIRTUAL-USB-THROTTLING:0 usb_conn_therm:29836 
+10-07 12:20:05.780  2873  2873 D NavigationModeController: getCurrentUserContext: contextUser=0 currentUser=0
+10-07 12:20:05.781  2031  2031 I pixel-thermal: VIRTUAL-SKIN-SPEAKER:30.8275 raw data: VIRTUAL-SKIN-SPEAKER:30827.5 VIRTUAL-SKIN-SPEAKER-SUB-1:27902.8 VIRTUAL-SKIN-SPEAKER-SUB-2:30827.5 battery:29500 gnss_tcxo_therm:30570 quiet_therm:30303 soc_therm:30570 usb_conn_therm:29836 
+10-07 12:20:05.781  2031  2031 I pixel-thermal: cellular-emergency:30.3367 raw data: VIRTUAL-SKIN:30336.7 VIRTUAL-SKIN-SUB-1:30336.7 VIRTUAL-SKIN-SUB-2:27487 VIRTUAL-SKIN-SUB-3:29538.1 cellular-emergency:30336.7 charger_therm:32418 gnss_tcxo_therm:30570 modem_therm:31550 quiet_therm:30303 rffe_therm:30281 soc_therm:30570 usb_conn_therm:29836 
+10-07 12:20:05.782  2031  2031 I pixel-thermal: VIRTUAL-SKIN-CHARGE:31.3642 raw data: VIRTUAL-SKIN-CHARGE:31364.2 VIRTUAL-SKIN-CHARGE-SUB-1:30749.2 VIRTUAL-SKIN-CHARGE-SUB-2:31364.2 charger_therm:32418 modem_therm:31550 quiet_therm:30303 rffe_therm:30281 soc_therm:30570 
+10-07 12:20:05.782  2031  2031 I pixel-thermal: VIRTUAL-SKIN-CHARGE-WLC:31.2433 raw data: VIRTUAL-SKIN-CHARGE-WLC:31243.2 charger_therm:32418 modem_therm:31550 rffe_therm:30281 soc_therm:30570 
+10-07 12:20:05.782  2031  2031 I pixel-thermal: VIRTUAL-SKIN:30.3367 raw data: VIRTUAL-SKIN:30336.7 
+10-07 12:20:05.783 10588 10588 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+10-07 12:20:05.790 10588 10588 D CompatChangeReporter: Compat change id reported: 309578419; UID 10335; state: ENABLED
+10-07 12:20:05.792  6164  6164 I adbd    : adbd service requested 'shell,v2,TERM=xterm-256color:export ANDROID_LOG_TAGS="''"; exec logcat '-d''
+10-07 12:20:05.794 10588 10588 I WebViewFactory: Loading com.google.android.webview version 153.0.8010.36 (code 801003603)
+10-07 12:20:05.796 10588 10588 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=f2a8fe1e mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v37 mCompatInfo={420dpi always-compat} mLoaders=[]}
+10-07 12:20:05.796 10588 10588 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+10-07 12:20:05.796 10588 10588 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+10-07 12:20:05.798 10588 10588 D nativeloader: Configuring clns-10 for other apk /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/lib/arm64:/data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand
+10-07 12:20:05.807 10588 10588 I cr_WVCFactoryProvider: version=153.0.8010.36 (801003603) minSdkVersion=29 multiprocess=true packageId=2 splits=<none>
+10-07 12:20:05.809 10588 10588 D nativeloader: Load /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk!/lib/arm64-v8a/libwebviewchromium.so using class loader ns clns-10 (caller=/data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk): ok
+10-07 12:20:05.810 10588 10588 D nativeloader: Load /system/lib64/libwebviewchromium_plat_support.so using class loader ns clns-10 (caller=/data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk): ok
+10-07 12:20:05.812 10588 10588 E com.wails.app: hiddenapi: Accessing hidden method Landroid/app/contentsafety/ContentSafetyManager;->isContentSafetyEnabled()Z (runtime_flags=0, domain=platform, api=blocked) from /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk (domain=app, TargetSdkVersion=35) using linking: denied
+10-07 12:20:05.812 10588 10588 E com.wails.app: hiddenapi: Accessing hidden method Landroid/webkit/WebViewDelegate;->isNativeWebViewZygoteEnabled()Z (runtime_flags=0, domain=platform, api=blocked) from /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk (domain=app, TargetSdkVersion=35) using linking: denied
+10-07 12:20:05.812 10588 10588 E com.wails.app: hiddenapi: Accessing hidden method Landroid/app/contentsafety/ClassifiableContent$Builder;-><init>(Landroid/content/LocusId;Ljava/lang/String;)V (runtime_flags=0, domain=platform, api=blocked) from /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk (domain=app, TargetSdkVersion=35) using linking: denied
+10-07 12:20:05.812 10588 10588 E com.wails.app: hiddenapi: Accessing hidden method Landroid/app/contentsafety/ClassifiableContent$Builder;->setUri(Landroid/net/Uri;)Landroid/app/contentsafety/ClassifiableContent$Builder; (runtime_flags=0, domain=platform, api=blocked) from /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk (domain=app, TargetSdkVersion=35) using linking: denied
+10-07 12:20:05.812 10588 10588 E com.wails.app: hiddenapi: Accessing hidden method Landroid/app/contentsafety/ClassifiableContent$Builder;->setData(Landroid/os/ParcelFileDescriptor;)Landroid/app/contentsafety/ClassifiableContent$Builder; (runtime_flags=0, domain=platform, api=blocked) from /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk (domain=app, TargetSdkVersion=35) using linking: denied
+10-07 12:20:05.812 10588 10588 E com.wails.app: hiddenapi: Accessing hidden method Landroid/app/contentsafety/ClassifiableContent$Builder;->build()Landroid/app/contentsafety/ClassifiableContent; (runtime_flags=0, domain=platform, api=blocked) from /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk (domain=app, TargetSdkVersion=35) using linking: denied
+10-07 12:20:05.813 10588 10588 E com.wails.app: hiddenapi: Accessing hidden method Landroid/app/contentsafety/ContentSafetyManager;->createContentRestrictedIntent(Landroid/content/LocusId;)Landroid/content/Intent; (runtime_flags=0, domain=platform, api=blocked) from /data/app/~~KIVSvlLXX-eOFDurULGSig==/com.google.android.webview-ofkAi95K9SVNBvHM-ZL6lg==/base.apk (domain=app, TargetSdkVersion=35) using linking: denied
+10-07 12:20:05.815 10588 10588 I cr_LibraryLoader: Successfully loaded native library
+10-07 12:20:05.816 10588 10588 I cr_CachingUmaRecorder: Flushed 46 samples from 21 histograms, 0 samples were dropped.
+10-07 12:20:05.817 10588 10615 I chromium: [INFO:android_webview/browser/variations/variations_seed_loader.cc:67] Failed to open file for reading.: No such file or directory (2)
+10-07 12:20:05.817 10588 10615 I chromium: [INFO:android_webview/browser/variations/variations_seed_loader.cc:67] Failed to open file for reading.: No such file or directory (2)
+10-07 12:20:05.818 10588 10588 I cr_ChildProcLH: ScopedServiceBindingBatch.tryActivate: false
+10-07 12:20:05.818 10588 10588 I cr_CombinedPProvider: #registerProvider() provider:WV.hj@63a9c57 isPolicyCacheEnabled:false policyProvidersSize:0
+10-07 12:20:05.818 10588 10588 I cr_PolicyProvider: #setManagerAndSource() 0
+10-07 12:20:05.819 10588 10612 I cr_policy: registerReceiver succeeded after 1ms
+10-07 12:20:05.819 10588 10588 I cr_DisplayManager: Is Display Topology available: false
+10-07 12:20:05.822  1721 25041 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@b1c621f4 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+10-07 12:20:05.825 10588 10588 I cr_CombinedPProvider: #linkNativeInternal() 1
+10-07 12:20:05.825 10588 10588 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+10-07 12:20:05.825 10588 10588 I cr_PolicyProvider: #notifySettingsAvailable() 0
+10-07 12:20:05.825 10588 10588 I cr_CombinedPProvider: #onSettingsAvailable() 0
+10-07 12:20:05.825 10588 10588 I cr_CombinedPProvider: #flushPolicies()
+10-07 12:20:05.834 21991 21991 D Zygote  : Forked child process 10630
+10-07 12:20:05.834  1721  1935 I libprocessgroup: Created cgroup /sys/fs/cgroup/apps/uid_99137
+10-07 12:20:05.835  1721  1935 I libprocessgroup: Created cgroup /sys/fs/cgroup/apps/uid_99137/pid_10630
+10-07 12:20:05.836  1721  1935 I ActivityManager: Start proc 10630:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i137 for bound-service {com.wails.app/org.chromium.content.app.SandboxedProcessService0:0}
+10-07 12:20:05.836 10630 10630 E libc    : SetHeapTaggingLevel: re-enabling tagging after it was disabled is not supported
+10-07 12:20:05.838  1721  2032 W ActivityManager: Skipping manifest association check for null package. SourceUid: -1, SourcePkg: null, TargetUid: 10335, TargetPkg: com.wails.app
+10-07 12:20:05.838  1721  1934 W ActivityManager: Skipping manifest association check for null package. SourceUid: -1, SourcePkg: null, TargetUid: 10335, TargetPkg: com.wails.app
+10-07 12:20:05.840 10630 10630 I Zygote  : Process 10630 created for com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+10-07 12:20:05.840 10630 10630 I ocessService0:0: Using generational CollectorTypeCMC GC.
+10-07 12:20:05.845 10630 10630 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+10-07 12:20:05.848 17724 17724 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.safebrowsing.SafeBrowsingService.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+10-07 12:20:05.848  1721  9142 D ConnectivityService: requestNetwork for uid/pid:10335/10588 activeRequest: null callbackRequest: 25186 [NetworkRequest [ REQUEST id=25187, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10335 RequestorUid: 10335 RequestorPkg: com.wails.app UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647 isUidTracked: false declaredMethods: AVAIL|LOST|NC|LP
+10-07 12:20:05.849  1721  1942 E libprocessgroup: Unable to find usable controller for (uid, pid, v2_path): (10335, 10630, 1)
+10-07 12:20:05.849  1721  2762 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=25187, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10335 RequestorUid: 10335 RequestorPkg: com.wails.app UnderlyingNetworks: Null] ]
+10-07 12:20:05.850  1721  2769 D ConnectivityService: NetReassign [25187 : null → 103] [c 0] [a 1] [i 0]
+10-07 12:20:05.850  1721  2762 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=25187, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10335 RequestorUid: 10335 RequestorPkg: com.wails.app UnderlyingNetworks: Null] ]
+10-07 12:20:05.850  1721  2762 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=25187, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10335 RequestorUid: 10335 RequestorPkg: com.wails.app UnderlyingNetworks: Null] ]
+10-07 12:20:05.850  1721  2762 D MultiInternetWifiNetworkFactory: got request NetworkRequest [ REQUEST id=25187, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10335 RequestorUid: 10335 RequestorPkg: com.wails.app UnderlyingNetworks: Null] ]
+10-07 12:20:05.850  1721  2769 D ConnectivityService: NetReassign [no changes] [c 0] [a 0] [i 1]
+10-07 12:20:05.853 10630 10630 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+10-07 12:20:05.853 10630 10630 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
