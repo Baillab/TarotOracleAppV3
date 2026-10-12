@@ -1,12 +1,6 @@
 package main
 
-import (
-	"log"
-	"os"
-	"path/filepath"
-
-	"tarotoracleapp/tarot"
-)
+import "tarotoracleapp/tarot"
 
 // TarotService — сервис, который Wails v3 забиндит на фронтенд.
 // Методы те же, что были у App в v2, но теперь это
@@ -18,64 +12,6 @@ type TarotService struct {
 // NewTarotService создаёт и инициализирует сервис:
 // грузит колоду, открывает SQLite, настраивает всё
 // так же, как раньше делал App.startup() в v2.
-func NewTarotService() *TarotService {
-
-	deck, err :=
-		tarot.LoadDeckFolder(
-			"assets/tarot",
-		)
-
-	if err != nil {
-
-		log.Fatal(
-			"Ошибка загрузки колоды:",
-			err,
-		)
-
-	}
-
-	dbPath, err :=
-		getDatabasePath()
-
-	if err != nil {
-
-		log.Fatal(
-			"Ошибка определения пути к базе:",
-			err,
-		)
-
-	}
-
-	storage, err :=
-		tarot.NewSQLiteStorage(
-			dbPath,
-		)
-
-	if err != nil {
-
-		log.Fatal(
-			"Ошибка SQLite:",
-			err,
-		)
-
-	}
-
-	service :=
-		tarot.NewTarotService(
-			deck,
-			"assets/tarot",
-			storage,
-		)
-
-	log.Println(
-		"Tarot Oracle (v3) запущен",
-	)
-
-	return &TarotService{
-		service: service,
-	}
-
-}
 
 // =====================================
 // Колода
@@ -295,40 +231,3 @@ func (a *TarotService) Status() map[string]interface{} {
 
 // getDatabasePath возвращает единый путь к базе данных
 // в домашней папке пользователя.
-func getDatabasePath() (string, error) {
-
-	home, err :=
-		os.UserHomeDir()
-
-	if err != nil {
-
-		return "", err
-
-	}
-
-	dir :=
-		filepath.Join(
-			home,
-			".local",
-			"share",
-			"tarot-oracle",
-		)
-
-	err =
-		os.MkdirAll(
-			dir,
-			0755,
-		)
-
-	if err != nil {
-
-		return "", err
-
-	}
-
-	return filepath.Join(
-		dir,
-		"tarot.db",
-	), nil
-
-}
