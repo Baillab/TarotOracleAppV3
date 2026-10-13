@@ -1,0 +1,77 @@
+name: Windows Build
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  windows:
+    name: Build Windows EXE (amd64)
+    runs-on: ubuntu-24.04
+
+    env:
+      GO_VERSION: "1.25.6"
+      WAILS_VERSION: "v3.0.0-beta.27"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Wails Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgtk-4-dev \
+            libwebkitgtk-6.0-dev \
+            pkg-config
+
+      - name: Install Wails CLI
+        run: |
+          go install github.com/wailsapp/wails/v3/cmd/wails3@${WAILS_VERSION}
+          wails3 version
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Generate bindings and build frontend
+        run: |
+          wails3 generate bindings -clean=true -ts -i
+          cd frontend
+          npm run build
+
+      - name: Build Windows EXE
+        run: |
+          cd build
+          wails3 generate syso -arch amd64 -icon windows/icon.ico -manifest windows/wails.exe.manifest -info windows/info.json -out ../wails_windows_amd64.syso
+          cd ..
+          GOOS=windows GOARCH=amd64 go build -tags production -trimpath -buildvcs=false -ldflags="-w -s -H windowsgui" -o bin/tarotoracleappv3-amd64.exe
+          rm -f *.syso
+
+      - name: Check architecture
+        run: file bin/tarotoracleappv3-amd64.exe
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: TarotOracleApp-Windows-amd64
+          path: bin/tarotoracleappv3-amd64.exe
+          if-no-files-found: error
+          retention-days: 14
