@@ -83,7 +83,7 @@ document.querySelector("#app").innerHTML = `
         <div class="icon-row">
 
 
-    <button id="shuffle" class="icon-button" title="Перемешать">
+    <button id="shuffle" class="icon-button" title="Перемешать" data-label="Перемешать">
 
         🂠
 
@@ -91,7 +91,7 @@ document.querySelector("#app").innerHTML = `
 
 
 
-    <button id="history" class="icon-button" title="История">
+    <button id="history" class="icon-button" title="История" data-label="История">
 
         🕒
 
@@ -99,7 +99,7 @@ document.querySelector("#app").innerHTML = `
 
 
 
-    <button id="deck-info" class="icon-button" title="Колода">
+    <button id="deck-info" class="icon-button" title="Колода" data-label="Колода">
 
         🗂
 
@@ -107,7 +107,7 @@ document.querySelector("#app").innerHTML = `
 
 
 
-    <button id="settings" class="icon-button" title="Настройки">
+    <button id="settings" class="icon-button" title="Настройки" data-label="Настройки">
 
         ⚙
 
@@ -115,7 +115,7 @@ document.querySelector("#app").innerHTML = `
 
 
 
-    <button id="interpretation-icon" class="icon-button" title="Толкование расклада">
+    <button id="interpretation-icon" class="icon-button" title="Толкование расклада" data-label="Толкование">
 
         📖
 
@@ -1683,7 +1683,7 @@ function showWelcomeDeck() {
 
             <p class="welcome-text">
 
-                Выберите действие слева, чтобы начать
+                ${isMobileLayout() ? "Выберите карту или расклад, чтобы начать" : "Выберите действие слева, чтобы начать"}
 
             </p>
 
@@ -2133,6 +2133,229 @@ async function drawSpread(id, question) {
 
 }
 
+// ==========================================
+// Мобильная вёрстка: подгонка расклада под экран
+// ==========================================
+
+
+// function-объявление поднимается, поэтому безопасно вызывать
+// из showWelcomeDeck() на старте; matchMedia читаем каждый раз
+
+function isMobileLayout() {
+
+    return window.matchMedia("(max-width: 900px)").matches
+
+}
+
+
+
+// На телефоне карты расклада делаем читаемого размера. Если все
+// не помещаются без наложения — растягиваем холст, и область
+// расклада прокручивается пальцем. Возвращает масштаб карт.
+
+function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, baseScale) {
+
+    canvas.style.width = ""
+
+    canvas.style.height = ""
+
+
+
+    const desktop =
+        { scale: baseScale, marginX: margin, marginY: margin }
+
+
+
+    if (!isMobileLayout()) return desktop
+
+
+
+    const viewport =
+        canvas.parentElement
+
+
+
+    const vw =
+        viewport.clientWidth
+
+
+
+    const vh =
+        viewport.clientHeight
+
+
+
+    const count =
+        data.cards.length
+
+
+
+    // ширина картинки карты на телефоне, px
+
+    const imgWidth =
+        count <= 3 ? 100
+            : count <= 6 ? 88
+                : count <= 7 ? 80
+                    : 76
+
+
+
+    // «коробка» карты: картинка + подписи
+
+    const boxW =
+        imgWidth * 1.125 + 6
+
+
+
+    const boxH =
+        imgWidth * 1.75 + 76
+
+
+
+    // карты ближе этого порога считаем лежащими «в одном слоте»
+    // (например, карта, положенная поперёк другой)
+
+    const tolX =
+        spreadWidth * 0.04
+
+
+
+    const tolY =
+        spreadHeight * 0.04
+
+
+
+    // отступ от края холста до коробки карты
+
+    const pad = 8
+
+
+
+    const pts =
+        data.cards.map(c => c.position)
+
+
+
+    // какая высота холста нужна при заданной ширине,
+    // чтобы карты не перекрывали друг друга
+    // (центры карт лежат в зоне, отступающей от краёв на полкоробки)
+
+    function neededHeight(width) {
+
+        const kx =
+            (width - boxW - pad * 2) / spreadWidth
+
+
+
+        if (kx <= 0) return Infinity
+
+
+
+        let need = 0
+
+
+
+        for (let i = 0; i < pts.length; i++) {
+
+            for (let j = i + 1; j < pts.length; j++) {
+
+                const dx =
+                    Math.abs(pts[i].x - pts[j].x)
+
+
+
+                const dy =
+                    Math.abs(pts[i].y - pts[j].y)
+
+
+
+                if (dx < tolX && dy < tolY) continue
+
+                if (dx * kx >= boxW) continue
+
+                if (dy < tolY) return Infinity
+
+
+
+                need = Math.max(
+                    need,
+                    boxH + pad * 2 + (boxH * spreadHeight) / dy
+                )
+
+            }
+
+        }
+
+        return need
+
+    }
+
+
+
+    // перебираем ширину и берём вариант с наименьшей площадью холста
+
+    let best = null
+
+
+
+    for (let w = vw; w <= 1100; w += 20) {
+
+        const h =
+            Math.max(vh, neededHeight(w))
+
+
+
+        if (!Number.isFinite(h)) continue
+
+
+
+        const height =
+            Math.min(h, 1500)
+
+
+
+        if (!best || w * height < best.w * best.h) {
+
+            best = { w, h: height }
+
+        }
+
+    }
+
+
+
+    if (!best) best = { w: Math.min(vw * 1.6, 1100), h: vh }
+
+
+
+    canvas.style.width = best.w + "px"
+
+    canvas.style.height = best.h + "px"
+
+
+
+    // начинаем с центра по горизонтали
+
+    viewport.scrollLeft = (best.w - vw) / 2
+
+    viewport.scrollTop = 0
+
+
+
+    return {
+
+        scale: imgWidth / 160,
+
+        marginX: ((boxW / 2 + pad) / best.w) * 100,
+
+        marginY: ((boxH / 2 + pad) / best.h) * 100,
+
+    }
+
+}
+
+
+
 function renderSpread(data, question) {
 
     let currentComment = ""
@@ -2185,7 +2408,7 @@ function renderSpread(data, question) {
 
 
 
-    <div class="spread-area"></div>
+    <div class="spread-area"><div class="spread-canvas"></div></div>
 
 `
 
@@ -2193,7 +2416,7 @@ function renderSpread(data, question) {
 
 
     const area =
-        document.querySelector(".spread-area")
+        document.querySelector(".spread-canvas")
 
 
 
@@ -2211,6 +2434,12 @@ function renderSpread(data, question) {
 
 
 
+    let marginX = margin
+
+    let marginY = margin
+
+
+
     function normalize(x, y) {
 
         const nx =
@@ -2221,9 +2450,9 @@ function renderSpread(data, question) {
 
         return {
 
-            left: margin + (nx * (100 - margin * 2)) / 100,
+            left: marginX + (nx * (100 - marginX * 2)) / 100,
 
-            top: margin + (ny * (100 - margin * 2)) / 100,
+            top: marginY + (ny * (100 - marginY * 2)) / 100,
 
         }
 
@@ -2244,9 +2473,27 @@ function renderSpread(data, question) {
 
 
 
+    const fit =
+        fitSpreadToViewport(
+            area,
+            data,
+            spreadWidth,
+            spreadHeight,
+            margin,
+            scale
+        )
+
+
+
+    marginX = fit.marginX
+
+    marginY = fit.marginY
+
+
+
     area.style.setProperty(
         "--card-scale",
-        scale
+        fit.scale
     )
 
 
