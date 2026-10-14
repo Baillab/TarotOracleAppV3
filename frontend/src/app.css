@@ -5646,49 +5646,6 @@ button,
 
     }
 
-    /* поперечная карта: подписи поверх картинки, по центру */
-
-    .spread-card-cross .position-name,
-    .spread-card-cross .card-name {
-
-        position: absolute;
-
-        left: 50%;
-
-        top: 50%;
-
-        z-index: 2;
-
-        max-width: 150%;
-
-        margin: 0;
-
-        padding: 2px 8px;
-
-        border-radius: 6px;
-
-        background: rgba(21, 14, 30, .88);
-
-        border: 1px solid rgba(215, 180, 90, .3);
-
-        text-align: center;
-
-        font-size: 10.5px;
-
-    }
-
-    .spread-card-cross .position-name {
-
-        transform: translate(-50%, -100%);
-
-    }
-
-    .spread-card-cross .card-name {
-
-        transform: translate(-50%, 0);
-
-    }
-
     .spread-answer {
 
         top: 10px;
@@ -6426,6 +6383,238 @@ button,
     .strip-arrow span {
 
         animation: none !important;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   Телефон: расклад на весь экран без прокрутки.
+   Шапка и нижняя панель — полупрозрачные поверх расклада,
+   поэтому верхние и нижние карты видны под ними.
+   Класс spread-mode ставит JS, пока на сцене расклад.
+===================================================== */
+
+@media (max-width: 900px) {
+
+    /* подписи не уже 62px, иначе при мелких картах текст рвётся по буквам */
+
+    .spread-card {
+
+        width: max(calc(180px * var(--card-scale, 1)), 62px);
+
+    }
+
+    .layout.spread-mode .scene {
+
+        position: absolute;
+
+        top: env(safe-area-inset-top, 0px);
+
+        right: 0;
+
+        bottom: 0;
+
+        left: 0;
+
+        z-index: 1;
+
+        padding: 0;
+
+    }
+
+    .layout.spread-mode .spread-area,
+    .layout.spread-mode .spread-answer~.spread-area,
+    .layout.spread-mode .back-to-history~.spread-area {
+
+        top: 0;
+
+        bottom: 0;
+
+        overflow: hidden;
+
+    }
+
+    /* шапка: прозрачная подложка, пропускает касания к картам под собой */
+
+    .layout.spread-mode .logo,
+    .layout.spread-mode .menu,
+    .layout.spread-mode .spread-strip,
+    .layout.spread-mode .header-toggle {
+
+        position: relative;
+
+        z-index: 3;
+
+        background: rgba(18, 12, 28, .34);
+
+    }
+
+    .layout.spread-mode .header-toggle {
+
+        background: rgba(18, 12, 28, .5);
+
+    }
+
+    .layout.spread-mode .logo,
+    .layout.spread-mode .menu,
+    .layout.spread-mode .spread-strip {
+
+        pointer-events: none;
+
+    }
+
+    .layout.spread-mode .action-button,
+    .layout.spread-mode .spread-list {
+
+        pointer-events: auto;
+
+    }
+
+    .layout.spread-mode .action-button {
+
+        opacity: .82;
+
+    }
+
+    .layout.spread-mode .spread-button:not(.active) {
+
+        background: rgba(30, 20, 44, .55);
+
+    }
+
+    /* нижняя панель */
+
+    .layout.spread-mode .icon-row {
+
+        position: relative;
+
+        z-index: 5;
+
+        margin-top: auto;
+
+        background: rgba(18, 12, 28, .5);
+
+        border-top-color: rgba(215, 180, 90, .18);
+
+        box-shadow: none;
+
+    }
+
+    /* «Общий ответ», «📝» и «← К истории» — в строке с ручкой меню,
+       чтобы не закрывать карты */
+
+    .layout.spread-mode .spread-answer,
+    .layout.spread-mode .back-to-history,
+    .layout.spread-mode .comment-icon-btn {
+
+        position: absolute;
+
+        top: calc(var(--header-h, 28px) - 26px);
+
+        bottom: auto;
+
+        z-index: 6;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        height: 24px;
+
+        min-height: 0;
+
+        margin: 0;
+
+        padding: 0 10px;
+
+        border-radius: 12px;
+
+        font-size: 12px;
+
+        line-height: 1;
+
+    }
+
+    .layout.spread-mode .spread-answer {
+
+        left: auto;
+
+        right: 10px;
+
+        pointer-events: none;
+
+    }
+
+    .layout.spread-mode .spread-answer-label {
+
+        display: none;
+
+    }
+
+    .layout.spread-mode .spread-answer-value {
+
+        font-size: 12px;
+
+        white-space: nowrap;
+
+    }
+
+    .layout.spread-mode .comment-icon-btn {
+
+        left: 10px;
+
+        right: auto;
+
+        width: 34px;
+
+        padding: 0;
+
+        font-size: 14px;
+
+    }
+
+    .layout.spread-mode .back-to-history {
+
+        left: 52px;
+
+        right: auto;
+
+        padding: 0 9px;
+
+        font-size: 11.5px;
+
+        pointer-events: auto;
+
+    }
+
+    /* подпись ручки короче, чтобы в строке хватило места */
+
+    .layout.spread-mode:not(.header-collapsed) .header-toggle::after {
+
+        content: "Скрыть";
+
+    }
+
+    .layout.spread-mode .spread-question {
+
+        bottom: calc(var(--bar-h, 68px) + 8px);
+
+        z-index: 2;
+
+        opacity: .9;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        pointer-events: none;
 
     }
 

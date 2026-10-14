@@ -1564,11 +1564,59 @@ function setHeaderCollapsed(collapsed) {
 
     requestAnimationFrame(() => {
 
+        updateChrome()
+
         if (currentSpreadRelayout) currentSpreadRelayout()
 
     })
 
 }
+
+
+
+// Пока на сцене расклад, сцена занимает весь экран, а шапка и нижняя
+// панель — полупрозрачные поверх неё (класс spread-mode). Высоты
+// шапки и панели передаём в CSS, чтобы подписи не прятались под ними.
+
+function updateChrome() {
+
+    const hasSpread =
+        !!result.querySelector(".spread-area")
+
+    layoutEl.classList.toggle("spread-mode", hasSpread)
+
+
+
+    const bar =
+        document.querySelector(".icon-row")
+
+    layoutEl.style.setProperty(
+        "--header-h",
+        Math.round(headerToggle.getBoundingClientRect().bottom) + "px"
+    )
+
+    layoutEl.style.setProperty(
+        "--bar-h",
+        (bar ? bar.offsetHeight : 0) + "px"
+    )
+
+}
+
+
+
+new MutationObserver(() => {
+
+    const was =
+        layoutEl.classList.contains("spread-mode")
+
+    updateChrome()
+
+    const now =
+        layoutEl.classList.contains("spread-mode")
+
+    if (now && !was && currentSpreadRelayout) currentSpreadRelayout()
+
+}).observe(result, { childList: true })
 
 
 
@@ -1617,6 +1665,8 @@ window.addEventListener("resize", () => {
 
         updateSpreadStrip()
 
+        updateChrome()
+
 
 
         if (window.innerWidth !== lastWindowWidth) {
@@ -1641,6 +1691,34 @@ window.addEventListener("resize", () => {
 
 
 async function quitApp() {
+
+    // 0) метод Quit() сервиса на Go (см. go/quit.go) — на Android это
+    //    единственный надёжный способ полностью завершить приложение.
+    //    Модуль биндингов импортируем динамически: если Quit в нём ещё
+    //    не сгенерирован, сборка не падает, просто идём дальше.
+
+    try {
+
+        const bindings =
+            await import("../bindings/tarotoracleapp/tarotservice.js")
+
+        if (bindings.Quit) {
+
+            await bindings.Quit()
+
+            return
+
+        }
+
+    }
+
+    catch (e) {
+
+        console.error(e)
+
+    }
+
+
 
     // 1) глобальный рантайм Wails, если он есть
 
@@ -1681,6 +1759,28 @@ async function quitApp() {
 
         const rt =
             await import(/* @vite-ignore */ runtimeUrl)
+
+
+
+        // вызов метода Go по имени — работает и без сгенерированных биндингов
+
+        if (rt.Call?.ByName) {
+
+            try {
+
+                await rt.Call.ByName("main.TarotService.Quit")
+
+                return
+
+            }
+
+            catch (e) {
+
+                console.error(e)
+
+            }
+
+        }
 
 
 
@@ -2466,107 +2566,58 @@ function isCrossRotation(rotation) {
 
 
 
-// На телефоне карты расклада делаем читаемого размера. Если все
-// не помещаются без наложения — растягиваем холст, и область
-// расклада прокручивается пальцем. Возвращает масштаб карт.
+// Точки расклада для телефона. Координаты карт растягиваем на всю
+// область (одинаковые поля со всех сторон). В раскладах с поперечной
+// картой («Кельтский крест») правый столбец раскладываем симметрично
+// относительно центра креста.
 
-function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, baseScale) {
-
-    canvas.style.width = ""
-
-    canvas.style.height = ""
-
-
-
-    const desktop =
-        { scale: baseScale, marginX: margin, marginY: margin }
-
-
-
-    if (!isMobileLayout()) return desktop
-
-
-
-    const viewport =
-        canvas.parentElement
-
-
-
-    const vw =
-        viewport.clientWidth
-
-
-
-    const vh =
-        viewport.clientHeight
-
-
-
-    const count =
-        data.cards.length
-
-
-
-    // желаемая ширина картинки карты на телефоне, px
-
-    const preferred =
-        count <= 3 ? 100
-            : count <= 6 ? 88
-                : count <= 7 ? 80
-                    : 76
-
-
-
-    // при свёрнутом меню места больше — можно сжимать карты сильнее,
-    // лишь бы расклад поместился без прокрутки
-
-    const collapsed =
-        !!document.querySelector(".layout.header-collapsed")
-
-
-
-    const floor =
-        collapsed ? 46 : 60
-
-
-
-    // отступ от края холста до коробки карты
-
-    const pad = 8
-
-
-
-    // карты ближе этого порога считаем лежащими «в одном слоте»
-    // (например, карта, положенная поперёк другой)
-
-    const tolX =
-        spreadWidth * 0.04
-
-
-
-    const tolY =
-        spreadHeight * 0.04
-
-
+function mobileSpreadPoints(data, W, H) {
 
     const pts =
-        data.cards.map(c => c.position)
+        data.cards.map(c => ({
+            x: c.position.x,
+            y: c.position.y,
+            rotation: c.position.rotation || 0,
+        }))
 
 
 
-    // размеры «коробки» карты (картинка + подписи) для ширины картинки iw
+    if (!isMobileLayout()) return pts
 
-    function geometry(iw) {
 
-        return {
 
-            iw,
+    const tolX = W * 0.04
 
-            boxW: iw * 1.125 + 6,
+    const cross =
+        pts.find(p => isCrossRotation(p.rotation))
 
-            boxH: iw * 1.75 + 64,
 
-            crossW: iw * 1.75,
+
+    if (cross) {
+
+        const maxX =
+            Math.max(...pts.map(p => p.x))
+
+        const col =
+            pts.filter(p => maxX - p.x < tolX && p !== cross)
+
+
+
+        if (col.length >= 3) {
+
+            col.sort((a, b) => a.y - b.y)
+
+            const span =
+                col[col.length - 1].y - col[0].y
+
+            const half =
+                Math.min(span / 2, cross.y, H - cross.y)
+
+            col.forEach((p, i) => {
+
+                p.y = cross.y - half + (2 * half * i) / (col.length - 1)
+
+            })
 
         }
 
@@ -2574,20 +2625,241 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
 
 
-    // какая высота холста нужна при заданной ширине,
-    // чтобы карты не перекрывали друг друга
-    // (центры карт лежат в зоне, отступающей от краёв на полкоробки)
+    const fill = (key, size) => {
 
-    function neededHeight(g, width) {
+        const vals =
+            pts.map(p => p[key])
 
-        const kx =
-            (width - g.boxW - pad * 2) / spreadWidth
+        const min =
+            Math.min(...vals)
+
+        const span =
+            Math.max(...vals) - min
+
+        pts.forEach(p => {
+
+            p[key] =
+                span > 0 ? ((p[key] - min) / span) * size : size / 2
+
+        })
+
+    }
 
 
 
-        if (kx <= 0) return Infinity
+    fill("x", W)
+
+    fill("y", H)
 
 
+
+    return pts
+
+}
+
+
+
+// На телефоне расклад всегда целиком умещается на экране, без
+// прокрутки: подбираем наибольший размер карт, при котором ни карты,
+// ни их подписи не налезают друг на друга. Возвращает масштаб карт
+// и положение центров карт в процентах холста (pos[i] = {left, top}).
+
+function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, baseScale) {
+
+    canvas.style.width = ""
+
+    canvas.style.height = ""
+
+
+
+    if (!isMobileLayout()) {
+
+        return { scale: baseScale, pos: null }
+
+    }
+
+
+
+    const viewport =
+        canvas.parentElement
+
+    const vw =
+        viewport.clientWidth
+
+    const vh =
+        viewport.clientHeight
+
+    const count =
+        pts.length
+
+
+
+    // желаемая ширина картинки карты, px
+    const preferred =
+        count <= 3 ? 100
+            : count <= 6 ? 88
+                : count <= 7 ? 80
+                    : 76
+
+    const floor = 26
+
+    const padX = 6
+
+    const padY = 6
+
+    const gap = 6
+
+    const labelW = 62
+
+    const tolX = spreadWidth * 0.04
+
+    const tolY = spreadHeight * 0.04
+
+    const hasCross =
+        pts.some(p => isCrossRotation(p.rotation))
+
+
+
+    // размеры «коробки» карты (картинка + подписи)
+    function geometry(iw) {
+
+        const boxW =
+            Math.max(iw * 1.125 + 6, labelW)
+
+        const boxH =
+            iw * 1.75 + 64
+
+        // карта, положенная поперёк: ширина и высота меняются местами
+        return { iw, boxW, boxH, crossW: boxH, crossH: boxW }
+
+    }
+
+
+
+    function ext(p, g) {
+
+        return isCrossRotation(p.rotation)
+            ? { w: g.crossW, h: g.crossH }
+            : { w: g.boxW, h: g.boxH }
+
+    }
+
+
+
+    // Центры карт по горизонтали, px. Для креста: столбцы (по близким x)
+    // раздвигаем так, чтобы коробки соседних столбцов не пересекались,
+    // а свободное место делим пропорционально исходным промежуткам.
+    // null — при таком размере карт в ширину не помещается.
+
+    function layoutX(g) {
+
+        if (!hasCross) {
+
+            return pts.map(p =>
+                padX + g.boxW / 2
+                + (p.x / spreadWidth) * (vw - padX * 2 - g.boxW)
+            )
+
+        }
+
+
+
+        const order =
+            pts.map((p, i) => i).sort((a, b) => pts[a].x - pts[b].x)
+
+        const columns = []
+
+
+
+        order.forEach(i => {
+
+            const last =
+                columns[columns.length - 1]
+
+            if (last && pts[i].x - pts[last.members[last.members.length - 1]].x < tolX) {
+
+                last.members.push(i)
+
+            }
+
+            else {
+
+                columns.push({ members: [i] })
+
+            }
+
+        })
+
+
+
+        columns.forEach(c => {
+
+            c.cx =
+                c.members.reduce((s, i) => s + pts[i].x, 0) / c.members.length
+
+            c.w =
+                Math.max(...c.members.map(i => ext(pts[i], g).w))
+
+        })
+
+
+
+        const avail =
+            vw - padX * 2
+
+        const minTotal =
+            columns.reduce((s, c) => s + c.w, 0) + gap * (columns.length - 1)
+
+
+
+        if (minTotal > avail) return null
+
+
+
+        const slack =
+            avail - minTotal
+
+        const origSpan =
+            columns[columns.length - 1].cx - columns[0].cx
+
+        const xs =
+            new Array(pts.length)
+
+        let x =
+            padX + columns[0].w / 2
+
+
+
+        columns.forEach((c, k) => {
+
+            if (k > 0) {
+
+                const prev =
+                    columns[k - 1]
+
+                const share =
+                    origSpan > 0 ? (c.cx - prev.cx) / origSpan : 0
+
+                x += (prev.w + c.w) / 2 + gap + slack * share
+
+            }
+
+            c.members.forEach(i => { xs[i] = x })
+
+        })
+
+
+
+        return xs
+
+    }
+
+
+
+    // Положение по вертикали: доля высоты y/H → px.
+    // Возвращает нужную высоту области, чтобы карты не налезали друг на друга.
+
+    function neededHeight(g, xs) {
 
         let need = 0
 
@@ -2600,30 +2872,28 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
                 const dx =
                     Math.abs(pts[i].x - pts[j].x)
 
-
-
                 const dy =
                     Math.abs(pts[i].y - pts[j].y)
 
 
 
+                // одна «ячейка» (карта, положенная поперёк другой)
                 if (dx < tolX && dy < tolY) continue
 
 
 
-                // поперечная карта шире: по горизонтали занимает высоту картинки
+                const a =
+                    ext(pts[i], g)
 
-                const wi =
-                    isCrossRotation(pts[i].rotation) ? g.crossW : g.boxW
-
-
-
-                const wj =
-                    isCrossRotation(pts[j].rotation) ? g.crossW : g.boxW
+                const b =
+                    ext(pts[j], g)
 
 
 
-                if (dx * kx >= (wi + wj) / 2) continue
+                // по горизонтали не пересекаются — по вертикали можно не разносить
+                if (Math.abs(xs[i] - xs[j]) >= (a.w + b.w) / 2 + 2) continue
+
+
 
                 if (dy < tolY) return Infinity
 
@@ -2631,62 +2901,59 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
                 need = Math.max(
                     need,
-                    g.boxH + pad * 2 + (g.boxH * spreadHeight) / dy
+                    ((a.h + b.h) / 2) * spreadHeight / dy
                 )
 
             }
 
         }
 
-        return need
+
+
+        return need + g.boxH + padY * 2
 
     }
 
 
 
-    function applyFit(g, w, h) {
+    // top/bottom — сколько px сверху и снизу области занимают панели
+    // (карты стараемся не прятать под ними)
 
-        canvas.style.width = w + "px"
+    function build(g, xs, top, height, need) {
 
-        canvas.style.height = h + "px"
+        // по вертикали карты не растягиваем сильнее, чем нужно: иначе
+        // расклад из двух рядов расползается к краям экрана с пустотой
+        // посередине. Но и не теснее минимально необходимого.
 
+        const fullH =
+            Math.max(0, height - padY * 2 - g.boxH)
 
+        const minH =
+            Math.max(0, need - padY * 2 - g.boxH)
 
-        // начинаем с центра по горизонтали
+        const capH =
+            Math.max(minH, (vw - padX * 2 - g.boxW) * 1.0)
 
-        viewport.scrollLeft = (w - vw) / 2
+        const availH =
+            Math.min(fullH, capH)
 
-        viewport.scrollTop = 0
+        top += (fullH - availH) / 2
 
 
 
         return {
 
+            iw: g.iw,
+
             scale: g.iw / 160,
 
-            marginX: ((g.boxW / 2 + pad) / w) * 100,
+            pos: pts.map((p, i) => ({
 
-            marginY: ((g.boxH / 2 + pad) / h) * 100,
+                left: (xs[i] / vw) * 100,
 
-        }
+                top: ((top + padY + g.boxH / 2 + (p.y / spreadHeight) * availH) / vh) * 100,
 
-    }
-
-
-
-    // 1) пробуем уложить расклад целиком в видимую область без прокрутки,
-    //    постепенно уменьшая карты до порога читаемости
-
-    for (let iw = preferred; iw >= floor; iw -= 4) {
-
-        const g =
-            geometry(iw)
-
-
-
-        if (neededHeight(g, vw) <= vh) {
-
-            return applyFit(g, vw, vh)
+            })),
 
         }
 
@@ -2694,49 +2961,103 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
 
 
-    // 2) не помещается — берём желаемый размер, холст делаем больше экрана,
-    //    перебирая ширину и выбирая вариант с наименьшей площадью
+    // наибольший размер карт, при котором расклад помещается
+    // в область высотой height (top — отступ сверху)
 
-    const g =
-        geometry(preferred)
-
-
-
-    let best = null
-
-
-
-    for (let w = vw; w <= 1100; w += 20) {
-
-        const h =
-            Math.max(vh, neededHeight(g, w))
-
-
-
-        if (!Number.isFinite(h)) continue
-
-
+    function solve(top, bottom) {
 
         const height =
-            Math.min(h, 1500)
+            vh - top - bottom
+
+        if (height <= 0) return null
 
 
 
-        if (!best || w * height < best.w * best.h) {
+        for (let iw = preferred; iw >= floor; iw -= 2) {
 
-            best = { w, h: height }
+            const g =
+                geometry(iw)
+
+            const xs =
+                layoutX(g)
+
+            const need =
+                xs ? neededHeight(g, xs) : Infinity
+
+            if (xs && need <= height) {
+
+                return build(g, xs, top, height, need)
+
+            }
 
         }
+
+        return null
 
     }
 
 
 
-    if (!best) best = { w: Math.min(vw * 1.6, 1100), h: vh }
+    const cs =
+        getComputedStyle(layoutEl)
+
+    const headerH =
+        parseFloat(cs.getPropertyValue("--header-h")) || 0
+
+    const barH =
+        parseFloat(cs.getPropertyValue("--bar-h")) || 0
 
 
 
-    return applyFit(g, best.w, best.h)
+    const full =
+        solve(0, 0)
+
+
+
+    if (full) {
+
+        // сначала пробуем не заходить под панели; заходим, только если
+        // иначе карты пришлось бы заметно уменьшить
+
+        // плашка с вопросом лежит над нижней панелью — место под неё тоже
+
+        const q =
+            document.querySelector(".spread-question")
+
+        const qH =
+            q ? q.offsetHeight + 10 : 0
+
+        const levels = [
+            [headerH, barH + qH],
+            [headerH / 2, barH / 2 + qH],
+        ]
+
+        for (const [t, b] of levels) {
+
+            const r =
+                solve(t, b)
+
+            if (r && r.iw >= full.iw * 0.88) return r
+
+        }
+
+        return full
+
+    }
+
+
+
+    // совсем тесно: берём минимальный размер, пусть чуть налезают
+    // (прокрутки нет, всё остаётся на экране)
+
+    const g =
+        geometry(floor)
+
+    const xs =
+        layoutX(g)
+        || pts.map(p => padX + g.boxW / 2 + (p.x / spreadWidth) * (vw - padX * 2 - g.boxW))
+
+    return build(g, xs, 0, vh, 0)
 
 }
 
@@ -2801,6 +3122,10 @@ function renderSpread(data, question) {
 
 
 
+    updateChrome()
+
+
+
     const area =
         document.querySelector(".spread-canvas")
 
@@ -2820,13 +3145,26 @@ function renderSpread(data, question) {
 
 
 
-    let marginX = margin
+    // на телефоне положение карт считает fitSpreadToViewport (pos[i]),
+    // на десктопе — проценты от размера области с полями margin
 
-    let marginY = margin
+    const mobilePts =
+        mobileSpreadPoints(data, spreadWidth, spreadHeight)
+
+    let layoutPos = null
 
 
 
-    function normalize(x, y) {
+    function normalize(x, y, i) {
+
+        if (layoutPos) {
+
+            return {
+                left: layoutPos[i].left,
+                top: layoutPos[i].top,
+            }
+
+        }
 
         const nx =
             (x / spreadWidth) * 100
@@ -2836,9 +3174,9 @@ function renderSpread(data, question) {
 
         return {
 
-            left: marginX + (nx * (100 - marginX * 2)) / 100,
+            left: margin + (nx * (100 - margin * 2)) / 100,
 
-            top: marginY + (ny * (100 - marginY * 2)) / 100,
+            top: margin + (ny * (100 - margin * 2)) / 100,
 
         }
 
@@ -2862,7 +3200,7 @@ function renderSpread(data, question) {
     const fit =
         fitSpreadToViewport(
             area,
-            data,
+            mobilePts,
             spreadWidth,
             spreadHeight,
             margin,
@@ -2871,9 +3209,7 @@ function renderSpread(data, question) {
 
 
 
-    marginX = fit.marginX
-
-    marginY = fit.marginY
+    layoutPos = fit.pos
 
 
 
@@ -2900,17 +3236,12 @@ function renderSpread(data, question) {
 
 
 
-            const crossOnMobile =
-                isMobileLayout() && isCrossRotation(p.rotation)
-
-
-
             const cardRotation =
-                crossOnMobile ? 0 : (p.rotation || 0)
+                p.rotation || 0
 
 
             const pos =
-                normalize(p.x, p.y)
+                normalize(p.x, p.y, index)
 
 
 
@@ -2950,25 +3281,6 @@ function renderSpread(data, question) {
  
             `
 
-            // На телефоне поперечную карту не вращаем целиком — иначе подписи
-            // уезжают на бока и скрываются под соседними картами.
-            // Вращаем только картинку, а подписи кладём поверх неё.
-
-            if (crossOnMobile) {
-
-                card.classList.add("spread-card-cross")
-
-
-
-                card
-                    .querySelector(".card-image")
-                    .style.transform =
-                    `rotate(${(p.rotation || 0) + (item.isReversed ? 180 : 0)}deg)`
-
-            }
-
-
-
             card.onclick =
                 () => openCardModal(item)
 
@@ -3007,7 +3319,7 @@ function renderSpread(data, question) {
 
 
 
-            placed.push({ el: card, p })
+            placed.push({ el: card, index })
 
 
 
@@ -3060,7 +3372,7 @@ function renderSpread(data, question) {
         const f =
             fitSpreadToViewport(
                 area,
-                data,
+                mobilePts,
                 spreadWidth,
                 spreadHeight,
                 margin,
@@ -3069,9 +3381,7 @@ function renderSpread(data, question) {
 
 
 
-        marginX = f.marginX
-
-        marginY = f.marginY
+        layoutPos = f.pos
 
 
 
@@ -3079,10 +3389,13 @@ function renderSpread(data, question) {
 
 
 
-        placed.forEach(({ el, p }) => {
+        placed.forEach(({ el, index }) => {
+
+            const p =
+                data.cards[index].position
 
             const pos =
-                normalize(p.x, p.y)
+                normalize(p.x, p.y, index)
 
 
 
