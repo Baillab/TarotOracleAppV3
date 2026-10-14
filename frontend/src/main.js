@@ -1,4 +1,3 @@
-
 import './app.css'
 
 import {
@@ -1596,6 +1595,11 @@ function updateChrome() {
     )
 
     layoutEl.style.setProperty(
+        "--toggle-h",
+        Math.round(headerToggle.offsetHeight) + "px"
+    )
+
+    layoutEl.style.setProperty(
         "--bar-h",
         (bar ? bar.offsetHeight : 0) + "px"
     )
@@ -3001,8 +3005,12 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
     const cs =
         getComputedStyle(layoutEl)
 
+    // Расклад всегда считаем под свёрнутое меню (остаётся только полоска
+    // ручки). Раскрытое меню ложится сверху поверх карт — карты при этом
+    // не двигаются.
+
     const headerH =
-        parseFloat(cs.getPropertyValue("--header-h")) || 0
+        parseFloat(cs.getPropertyValue("--toggle-h")) || 0
 
     const barH =
         parseFloat(cs.getPropertyValue("--bar-h")) || 0
