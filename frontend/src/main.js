@@ -1,3 +1,4 @@
+
 import './app.css'
 
 import {
@@ -29,154 +30,168 @@ import {
 // ==========================================
 
 document.querySelector("#app").innerHTML = `
-
+ 
 <div class="layout">
-
-
+ 
+ 
     <aside class="sidebar">
-
-
+ 
+ 
         <h1 class="logo">
-
+ 
             ✦ Tarot Oracle ✦
-
+ 
         </h1>
-
-
-
+ 
+ 
+ 
         <div class="menu">
-
-
+ 
+ 
             <button id="draw" class="action-button">
-
+ 
                 ✦ Вытянуть карту
-
+ 
             </button>
-
-
-
+ 
+ 
+ 
             <button id="daily" class="action-button">
-
+ 
                 ✦ Карта дня
-
+ 
             </button>
-
-
+ 
+ 
         </div>
-
-
-
+ 
+ 
+ 
         <div class="spread-title">
-
+ 
             РАСКЛАДЫ
-
+ 
         </div>
-
-
-
-        <div id="spread-list" class="spread-list">
-
+ 
+ 
+ 
+        <div class="spread-strip" id="spread-strip">
+ 
+            <button class="strip-arrow strip-arrow-left" id="strip-left" aria-label="Прокрутить расклады влево"><span>‹</span></button>
+ 
+            <div id="spread-list" class="spread-list">
+ 
+            </div>
+ 
+            <button class="strip-arrow strip-arrow-right" id="strip-right" aria-label="Прокрутить расклады вправо"><span>›</span></button>
+ 
         </div>
-
-
-
+ 
+ 
+ 
         <div class="icon-row">
-
-
+ 
+ 
     <button id="shuffle" class="icon-button" title="Перемешать" data-label="Перемешать">
-
+ 
         🂠
-
+ 
     </button>
-
-
-
+ 
+ 
+ 
     <button id="history" class="icon-button" title="История" data-label="История">
-
+ 
         🕒
-
+ 
     </button>
-
-
-
+ 
+ 
+ 
     <button id="deck-info" class="icon-button" title="Колода" data-label="Колода">
-
+ 
         🗂
-
+ 
     </button>
-
-
-
+ 
+ 
+ 
     <button id="settings" class="icon-button" title="Настройки" data-label="Настройки">
-
+ 
         ⚙
-
+ 
     </button>
-
-
-
+ 
+ 
+ 
     <button id="interpretation-icon" class="icon-button" title="Толкование расклада" data-label="Толкование">
-
+ 
         📖
-
+ 
     </button>
-
-
+ 
+ 
 </div>
-
-
+ 
+ 
     </aside>
-
-
+ 
+ 
+ 
+    <button id="header-toggle" class="header-toggle" aria-label="Свернуть или развернуть меню" aria-expanded="true"></button>
+ 
+    <button id="exit-app" class="exit-button" title="Выход" aria-label="Выйти из приложения">✕</button>
+ 
+ 
     <main class="scene">
-
-
+ 
+ 
         <div id="result">
-
+ 
         </div>
-
-
+ 
+ 
         <div id="shuffle-animation" class="shuffle-animation hidden">
-
+ 
     <div class="shuffle-card"></div>
-
+ 
     <div class="shuffle-card"></div>
-
+ 
     <div class="shuffle-card"></div>
-
+ 
     <div class="shuffle-card"></div>
-
+ 
     <div class="shuffle-card"></div>
-
+ 
 </div>
-
-
-
+ 
+ 
+ 
 <div id="toast" class="toast"></div>
-
-
-
+ 
+ 
+ 
         <div id="interpretation-panel" class="interpretation-panel">
-
+ 
         </div>
-
-
+ 
+ 
     </main>
-
-
-
+ 
+ 
+ 
     <div id="card-modal" class="modal-overlay hidden">
-
+ 
         <div class="modal-content" id="modal-content">
-
+ 
         </div>
-
+ 
     </div>
-
-
-
+ 
+ 
+ 
 </div>
-
+ 
 `
 
 
@@ -196,7 +211,72 @@ const spreadList =
 
 
 
+const spreadStrip =
+    document.querySelector("#spread-strip")
+
+
+
+// Стрелки ‹ › у ленты раскладов: показываем только там,
+// куда ещё можно прокрутить
+
+function updateSpreadStrip() {
+
+    const max =
+        spreadList.scrollWidth - spreadList.clientWidth
+
+
+
+    spreadStrip.classList.toggle(
+        "can-left",
+        spreadList.scrollLeft > 4
+    )
+
+
+
+    spreadStrip.classList.toggle(
+        "can-right",
+        spreadList.scrollLeft < max - 4
+    )
+
+}
+
+
+
+spreadList.addEventListener("scroll", updateSpreadStrip, { passive: true })
+
+
+
+document
+    .querySelector("#strip-left")
+    .onclick = () => spreadList.scrollBy({
+
+        left: -spreadList.clientWidth * 0.7,
+
+        behavior: "smooth",
+
+    })
+
+
+
+document
+    .querySelector("#strip-right")
+    .onclick = () => spreadList.scrollBy({
+
+        left: spreadList.clientWidth * 0.7,
+
+        behavior: "smooth",
+
+    })
+
+
+
 let activeButton =
+    null
+
+
+// пересчёт текущего расклада (после сворачивания шапки, поворота экрана)
+
+let currentSpreadRelayout =
     null
 
 
@@ -378,21 +458,21 @@ function setInterpretation(html) {
     document
         .querySelector("#interpretation-panel")
         .innerHTML = `
-
+ 
             <div class="interpretation-header">
-
+ 
                 ✦ Толкование ✦
-
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="interpretation-body">
-
+ 
                 ${html}
-
+ 
             </div>
-
+ 
         `
 
 }
@@ -414,51 +494,51 @@ function openCommentModal(historyId, existingComment, onSaved) {
 
 
     content.innerHTML = `
-
-
+ 
+ 
         <button class="modal-close" id="modal-close">
-
+ 
             ✕
-
+ 
         </button>
-
-
-
+ 
+ 
+ 
         <h2 class="question-title">
-
+ 
             Ваш комментарий
-
+ 
         </h2>
-
-
-
+ 
+ 
+ 
         <textarea
-
+ 
             id="comment-textarea"
-
+ 
             class="comment-textarea"
-
+ 
             placeholder="Добавьте заметку об этом раскладе..."
-
+ 
             rows="5"
-
+ 
         >${existingComment || ""}</textarea>
-
-
-
+ 
+ 
+ 
         <div class="question-actions">
-
-
+ 
+ 
             <button id="comment-save" class="confirm-btn confirm-yes-gold">
-
+ 
                 Сохранить
-
+ 
             </button>
-
-
+ 
+ 
         </div>
-
-
+ 
+ 
     `
 
 
@@ -654,15 +734,15 @@ function keywordsHTML(card) {
     }
 
     return `
-
+ 
         <div class="keywords">
-
+ 
             ${card.keywords.map(
         k => `<span class="keyword-tag">${k}</span>`
     ).join("")}
-
+ 
         </div>
-
+ 
     `
 
 }
@@ -701,21 +781,21 @@ function cardMeaningTabs(card, isReversed, prefix) {
     const buttons =
         tabs.map(
             (t, i) => `
-
+ 
                 <button
-
+ 
                     class="tab-btn ${i === 0 ? "active" : ""}"
-
+ 
                     data-tab-group="${prefix}"
-
+ 
                     data-tab-key="${t.key}"
-
+ 
                 >
-
+ 
                     ${t.label}
-
+ 
                 </button>
-
+ 
             `
         ).join("")
 
@@ -724,42 +804,42 @@ function cardMeaningTabs(card, isReversed, prefix) {
     const panels =
         tabs.map(
             (t, i) => `
-
+ 
                 <div
-
+ 
                     class="tab-panel ${i === 0 ? "active" : ""}"
-
+ 
                     data-tab-group="${prefix}"
-
+ 
                     data-tab-panel="${t.key}"
-
+ 
                 >
-
+ 
                     ${t.value}
-
+ 
                 </div>
-
+ 
             `
         ).join("")
 
 
 
     return `
-
+ 
         <div class="card-tabs">
-
+ 
             ${buttons}
-
+ 
         </div>
-
-
-
+ 
+ 
+ 
         <div class="card-tab-panels">
-
+ 
             ${panels}
-
+ 
         </div>
-
+ 
     `
 
 }
@@ -844,61 +924,61 @@ function openCardModal(item) {
 
 
     content.innerHTML = `
-
-
+ 
+ 
         <button class="modal-close" id="modal-close">
-
+ 
             ✕
-
+ 
         </button>
-
-
-
+ 
+ 
+ 
         <img
-
+ 
             class="card-image ${item.isReversed ? "reversed" : ""}"
-
+ 
             src="/${card.image}"
-
+ 
         >
-
-
-
+ 
+ 
+ 
         <h2>
-
+ 
             ${card.name}${item.isReversed ? " (перевёрнутая)" : ""}
-
+ 
         </h2>
-
-
-
+ 
+ 
+ 
         ${keywordsHTML(card)}
-
-
-
+ 
+ 
+ 
         ${item.quickAnswer ? `
-
+ 
             <div class="quick-answer ${answerClass(item.quickAnswer)}">
-
+ 
                 ${item.quickAnswer}
-
+ 
             </div>
-
+ 
         ` : ""}
-
-
-
+ 
+ 
+ 
         <p>
-
+ 
             ${meaning.text}
-
+ 
         </p>
-
-
-
+ 
+ 
+ 
         ${cardMeaningTabs(card, item.isReversed, "modal")}
-
-
+ 
+ 
     `
 
     modal.classList.remove("hidden")
@@ -936,7 +1016,7 @@ function openCardModal(item) {
 // ==========================================
 
 
-function showConfirm(text, onConfirm) {
+function showConfirm(text, onConfirm, yesLabel) {
 
     const modal =
         document.querySelector("#card-modal")
@@ -949,45 +1029,45 @@ function showConfirm(text, onConfirm) {
 
 
     content.innerHTML = `
-
-
+ 
+ 
         <button class="modal-close" id="modal-close">
-
+ 
             ✕
-
+ 
         </button>
-
-
-
+ 
+ 
+ 
         <p class="confirm-text">
-
+ 
             ${text}
-
+ 
         </p>
-
-
-
+ 
+ 
+ 
         <div class="confirm-actions">
-
-
+ 
+ 
             <button id="confirm-yes" class="confirm-btn confirm-yes">
-
-                Да, очистить
-
+ 
+                ${yesLabel || "Да, очистить"}
+ 
             </button>
-
-
-
+ 
+ 
+ 
             <button id="confirm-no" class="confirm-btn confirm-no">
-
+ 
                 Отмена
-
+ 
             </button>
-
-
+ 
+ 
         </div>
-
-
+ 
+ 
     `
 
     modal.classList.remove("hidden")
@@ -1098,119 +1178,119 @@ async function openQuestionModal(spread) {
 
 
     content.innerHTML = `
-
-
+ 
+ 
         <button class="modal-close" id="modal-close">
-
+ 
             ✕
-
+ 
         </button>
-
-
-
+ 
+ 
+ 
         <h2 class="question-title">
-
+ 
             ${spread.name}
-
+ 
         </h2>
-
-
-
+ 
+ 
+ 
         <p class="question-subtitle">
-
+ 
             Задайте вопрос или начните без него
-
+ 
         </p>
-
-
-
+ 
+ 
+ 
         <div class="question-tabs">
-
+ 
             ${questionCategories.map(
         (category, i) => `
-
+ 
                     <button
-
+ 
                         class="tab-btn ${i === 0 ? "active" : ""}"
-
+ 
                         data-tab-group="question"
-
+ 
                         data-tab-key="${category.id}"
-
+ 
                     >
-
+ 
                         ${category.label}
-
+ 
                     </button>
-
+ 
                 `
     ).join("")}
-
+ 
         </div>
-
-
-
+ 
+ 
+ 
         <div class="question-chips-panels">
-
+ 
             ${questionCategories.map(
         (category, i) => `
-
+ 
                     <div
-
+ 
                         class="question-chips tab-panel-q ${i === 0 ? "active" : ""}"
-
+ 
                         data-tab-group="question"
-
+ 
                         data-tab-panel="${category.id}"
-
+ 
                     >
-
+ 
                         ${chipsHTML(category)}
-
+ 
                     </div>
-
+ 
                 `
     ).join("")}
-
+ 
         </div>
-
-
-
+ 
+ 
+ 
         <textarea
-
+ 
             id="question-input"
-
+ 
             class="question-textarea"
-
+ 
             placeholder="Свой вопрос..."
-
+ 
             rows="3"
-
+ 
         ></textarea>
-
-
-
+ 
+ 
+ 
         <div class="question-actions">
-
-
+ 
+ 
             <button id="question-skip" class="confirm-btn confirm-no">
-
+ 
                 Без вопроса
-
+ 
             </button>
-
-
-
+ 
+ 
+ 
             <button id="question-start" class="confirm-btn confirm-yes-gold">
-
+ 
                 Начать расклад
-
+ 
             </button>
-
-
+ 
+ 
         </div>
-
-
+ 
+ 
     `
 
     modal.classList.remove("hidden")
@@ -1406,6 +1486,16 @@ async function loadSpreads() {
 
                     setActive(button)
 
+                    if (isMobileLayout()) {
+
+                        button.scrollIntoView({
+                            inline: "center",
+                            block: "nearest",
+                            behavior: "smooth",
+                        })
+
+                    }
+
                     openQuestionModal(spread)
 
                 }
@@ -1413,9 +1503,11 @@ async function loadSpreads() {
 
             spreadList.appendChild(button)
 
-
-
         })
+
+
+
+        requestAnimationFrame(updateSpreadStrip)
 
 
     }
@@ -1431,6 +1523,215 @@ async function loadSpreads() {
 
 
 }
+
+
+// ==========================================
+// Телефон: свернуть / развернуть верхнее меню
+// ==========================================
+
+
+const layoutEl =
+    document.querySelector(".layout")
+
+
+
+const headerToggle =
+    document.querySelector("#header-toggle")
+
+
+
+function setHeaderCollapsed(collapsed) {
+
+    layoutEl.classList.toggle("header-collapsed", collapsed)
+
+
+
+    headerToggle.setAttribute("aria-expanded", String(!collapsed))
+
+
+
+    try {
+
+        localStorage.setItem("headerCollapsed", collapsed ? "1" : "0")
+
+    }
+
+    catch (e) { }
+
+
+
+    // сцена изменила размер — перекладываем расклад
+
+    requestAnimationFrame(() => {
+
+        if (currentSpreadRelayout) currentSpreadRelayout()
+
+    })
+
+}
+
+
+
+headerToggle.onclick = () =>
+    setHeaderCollapsed(
+        !layoutEl.classList.contains("header-collapsed")
+    )
+
+
+
+try {
+
+    if (localStorage.getItem("headerCollapsed") === "1") {
+
+        layoutEl.classList.add("header-collapsed")
+
+    }
+
+}
+
+catch (e) { }
+
+
+
+// Поворот экрана / изменение ширины окна.
+// Смену только высоты (клавиатура) игнорируем — иначе расклад
+// «прыгал» бы при вводе комментария.
+
+let lastWindowWidth =
+    window.innerWidth
+
+
+
+let resizeTimer =
+    null
+
+
+
+window.addEventListener("resize", () => {
+
+    clearTimeout(resizeTimer)
+
+
+
+    resizeTimer = setTimeout(() => {
+
+        updateSpreadStrip()
+
+
+
+        if (window.innerWidth !== lastWindowWidth) {
+
+            lastWindowWidth = window.innerWidth
+
+
+
+            if (currentSpreadRelayout) currentSpreadRelayout()
+
+        }
+
+    }, 150)
+
+})
+
+
+
+// ==========================================
+// Выход из приложения
+// ==========================================
+
+
+async function quitApp() {
+
+    // 1) глобальный рантайм Wails, если он есть
+
+    try {
+
+        const app =
+            window.wails?.Application
+
+
+
+        if (app?.Quit) {
+
+            await app.Quit()
+
+            return
+
+        }
+
+    }
+
+    catch (e) {
+
+        console.error(e)
+
+    }
+
+
+
+    // 2) рантайм, который отдаёт сам Wails v3
+    // (адрес в переменной, чтобы сборщик не пытался его разрешить)
+
+    try {
+
+        const runtimeUrl =
+            "/wails/runtime.js"
+
+
+
+        const rt =
+            await import(/* @vite-ignore */ runtimeUrl)
+
+
+
+        const quit =
+            rt.Application?.Quit || rt.Quit
+
+
+
+        if (quit) {
+
+            await quit()
+
+            return
+
+        }
+
+    }
+
+    catch (e) {
+
+        console.error(e)
+
+    }
+
+
+
+    try {
+
+        window.close()
+
+    }
+
+    catch (e) { }
+
+
+
+    showToast("Не удалось закрыть приложение. Закройте его системной кнопкой.")
+
+}
+
+
+
+document
+    .querySelector("#exit-app")
+    .onclick = () => showConfirm(
+        "Закрыть приложение?",
+        quitApp,
+        "Да, закрыть"
+    )
+
+
 
 loadSpreads()
 
@@ -1636,61 +1937,61 @@ function showWelcomeDeck() {
 
 
     setInterpretation(`
-
+ 
         <div class="interpretation-item">
-
+ 
             <div class="interpretation-advice">
-
+ 
                 Выберите карту или расклад, чтобы увидеть толкование.
-
+ 
             </div>
-
+ 
         </div>
-
+ 
     `)
 
 
     result.innerHTML = `
-
-
+ 
+ 
         <div class="welcome-deck">
-
-
+ 
+ 
             <div class="deck-fan">
-
+ 
                 <div class="deck-card c1"></div>
-
+ 
                 <div class="deck-card c2"></div>
-
+ 
                 <div class="deck-card c3"></div>
-
+ 
                 <div class="deck-card c4"></div>
-
+ 
                 <div class="deck-card c5"></div>
-
-
+ 
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <h2 class="welcome-title">
-
+ 
                 ✦ Tarot Oracle ✦
-
+ 
             </h2>
-
-
-
+ 
+ 
+ 
             <p class="welcome-text">
-
+ 
                 ${isMobileLayout() ? "Выберите карту или расклад, чтобы начать" : "Выберите действие слева, чтобы начать"}
-
+ 
             </p>
-
-
+ 
+ 
         </div>
-
-
+ 
+ 
     `
 
 
@@ -1707,31 +2008,31 @@ function showMessage(text) {
 
 
     setInterpretation(`
-
+ 
         <div class="interpretation-item">
-
+ 
             <div class="interpretation-advice">
-
+ 
                 Выберите карту или расклад, чтобы увидеть толкование.
-
+ 
             </div>
-
+ 
         </div>
-
+ 
     `)
 
 
 
     result.innerHTML = `
-
-
+ 
+ 
         <div class="message">
-
+ 
             ${text}
-
+ 
         </div>
-
-
+ 
+ 
     `
 
 
@@ -1801,80 +2102,80 @@ function showCard(answer) {
 
 
     result.innerHTML = `
-
+ 
     
-
-
+ 
+ 
         <div class="card">
-
-
+ 
+ 
             <img
-
+ 
                 class="card-image ${answer.isReversed ? "reversed" : ""}"
-
+ 
                 src="/${card.image}"
-
+ 
             >
-
-
+ 
+ 
             <h2>
-
+ 
     
             ${card.name}${answer.isReversed ? " (перевёрнутая)" : ""}
-
-
+ 
+ 
             </h2>
-
-
-
+ 
+ 
+ 
             ${keywordsHTML(card)}
-
-
-
+ 
+ 
+ 
             ${answer.quickAnswer ? `
-
+ 
                 <div class="quick-answer ${answerClass(answer.quickAnswer)}">
-
+ 
                     ${answer.quickAnswer}
-
+ 
                 </div>
-
+ 
             ` : ""}
-
-
-
+ 
+ 
+ 
             <p>
-
+ 
                 ${meaning.text}
-
+ 
             </p>
-
+ 
     ${cardMeaningTabs(card, answer.isReversed, "single")}
-
-
-
+ 
+ 
+ 
 ${answer.historyId ? `
-
+ 
     <button
-
+ 
         class="comment-icon-btn"
-
+ 
         data-history-id="${answer.historyId}"
-
+ 
         title="Добавить комментарий"
-
+ 
     >
-
+ 
         📝
-
+ 
     </button>
-
+ 
 ` : ""}
-
-
+ 
+ 
         </div>
-
-
+ 
+ 
     `
 
 
@@ -1907,33 +2208,33 @@ ${answer.historyId ? `
 
 
     setInterpretation(`
-
+ 
         <div class="interpretation-item">
-
+ 
             <div class="interpretation-position">
-
+ 
                 Толкование
-
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="interpretation-card">
-
+ 
                 ${card.name}${answer.isReversed ? " (перевёрнутая)" : ""}
-
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="interpretation-advice">
-
+ 
                 ${meaning.advice}
-
+ 
             </div>
-
+ 
         </div>
-
+ 
     `)
 
 }
@@ -1962,59 +2263,59 @@ function showDailyCard(daily) {
 
 
     result.innerHTML = `
-
-
+ 
+ 
         <div class="daily-card">
-
-
+ 
+ 
             <img
-
+ 
                 class="card-image ${drawn.isReversed ? "reversed" : ""}"
-
+ 
                 src="/${card.image}"
-
+ 
             >
-
-
-
+ 
+ 
+ 
             <h3>
-
+ 
                 ${card.name}${drawn.isReversed ? " (перевёрнутая)" : ""}
-
+ 
             </h3>
-
-
-
+ 
+ 
+ 
             ${keywordsHTML(card)}
-
-
-
+ 
+ 
+ 
             ${drawn.quickAnswer ? `
-
+ 
                 <div class="quick-answer ${answerClass(drawn.quickAnswer)}">
-
+ 
                     ${drawn.quickAnswer}
-
+ 
                 </div>
-
+ 
             ` : ""}
-
-
-
+ 
+ 
+ 
             <p>
-
+ 
                 ${meaning.text}
-
+ 
             </p>
-
-
-
+ 
+ 
+ 
             ${cardMeaningTabs(card, drawn.isReversed, "daily")}
-
-
+ 
+ 
         </div>
-
-
+ 
+ 
     `
 
     const commentBtn =
@@ -2043,33 +2344,33 @@ function showDailyCard(daily) {
 
 
     setInterpretation(`
-
+ 
         <div class="interpretation-item">
-
+ 
             <div class="interpretation-position">
-
+ 
                 Толкование
-
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="interpretation-card">
-
+ 
                 ${card.name}${drawn.isReversed ? " (перевёрнутая)" : ""}
-
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="interpretation-advice">
-
+ 
                 ${meaning.advice}
-
+ 
             </div>
-
+ 
         </div>
-
+ 
     `)
 
 
@@ -2149,6 +2450,22 @@ function isMobileLayout() {
 
 
 
+// Карта, положенная поперёк (≈90° / 270°), как «Препятствие»
+// в Кельтском кресте
+
+function isCrossRotation(rotation) {
+
+    const r =
+        (((rotation || 0) % 180) + 180) % 180
+
+
+
+    return Math.abs(r - 90) < 15
+
+}
+
+
+
 // На телефоне карты расклада делаем читаемого размера. Если все
 // не помещаются без наложения — растягиваем холст, и область
 // расклада прокручивается пальцем. Возвращает масштаб карт.
@@ -2190,9 +2507,9 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
 
 
-    // ширина картинки карты на телефоне, px
+    // желаемая ширина картинки карты на телефоне, px
 
-    const imgWidth =
+    const preferred =
         count <= 3 ? 100
             : count <= 6 ? 88
                 : count <= 7 ? 80
@@ -2200,15 +2517,22 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
 
 
-    // «коробка» карты: картинка + подписи
+    // при свёрнутом меню места больше — можно сжимать карты сильнее,
+    // лишь бы расклад поместился без прокрутки
 
-    const boxW =
-        imgWidth * 1.125 + 6
+    const collapsed =
+        !!document.querySelector(".layout.header-collapsed")
 
 
 
-    const boxH =
-        imgWidth * 1.75 + 76
+    const floor =
+        collapsed ? 46 : 60
+
+
+
+    // отступ от края холста до коробки карты
+
+    const pad = 8
 
 
 
@@ -2225,14 +2549,28 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
 
 
-    // отступ от края холста до коробки карты
-
-    const pad = 8
-
-
-
     const pts =
         data.cards.map(c => c.position)
+
+
+
+    // размеры «коробки» карты (картинка + подписи) для ширины картинки iw
+
+    function geometry(iw) {
+
+        return {
+
+            iw,
+
+            boxW: iw * 1.125 + 6,
+
+            boxH: iw * 1.75 + 64,
+
+            crossW: iw * 1.75,
+
+        }
+
+    }
 
 
 
@@ -2240,10 +2578,10 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
     // чтобы карты не перекрывали друг друга
     // (центры карт лежат в зоне, отступающей от краёв на полкоробки)
 
-    function neededHeight(width) {
+    function neededHeight(g, width) {
 
         const kx =
-            (width - boxW - pad * 2) / spreadWidth
+            (width - g.boxW - pad * 2) / spreadWidth
 
 
 
@@ -2271,7 +2609,21 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
                 if (dx < tolX && dy < tolY) continue
 
-                if (dx * kx >= boxW) continue
+
+
+                // поперечная карта шире: по горизонтали занимает высоту картинки
+
+                const wi =
+                    isCrossRotation(pts[i].rotation) ? g.crossW : g.boxW
+
+
+
+                const wj =
+                    isCrossRotation(pts[j].rotation) ? g.crossW : g.boxW
+
+
+
+                if (dx * kx >= (wi + wj) / 2) continue
 
                 if (dy < tolY) return Infinity
 
@@ -2279,7 +2631,7 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
                 need = Math.max(
                     need,
-                    boxH + pad * 2 + (boxH * spreadHeight) / dy
+                    g.boxH + pad * 2 + (g.boxH * spreadHeight) / dy
                 )
 
             }
@@ -2292,7 +2644,63 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
 
 
-    // перебираем ширину и берём вариант с наименьшей площадью холста
+    function applyFit(g, w, h) {
+
+        canvas.style.width = w + "px"
+
+        canvas.style.height = h + "px"
+
+
+
+        // начинаем с центра по горизонтали
+
+        viewport.scrollLeft = (w - vw) / 2
+
+        viewport.scrollTop = 0
+
+
+
+        return {
+
+            scale: g.iw / 160,
+
+            marginX: ((g.boxW / 2 + pad) / w) * 100,
+
+            marginY: ((g.boxH / 2 + pad) / h) * 100,
+
+        }
+
+    }
+
+
+
+    // 1) пробуем уложить расклад целиком в видимую область без прокрутки,
+    //    постепенно уменьшая карты до порога читаемости
+
+    for (let iw = preferred; iw >= floor; iw -= 4) {
+
+        const g =
+            geometry(iw)
+
+
+
+        if (neededHeight(g, vw) <= vh) {
+
+            return applyFit(g, vw, vh)
+
+        }
+
+    }
+
+
+
+    // 2) не помещается — берём желаемый размер, холст делаем больше экрана,
+    //    перебирая ширину и выбирая вариант с наименьшей площадью
+
+    const g =
+        geometry(preferred)
+
+
 
     let best = null
 
@@ -2301,7 +2709,7 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
     for (let w = vw; w <= 1100; w += 20) {
 
         const h =
-            Math.max(vh, neededHeight(w))
+            Math.max(vh, neededHeight(g, w))
 
 
 
@@ -2328,29 +2736,7 @@ function fitSpreadToViewport(canvas, data, spreadWidth, spreadHeight, margin, ba
 
 
 
-    canvas.style.width = best.w + "px"
-
-    canvas.style.height = best.h + "px"
-
-
-
-    // начинаем с центра по горизонтали
-
-    viewport.scrollLeft = (best.w - vw) / 2
-
-    viewport.scrollTop = 0
-
-
-
-    return {
-
-        scale: imgWidth / 160,
-
-        marginX: ((boxW / 2 + pad) / best.w) * 100,
-
-        marginY: ((boxH / 2 + pad) / best.h) * 100,
-
-    }
+    return applyFit(g, best.w, best.h)
 
 }
 
@@ -2361,55 +2747,55 @@ function renderSpread(data, question) {
     let currentComment = ""
 
     result.innerHTML = `
-
+ 
     ${question ? `
-
+ 
         <div class="spread-question">
-
+ 
             «${question}»
-
+ 
         </div>
-
+ 
     ` : ""}
-
-
-
+ 
+ 
+ 
     ${data.quickAnswer ? `
-
+ 
         <div class="spread-answer ${answerClass(data.quickAnswer)}">
-
+ 
             <span class="spread-answer-label">Общий ответ:</span>
-
+ 
             <span class="spread-answer-value">${data.quickAnswer}</span>
-
+ 
         </div>
-
+ 
     ` : ""}
-
-
-
+ 
+ 
+ 
     ${data.historyId ? `
-
+ 
         <button
-
+ 
             class="comment-icon-btn"
-
+ 
             data-history-id="${data.historyId}"
-
+ 
             title="Добавить комментарий"
-
+ 
         >
-
+ 
             📝
-
+ 
         </button>
-
+ 
     ` : ""}
-
-
-
+ 
+ 
+ 
     <div class="spread-area"><div class="spread-canvas"></div></div>
-
+ 
 `
 
 
@@ -2498,6 +2884,11 @@ function renderSpread(data, question) {
 
 
 
+
+    const placed = []
+
+
+
     data.cards.forEach(
         (item, index) => {
 
@@ -2505,6 +2896,17 @@ function renderSpread(data, question) {
             const p =
                 item.position
 
+
+
+
+
+            const crossOnMobile =
+                isMobileLayout() && isCrossRotation(p.rotation)
+
+
+
+            const cardRotation =
+                crossOnMobile ? 0 : (p.rotation || 0)
 
 
             const pos =
@@ -2523,30 +2925,49 @@ function renderSpread(data, question) {
 
 
             card.innerHTML = `
-
-
+ 
+ 
                 ${p.name ? `<div class="position-name">${p.name}</div>` : ""}
-
-
-
+ 
+ 
+ 
                 <img
-
+ 
                     class="card-image ${item.isReversed ? "reversed" : ""}"
-
+ 
                     src="/${item.card.image}"
-
+ 
                 >
-
-
-
+ 
+ 
+ 
                 <div class="card-name">
-
+ 
                     ${item.card.name}${item.isReversed ? " (п.)" : ""}
-
+ 
                 </div>
-
-
+ 
+ 
             `
+
+            // На телефоне поперечную карту не вращаем целиком — иначе подписи
+            // уезжают на бока и скрываются под соседними картами.
+            // Вращаем только картинку, а подписи кладём поверх неё.
+
+            if (crossOnMobile) {
+
+                card.classList.add("spread-card-cross")
+
+
+
+                card
+                    .querySelector(".card-image")
+                    .style.transform =
+                    `rotate(${(p.rotation || 0) + (item.isReversed ? 180 : 0)}deg)`
+
+            }
+
+
 
             card.onclick =
                 () => openCardModal(item)
@@ -2569,13 +2990,13 @@ function renderSpread(data, question) {
 
 
             card.style.transform = `
-
+ 
                 translate(-50%, -50%)
-
+ 
                 scale(.3)
-
-                rotate(${p.rotation || 0}deg)
-
+ 
+                rotate(${cardRotation}deg)
+ 
             `
 
 
@@ -2583,6 +3004,10 @@ function renderSpread(data, question) {
 
 
             area.appendChild(card)
+
+
+
+            placed.push({ el: card, p })
 
 
 
@@ -2594,13 +3019,13 @@ function renderSpread(data, question) {
 
 
                 card.style.transform = `
-
+ 
                     translate(-50%, -50%)
-
+ 
                     scale(1)
-
-                    rotate(${p.rotation || 0}deg)
-
+ 
+                    rotate(${cardRotation}deg)
+ 
                 `
 
 
@@ -2624,6 +3049,57 @@ function renderSpread(data, question) {
 
 
 
+    // пересчёт размера холста и позиций карт без перерисовки расклада
+
+    currentSpreadRelayout = () => {
+
+        if (!area.isConnected) return
+
+
+
+        const f =
+            fitSpreadToViewport(
+                area,
+                data,
+                spreadWidth,
+                spreadHeight,
+                margin,
+                scale
+            )
+
+
+
+        marginX = f.marginX
+
+        marginY = f.marginY
+
+
+
+        area.style.setProperty("--card-scale", f.scale)
+
+
+
+        placed.forEach(({ el, p }) => {
+
+            const pos =
+                normalize(p.x, p.y)
+
+
+
+            el.style.left =
+                pos.left + "%"
+
+
+
+            el.style.top =
+                pos.top + "%"
+
+        })
+
+    }
+
+
+
     const interpretationHTML =
         data.cards.map(item => {
 
@@ -2633,33 +3109,33 @@ function renderSpread(data, question) {
                     : item.card.upright
 
             return `
-
+ 
                 <div class="interpretation-item">
-
+ 
                     <div class="interpretation-position">
-
+ 
                         ${item.position.name}
-
+ 
                     </div>
-
-
-
+ 
+ 
+ 
                     <div class="interpretation-card">
-
+ 
                         ${item.card.name}${item.isReversed ? " (перевёрнутая)" : ""}
-
+ 
                     </div>
-
-
-
+ 
+ 
+ 
                     <div class="interpretation-advice">
-
+ 
                         ${m.advice}
-
+ 
                     </div>
-
+ 
                 </div>
-
+ 
             `
 
         }).join("")
@@ -2755,17 +3231,17 @@ async function showHistoryList() {
 
 
         setInterpretation(`
-
+ 
             <div class="interpretation-item">
-
+ 
                 <div class="interpretation-advice">
-
+ 
                     Выберите карту или расклад, чтобы увидеть толкование.
-
+ 
                 </div>
-
+ 
             </div>
-
+ 
         `)
 
 
@@ -2782,27 +3258,27 @@ async function showHistoryList() {
         if (sorted.length === 0) {
 
             result.innerHTML = `
-
+ 
         <div class="history-empty">
-
-
+ 
+ 
             <h2 class="history-title">
-
+ 
                 ✦ История гаданий ✦
-
+ 
             </h2>
-
-
-
+ 
+ 
+ 
             <p class="welcome-text">
-
+ 
                 История пока пуста
-
+ 
             </p>
-
-
+ 
+ 
         </div>
-
+ 
     `
 
 
@@ -2813,70 +3289,70 @@ async function showHistoryList() {
 
 
         result.innerHTML = `
-
+ 
     <div class="history-list">
-
-
+ 
+ 
         <h2 class="history-title">
-
+ 
             ✦ История гаданий ✦
-
+ 
         </h2>
-
-
-
+ 
+ 
+ 
         <div class="history-header">
-
-
+ 
+ 
             <span class="history-count">Записей: ${sorted.length}</span>
-
-
-
+ 
+ 
+ 
             <button id="clear-history" class="history-clear-btn">
-
+ 
                 Очистить всё
-
+ 
             </button>
-
-
+ 
+ 
         </div>
-
-
-
+ 
+ 
+ 
                 ${sorted.map(r => `
-
+ 
                     <div class="history-item" data-id="${r.id}">
-
+ 
                         <div class="history-item-main">
-
+ 
                             <span class="history-icon">${historyTypeIcon(r.type)}</span>
-
-
-
+ 
+ 
+ 
                             <div class="history-item-text">
-
+ 
                                 <div class="history-item-name">${r.name}</div>
-
+ 
                                 <div class="history-item-date">${formatHistoryDate(r.date)}</div>
-
+ 
                             </div>
-
+ 
                         </div>
-
-
-
+ 
+ 
+ 
                         <button class="history-delete" data-id="${r.id}" title="Удалить">
-
+ 
                             ✕
-
+ 
                         </button>
-
+ 
                     </div>
-
+ 
                 `).join("")}
-
+ 
             </div>
-
+ 
         `
 
 
@@ -3004,13 +3480,13 @@ async function showHistoryList() {
 function backToHistoryButton() {
 
     return `
-
+ 
         <button class="back-to-history" id="back-to-history">
-
+ 
             ← К истории
-
+ 
         </button>
-
+ 
     `
 
 }
@@ -3148,264 +3624,264 @@ function showSettings() {
 
 
     result.innerHTML = `
-
-
+ 
+ 
         <div class="settings-screen">
-
-
+ 
+ 
             <h2 class="settings-title">
-
+ 
                 ✦ Настройки ✦
-
+ 
             </h2>
-
-
-
+ 
+ 
+ 
             <div class="settings-group">
-
-
+ 
+ 
                 <div class="settings-group-title">Колода</div>
-
-
-
+ 
+ 
+ 
                 <div class="settings-options">
-
-
+ 
+ 
                     <button
-
+ 
                         class="settings-option ${appSettings.deckMode === "full" ? "active" : ""}"
-
+ 
                         data-setting="deckMode"
-
+ 
                         data-value="full"
-
+ 
                     >
-
+ 
                         Полная (78 карт)
-
+ 
                     </button>
-
-
-
+ 
+ 
+ 
                     <button
-
+ 
                         class="settings-option ${appSettings.deckMode === "major" ? "active" : ""}"
-
+ 
                         data-setting="deckMode"
-
+ 
                         data-value="major"
-
+ 
                     >
-
+ 
                         Старшие арканы (22)
-
+ 
                     </button>
-
-
+ 
+ 
                 </div>
-
-
-
+ 
+ 
+ 
                 <p class="settings-hint">
-
+ 
                     При смене режима колода будет пересобрана и перемешана.
-
+ 
                 </p>
-
-
+ 
+ 
             </div>
-
+ 
             <div class="settings-group">
-
-
+ 
+ 
     <div class="settings-group-title">Способ вытягивания</div>
-
-
-
+ 
+ 
+ 
     <div class="settings-options">
-
-
+ 
+ 
         <button
-
+ 
             class="settings-option ${appSettings.drawMode !== "random" ? "active" : ""}"
-
+ 
             data-setting="drawMode"
-
+ 
             data-value="sequential"
-
+ 
         >
-
+ 
             По порядку
-
+ 
         </button>
-
-
-
+ 
+ 
+ 
         <button
-
+ 
             class="settings-option ${appSettings.drawMode === "random" ? "active" : ""}"
-
+ 
             data-setting="drawMode"
-
+ 
             data-value="random"
-
+ 
         >
-
+ 
             Случайно
-
+ 
         </button>
-
-
+ 
+ 
     </div>
-
-
-
+ 
+ 
+ 
     <p class="settings-hint">
-
+ 
         «По порядку» — карты вытягиваются последовательно из уже перемешанной колоды. «Случайно» — каждая карта выбирается заново из оставшихся.
-
+ 
     </p>
-
-
+ 
+ 
 </div>
-
-
-
+ 
+ 
+ 
             <div class="settings-group">
-
-
+ 
+ 
                 <div class="settings-group-title">
-
+ 
                     Стиль колоды <span class="settings-soon">Скоро</span>
-
+ 
                 </div>
-
-
-
+ 
+ 
+ 
                 <div class="settings-options">
-
-
+ 
+ 
                     <button class="settings-option active" disabled>
-
+ 
                         Классическая
-
+ 
                     </button>
-
-
-
+ 
+ 
+ 
                     <button class="settings-option" disabled>
-
+ 
                         Тёмная
-
+ 
                     </button>
-
-
-
+ 
+ 
+ 
                     <button class="settings-option" disabled>
-
+ 
                         Акварель
-
+ 
                     </button>
-
-
+ 
+ 
                 </div>
-
-
+ 
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="settings-group">
-
-
+ 
+ 
                 <div class="settings-group-title">
-
+ 
                     Язык <span class="settings-soon">Скоро</span>
-
+ 
                 </div>
-
-
-
+ 
+ 
+ 
                 <div class="settings-options">
-
-
+ 
+ 
                     <button class="settings-option active" disabled>
-
+ 
                         Русский
-
+ 
                     </button>
-
-
-
+ 
+ 
+ 
                     <button class="settings-option" disabled>
-
+ 
                         English
-
+ 
                     </button>
-
-
+ 
+ 
                 </div>
-
-
+ 
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="settings-group">
-
-
+ 
+ 
                 <div class="settings-group-title">О программе</div>
-
-
-
+ 
+ 
+ 
                 <button class="settings-link" id="open-about">
-
+ 
                     ${APP_INFO.name} · версия ${APP_INFO.version}
-
+ 
                 </button>
-
-
+ 
+ 
                  <button class="settings-link" id="open-guide">
-
+ 
         Руководство пользователя
-
+ 
     </button>
-
+ 
     <button class="settings-link" id="open-about-tarot">
-
+ 
         О картах Таро
-
+ 
     </button>
-
-
+ 
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="settings-group">
-
-
+ 
+ 
                 <button class="settings-link" id="open-privacy">
-
+ 
                     Политика конфиденциальности
-
+ 
                 </button>
-
-
-
+ 
+ 
+ 
                 <button class="settings-link" id="open-terms">
-
+ 
                     Условия использования
-
+ 
                 </button>
-
-
+ 
+ 
             </div>
-
-
+ 
+ 
         </div>
-
-
+ 
+ 
     `
 
 
@@ -3609,23 +4085,23 @@ function showInfoModal(title, html) {
 
 
     content.innerHTML = `
-
-
+ 
+ 
         <button class="modal-close" id="modal-close">
-
+ 
             ✕
-
+ 
         </button>
-
-
-
+ 
+ 
+ 
         <h2 class="question-title">${title}</h2>
-
-
-
+ 
+ 
+ 
         <p class="info-modal-text">${html}</p>
-
-
+ 
+ 
     `
 
     modal.classList.remove("hidden")
@@ -3697,23 +4173,23 @@ document
 function cardGridItemHTML(card, isReversed) {
 
     return `
-
+ 
         <div class="deck-card-item">
-
+ 
             <img
-
+ 
                 class="deck-card-thumb ${isReversed ? "reversed" : ""}"
-
+ 
                 src="/${card.image}"
-
+ 
             >
-
-
-
+ 
+ 
+ 
             <span class="deck-card-item-name">${card.name}</span>
-
+ 
         </div>
-
+ 
     `
 
 }
@@ -3722,76 +4198,76 @@ async function showDeckScreen() {
 
 
     result.innerHTML = `
-
+ 
         <div class="deck-screen">
-
-
+ 
+ 
             <h2 class="deck-screen-title">
-
+ 
                 ✦ Колода ✦
-
+ 
             </h2>
-
-
+ 
+ 
             <div class="deck-tabs">
-
-
+ 
+ 
     <button class="tab-btn active" data-tab-group="deck" data-tab-key="remaining">
-
+ 
         Оставшиеся карты
-
+ 
         <span class="deck-group-count" id="remaining-total-count"></span>
-
+ 
     </button>
-
-
-
+ 
+ 
+ 
     <button class="tab-btn" data-tab-group="deck" data-tab-key="full">
-
+ 
         Вся колода
-
+ 
         <span class="deck-group-count" id="full-total-count"></span>
-
+ 
     </button>
-
-
+ 
+ 
 </div>
-
-
-
+ 
+ 
+ 
             <div
-
+ 
                 class="tab-panel-deck active"
-
+ 
                 data-tab-group="deck"
-
+ 
                 data-tab-panel="remaining"
-
+ 
             >
-
+ 
                 <div class="deck-loading">Загрузка...</div>
-
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div
-
+ 
                 class="tab-panel-deck"
-
+ 
                 data-tab-group="deck"
-
+ 
                 data-tab-panel="full"
-
+ 
             >
-
+ 
                 <div class="deck-loading">Загрузка...</div>
-
+ 
             </div>
-
-
+ 
+ 
         </div>
-
+ 
     `
 
 
@@ -3896,59 +4372,59 @@ async function showDeckScreen() {
 
 
         panel.innerHTML = `
-
+ 
             <div class="deck-subtabs">
-
+ 
                 ${groupKeys.map(
             (key, i) => `
-
+ 
                         <button
-
+ 
                             class="tab-btn ${i === 0 ? "active" : ""}"
-
+ 
                             data-tab-group="${subtabPrefix}"
-
+ 
                             data-tab-key="${key}"
-
+ 
                         >
-
+ 
                             ${groupLabels[key]}
-
+ 
                             <span class="deck-group-count">${grouped[key].length}</span>
-
+ 
                         </button>
-
+ 
                     `
         ).join("")}
-
+ 
             </div>
-
-
-
+ 
+ 
+ 
             <div class="deck-suit-panels">
-
+ 
                 ${groupKeys.map(
             (key, i) => `
-
+ 
                         <div
-
+ 
                             class="deck-card-grid tab-panel-suit ${i === 0 ? "active" : ""}"
-
+ 
                             data-tab-group="${subtabPrefix}"
-
+ 
                             data-tab-panel="${key}"
-
+ 
                         >
-
+ 
                             ${grouped[key].map(card => cardGridItemHTML(card, false)).join("")}
-
+ 
                         </div>
-
+ 
                     `
         ).join("")}
-
+ 
             </div>
-
+ 
         `
 
 
@@ -4014,9 +4490,9 @@ async function showDeckScreen() {
             result.querySelector(
                 '.tab-panel-deck[data-tab-panel="remaining"]'
             ).innerHTML = `
-
+ 
             <p class="deck-empty-text">Колода пуста</p>
-
+ 
         `
 
         }
@@ -4114,35 +4590,35 @@ async function showGuideScreen(title, fetchFn) {
 
 
     result.innerHTML = `
-
+ 
         <div class="guide-screen">
-
-
+ 
+ 
             <button class="back-to-history" id="back-from-guide">
-
+ 
                 ← Назад
-
+ 
             </button>
-
-
-
+ 
+ 
+ 
             <h2 class="guide-screen-title">
-
+ 
                 ${screenTitle}
-
+ 
             </h2>
-
-
-
+ 
+ 
+ 
             <div id="guide-content" class="guide-content">
-
+ 
                 <div class="deck-loading">Загрузка...</div>
-
+ 
             </div>
-
-
+ 
+ 
         </div>
-
+ 
     `
 
 
@@ -4176,9 +4652,9 @@ async function showGuideScreen(title, fetchFn) {
         if (!sections || sections.length === 0) {
 
             contentEl.innerHTML = `
-
+ 
                 <p class="deck-empty-text">Раздел пока недоступен</p>
-
+ 
             `
 
 
@@ -4191,27 +4667,27 @@ async function showGuideScreen(title, fetchFn) {
 
         contentEl.innerHTML =
             sections.map(section => `
-
+ 
                 <div class="guide-section">
-
-
+ 
+ 
                     <h3 class="guide-section-title">
-
+ 
                         ${section.title}
-
+ 
                     </h3>
-
-
-
+ 
+ 
+ 
                     <p class="guide-section-text">
-
+ 
                         ${section.text}
-
+ 
                     </p>
-
-
+ 
+ 
                 </div>
-
+ 
             `).join("")
 
 

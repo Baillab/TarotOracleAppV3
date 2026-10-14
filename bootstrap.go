@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
 
 	"github.com/wailsapp/wails/v3/pkg/application"
 
@@ -60,6 +61,9 @@ func NewTarotService() *TarotService {
 
 // getDatabasePath: на Android берём папку приложения,
 // на desktop остаётся ~/.local/share/tarot-oracle.
+
+// getDatabasePath: Android — папка приложения, Windows — %AppData%,
+// Linux — ~/.local/share (как раньше, чтобы не потерять историю).
 func getDatabasePath() (string, error) {
 
 	if dir := application.Mobile.StoragePath(); dir != "" {
@@ -68,17 +72,39 @@ func getDatabasePath() (string, error) {
 
 	}
 
-	home, err :=
-		os.UserHomeDir()
+	var base string
 
-	if err != nil {
+	if runtime.GOOS == "windows" {
 
-		return "", err
+		cfg, err :=
+			os.UserConfigDir()
+
+		if err != nil {
+
+			return "", err
+
+		}
+
+		base = cfg
+
+	} else {
+
+		home, err :=
+			os.UserHomeDir()
+
+		if err != nil {
+
+			return "", err
+
+		}
+
+		base =
+			filepath.Join(home, ".local", "share")
 
 	}
 
 	dir :=
-		filepath.Join(home, ".local", "share", "tarot-oracle")
+		filepath.Join(base, "tarot-oracle")
 
 	if err := os.MkdirAll(dir, 0755); err != nil {
 
