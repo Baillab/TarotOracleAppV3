@@ -1,3 +1,4 @@
+
 import './app.css'
 
 import {
@@ -138,8 +139,6 @@ document.querySelector("#app").innerHTML = `
  
  
     <button id="header-toggle" class="header-toggle" aria-label="Свернуть или развернуть меню" aria-expanded="true"></button>
- 
-    <button id="exit-app" class="exit-button" title="Выход" aria-label="Выйти из приложения">✕</button>
  
  
     <main class="scene">
@@ -1539,7 +1538,15 @@ const headerToggle =
 
 
 
-function setHeaderCollapsed(collapsed) {
+// Меню автоматически прячется, когда на сцене расклад (расклад
+// занимает весь экран), и возвращается, когда расклад закрыт.
+// Автоматическое сворачивание в память не записываем.
+
+let headerAutoCollapsed = false
+
+
+
+function setHeaderCollapsed(collapsed, persist = true) {
 
     layoutEl.classList.toggle("header-collapsed", collapsed)
 
@@ -1549,13 +1556,17 @@ function setHeaderCollapsed(collapsed) {
 
 
 
-    try {
+    if (persist) {
 
-        localStorage.setItem("headerCollapsed", collapsed ? "1" : "0")
+        try {
+
+            localStorage.setItem("headerCollapsed", collapsed ? "1" : "0")
+
+        }
+
+        catch (e) { }
 
     }
-
-    catch (e) { }
 
 
 
@@ -1620,14 +1631,29 @@ new MutationObserver(() => {
 
     if (now && !was && currentSpreadRelayout) currentSpreadRelayout()
 
+    // расклад закрыт — возвращаем меню, которое спрятали сами
+    if (was && !now && headerAutoCollapsed) {
+
+        headerAutoCollapsed = false
+
+        setHeaderCollapsed(false, false)
+
+    }
+
 }).observe(result, { childList: true })
 
 
 
-headerToggle.onclick = () =>
+headerToggle.onclick = () => {
+
+    // пользователь сам решил — автоматику больше не применяем
+    headerAutoCollapsed = false
+
     setHeaderCollapsed(
         !layoutEl.classList.contains("header-collapsed")
     )
+
+}
 
 
 
@@ -1686,154 +1712,6 @@ window.addEventListener("resize", () => {
     }, 150)
 
 })
-
-
-
-// ==========================================
-// Выход из приложения
-// ==========================================
-
-
-async function quitApp() {
-
-    // 0) метод Quit() сервиса на Go (см. go/quit.go) — на Android это
-    //    единственный надёжный способ полностью завершить приложение.
-    //    Модуль биндингов импортируем динамически: если Quit в нём ещё
-    //    не сгенерирован, сборка не падает, просто идём дальше.
-
-    try {
-
-        const bindings =
-            await import("../bindings/tarotoracleapp/tarotservice.js")
-
-        if (bindings.Quit) {
-
-            await bindings.Quit()
-
-            return
-
-        }
-
-    }
-
-    catch (e) {
-
-        console.error(e)
-
-    }
-
-
-
-    // 1) глобальный рантайм Wails, если он есть
-
-    try {
-
-        const app =
-            window.wails?.Application
-
-
-
-        if (app?.Quit) {
-
-            await app.Quit()
-
-            return
-
-        }
-
-    }
-
-    catch (e) {
-
-        console.error(e)
-
-    }
-
-
-
-    // 2) рантайм, который отдаёт сам Wails v3
-    // (адрес в переменной, чтобы сборщик не пытался его разрешить)
-
-    try {
-
-        const runtimeUrl =
-            "/wails/runtime.js"
-
-
-
-        const rt =
-            await import(/* @vite-ignore */ runtimeUrl)
-
-
-
-        // вызов метода Go по имени — работает и без сгенерированных биндингов
-
-        if (rt.Call?.ByName) {
-
-            try {
-
-                await rt.Call.ByName("main.TarotService.Quit")
-
-                return
-
-            }
-
-            catch (e) {
-
-                console.error(e)
-
-            }
-
-        }
-
-
-
-        const quit =
-            rt.Application?.Quit || rt.Quit
-
-
-
-        if (quit) {
-
-            await quit()
-
-            return
-
-        }
-
-    }
-
-    catch (e) {
-
-        console.error(e)
-
-    }
-
-
-
-    try {
-
-        window.close()
-
-    }
-
-    catch (e) { }
-
-
-
-    showToast("Не удалось закрыть приложение. Закройте его системной кнопкой.")
-
-}
-
-
-
-document
-    .querySelector("#exit-app")
-    .onclick = () => showConfirm(
-        "Закрыть приложение?",
-        quitApp,
-        "Да, закрыть"
-    )
 
 
 
@@ -3032,8 +2910,14 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
         const q =
             document.querySelector(".spread-question")
 
+        const cb =
+            document.querySelector(".comment-icon-btn")
+
         const qH =
-            q ? q.offsetHeight + 10 : 0
+            Math.max(
+                q ? q.offsetHeight + 10 : 0,
+                cb ? cb.offsetHeight + 10 : 0
+            )
 
         const levels = [
             [headerH, barH + qH],
@@ -3129,6 +3013,17 @@ function renderSpread(data, question) {
 
 
 
+
+    // на телефоне расклад открывается на весь экран: меню прячем
+    // (раскрыть можно кнопкой сверху — тогда оно ляжет поверх расклада)
+
+    if (isMobileLayout() && !layoutEl.classList.contains("header-collapsed")) {
+
+        headerAutoCollapsed = true
+
+        setHeaderCollapsed(true, false)
+
+    }
 
     updateChrome()
 
