@@ -88,6 +88,17 @@ export function LastSpread(): $CancellablePromise<tarot$0.Spread | null> {
     return $Call.ByID(3900020122);
 }
 
+/**
+ * Quit полностью закрывает приложение (кнопка ✕ в интерфейсе).
+ * 
+ * На десктопе достаточно app.Quit(). На Android он может не завершить
+ * процесс, поэтому через короткую паузу — os.Exit(0): процесс
+ * завершается, и приложение не остаётся висеть в фоне.
+ */
+export function Quit(): $CancellablePromise<void> {
+    return $Call.ByID(1631564958);
+}
+
 export function RemainingCards(): $CancellablePromise<number> {
     return $Call.ByID(2211910234);
 }
