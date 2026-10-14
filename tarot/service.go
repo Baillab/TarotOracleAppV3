@@ -261,7 +261,8 @@ func (s *TarotService) Shuffle() string {
 
 	s.deck.Shuffle()
 
-	s.daily.Reset()
+	// Карту дня не сбрасываем: она живёт до конца суток
+	// независимо от перемешивания колоды.
 
 	return "Колода восстановлена и перемешана"
 }
@@ -279,7 +280,7 @@ func (s *TarotService) ResetDeck() string {
 
 	s.deck.Shuffle()
 
-	s.daily.Reset()
+	// Карту дня не сбрасываем (см. Shuffle).
 
 	return "Колода восстановлена"
 }
@@ -431,13 +432,15 @@ func (s *TarotService) GetDailyCard() (*DailyCard, error) {
 
 	}
 
-	daily :=
-		s.daily.Set(
+	record :=
+		s.history.AddDaily(
 			*card,
 		)
 
-	record :=
-		s.history.AddDaily(
+	card.HistoryID = record.ID
+
+	daily :=
+		s.daily.Set(
 			*card,
 		)
 
@@ -452,10 +455,6 @@ func (s *TarotService) GetDailyCard() (*DailyCard, error) {
 		)
 
 	}
-
-	card.HistoryID = record.ID
-
-	daily.Card = *card
 
 	return daily, nil
 
