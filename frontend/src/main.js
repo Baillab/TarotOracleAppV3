@@ -1757,6 +1757,34 @@ document
     }
 
 
+// Карта центрируется по высоте, поэтому, если картинка догружается
+// уже после показа, карта «подпрыгивает». Загружаем её заранее
+// (не дольше 1.5 с, чтобы не зависнуть на медленной загрузке).
+
+function preloadImage(path, timeout = 1500) {
+
+    return new Promise(resolve => {
+
+        if (!path) return resolve()
+
+        const img = new Image()
+
+        const done = () => resolve()
+
+        img.onload = done
+
+        img.onerror = done
+
+        img.src = "/" + path
+
+        setTimeout(done, timeout)
+
+    })
+
+}
+
+
+
 // ==========================================
 // Вытянуть карту
 // ==========================================
@@ -1778,6 +1806,10 @@ document
 
             const answer =
                 await DrawCard()
+
+
+
+            await preloadImage(answer.card.image)
 
 
 
@@ -1828,6 +1860,10 @@ document
 
             const daily =
                 await GetDailyCard()
+
+
+
+            await preloadImage(daily.card.card.image)
 
 
 
