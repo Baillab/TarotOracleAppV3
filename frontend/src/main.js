@@ -45,6 +45,7 @@ document.querySelector("#app").innerHTML = `
  
  
  
+        <div class="menu-panel" id="menu-panel">
         <div class="menu">
  
  
@@ -85,6 +86,7 @@ document.querySelector("#app").innerHTML = `
  
             <button class="strip-arrow strip-arrow-right" id="strip-right" aria-label="Прокрутить расклады вправо"><span>›</span></button>
  
+        </div>
         </div>
  
  
@@ -138,7 +140,12 @@ document.querySelector("#app").innerHTML = `
  
  
  
-    <button id="header-toggle" class="header-toggle" aria-label="Свернуть или развернуть меню" aria-expanded="true"></button>
+    <header class="topbar" id="topbar">
+        <button id="topbar-menu" class="topbar-menu" aria-label="Открыть меню раскладов">☰ Расклады</button>
+        <div id="topbar-title" class="topbar-title"></div>
+        <span></span>
+    </header>
+    <div id="menu-backdrop" class="menu-backdrop"></div>
  
  
     <main class="scene">
@@ -1524,69 +1531,55 @@ async function loadSpreads() {
 
 
 // ==========================================
-// Телефон: свернуть / развернуть верхнее меню
+// Телефон: верхняя строка, меню раскладов, заголовок режима
 // ==========================================
 
 
 const layoutEl =
     document.querySelector(".layout")
 
+const topbar =
+    document.querySelector("#topbar")
 
-
-const headerToggle =
-    document.querySelector("#header-toggle")
-
-
-
-// Меню автоматически прячется, когда на сцене расклад (расклад
-// занимает весь экран), и возвращается, когда расклад закрыт.
-// Автоматическое сворачивание в память не записываем.
-
-let headerAutoCollapsed = false
+const topbarTitle =
+    document.querySelector("#topbar-title")
 
 
 
-function setHeaderCollapsed(collapsed, persist = true) {
+// Меню раскладов — оверлей по центру на затемнённом фоне
 
-    layoutEl.classList.toggle("header-collapsed", collapsed)
+function closeMenu() {
 
-
-
-    headerToggle.setAttribute("aria-expanded", String(!collapsed))
-
-
-
-    if (persist) {
-
-        try {
-
-            localStorage.setItem("headerCollapsed", collapsed ? "1" : "0")
-
-        }
-
-        catch (e) { }
-
-    }
-
-
-
-    // сцена изменила размер — перекладываем расклад
-
-    requestAnimationFrame(() => {
-
-        updateChrome()
-
-        if (currentSpreadRelayout) currentSpreadRelayout()
-
-    })
+    layoutEl.classList.remove("menu-open")
 
 }
 
 
 
-// Пока на сцене расклад, сцена занимает весь экран, а шапка и нижняя
-// панель — полупрозрачные поверх неё (класс spread-mode). Высоты
-// шапки и панели передаём в CSS, чтобы подписи не прятались под ними.
+document
+    .querySelector("#topbar-menu")
+    .onclick = () => layoutEl.classList.toggle("menu-open")
+
+document
+    .querySelector("#menu-backdrop")
+    .onclick = closeMenu
+
+// выбрали расклад или действие — меню закрывается сразу, одновременно
+// с появлением окна вопроса
+
+document
+    .querySelector("#menu-panel")
+    .addEventListener("click", (e) => {
+
+        if (e.target.closest(".action-button, .spread-button")) closeMenu()
+
+    })
+
+
+
+// Пока на сцене расклад, сцена занимает весь экран, а верхняя строка
+// и нижняя панель — полупрозрачные поверх неё (класс spread-mode).
+// Высоты панелей и заголовок режима обновляем здесь.
 
 function updateChrome() {
 
@@ -1597,17 +1590,27 @@ function updateChrome() {
 
 
 
+    let title = ""
+
+    const marked =
+        result.querySelector("[data-topbar]")
+
+    if (marked) title = marked.dataset.topbar
+
+    else if (result.querySelector(".daily-card")) title = "Карта дня"
+
+    else if (result.querySelector(":scope > .card")) title = "Вытянуть карту"
+
+    topbarTitle.textContent = title
+
+
+
     const bar =
         document.querySelector(".icon-row")
 
     layoutEl.style.setProperty(
-        "--header-h",
-        Math.round(headerToggle.getBoundingClientRect().bottom) + "px"
-    )
-
-    layoutEl.style.setProperty(
-        "--toggle-h",
-        Math.round(headerToggle.offsetHeight) + "px"
+        "--topbar-h",
+        Math.round(topbar.offsetHeight) + "px"
     )
 
     layoutEl.style.setProperty(
@@ -1631,39 +1634,16 @@ new MutationObserver(() => {
 
     if (now && !was && currentSpreadRelayout) currentSpreadRelayout()
 
-    // расклад закрыт — возвращаем меню, которое спрятали сами
-    if (was && !now && headerAutoCollapsed) {
-
-        headerAutoCollapsed = false
-
-        setHeaderCollapsed(false, false)
-
-    }
-
 }).observe(result, { childList: true })
 
 
 
-headerToggle.onclick = () => {
-
-    // пользователь сам решил — автоматику больше не применяем
-    headerAutoCollapsed = false
-
-    setHeaderCollapsed(
-        !layoutEl.classList.contains("header-collapsed")
-    )
-
-}
-
-
+// Только вертикальная ориентация (где браузер это позволяет;
+// в Android-приложении ориентацию задаёт AndroidManifest.xml)
 
 try {
 
-    if (localStorage.getItem("headerCollapsed") === "1") {
-
-        layoutEl.classList.add("header-collapsed")
-
-    }
+    screen.orientation?.lock?.("portrait")?.catch(() => { })
 
 }
 
@@ -2883,45 +2863,52 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
     const cs =
         getComputedStyle(layoutEl)
 
-    // Расклад всегда считаем под свёрнутое меню (остаётся только полоска
-    // ручки). Раскрытое меню ложится сверху поверх карт — карты при этом
-    // не двигаются.
-
-    const headerH =
-        parseFloat(cs.getPropertyValue("--toggle-h")) || 0
+    const barTop =
+        parseFloat(cs.getPropertyValue("--topbar-h")) || 0
 
     const barH =
         parseFloat(cs.getPropertyValue("--bar-h")) || 0
 
 
 
+    // плашка «Общий ответ» лежит под верхней строкой и закрывает карты —
+    // место под неё резервируем всегда
+
+    const answer =
+        document.querySelector(".spread-answer")
+
+    const answerTop =
+        answer ? barTop + answer.offsetHeight + 12 : 0
+
+
+
+    // плашка с вопросом и кнопка 📝 лежат над нижней панелью
+
+    const q =
+        document.querySelector(".spread-question")
+
+    const cb =
+        document.querySelector(".comment-icon-btn")
+
+    const lowH =
+        Math.max(
+            q ? q.offsetHeight + 10 : 0,
+            cb ? cb.offsetHeight + 10 : 0
+        )
+
+
+
     const full =
-        solve(0, 0)
-
-
+        solve(answerTop, 0)
 
     if (full) {
 
         // сначала пробуем не заходить под панели; заходим, только если
         // иначе карты пришлось бы заметно уменьшить
 
-        // плашка с вопросом лежит над нижней панелью — место под неё тоже
-
-        const q =
-            document.querySelector(".spread-question")
-
-        const cb =
-            document.querySelector(".comment-icon-btn")
-
-        const qH =
-            Math.max(
-                q ? q.offsetHeight + 10 : 0,
-                cb ? cb.offsetHeight + 10 : 0
-            )
-
         const levels = [
-            [headerH, barH + qH],
-            [headerH / 2, barH / 2 + qH],
+            [Math.max(answerTop, barTop), barH + lowH],
+            [Math.max(answerTop, barTop / 2), barH / 2 + lowH],
         ]
 
         for (const [t, b] of levels) {
@@ -3007,23 +2994,12 @@ function renderSpread(data, question) {
  
  
  
-    <div class="spread-area"><div class="spread-canvas"></div></div>
+    <div class="spread-area" data-topbar="${data.spread.name || ""}"><div class="spread-canvas"></div></div>
  
 `
 
 
 
-
-    // на телефоне расклад открывается на весь экран: меню прячем
-    // (раскрыть можно кнопкой сверху — тогда оно ляжет поверх расклада)
-
-    if (isMobileLayout() && !layoutEl.classList.contains("header-collapsed")) {
-
-        headerAutoCollapsed = true
-
-        setHeaderCollapsed(true, false)
-
-    }
 
     updateChrome()
 

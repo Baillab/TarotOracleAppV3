@@ -6354,13 +6354,331 @@ button,
 
 
 /* =====================================================
-   Телефон: расклад на весь экран без прокрутки.
-   Шапка и нижняя панель — полупрозрачные поверх расклада,
-   поэтому верхние и нижние карты видны под ними.
-   Класс spread-mode ставит JS, пока на сцене расклад.
+   Телефон: верхняя строка, меню-оверлей, расклад на весь экран.
+ 
+   Верхняя строка: слева «Расклады», по центру — название
+   режима (расклад / «Карта дня» / «Вытянуть карту»).
+   Меню раскладов открывается по центру на затемнённом фоне.
+   Пока на сцене расклад (класс spread-mode, его ставит JS),
+   сцена занимает весь экран, а верхняя и нижняя панели —
+   полупрозрачные поверх карт.
 ===================================================== */
 
+/* на десктопе обёртка меню прозрачна, а верхней строки нет */
+
+.menu-panel {
+
+    display: contents;
+
+}
+
+.topbar,
+.menu-backdrop {
+
+    display: none;
+
+}
+
+
+
 @media (max-width: 900px) {
+
+    .logo {
+
+        display: none;
+
+    }
+
+
+
+    /* ---------- Верхняя строка ---------- */
+
+    .topbar {
+
+        display: grid;
+
+        grid-template-columns: 1fr auto 1fr;
+
+        align-items: center;
+
+        order: 0;
+
+        flex: none;
+
+        position: relative;
+
+        z-index: 4;
+
+        height: 42px;
+
+        padding: 0 10px;
+
+        background:
+            linear-gradient(180deg,
+                rgba(18, 12, 28, .94),
+                rgba(18, 12, 28, .72));
+
+        border-bottom: 1px solid rgba(215, 180, 90, .16);
+
+    }
+
+    .topbar-menu {
+
+        justify-self: start;
+
+        display: flex;
+
+        align-items: center;
+
+        height: 30px;
+
+        padding: 0 14px;
+
+        border-radius: 15px;
+
+        border: 1px solid rgba(215, 180, 90, .32);
+
+        background: rgba(45, 31, 62, .6);
+
+        color: #f2deb0;
+
+        font-family: inherit;
+
+        font-size: 13px;
+
+        letter-spacing: .5px;
+
+        cursor: pointer;
+
+    }
+
+    .topbar-title {
+
+        position: absolute;
+
+        left: 50%;
+
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        max-width: calc(100% - 270px);
+
+        overflow: hidden;
+
+        text-align: center;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+
+        color: #d7b45a;
+
+        font-size: 15px;
+
+        letter-spacing: .8px;
+
+    }
+
+    .layout.spread-mode .topbar {
+
+        background:
+            linear-gradient(180deg,
+                rgba(18, 12, 28, .6),
+                rgba(18, 12, 28, .18));
+
+        border-bottom-color: transparent;
+
+    }
+
+
+
+    /* ---------- Меню раскладов (оверлей по центру) ---------- */
+
+    .menu-backdrop {
+
+        display: block;
+
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 19;
+
+        background: rgba(8, 5, 14, .62);
+
+        backdrop-filter: blur(3px);
+
+        -webkit-backdrop-filter: blur(3px);
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transition: opacity .2s ease;
+
+    }
+
+    .layout.menu-open .menu-backdrop {
+
+        opacity: 1;
+
+        pointer-events: auto;
+
+    }
+
+    .menu-panel {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        position: fixed;
+
+        z-index: 20;
+
+        left: 50%;
+
+        top: 50%;
+
+        width: min(330px, calc(100vw - 40px));
+
+        max-height: calc(100% - 96px);
+
+        overflow-y: auto;
+
+        padding: 18px 16px 16px;
+
+        border-radius: 22px;
+
+        border: 1px solid rgba(215, 180, 90, .32);
+
+        background:
+            linear-gradient(180deg,
+                rgba(38, 26, 56, .97),
+                rgba(20, 14, 30, .97));
+
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, .6),
+            0 0 40px rgba(215, 180, 90, .12);
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform: translate(-50%, -48%) scale(.97);
+
+        transition: opacity .2s ease, transform .2s ease;
+
+    }
+
+    .layout.menu-open .menu-panel {
+
+        opacity: 1;
+
+        pointer-events: auto;
+
+        transform: translate(-50%, -50%) scale(1);
+
+    }
+
+    .menu-panel>* {
+
+        flex: none;
+
+    }
+
+    .menu-panel .menu {
+
+        order: 0;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        padding: 0;
+
+    }
+
+    .menu-panel .action-button {
+
+        flex: none;
+
+        width: 100%;
+
+        height: 46px;
+
+        font-size: 15px;
+
+        border-radius: 14px;
+
+        white-space: nowrap;
+
+    }
+
+    .menu-panel .spread-title {
+
+        display: block;
+
+        margin: 6px 0 0;
+
+        text-align: center;
+
+        font-size: 13px;
+
+        letter-spacing: 3px;
+
+    }
+
+    .menu-panel .spread-strip {
+
+        display: block;
+
+        order: 0;
+
+        position: static;
+
+    }
+
+    .menu-panel .strip-arrow {
+
+        display: none;
+
+    }
+
+    .menu-panel .spread-list {
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        overflow: visible;
+
+        padding: 0;
+
+    }
+
+    .menu-panel .spread-button {
+
+        width: 100%;
+
+        height: 44px;
+
+        padding: 0 16px;
+
+        border-radius: 14px;
+
+        font-size: 15px;
+
+        text-align: left;
+
+    }
+
+
+
+    /* ---------- Расклад на весь экран ---------- */
 
     /* подписи не уже 62px, иначе при мелких картах текст рвётся по буквам */
 
@@ -6400,54 +6718,6 @@ button,
 
     }
 
-    /* шапка: прозрачная подложка, пропускает касания к картам под собой */
-
-    .layout.spread-mode .logo,
-    .layout.spread-mode .menu,
-    .layout.spread-mode .spread-strip,
-    .layout.spread-mode .header-toggle {
-
-        position: relative;
-
-        z-index: 3;
-
-        background: rgba(18, 12, 28, .34);
-
-    }
-
-    .layout.spread-mode .header-toggle {
-
-        background: rgba(18, 12, 28, .5);
-
-    }
-
-    .layout.spread-mode .logo,
-    .layout.spread-mode .menu,
-    .layout.spread-mode .spread-strip {
-
-        pointer-events: none;
-
-    }
-
-    .layout.spread-mode .action-button,
-    .layout.spread-mode .spread-list {
-
-        pointer-events: auto;
-
-    }
-
-    .layout.spread-mode .action-button {
-
-        opacity: .82;
-
-    }
-
-    .layout.spread-mode .spread-button:not(.active) {
-
-        background: rgba(30, 20, 44, .55);
-
-    }
-
     /* нижняя панель */
 
     .layout.spread-mode .icon-row {
@@ -6466,63 +6736,29 @@ button,
 
     }
 
-    /* «Общий ответ», «📝» и «← К истории» — в строке с ручкой меню,
-       чтобы не закрывать карты */
-
-    .layout.spread-mode .spread-answer,
-    .layout.spread-mode .back-to-history {
-
-        position: absolute;
-
-        top: 2px;
-
-        bottom: auto;
-
-        z-index: 6;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        height: 24px;
-
-        min-height: 0;
-
-        margin: 0;
-
-        padding: 0 10px;
-
-        border-radius: 12px;
-
-        font-size: 12px;
-
-        line-height: 1;
-
-    }
+    /* «Общий ответ» — под верхней строкой, яркий */
 
     .layout.spread-mode .spread-answer {
+
+        top: calc(var(--topbar-h, 42px) + 8px);
 
         left: auto;
 
         right: 10px;
 
+        z-index: 6;
+
         pointer-events: none;
 
     }
 
-    .layout.spread-mode .spread-answer-label {
+    .layout.spread-mode .back-to-history {
 
-        display: none;
+        top: calc(var(--topbar-h, 42px) + 8px);
 
-    }
+        left: 10px;
 
-    .layout.spread-mode .spread-answer-value {
-
-        font-size: 12px;
-
-        white-space: nowrap;
+        z-index: 6;
 
     }
 
@@ -6552,28 +6788,6 @@ button,
 
     }
 
-    .layout.spread-mode .back-to-history {
-
-        left: 10px;
-
-        right: auto;
-
-        padding: 0 9px;
-
-        font-size: 11.5px;
-
-        pointer-events: auto;
-
-    }
-
-    /* подпись ручки короче, чтобы в строке хватило места */
-
-    .layout.spread-mode:not(.header-collapsed) .header-toggle::after {
-
-        content: "Скрыть";
-
-    }
-
     .layout.spread-mode .spread-question {
 
         left: 58px;
@@ -6596,56 +6810,17 @@ button,
 
     }
 
-}
+    /* толкование начинается от верхней границы нижней панели */
 
+    .layout.spread-mode .interpretation-panel {
 
-/* =====================================================
-   Телефон: без заголовка, кнопка выхода в строке меню,
-   меню плавно опускается поверх расклада
-===================================================== */
+        bottom: var(--bar-h, 68px);
 
-@media (max-width: 900px) {
+        max-height: calc(100% - var(--bar-h, 68px) - var(--topbar-h, 42px) - 16px);
 
-    /* заголовок «Tarot Oracle» сверху не нужен */
+        border-bottom-left-radius: 0;
 
-    .logo {
-
-        display: none;
-
-    }
-
-    .menu {
-
-        padding-top: 8px;
-
-    }
-
-    /* меню опускается сверху: плавное появление со сдвигом вниз */
-
-    .layout.spread-mode:not(.header-collapsed) .menu,
-    .layout.spread-mode:not(.header-collapsed) .spread-strip {
-
-        animation: headerDrop .22s ease-out;
-
-    }
-
-}
-
-@keyframes headerDrop {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(-14px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
+        border-bottom-right-radius: 0;
 
     }
 
