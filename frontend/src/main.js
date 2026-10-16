@@ -1,3 +1,4 @@
+
 import './app.css'
 
 import {
@@ -2873,6 +2874,70 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 
 
 
+        const cyOf =
+            i => top + padY + g.boxH / 2 + (pts[i].y / spreadHeight) * availH
+
+        const tops =
+            pts.map((p, i) => cyOf(i))
+
+        // Кельтский крест: верхнюю карту («Сознание») немного опускаем,
+        // нижнюю («Подсознание») поднимаем на столько же — так нижняя не
+        // налезает на плашку с вопросом, а расклад выглядит симметрично.
+        // Сдвиг не больше свободного места до центральной карты.
+
+        const crossI =
+            pts.findIndex(p => isCrossRotation(p.rotation))
+
+        if (crossI >= 0) {
+
+            const col =
+                pts.map((p, i) => i).filter(i =>
+                    i !== crossI
+                    && Math.abs(pts[i].x - pts[crossI].x) < tolX
+                    && Math.abs(pts[i].y - pts[crossI].y) >= tolY
+                )
+
+            const upper =
+                col.filter(i => pts[i].y < pts[crossI].y)
+                    .sort((a, b) => pts[a].y - pts[b].y)[0]
+
+            const lower =
+                col.filter(i => pts[i].y > pts[crossI].y)
+                    .sort((a, b) => pts[b].y - pts[a].y)[0]
+
+            if (upper !== undefined && lower !== undefined) {
+
+                const cC = tops[crossI]
+
+                const room =
+                    Math.min(cC - tops[upper], tops[lower] - cC) - g.boxH
+
+                // базовый сдвиг ~5% расстояния до центра
+                let d =
+                    0.05 * Math.min(cC - tops[upper], tops[lower] - cC)
+
+                const qEl =
+                    document.querySelector(".spread-question")
+
+                if (qEl) {
+
+                    const limit =
+                        vh - barH - 8 - qEl.offsetHeight - 6
+
+                    d = Math.max(d, tops[lower] + g.boxH / 2 - limit)
+
+                }
+
+                d = Math.max(0, Math.min(d, room))
+
+                tops[upper] += d
+
+                tops[lower] -= d
+
+            }
+
+        }
+
         return {
 
             iw: g.iw,
@@ -2883,7 +2948,7 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 
                 left: (xs[i] / vw) * 100,
 
-                top: ((top + padY + g.boxH / 2 + (p.y / spreadHeight) * availH) / vh) * 100,
+                top: (tops[i] / vh) * 100,
 
             })),
 
@@ -2935,7 +3000,6 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 
     const barTop =
         parseFloat(cs.getPropertyValue("--topbar-h")) || 0
-
     const barH =
         parseFloat(cs.getPropertyValue("--bar-h")) || 0
 
@@ -2960,10 +3024,18 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
     const cb =
         document.querySelector(".comment-icon-btn")
 
+    const db =
+        document.querySelector(".download-icon-btn")
+
+    // слева друг над другом: 📝 и ⬇
+    const stackH =
+        (cb ? cb.offsetHeight + 10 : 0)
+        + (db ? db.offsetHeight + 8 : 0)
+
     const lowH =
         Math.max(
             q ? q.offsetHeight + 10 : 0,
-            cb ? cb.offsetHeight + 10 : 0
+            stackH
         )
 
 
@@ -3963,6 +4035,7 @@ function exportRoundRect(ctx, x, y, w, h, r) {
 
 
 
+
 function exportWrap(ctx, text, maxW) {
 
     const out = []
@@ -3998,7 +4071,6 @@ function exportWrap(ctx, text, maxW) {
         })
 
         if (line) out.push(line)
-
 
     })
 
@@ -4662,6 +4734,38 @@ function blobToBase64(blob) {
 
 
 
+async function saveViaAndroid(blob, fileName) {
+
+    try {
+
+        if (!window.TarotNative || typeof window.TarotNative.saveImage !== "function") return false
+
+        const res = String(window.TarotNative.saveImage(fileName, await blobToBase64(blob)))
+
+        if (res.indexOf("ok:") === 0) {
+
+            showToast("Сохранено в галерее: Pictures/TarotOracle")
+
+            return true
+
+        }
+
+        console.warn("TarotNative:", res)
+
+    }
+
+    catch (e) {
+
+        console.warn("TarotNative:", e)
+
+    }
+
+    return false
+
+}
+
+
+
 function showImagePreview(blob, fileName) {
 
     const url = URL.createObjectURL(blob)
@@ -4670,13 +4774,20 @@ function showImagePreview(blob, fileName) {
 
     box.className = "image-preview"
 
+    const canCopy =
+        !!(navigator.clipboard && window.ClipboardItem)
+
     box.innerHTML = `
  
         <div class="image-preview-bar">
  
-            <a class="image-preview-btn" href="${url}" download="${fileName}">Скачать</a>
+            <button class="image-preview-btn" data-act="close" type="button">Закрыть</button>
  
-            <button class="image-preview-btn" type="button">Закрыть</button>
+            <span class="image-preview-space"></span>
+ 
+            ${canCopy ? `<button class="image-preview-btn" data-act="copy" type="button">Копировать</button>` : ""}
+ 
+            <a class="image-preview-btn" data-act="save" href="${url}" download="${fileName}">Скачать</a>
  
         </div>
  
@@ -4684,11 +4795,53 @@ function showImagePreview(blob, fileName) {
  
     `
 
-    box.querySelector("button").onclick = () => {
+    const close = () => {
 
         box.remove()
 
         URL.revokeObjectURL(url)
+
+    }
+
+    box.querySelector('[data-act="close"]').addEventListener("click", close)
+
+    const copyBtn = box.querySelector('[data-act="copy"]')
+
+    if (copyBtn) {
+
+        copyBtn.addEventListener("click", async () => {
+
+            try {
+
+                await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })])
+
+                showToast("Картинка скопирована")
+
+            }
+
+            catch (e) {
+
+                console.warn("clipboard:", e)
+
+                showToast("Не удалось скопировать")
+
+            }
+
+        })
+
+    }
+
+    const saveBtn = box.querySelector('[data-act="save"]')
+
+    if (window.TarotNative) {
+
+        saveBtn.addEventListener("click", async (ev) => {
+
+            ev.preventDefault()
+
+            await saveViaAndroid(blob, fileName)
+
+        })
 
     }
 
@@ -4707,6 +4860,10 @@ async function downloadRecordImage(record) {
         const blob = await renderRecordImage(record)
 
         const fileName = recordFileName(record)
+
+        // 0) Android: нативное сохранение в галерею
+
+        if (await saveViaAndroid(blob, fileName)) return
 
         // 1) компьютер: Go сохраняет файл в «Загрузки»
 
@@ -4881,8 +5038,7 @@ function showSettings() {
             data-value="sequential"
  
         >
- 
-            По порядку
+          По порядку
  
         </button>
  

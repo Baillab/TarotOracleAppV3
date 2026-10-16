@@ -2997,7 +2997,6 @@ body {
 
 @keyframes modalAppear {
 
-
     from {
 
 
@@ -6987,41 +6986,75 @@ body[data-bg="classic"] {
 
     flex-direction: column;
 
-    background: rgba(8, 5, 14, .95);
+    padding-top: env(safe-area-inset-top, 0px);
+
+    padding-left: env(safe-area-inset-left, 0px);
+
+    padding-right: env(safe-area-inset-right, 0px);
+
+    background: #0b0812;
 
 }
 
+/* панель — на уровне верхней строки приложения (под системной строкой) */
+
 .image-preview-bar {
+
+    position: relative;
+
+    z-index: 2;
+
+    flex: none;
 
     display: flex;
 
-    gap: 10px;
+    align-items: center;
 
-    justify-content: center;
+    gap: 8px;
 
-    padding: 12px;
+    height: 42px;
+
+    padding: 0 10px;
+
+    border-bottom: 1px solid rgba(215, 180, 90, .18);
+
+    background: rgba(18, 12, 28, .9);
+
+}
+
+.image-preview-space {
+
+    flex: 1;
 
 }
 
 .image-preview-btn {
 
-    padding: 10px 22px;
+    display: inline-flex;
 
-    border-radius: 999px;
+    align-items: center;
 
-    border: 1px solid rgba(215, 180, 90, .5);
+    height: 30px;
 
-    background: rgba(215, 180, 90, .15);
+    padding: 0 14px;
 
-    color: #e2b94f;
+    border-radius: 15px;
+
+    border: 1px solid rgba(215, 180, 90, .45);
+
+    background: rgba(215, 180, 90, .14);
+
+    color: #f2deb0;
 
     font: inherit;
 
-    font-size: 15px;
+    font-size: 13px;
 
     text-decoration: none;
 
     cursor: pointer;
+
+    touch-action: manipulation;
 
 }
 
@@ -7033,7 +7066,7 @@ body[data-bg="classic"] {
 
     overflow: auto;
 
-    padding: 0 12px 16px;
+    padding: 12px 12px calc(16px + env(safe-area-inset-bottom, 0px));
 
 }
 
@@ -7104,13 +7137,13 @@ body[data-bg="classic"] {
 
     .layout.spread-mode .download-icon-btn {
 
-        left: auto;
+        left: 10px;
 
-        right: 10px;
+        right: auto;
 
         top: auto;
 
-        bottom: calc(var(--bar-h, 68px) + 8px);
+        bottom: calc(var(--bar-h, 68px) + 56px);
 
         z-index: 6;
 
@@ -7122,11 +7155,6 @@ body[data-bg="classic"] {
 
     }
 
-    .layout.spread-mode .spread-question {
-
-        max-width: calc(100% - 116px);
-
-    }
 
 }
 
