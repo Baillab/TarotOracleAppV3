@@ -1639,10 +1639,10 @@ new MutationObserver(() => {
 
 
 // Фон приложения. Варианты: "amethyst" (Аметист), "midnight" (Полночь),
-// "twilight" (Сумерки), "starry" (Звёздная ночь). Чтобы вернуть
+// "twilight" (Сумерки), "starry" (Звёздная ночь), "classic" (прежний фон с узором). Чтобы вернуть
 // прежний простой фон, удалите следующую строку.
 
-document.body.dataset.bg = "twilight"
+document.body.dataset.bg = "classic"
 
 
 
@@ -4948,4 +4948,3 @@ async function showGuideScreen(title, fetchFn) {
 // Звуки
 // Анимация переворота
 // Полноэкранный режим
-//
