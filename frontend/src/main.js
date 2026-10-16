@@ -3000,6 +3000,7 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 
     const barTop =
         parseFloat(cs.getPropertyValue("--topbar-h")) || 0
+
     const barH =
         parseFloat(cs.getPropertyValue("--bar-h")) || 0
 
@@ -3027,16 +3028,8 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
     const db =
         document.querySelector(".download-icon-btn")
 
-    // слева друг над другом: 📝 и ⬇
-    const stackH =
-        (cb ? cb.offsetHeight + 10 : 0)
-        + (db ? db.offsetHeight + 8 : 0)
-
     const lowH =
-        Math.max(
-            q ? q.offsetHeight + 10 : 0,
-            stackH
-        )
+        q ? q.offsetHeight + 10 : 0
 
 
 
@@ -3241,7 +3234,6 @@ function renderSpread(data, question) {
         "--card-scale",
         fit.scale
     )
-
 
 
 
@@ -4035,7 +4027,6 @@ function exportRoundRect(ctx, x, y, w, h, r) {
 
 
 
-
 function exportWrap(ctx, text, maxW) {
 
     const out = []
@@ -4255,7 +4246,6 @@ async function renderRecordImage(record) {
         spreadDef && items.length > 1
             ? exportSpreadLayout(spreadDef, items, W - 2 * PAD, ratio)
             : null
-
 
 
     // run(ctx, draw): считает высоту; при draw=true ещё и рисует
@@ -4774,8 +4764,18 @@ function showImagePreview(blob, fileName) {
 
     box.className = "image-preview"
 
-    const canCopy =
-        !!(navigator.clipboard && window.ClipboardItem)
+    // панель встаёт ровно на уровень верхней строки приложения («Расклады»)
+    const tb = document.querySelector("#topbar")
+
+    const r = tb ? tb.getBoundingClientRect() : null
+
+    if (r && r.height > 0) {
+
+        box.style.paddingTop = Math.round(r.top) + "px"
+
+        box.style.setProperty("--preview-bar-h", Math.round(r.height) + "px")
+
+    }
 
     box.innerHTML = `
  
@@ -4784,8 +4784,6 @@ function showImagePreview(blob, fileName) {
             <button class="image-preview-btn" data-act="close" type="button">Закрыть</button>
  
             <span class="image-preview-space"></span>
- 
-            ${canCopy ? `<button class="image-preview-btn" data-act="copy" type="button">Копировать</button>` : ""}
  
             <a class="image-preview-btn" data-act="save" href="${url}" download="${fileName}">Скачать</a>
  
@@ -4804,32 +4802,6 @@ function showImagePreview(blob, fileName) {
     }
 
     box.querySelector('[data-act="close"]').addEventListener("click", close)
-
-    const copyBtn = box.querySelector('[data-act="copy"]')
-
-    if (copyBtn) {
-
-        copyBtn.addEventListener("click", async () => {
-
-            try {
-
-                await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })])
-
-                showToast("Картинка скопирована")
-
-            }
-
-            catch (e) {
-
-                console.warn("clipboard:", e)
-
-                showToast("Не удалось скопировать")
-
-            }
-
-        })
-
-    }
 
     const saveBtn = box.querySelector('[data-act="save"]')
 
@@ -4861,9 +4833,15 @@ async function downloadRecordImage(record) {
 
         const fileName = recordFileName(record)
 
-        // 0) Android: нативное сохранение в галерею
+        // Android: окно с кнопками «Скачать» / «Закрыть»
 
-        if (await saveViaAndroid(blob, fileName)) return
+        if (window.TarotNative) {
+
+            showImagePreview(blob, fileName)
+
+            return
+
+        }
 
         // 1) компьютер: Go сохраняет файл в «Загрузки»
 
@@ -5038,7 +5016,8 @@ function showSettings() {
             data-value="sequential"
  
         >
-          По порядку
+ 
+            По порядку
  
         </button>
  
@@ -6038,5 +6017,4 @@ async function showGuideScreen(title, fetchFn) {
 // Избранные карты
 // Звуки
 // Анимация переворота
-// Полноэкранный режим
-//
+// Полн
