@@ -5508,7 +5508,8 @@ button,
 
     /* внизу карты — место под плавающую кнопку комментария */
 
-    .card {
+    .card,
+    .daily-card {
 
         padding-bottom: 64px;
 
@@ -6432,7 +6433,7 @@ button,
 
         height: 30px;
 
-        padding: 0 14px;
+        padding: 0 12px;
 
         border-radius: 15px;
 
@@ -6462,7 +6463,7 @@ button,
 
         transform: translate(-50%, -50%);
 
-        max-width: calc(100% - 270px);
+        max-width: calc(100% - 250px);
 
         overflow: hidden;
 
@@ -6474,9 +6475,9 @@ button,
 
         color: #d7b45a;
 
-        font-size: 15px;
+        font-size: 14px;
 
-        letter-spacing: .8px;
+        letter-spacing: .3px;
 
     }
 
@@ -6900,4 +6901,256 @@ body[data-bg="classic"] {
             #09070d 100%);
     background-size: 200px 200px, 100% 100%;
     background-repeat: repeat, no-repeat;
+}
+
+
+/* место под кнопку комментария внизу карты (и на десктопе) */
+.card,
+.daily-card {
+
+    padding-bottom: 64px;
+
+}
+
+
+/* =====================================================
+   Скачивание записи истории (кнопка ⬇ и запасной просмотр)
+===================================================== */
+
+.history-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+
+}
+
+.history-download {
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(215, 180, 90, .35);
+
+    background: rgba(215, 180, 90, .1);
+
+    color: #e2b94f;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    flex-shrink: 0;
+
+}
+
+.history-download:hover {
+
+    background: rgba(215, 180, 90, .25);
+
+}
+
+@media (max-width: 900px) {
+
+    .history-download {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+    .history-actions .history-delete {
+
+        margin-left: 0;
+
+    }
+
+}
+
+.image-preview {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 200;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: rgba(8, 5, 14, .95);
+
+}
+
+.image-preview-bar {
+
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    padding: 12px;
+
+}
+
+.image-preview-btn {
+
+    padding: 10px 22px;
+
+    border-radius: 999px;
+
+    border: 1px solid rgba(215, 180, 90, .5);
+
+    background: rgba(215, 180, 90, .15);
+
+    color: #e2b94f;
+
+    font: inherit;
+
+    font-size: 15px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+}
+
+.image-preview-scroll {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow: auto;
+
+    padding: 0 12px 16px;
+
+}
+
+.image-preview-scroll img {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 720px;
+
+    margin: 0 auto;
+
+}
+
+
+/* Кнопка «скачать картинкой» рядом с кнопкой комментария */
+
+.download-icon-btn {
+
+    position: absolute;
+
+    bottom: 16px;
+
+    right: 64px;
+
+    z-index: 10;
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(215, 180, 90, .3);
+
+    background: rgba(45, 31, 62, .9);
+
+    color: #e2b94f;
+
+    font-size: 18px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+}
+
+.download-icon-btn:hover {
+
+    background: rgba(215, 180, 90, .2);
+
+}
+
+@media (max-width: 900px) {
+
+    .download-icon-btn {
+
+        right: 62px;
+
+        bottom: 10px;
+
+        width: 44px;
+
+        height: 44px;
+
+    }
+
+    .layout.spread-mode .download-icon-btn {
+
+        left: auto;
+
+        right: 10px;
+
+        top: auto;
+
+        bottom: calc(var(--bar-h, 68px) + 8px);
+
+        z-index: 6;
+
+        width: 40px;
+
+        height: 40px;
+
+        opacity: .92;
+
+    }
+
+    .layout.spread-mode .spread-question {
+
+        max-width: calc(100% - 116px);
+
+    }
+
+}
+
+
+/* Кнопки комментария и «скачать» внутри карты (и карты дня): держатся
+   у нижнего края видимой области, пока карта прокручивается */
+
+.card>.comment-icon-btn,
+.card>.download-icon-btn,
+.daily-card>.comment-icon-btn,
+.daily-card>.download-icon-btn {
+
+    position: sticky;
+
+    float: right;
+
+    top: auto;
+
+    left: auto;
+
+    right: auto;
+
+    bottom: 10px;
+
+    margin: 0 0 0 8px;
+
 }

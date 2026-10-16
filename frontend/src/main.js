@@ -1,4 +1,3 @@
-
 import './app.css'
 
 import {
@@ -21,6 +20,8 @@ import {
     UpdateHistoryComment,
     GetAboutTarot
 } from '../bindings/tarotoracleapp/tarotservice.js'
+
+import * as TarotApi from '../bindings/tarotoracleapp/tarotservice.js'
 
 
 
@@ -2176,6 +2177,9 @@ ${answer.historyId ? `
  
     </button>
  
+        <button class="download-icon-btn" data-history-id="${answer.historyId}" title="Скачать картинкой">⬇</button>
+ 
+ 
 ` : ""}
  
  
@@ -2317,6 +2321,28 @@ function showDailyCard(daily) {
  
  
             ${cardMeaningTabs(card, drawn.isReversed, "daily")}
+ 
+ 
+            ${drawn.historyId ? `
+ 
+                <button
+ 
+                    class="comment-icon-btn"
+ 
+                    data-history-id="${drawn.historyId}"
+ 
+                    title="Добавить комментарий"
+ 
+                >
+ 
+                    📝
+ 
+                </button>
+ 
+        <button class="download-icon-btn" data-history-id="${drawn.historyId}" title="Скачать картинкой">⬇</button>
+ 
+ 
+            ` : ""}
  
  
         </div>
@@ -2477,7 +2503,7 @@ function isCrossRotation(rotation) {
 // картой («Кельтский крест») правый столбец раскладываем симметрично
 // относительно центра креста.
 
-function mobileSpreadPoints(data, W, H) {
+function mobileSpreadPoints(data, W, H, force = false) {
 
     const pts =
         data.cards.map(c => ({
@@ -2488,7 +2514,7 @@ function mobileSpreadPoints(data, W, H) {
 
 
 
-    if (!isMobileLayout()) return pts
+    if (!force && !isMobileLayout()) return pts
 
 
 
@@ -3034,6 +3060,9 @@ function renderSpread(data, question) {
  
         </button>
  
+        <button class="download-icon-btn" data-history-id="${data.historyId}" title="Скачать картинкой">⬇</button>
+ 
+ 
     ` : ""}
  
  
@@ -3577,11 +3606,21 @@ async function showHistoryList() {
  
  
  
-                        <button class="history-delete" data-id="${r.id}" title="Удалить">
+                        <div class="history-actions">
  
-                            ✕
+                            <button class="history-download" data-id="${r.id}" title="Скачать картинкой">
  
-                        </button>
+                                ⬇
+ 
+                            </button>
+ 
+                            <button class="history-delete" data-id="${r.id}" title="Удалить">
+ 
+                                ✕
+ 
+                            </button>
+ 
+                        </div>
  
                     </div>
  
@@ -3608,6 +3647,23 @@ async function showHistoryList() {
 
 
                 if (record) openHistoryRecord(record)
+
+            }
+
+        })
+
+
+
+        result.querySelectorAll(".history-download").forEach(btn => {
+
+            btn.onclick = (e) => {
+
+                e.stopPropagation()
+
+                const record =
+                    sorted.find(r => r.id === Number(btn.dataset.id))
+
+                if (record) downloadRecordImage(record)
 
             }
 
@@ -3839,6 +3895,885 @@ function openHistoryRecord(record) {
 
 
 }
+
+
+// ==========================================
+// Скачивание записи истории в виде картинки (PNG)
+// ==========================================
+//
+// Картинка рисуется на canvas: заголовок, дата, вопрос, расклад
+// с картами, общий ответ, толкование и комментарий. Сохранение:
+//  1) на компьютере — Go-метод SaveImage кладёт файл в «Загрузки»;
+//  2) на телефоне — системное меню «Поделиться» (там можно сохранить
+//     в «Файлы», Google Диск, отправить в мессенджер);
+//  3) запасной вариант — картинка на экране с кнопкой «Скачать».
+
+
+function loadImageSafe(src, timeout = 5000) {
+
+    return new Promise(resolve => {
+
+        const img = new Image()
+
+        let done = false
+
+        const finish = ok => {
+
+            if (done) return
+
+            done = true
+
+            resolve(ok ? img : null)
+
+        }
+
+        img.onload = () => finish(true)
+
+        img.onerror = () => finish(false)
+
+        setTimeout(() => finish(false), timeout)
+
+        img.src = src
+
+    })
+
+}
+
+
+
+function exportRoundRect(ctx, x, y, w, h, r) {
+
+    r = Math.min(r, w / 2, h / 2)
+
+    ctx.beginPath()
+
+    ctx.moveTo(x + r, y)
+
+    ctx.arcTo(x + w, y, x + w, y + h, r)
+
+    ctx.arcTo(x + w, y + h, x, y + h, r)
+
+    ctx.arcTo(x, y + h, x, y, r)
+
+    ctx.arcTo(x, y, x + w, y, r)
+
+    ctx.closePath()
+
+}
+
+
+
+function exportWrap(ctx, text, maxW) {
+
+    const out = []
+
+    String(text || "").split("\n").forEach(par => {
+
+        const words = par.split(/\s+/).filter(Boolean)
+
+        if (!words.length) {
+
+            out.push("")
+
+            return
+
+        }
+
+        let line = ""
+
+        words.forEach(w => {
+
+            const t = line ? line + " " + w : w
+
+            if (!line || ctx.measureText(t).width <= maxW) line = t
+
+            else {
+
+                out.push(line)
+
+                line = w
+
+            }
+
+        })
+
+        if (line) out.push(line)
+
+
+    })
+
+    return out
+
+}
+
+
+
+// подбор размера карт и их центров (в пикселях области AW × AH)
+
+function exportSpreadLayout(spreadDef, items, AW, ratio) {
+
+    const sw = spreadDef.width || 100
+
+    const sh = spreadDef.height || 100
+
+    const pts =
+        mobileSpreadPoints(
+            { cards: items.map(it => ({ position: it.position })) },
+            sw, sh, true
+        )
+
+    const cross =
+        pts.map(p => isCrossRotation(p.rotation))
+
+    const n = pts.length
+
+
+
+    function place(iw, AH) {
+
+        const bw = iw * 1.12 + 14
+
+        const bh = iw * ratio + 116
+
+        const padX = bw / 2 + 14
+
+        const padY = bh / 2 + 14
+
+        if (AH < bh + 28 || AW < bw + 28) return null
+
+        const pos =
+            pts.map(p => ({
+                x: n === 1 ? AW / 2 : padX + (p.x / sw) * (AW - 2 * padX),
+                y: n === 1 ? AH / 2 : padY + (p.y / sh) * (AH - 2 * padY),
+            }))
+
+        for (let i = 0; i < n; i++) {
+
+            for (let j = i + 1; j < n; j++) {
+
+                const d =
+                    Math.hypot(pos[i].x - pos[j].x, pos[i].y - pos[j].y)
+
+                if ((cross[i] || cross[j]) && d < iw * 0.5) continue
+
+                const wi = cross[i] ? iw * ratio + 8 : bw
+
+                const hi = cross[i] ? iw + 8 : bh
+
+                const wj = cross[j] ? iw * ratio + 8 : bw
+
+                const hj = cross[j] ? iw + 8 : bh
+
+                if (
+                    Math.abs(pos[i].x - pos[j].x) < (wi + wj) / 2 &&
+                    Math.abs(pos[i].y - pos[j].y) < (hi + hj) / 2
+                ) return null
+
+            }
+
+        }
+
+        return pos
+
+    }
+
+
+
+    if (n === 1) {
+
+        const iw = 320
+
+        return { iw, AH: Math.round(iw * ratio + 150), pos: place(iw, iw * ratio + 150) }
+
+    }
+
+    const cands = []
+
+    for (let AH = 500; AH <= 2400; AH += 50) {
+
+        for (let iw = 300; iw >= 60; iw -= 4) {
+
+            const pos = place(iw, AH)
+
+            if (pos) {
+
+                cands.push({ iw, AH, pos })
+
+                break
+
+            }
+
+        }
+
+    }
+
+    if (!cands.length) {
+
+        const iw = 60, AH = 2400
+
+        return { iw, AH, pos: place(iw, AH) || pts.map(p => ({ x: (p.x / sw) * AW, y: (p.y / sh) * AH })) }
+
+    }
+
+    const maxIw = Math.max(...cands.map(c => c.iw))
+
+    return cands.find(c => c.iw >= maxIw * 0.92)
+
+}
+
+
+
+async function renderRecordImage(record) {
+
+    const W = 1080
+
+    const PAD = 56
+
+    const FONT = '"Segoe UI", Arial, sans-serif'
+
+    const GOLD = "#e2b94f"
+
+    const TEXT = "#ece4f6"
+
+    const MUTED = "#b4a8cc"
+
+
+
+    const spreadDef =
+        record.type === "spread" ? spreadsById[record.spreadId] : null
+
+    const items =
+        record.cards.map((c, i) => ({
+
+            card: c.card,
+
+            isReversed: !!c.isReversed,
+
+            quickAnswer: c.quickAnswer,
+
+            position:
+                spreadDef
+                    ? (spreadDef.positions[i] || {})
+                    : (c.position || {}),
+
+        }))
+
+    const imgs =
+        await Promise.all(
+            items.map(it => loadImageSafe("/" + it.card.image))
+        )
+
+    const firstImg = imgs.find(Boolean)
+
+    const ratio =
+        firstImg && firstImg.naturalWidth
+            ? firstImg.naturalHeight / firstImg.naturalWidth
+            : 1.75
+
+    const title =
+        record.name ||
+        (record.type === "daily" ? "Карта дня"
+            : record.type === "spread" ? "Расклад" : "Карта")
+
+    const quick =
+        record.quickAnswer ||
+        (record.type !== "spread" && items[0] ? items[0].quickAnswer : "")
+
+    const layout =
+        spreadDef && items.length > 1
+            ? exportSpreadLayout(spreadDef, items, W - 2 * PAD, ratio)
+            : null
+
+
+
+    // run(ctx, draw): считает высоту; при draw=true ещё и рисует
+    function run(ctx, draw) {
+
+        let y = PAD
+
+        const innerW = W - 2 * PAD
+
+        const text = (str, x, yy, font, color, align = "left") => {
+
+            if (!draw) return
+
+            ctx.font = font
+
+            ctx.fillStyle = color
+
+            ctx.textAlign = align
+
+            ctx.textBaseline = "alphabetic"
+
+            ctx.fillText(str, x, yy)
+
+        }
+
+        const para = (str, x, font, color, lh, maxW, align = "left") => {
+
+            ctx.font = font
+
+            const lines = exportWrap(ctx, str, maxW)
+
+            lines.forEach((ln, i) => text(ln, x, y + lh * (i + 0.8), font, color, align))
+
+            y += lines.length * lh
+
+        }
+
+        const rule = () => {
+
+            if (draw) {
+
+                ctx.strokeStyle = "rgba(226,185,79,.35)"
+
+                ctx.lineWidth = 2
+
+                ctx.beginPath()
+
+                ctx.moveTo(PAD, y)
+
+                ctx.lineTo(W - PAD, y)
+
+                ctx.stroke()
+
+            }
+
+            y += 34
+
+        }
+
+
+
+        text("✦  Tarot Oracle  ✦", W / 2, y + 28, `600 28px ${FONT}`, "rgba(226,185,79,.75)", "center")
+
+        y += 64
+
+        para(title, W / 2, `700 56px ${FONT}`, GOLD, 66, innerW, "center")
+
+        y += 8
+
+        text(formatHistoryDate(record.date), W / 2, y + 26, `400 28px ${FONT}`, MUTED, "center")
+
+        y += 52
+
+        if (record.question) {
+
+            ctx.font = `italic 400 32px ${FONT}`
+
+            para("«" + record.question + "»", W / 2, `italic 400 32px ${FONT}`, TEXT, 44, innerW - 40, "center")
+
+            y += 10
+
+        }
+
+        if (quick) {
+
+            ctx.font = `700 34px ${FONT}`
+
+            const label = "Общий ответ: " + quick
+
+            const tw = ctx.measureText(label).width + 56
+
+            const positive = /^(скорее )?да/i.test(quick)
+
+            const negative = /^(скорее )?нет/i.test(quick)
+
+            if (draw) {
+
+                exportRoundRect(ctx, (W - tw) / 2, y, tw, 64, 32)
+
+                ctx.fillStyle = positive ? "rgba(90,200,130,.22)" : negative ? "rgba(220,90,90,.22)" : "rgba(226,185,79,.18)"
+
+                ctx.fill()
+
+                ctx.strokeStyle = positive ? "#5ac882" : negative ? "#dc5a5a" : GOLD
+
+                ctx.lineWidth = 2
+
+                ctx.stroke()
+
+            }
+
+            text(label, W / 2, y + 43, `700 34px ${FONT}`, positive ? "#8ee6ad" : negative ? "#ff9a9a" : GOLD, "center")
+
+            y += 64 + 20
+
+        }
+
+        y += 6
+
+        rule()
+
+
+
+        // ---- карты ----
+
+        const drawCard = (it, img, cx, cy, iw, withLabels) => {
+
+            const ih = iw * ratio
+
+            if (!draw) return
+
+            const rot = ((it.position.rotation || 0) + (it.isReversed ? 180 : 0)) * Math.PI / 180
+
+            if (withLabels && it.position.name) {
+
+                ctx.font = `600 ${Math.max(20, Math.round(iw * 0.115))}px ${FONT}`
+
+                ctx.fillStyle = MUTED
+
+                ctx.textAlign = "center"
+
+                ctx.fillText(it.position.name, cx, cy - ih / 2 - 14)
+
+            }
+
+            ctx.save()
+
+            ctx.translate(cx, cy)
+
+            ctx.rotate(((it.position.rotation || 0) * Math.PI) / 180)
+
+            ctx.rotate(it.isReversed ? Math.PI : 0)
+
+            ctx.shadowColor = "rgba(226,185,79,.55)"
+
+            ctx.shadowBlur = 28
+
+            exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
+
+            ctx.fillStyle = "#4a3475"
+
+            ctx.fill()
+
+            ctx.shadowBlur = 0
+
+            ctx.save()
+
+            exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
+
+            ctx.clip()
+
+            if (img) ctx.drawImage(img, -iw / 2, -ih / 2, iw, ih)
+
+            ctx.restore()
+
+            exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
+
+            ctx.strokeStyle = "rgba(226,185,79,.85)"
+
+            ctx.lineWidth = 3
+
+            ctx.stroke()
+
+            ctx.restore()
+
+            if (withLabels) {
+
+                const nm = it.card.name + (it.isReversed ? " (п.)" : "")
+
+                const fs = Math.max(20, Math.round(iw * 0.105))
+
+                ctx.font = `500 ${fs}px ${FONT}`
+
+                ctx.fillStyle = TEXT
+
+                ctx.textAlign = "center"
+
+                const lines = exportWrap(ctx, nm, iw * 1.2 + 10)
+
+                lines.slice(0, 3).forEach((ln, k) => ctx.fillText(ln, cx, cy + ih / 2 + fs * 1.3 + k * fs * 1.2))
+
+            }
+
+        }
+
+        if (layout) {
+
+            if (draw) {
+
+                items.forEach((it, i) => {
+
+                    const isCross = isCrossRotation(it.position.rotation)
+
+                    drawCard(it, imgs[i], PAD + layout.pos[i].x, y + layout.pos[i].y, layout.iw, !isCross)
+
+                })
+
+            }
+
+            y += layout.AH + 10
+
+        } else if (items[0]) {
+
+            const iw = 320
+
+            const ih = iw * ratio
+
+            const cx = W / 2
+
+            drawCard(items[0], imgs[0], cx, y + ih / 2 + 8, iw, false)
+
+            y += ih + 30
+
+            const nm = items[0].card.name + (items[0].isReversed ? " (перевёрнутая)" : "")
+
+            ctx.font = `700 44px ${FONT}`
+
+            para(nm, W / 2, `700 44px ${FONT}`, GOLD, 54, innerW, "center")
+
+            y += 8
+
+        }
+
+        rule()
+
+
+
+        // ---- толкование ----
+
+        text("Толкование", PAD, y + 34, `700 38px ${FONT}`, GOLD)
+
+        y += 64
+
+        items.forEach(it => {
+
+            const m =
+                it.isReversed ? it.card.reversed : it.card.upright
+
+            const body =
+                spreadDef
+                    ? (m.advice || m.text || "")
+                    : [m.text, m.advice ? "Совет: " + m.advice : ""].filter(Boolean).join("\n\n")
+
+            const nm = it.card.name + (it.isReversed ? " (перевёрнутая)" : "")
+
+            const blockTop = y
+
+            ctx.font = `400 29px ${FONT}`
+
+            const lines = exportWrap(ctx, body, innerW - 56)
+
+            const h = 20 + (it.position.name ? 36 : 0) + 52 + lines.length * 41 + 18
+
+            if (draw) {
+
+                exportRoundRect(ctx, PAD, blockTop, innerW, h, 18)
+
+                ctx.fillStyle = "rgba(255,255,255,.055)"
+
+                ctx.fill()
+
+                ctx.fillStyle = "rgba(226,185,79,.8)"
+
+                exportRoundRect(ctx, PAD, blockTop, 7, h, 3)
+
+                ctx.fill()
+
+            }
+
+            let yy = blockTop + 20
+
+            if (it.position.name) {
+
+                text(it.position.name.toUpperCase(), PAD + 30, yy + 24, `600 24px ${FONT}`, MUTED)
+
+                yy += 36
+
+            }
+
+            text(nm, PAD + 30, yy + 32, `700 32px ${FONT}`, GOLD)
+
+            yy += 52
+
+            lines.forEach((ln, k) => text(ln, PAD + 30, yy + 30 + k * 41 - 8, `400 29px ${FONT}`, TEXT))
+
+            y = blockTop + h + 16
+
+        })
+
+
+
+        // ---- комментарий ----
+
+        if (record.comment && String(record.comment).trim()) {
+
+            y += 8
+
+            text("Комментарий", PAD, y + 34, `700 38px ${FONT}`, GOLD)
+
+            y += 64
+
+            ctx.font = `italic 400 30px ${FONT}`
+
+            const lines = exportWrap(ctx, record.comment, innerW - 56)
+
+            const h = 36 + lines.length * 42
+
+            if (draw) {
+
+                exportRoundRect(ctx, PAD, y, innerW, h, 18)
+
+                ctx.fillStyle = "rgba(226,185,79,.09)"
+
+                ctx.fill()
+
+                ctx.strokeStyle = "rgba(226,185,79,.4)"
+
+                ctx.lineWidth = 2
+
+                ctx.stroke()
+
+            }
+
+            lines.forEach((ln, k) => text(ln, PAD + 28, y + 18 + 31 + k * 42 - 4, `italic 400 30px ${FONT}`, TEXT))
+
+            y += h + 20
+
+        }
+
+        y += 10
+
+        text("✦ Tarot Oracle ✦", W / 2, y + 22, `500 24px ${FONT}`, "rgba(226,185,79,.55)", "center")
+
+        y += 22 + PAD
+
+        return y
+
+    }
+
+
+
+    const scratch = document.createElement("canvas").getContext("2d")
+
+    const H = Math.ceil(run(scratch, false))
+
+    const canvas = document.createElement("canvas")
+
+    canvas.width = W
+
+    canvas.height = Math.min(H, 16000)
+
+    const ctx = canvas.getContext("2d")
+
+    const bg = ctx.createRadialGradient(W / 2, 0, 0, W / 2, 0, Math.max(W, H))
+
+    bg.addColorStop(0, "#3b2b57")
+
+    bg.addColorStop(0.45, "#1b1528")
+
+    bg.addColorStop(1, "#09070d")
+
+    ctx.fillStyle = bg
+
+    ctx.fillRect(0, 0, W, H)
+
+    ctx.strokeStyle = "rgba(226,185,79,.45)"
+
+    ctx.lineWidth = 3
+
+    exportRoundRect(ctx, 14, 14, W - 28, H - 28, 26)
+
+    ctx.stroke()
+
+    run(ctx, true)
+
+    return new Promise((resolve, reject) =>
+        canvas.toBlob(b => b ? resolve(b) : reject(new Error("toBlob")), "image/png")
+    )
+
+}
+
+
+
+// Кнопка ⬇ внутри открытой карты / расклада: берём сохранённую запись
+// из истории (с актуальным комментарием) и скачиваем её картинкой
+
+result.addEventListener("click", async (e) => {
+
+    const btn = e.target.closest(".download-icon-btn")
+
+    if (!btn) return
+
+    try {
+
+        const id = Number(btn.dataset.historyId)
+
+        const records = await GetHistory()
+
+        const record = records.find(r => r.id === id)
+
+        if (record) downloadRecordImage(record)
+
+        else showToast("Запись не найдена в истории")
+
+    }
+
+    catch (err) {
+
+        console.error(err)
+
+        showToast("Не удалось создать картинку")
+
+    }
+
+})
+
+
+
+function recordFileName(record) {
+
+    const d = new Date(record.date)
+
+    const p = n => String(n).padStart(2, "0")
+
+    const stamp =
+        isNaN(d)
+            ? ""
+            : `_${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`
+
+    const name =
+        (record.name || "Tarot")
+            .replace(/[^\p{L}\p{N}]+/gu, "_")
+            .replace(/^_+|_+$/g, "")
+
+    return `Tarot_${name}${stamp}.png`
+
+}
+
+
+
+function blobToBase64(blob) {
+
+    return new Promise((resolve, reject) => {
+
+        const r = new FileReader()
+
+        r.onload = () => resolve(String(r.result).split(",")[1] || "")
+
+        r.onerror = () => reject(r.error)
+
+        r.readAsDataURL(blob)
+
+    })
+
+}
+
+
+
+function showImagePreview(blob, fileName) {
+
+    const url = URL.createObjectURL(blob)
+
+    const box = document.createElement("div")
+
+    box.className = "image-preview"
+
+    box.innerHTML = `
+ 
+        <div class="image-preview-bar">
+ 
+            <a class="image-preview-btn" href="${url}" download="${fileName}">Скачать</a>
+ 
+            <button class="image-preview-btn" type="button">Закрыть</button>
+ 
+        </div>
+ 
+        <div class="image-preview-scroll"><img src="${url}" alt=""></div>
+ 
+    `
+
+    box.querySelector("button").onclick = () => {
+
+        box.remove()
+
+        URL.revokeObjectURL(url)
+
+    }
+
+    document.body.appendChild(box)
+
+}
+
+
+
+async function downloadRecordImage(record) {
+
+    try {
+
+        showToast("Готовлю картинку…")
+
+        const blob = await renderRecordImage(record)
+
+        const fileName = recordFileName(record)
+
+        // 1) компьютер: Go сохраняет файл в «Загрузки»
+
+        const methodName = "SaveImage"
+
+        const save = TarotApi[methodName]
+
+        if (typeof save === "function") {
+
+            try {
+
+                const path = await save(fileName, await blobToBase64(blob))
+
+                showToast("Сохранено: " + path)
+
+                return
+
+            }
+
+            catch (e) {
+
+                console.warn("SaveImage:", e)
+
+            }
+
+        }
+
+        // 2) телефон: системное меню «Поделиться»
+
+        const file = new File([blob], fileName, { type: "image/png" })
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+
+            try {
+
+                await navigator.share({ files: [file], title: "Tarot Oracle" })
+
+                return
+
+            }
+
+            catch (e) {
+
+                if (e && e.name === "AbortError") return
+
+                console.warn("share:", e)
+
+            }
+
+        }
+
+        // 3) запасной вариант
+
+        showImagePreview(blob, fileName)
+
+    }
+
+    catch (e) {
+
+        console.error(e)
+
+        showToast("Не удалось создать картинку")
+
+    }
+
+}
+
 
 
 // ==========================================
@@ -4948,3 +5883,4 @@ async function showGuideScreen(title, fetchFn) {
 // Звуки
 // Анимация переворота
 // Полноэкранный режим
+//
