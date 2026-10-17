@@ -1546,6 +1546,30 @@ const topbar =
 const topbarTitle =
     document.querySelector("#topbar-title")
 
+const topbarClose = document.createElement("button")
+
+topbarClose.type = "button"
+
+topbarClose.id = "topbar-close"
+
+topbarClose.className = "topbar-close"
+
+topbarClose.textContent = "✕"
+
+topbarClose.setAttribute("aria-label", "Закрыть и вернуться на стартовый экран")
+
+topbarClose.hidden = true
+
+topbar.appendChild(topbarClose)
+
+topbarClose.addEventListener("click", () => {
+
+    closeMenu()
+
+    showWelcomeDeck()
+
+})
+
 
 
 // Меню раскладов — оверлей по центру на затемнённом фоне
@@ -1602,7 +1626,13 @@ function updateChrome() {
     else if (result.querySelector(".daily-card")) title = "Карта дня"
 
     else if (result.querySelector(":scope > .card")) title = "Вытянуть карту"
+
     topbarTitle.textContent = title
+
+    // «✕» справа: закрыть текущую картинку и вернуться на стартовый экран.
+    // На самом стартовом экране кнопки нет.
+    topbarClose.hidden =
+        result.children.length === 0 || !!result.querySelector(".welcome-deck")
 
 
 
@@ -5086,6 +5116,11 @@ function openRitual() {
 
     box.className = "ritual"
 
+    // на Android оставляем «богатое» оформление (размытие, плавное увеличение);
+    // на компьютере (WebKitGTK без видеокарты) — облегчённое
+
+    if (window.TarotNative) box.classList.add("ritual-rich")
+
     box.innerHTML = `
  
         <div class="ritual-stage"><div class="ritual-slot"></div></div>
@@ -5180,7 +5215,12 @@ function openRitual() {
 
             if (!canvasEl) {
 
-                canvasEl = canvas
+                // на экране — уменьшенные копии (лёгкие для отрисовки),
+                // полноразмерный холст остаётся за кадром
+
+                const VW = Math.min(canvas.width, 540)
+
+                const VH = Math.round(canvas.height * VW / canvas.width)
 
                 slot.style.position = "relative"
 
@@ -5188,19 +5228,25 @@ function openRitual() {
 
                 prevCanvas = document.createElement("canvas")
 
-                prevCanvas.width = canvas.width
+                prevCanvas.width = VW
 
-                prevCanvas.height = canvas.height
+                prevCanvas.height = VH
 
                 prevCanvas.className = "ritual-canvas ritual-prev"
 
-                canvas.className = "ritual-canvas ritual-main"
+                canvasEl = document.createElement("canvas")
+
+                canvasEl.width = VW
+
+                canvasEl.height = VH
+
+                canvasEl.className = "ritual-canvas ritual-main"
 
                 slot.appendChild(prevCanvas)
 
-                slot.appendChild(canvas)
+                slot.appendChild(canvasEl)
 
-                canvas.style.opacity = "0"
+                canvasEl.style.opacity = "0"
 
                 await sleep(RITUAL_START_MS)
 
@@ -5220,22 +5266,24 @@ function openRitual() {
 
             // новое состояние плавно проявляется поверх предыдущего
 
-            void canvas.offsetWidth
+            canvasEl.getContext("2d").drawImage(canvas, 0, 0, canvasEl.width, canvasEl.height)
 
-            canvas.style.transition = `opacity ${RITUAL_FADE_MS}ms ease`
+            void canvasEl.offsetWidth
 
-            canvas.style.opacity = "1"
+            canvasEl.style.transition = `opacity ${RITUAL_FADE_MS}ms ease`
+
+            canvasEl.style.opacity = "1"
 
             await sleep(RITUAL_STEP_MS)
 
-            // фиксируем кадр как «предыдущий» и прячем основной слой
+            // фиксируем кадр как «предыдущий» и прячем верхний слой
             // (без видимых изменений) до следующего шага
 
-            prevCanvas.getContext("2d").drawImage(canvas, 0, 0)
+            prevCanvas.getContext("2d").drawImage(canvasEl, 0, 0)
 
-            canvas.style.transition = "none"
+            canvasEl.style.transition = "none"
 
-            canvas.style.opacity = "0"
+            canvasEl.style.opacity = "0"
 
         },
 
@@ -6364,8 +6412,7 @@ async function showGuideScreen(title, fetchFn) {
 
 
 
-    const loader =
-        fetchFn || GetGuide
+    const loader = fetchFn || GetGuide
 
 
 
@@ -6491,4 +6538,5 @@ async function showGuideScreen(title, fetchFn) {
 // Избранные карты
 // Звуки
 // Анимация переворота
-// Полноэкранный режи
+// Полноэкранный режим
+//

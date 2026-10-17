@@ -3987,6 +3987,7 @@ body {
 
 
 
+
 .question-textarea:focus {
 
 
@@ -4551,7 +4552,6 @@ body {
 
 
     margin: 0 0 20px;
-    rgin: 0 0 20px;
 
 
 
@@ -6092,7 +6092,6 @@ button,
 }
 
 
-
 @media (max-width: 900px) {
 
     .layout {
@@ -7198,9 +7197,7 @@ body[data-bg="classic"] {
     justify-content: center;
     gap: 18px;
     padding: env(safe-area-inset-top, 0px) 16px env(safe-area-inset-bottom, 0px);
-    background: radial-gradient(ellipse at 50% 30%, rgba(52, 36, 84, .92), rgba(8, 5, 14, .96) 70%);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+    background: radial-gradient(ellipse at 50% 30%, rgb(40, 28, 66), rgb(8, 5, 14) 75%);
     opacity: 0;
     transition: opacity .45s ease;
     touch-action: manipulation;
@@ -7216,18 +7213,22 @@ body[data-bg="classic"] {
     height: min(56vh, 520px);
     overflow: hidden;
     border-radius: 14px;
-    box-shadow: 0 0 0 1px rgba(226, 185, 79, .35), 0 0 46px rgba(226, 185, 79, .22);
+    box-shadow: 0 0 0 1px rgba(226, 185, 79, .35), 0 0 18px rgba(226, 185, 79, .2);
     background: #09070d;
-    transform: scale(.94);
-    transition: transform .6s ease, filter .6s ease;
 }
 
-.ritual.show .ritual-stage {
-    transform: scale(1);
+.ritual-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 5, 14, 0);
+    transition: background .6s ease;
+    pointer-events: none;
 }
 
 .ritual-slot {
     width: 100%;
+    will-change: transform;
     transition: transform 1.6s cubic-bezier(.45, 0, .25, 1);
 }
 
@@ -7324,11 +7325,13 @@ body[data-bg="classic"] {
 
 .ritual.done .ritual-status {
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
+    transition: opacity .35s ease, visibility 0s .35s;
 }
 
-.ritual.done .ritual-stage {
-    filter: brightness(.32) blur(1.5px);
+.ritual.done .ritual-stage::after {
+    background: rgba(8, 5, 14, .74);
 }
 
 .ritual-done {
@@ -7361,7 +7364,6 @@ body[data-bg="classic"] {
     stroke-width: 3;
     stroke-linecap: round;
     stroke-linejoin: round;
-    filter: drop-shadow(0 0 10px rgba(226, 185, 79, .6));
 }
 
 .ritual-check circle {
@@ -7432,4 +7434,72 @@ body[data-bg="classic"] {
 .ritual-btn.ghost {
     background: rgba(226, 185, 79, .12);
     color: #f2deb0;
+}
+
+
+/* Android: прежнее оформление ритуала (с размытием) */
+
+.ritual.ritual-rich {
+    background: radial-gradient(ellipse at 50% 30%, rgba(52, 36, 84, .92), rgba(8, 5, 14, .96) 70%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+.ritual-rich .ritual-stage {
+    box-shadow: 0 0 0 1px rgba(226, 185, 79, .35), 0 0 46px rgba(226, 185, 79, .22);
+    transform: scale(.94);
+    transition: transform .6s ease, filter .6s ease;
+}
+
+.ritual-rich.show .ritual-stage {
+    transform: scale(1);
+}
+
+.ritual-rich.done .ritual-stage {
+    filter: brightness(.32) blur(1.5px);
+}
+
+.ritual-rich.done .ritual-stage::after {
+    background: transparent;
+}
+
+.ritual-rich .ritual-check {
+    filter: drop-shadow(0 0 10px rgba(226, 185, 79, .6));
+}
+
+
+/* «✕» в верхней строке: вернуться на стартовый экран */
+
+.topbar-close {
+    display: none;
+}
+
+@media (max-width: 900px) {
+
+    .topbar-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        border-radius: 50%;
+        border: 1px solid rgba(226, 185, 79, .55);
+        background: rgba(226, 185, 79, .14);
+        color: #f2deb0;
+        font: inherit;
+        font-size: 15px;
+        line-height: 1;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .topbar-close[hidden] {
+        display: none;
+    }
+
 }
