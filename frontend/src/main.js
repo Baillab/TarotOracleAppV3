@@ -1602,7 +1602,6 @@ function updateChrome() {
     else if (result.querySelector(".daily-card")) title = "Карта дня"
 
     else if (result.querySelector(":scope > .card")) title = "Вытянуть карту"
-
     topbarTitle.textContent = title
 
 
@@ -1998,6 +1997,7 @@ function showWelcomeDeck() {
  
  
         </div>
+ 
  
     `
 
@@ -4960,6 +4960,16 @@ async function saveBlobAnywhere(blob, fileName) {
 
     }
 
+    // iPhone / iPad: сохранить файл напрямую нельзя —
+    // картинку готовим, а сохранение идёт через «Поделиться»
+
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)
+        || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) {
+
+        return { ok: true, kind: "ready" }
+
+    }
+
     // компьютер: Go кладёт файл в «Загрузки»
 
     const save = TarotApi["SaveImage"]
@@ -5027,6 +5037,7 @@ async function shareSaved(saved, blob, fileName) {
     const file = new File([blob], fileName, { type: "image/png" })
 
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
+
         try {
 
             await navigator.share({ files: [file], title: "Tarot Oracle" })
@@ -5043,7 +5054,9 @@ async function shareSaved(saved, blob, fileName) {
 
     }
 
-    showToast("Поделиться здесь недоступно")
+    // запасной вариант: показать картинку, её можно сохранить долгим нажатием
+
+    showImagePreview(blob, fileName)
 
 }
 
@@ -5278,7 +5291,15 @@ function openRitual() {
 
             }
 
-            const share = saved.ok && canShareSaved(saved, blob, fileName)
+            if (saved.ok && saved.kind === "ready") {
+
+                title = "Картинка готова"
+
+                sub = "Нажмите «Поделиться» и выберите «Сохранить изображение»"
+
+            }
+
+            const share = saved.ok && (saved.kind === "ready" || canShareSaved(saved, blob, fileName))
 
             done.innerHTML = `
  
@@ -6470,5 +6491,4 @@ async function showGuideScreen(title, fetchFn) {
 // Избранные карты
 // Звуки
 // Анимация переворота
-// Полноэкранный режим
-//
+// Полноэкранный режи
