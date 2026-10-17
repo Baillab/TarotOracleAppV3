@@ -66,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean systemReceiversRegistered = false;
     private WebViewAssetLoader assetLoader;
 
+    // If the app stays in the background longer than this, coming back
+    // starts from the home screen instead of the last reading (minutes).
+    private static final long AWAY_RESET_MINUTES = 10;
+    private long stoppedAtMs = 0;
+
     // The Go-side dialog ID of the in-flight file picker (-1 when idle)
     private int pendingFilePickerCallbackID = -1;
     private static final int PHOTO_CAPTURE_REQUEST = 7002;
@@ -879,6 +884,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (stoppedAtMs > 0 && webView != null
+                && System.currentTimeMillis() - stoppedAtMs > AWAY_RESET_MINUTES * 60_000L) {
+            loadApplication();
+        }
+        stoppedAtMs = 0;
         // Battery: only monitor system events while the app is visible.
         if (!systemReceiversRegistered) {
             registerSystemEventReceivers();
@@ -908,6 +918,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        stoppedAtMs = System.currentTimeMillis();
         if (systemReceiversRegistered) {
             unregisterSystemEventReceivers();
             systemReceiversRegistered = false;
