@@ -1,6 +1,6 @@
 
 import './app.css'
-
+ 
 import {
     DrawCard,
     Shuffle,
@@ -21,16 +21,16 @@ import {
     UpdateHistoryComment,
     GetAboutTarot
 } from '../bindings/tarotoracleapp/tarotservice.js'
-
+ 
 import * as TarotApi from '../bindings/tarotoracleapp/tarotservice.js'
-
-
-
-
+ 
+ 
+ 
+ 
 // ==========================================
 // Интерфейс
 // ==========================================
-
+ 
 document.querySelector("#app").innerHTML = `
  
 <div class="layout">
@@ -200,268 +200,268 @@ document.querySelector("#app").innerHTML = `
 </div>
  
 `
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Элементы
 // ==========================================
-
-
+ 
+ 
 const result =
     document.querySelector("#result")
-
-
-
+ 
+ 
+ 
 const spreadList =
     document.querySelector("#spread-list")
-
-
-
+ 
+ 
+ 
 const spreadStrip =
     document.querySelector("#spread-strip")
-
-
-
+ 
+ 
+ 
 // Стрелки ‹ › у ленты раскладов: показываем только там,
 // куда ещё можно прокрутить
-
+ 
 function updateSpreadStrip() {
-
+ 
     const max =
         spreadList.scrollWidth - spreadList.clientWidth
-
-
-
+ 
+ 
+ 
     spreadStrip.classList.toggle(
         "can-left",
         spreadList.scrollLeft > 4
     )
-
-
-
+ 
+ 
+ 
     spreadStrip.classList.toggle(
         "can-right",
         spreadList.scrollLeft < max - 4
     )
-
+ 
 }
-
-
-
+ 
+ 
+ 
 spreadList.addEventListener("scroll", updateSpreadStrip, { passive: true })
-
-
-
+ 
+ 
+ 
 document
     .querySelector("#strip-left")
     .onclick = () => spreadList.scrollBy({
-
+ 
         left: -spreadList.clientWidth * 0.7,
-
+ 
         behavior: "smooth",
-
+ 
     })
-
-
-
+ 
+ 
+ 
 document
     .querySelector("#strip-right")
     .onclick = () => spreadList.scrollBy({
-
+ 
         left: spreadList.clientWidth * 0.7,
-
+ 
         behavior: "smooth",
-
+ 
     })
-
-
-
+ 
+ 
+ 
 let activeButton =
     null
-
-
+ 
+ 
 // пересчёт текущего расклада (после сворачивания шапки, поворота экрана)
-
+ 
 let currentSpreadRelayout =
     null
-
-
+ 
+ 
 let appSettings = {
-
+ 
     deckMode: "full",
-
+ 
     drawMode: "sequential",
-
+ 
     language: "ru",
-
+ 
     deckStyle: "classic",
-
+ 
 }
-
+ 
 // ==========================================
 // Анимация перемешивания
 // ==========================================
-
-
+ 
+ 
 async function initSettings() {
-
+ 
     try {
-
+ 
         const settings =
             await GetSettings()
-
-
-
+ 
+ 
+ 
         appSettings = { ...appSettings, ...settings }
-
-
-
+ 
+ 
+ 
     }
-
+ 
     catch (e) {
-
+ 
         console.error(e)
-
+ 
     }
-
+ 
 }
-
-
-
+ 
+ 
+ 
 function setActive(button) {
-
+ 
     if (activeButton) {
-
+ 
         activeButton.classList.remove("active")
-
+ 
     }
-
+ 
     button.classList.add("active")
-
+ 
     activeButton = button
-
+ 
 }
-
-
-
-
+ 
+ 
+ 
+ 
 // ==========================================
 // Анимация перемешивания
 // ==========================================
-
+ 
 function playShuffleAnimation() {
-
+ 
     return new Promise((resolve) => {
-
+ 
         const container =
             document.querySelector("#shuffle-animation")
-
-
-
+ 
+ 
+ 
         container.classList.remove("hidden")
-
-
-
+ 
+ 
+ 
         const cards =
             container.querySelectorAll(".shuffle-card")
-
-
-
+ 
+ 
+ 
         const duration = 900
-
-
-
+ 
+ 
+ 
         const offsets = [
-
+ 
             { x: -70, rot: -18 },
-
+ 
             { x: -35, rot: -9 },
-
+ 
             { x: 0, rot: 0 },
-
+ 
             { x: 35, rot: 9 },
-
+ 
             { x: 70, rot: 18 },
-
+ 
         ]
-
-
-
+ 
+ 
+ 
         cards.forEach((card, i) => {
-
+ 
             const o =
                 offsets[i]
-
-
-
+ 
+ 
+ 
             card.animate(
                 [
-
+ 
                     {
                         transform: "translate(-50%, -50%) scale(.85) rotate(0deg)",
                         opacity: 0,
                     },
-
+ 
                     {
                         transform: `translate(calc(-50% + ${o.x}px), -50%) scale(1) rotate(${o.rot}deg)`,
                         opacity: 1,
                         offset: 0.4,
                     },
-
+ 
                     {
                         transform: `translate(calc(-50% + ${o.x}px), -50%) scale(1) rotate(${o.rot}deg)`,
                         opacity: 1,
                         offset: 0.7,
                     },
-
+ 
                     {
                         transform: "translate(-50%, -50%) scale(.85) rotate(0deg)",
                         opacity: 0,
                     },
-
+ 
                 ],
-
+ 
                 {
-
+ 
                     duration,
-
+ 
                     easing: "ease-in-out",
-
+ 
                     delay: i * 40,
-
+ 
                 },
             )
-
+ 
         })
-
-
-
+ 
+ 
+ 
         setTimeout(() => {
-
+ 
             container.classList.add("hidden")
-
-
-
+ 
+ 
+ 
             resolve()
-
-
-
+ 
+ 
+ 
         }, duration + cards.length * 40 + 50)
-
+ 
     })
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Толкование (общее для карты и раскладов)
 // ==========================================
-
-
+ 
+ 
 function setInterpretation(html) {
-
+ 
     document
         .querySelector("#interpretation-panel")
         .innerHTML = `
@@ -481,25 +481,25 @@ function setInterpretation(html) {
             </div>
  
         `
-
+ 
 }
-
+ 
 // ==========================================
 // Комментарий — модальное окно
 // ==========================================
-
+ 
 function openCommentModal(historyId, existingComment, onSaved) {
-
+ 
     const modal =
         document.querySelector("#card-modal")
-
-
-
+ 
+ 
+ 
     const content =
         document.querySelector("#modal-content")
-
-
-
+ 
+ 
+ 
     content.innerHTML = `
  
  
@@ -547,199 +547,199 @@ function openCommentModal(historyId, existingComment, onSaved) {
  
  
     `
-
-
-
+ 
+ 
+ 
     modal.classList.remove("hidden")
-
-
-
+ 
+ 
+ 
     modal.classList.remove("opening")
-
-
-
+ 
+ 
+ 
     modal.classList.remove("closing")
-
-
-
+ 
+ 
+ 
     requestAnimationFrame(() => {
-
+ 
         requestAnimationFrame(() => {
-
+ 
             modal.classList.add("opening")
-
+ 
         })
-
+ 
     })
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#modal-close")
         .onclick = closeCardModal
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#comment-save")
         .onclick = async () => {
-
+ 
             const text =
                 document.querySelector("#comment-textarea").value.trim()
-
-
-
+ 
+ 
+ 
             try {
-
+ 
                 await UpdateHistoryComment(historyId, text)
-
-
-
+ 
+ 
+ 
                 if (onSaved) onSaved(text)
-
-
-
+ 
+ 
+ 
                 closeCardModal()
-
-
-
+ 
+ 
+ 
                 showToast("Комментарий сохранён")
-
-
+ 
+ 
             }
-
+ 
             catch (e) {
-
+ 
                 console.error(e)
-
+ 
             }
-
+ 
         }
-
+ 
 }
-
+ 
 function rebindCommentButton(record) {
-
+ 
     const commentBtn =
         result.querySelector(".comment-icon-btn")
-
-
-
+ 
+ 
+ 
     if (commentBtn) {
-
+ 
         commentBtn.onclick = () => {
-
+ 
             openCommentModal(
                 record.id,
                 record.comment || "",
                 (savedText) => {
-
+ 
                     record.comment = savedText
-
+ 
                 }
             )
-
+ 
         }
-
+ 
     }
-
+ 
 }
-
-
-
-
+ 
+ 
+ 
+ 
 document
     .querySelector("#interpretation-icon")
     .onclick = (e) => {
-
+ 
         e.stopPropagation()
-
-
-
+ 
+ 
+ 
         document
             .querySelector("#interpretation-panel")
             .classList.toggle("open")
-
+ 
     }
-
-
+ 
+ 
 document.addEventListener("click", (e) => {
-
+ 
     const panel =
         document.querySelector("#interpretation-panel")
-
-
-
+ 
+ 
+ 
     if (!panel.classList.contains("open")) return
-
-
-
+ 
+ 
+ 
     const clickedInsidePanel =
         panel.contains(e.target)
-
-
-
+ 
+ 
+ 
     const clickedIcon =
         e.target.closest("#interpretation-icon")
-
-
-
+ 
+ 
+ 
     if (!clickedInsidePanel && !clickedIcon) {
-
+ 
         panel.classList.remove("open")
-
+ 
     }
-
+ 
 })
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Класс цвета для быстрого ответа
 // ==========================================
-
-
+ 
+ 
 function answerClass(text) {
-
+ 
     switch (text) {
-
+ 
         case "Да":
             return "answer-yes"
-
+ 
         case "Скорее да":
             return "answer-mostly-yes"
-
+ 
         case "Неопределённо":
             return "answer-neutral"
-
+ 
         case "Скорее нет":
             return "answer-mostly-no"
-
+ 
         case "Нет":
             return "answer-no"
-
+ 
         default:
             return ""
-
+ 
     }
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Ключевые слова
 // ==========================================
-
-
+ 
+ 
 function keywordsHTML(card) {
-
+ 
     if (!card.keywords || !card.keywords.length) {
-
+ 
         return ""
-
+ 
     }
-
+ 
     return `
  
         <div class="keywords">
@@ -751,40 +751,40 @@ function keywordsHTML(card) {
         </div>
  
     `
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Вкладки с полной информацией по карте
 // (без "Общее" — текст уже показан отдельно)
 // ==========================================
-
-
+ 
+ 
 function cardMeaningTabs(card, isReversed, prefix) {
-
+ 
     const m =
         isReversed ? card.reversed : card.upright
-
-
-
+ 
+ 
+ 
     const tabs = [
-
+ 
         { key: "love", label: "Любовь", value: m.love },
-
+ 
         { key: "career", label: "Карьера", value: m.career },
-
+ 
         { key: "finance", label: "Финансы", value: m.finance },
-
+ 
         { key: "health", label: "Здоровье", value: m.health },
-
+ 
         { key: "advice", label: "Совет", value: m.advice },
-
+ 
     ]
-
-
-
+ 
+ 
+ 
     const buttons =
         tabs.map(
             (t, i) => `
@@ -805,9 +805,9 @@ function cardMeaningTabs(card, isReversed, prefix) {
  
             `
         ).join("")
-
-
-
+ 
+ 
+ 
     const panels =
         tabs.map(
             (t, i) => `
@@ -828,9 +828,9 @@ function cardMeaningTabs(card, isReversed, prefix) {
  
             `
         ).join("")
-
-
-
+ 
+ 
+ 
     return `
  
         <div class="card-tabs">
@@ -848,88 +848,88 @@ function cardMeaningTabs(card, isReversed, prefix) {
         </div>
  
     `
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Переключение вкладок (делегирование)
 // ==========================================
-
+ 
 document.addEventListener("click", (e) => {
-
+ 
     const btn =
         e.target.closest(".tab-btn")
-
-
-
+ 
+ 
+ 
     if (!btn) return
-
-
-
+ 
+ 
+ 
     const group =
         btn.dataset.tabGroup
-
-
-
+ 
+ 
+ 
     const key =
         btn.dataset.tabKey
-
-
-
+ 
+ 
+ 
     document
         .querySelectorAll(`.tab-btn[data-tab-group="${group}"]`)
         .forEach(b => b.classList.remove("active"))
-
-
-
+ 
+ 
+ 
     btn.classList.add("active")
-
-
-
+ 
+ 
+ 
     document
         .querySelectorAll(`.tab-panel[data-tab-group="${group}"]`)
         .forEach(p => p.classList.remove("active"))
-
-
-
+ 
+ 
+ 
     document
         .querySelector(`.tab-panel[data-tab-group="${group}"][data-tab-panel="${key}"]`)
         .classList.add("active")
-
+ 
 })
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Модальное окно карты
 // ==========================================
-
+ 
 function openCardModal(item) {
-
+ 
     const modal =
         document.querySelector("#card-modal")
-
-
-
+ 
+ 
+ 
     const content =
         document.querySelector("#modal-content")
-
-
-
+ 
+ 
+ 
     const card =
         item.card
-
-
-
+ 
+ 
+ 
     const meaning =
         item.isReversed
             ? card.reversed
             : card.upright
-
-
-
+ 
+ 
+ 
     content.innerHTML = `
  
  
@@ -987,54 +987,54 @@ function openCardModal(item) {
  
  
     `
-
+ 
     modal.classList.remove("hidden")
-
-
-
+ 
+ 
+ 
     modal.classList.remove("opening")
-
+ 
     modal.classList.remove("closing")
-
-
-
+ 
+ 
+ 
     requestAnimationFrame(() => {
-
+ 
         requestAnimationFrame(() => {
-
+ 
             modal.classList.add("opening")
-
+ 
         })
-
+ 
     })
-
-
-
-
+ 
+ 
+ 
+ 
     document
         .querySelector("#modal-close")
         .onclick = closeCardModal
-
+ 
 }
-
-
+ 
+ 
 // ==========================================
 // Диалог подтверждения
 // ==========================================
-
-
+ 
+ 
 function showConfirm(text, onConfirm, yesLabel) {
-
+ 
     const modal =
         document.querySelector("#card-modal")
-
-
-
+ 
+ 
+ 
     const content =
         document.querySelector("#modal-content")
-
-
-
+ 
+ 
+ 
     content.innerHTML = `
  
  
@@ -1076,114 +1076,114 @@ function showConfirm(text, onConfirm, yesLabel) {
  
  
     `
-
+ 
     modal.classList.remove("hidden")
-
-
-
+ 
+ 
+ 
     modal.classList.remove("opening")
-
+ 
     modal.classList.remove("closing")
-
-
-
+ 
+ 
+ 
     requestAnimationFrame(() => {
-
+ 
         requestAnimationFrame(() => {
-
+ 
             modal.classList.add("opening")
-
+ 
         })
-
+ 
     })
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#modal-close")
         .onclick = closeCardModal
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#confirm-no")
         .onclick = closeCardModal
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#confirm-yes")
         .onclick = () => {
-
+ 
             closeCardModal()
-
-
-
+ 
+ 
+ 
             onConfirm()
-
+ 
         }
-
+ 
 }
-
+ 
 // ==========================================
 // Модалка вопроса перед раскладом
 // ==========================================
-
-
+ 
+ 
 let questionCategories = null
-
-
-
+ 
+ 
+ 
 async function openQuestionModal(spread) {
-
+ 
     if (!questionCategories) {
-
+ 
         try {
-
+ 
             questionCategories =
                 await GetQuestions()
-
+ 
         }
-
+ 
         catch (e) {
-
+ 
             console.error(e)
-
-
-
+ 
+ 
+ 
             questionCategories = []
-
+ 
         }
-
+ 
     }
-
-
-
+ 
+ 
+ 
     const firstId =
         questionCategories[0]?.id
-
-
-
+ 
+ 
+ 
     const modal =
         document.querySelector("#card-modal")
-
-
-
+ 
+ 
+ 
     const content =
         document.querySelector("#modal-content")
-
-
-
+ 
+ 
+ 
     function chipsHTML(category) {
-
+ 
         return category.questions.map(
             q => `<button class="question-chip" data-q="${q}">${q}</button>`
         ).join("")
-
+ 
     }
-
-
-
+ 
+ 
+ 
     content.innerHTML = `
  
  
@@ -1299,651 +1299,651 @@ async function openQuestionModal(spread) {
  
  
     `
-
+ 
     modal.classList.remove("hidden")
-
-
-
+ 
+ 
+ 
     modal.classList.remove("opening")
-
-
-
+ 
+ 
+ 
     modal.classList.remove("closing")
-
-
-
+ 
+ 
+ 
     requestAnimationFrame(() => {
-
+ 
         requestAnimationFrame(() => {
-
+ 
             modal.classList.add("opening")
-
+ 
         })
-
+ 
     })
-
-
-
+ 
+ 
+ 
     const textarea =
         document.querySelector("#question-input")
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#modal-close")
         .onclick = closeCardModal
-
-
-
+ 
+ 
+ 
     content.querySelectorAll(".tab-btn[data-tab-group='question']").forEach(btn => {
-
+ 
         btn.onclick = () => {
-
+ 
             content.querySelectorAll(".tab-btn[data-tab-group='question']")
                 .forEach(b => b.classList.remove("active"))
-
-
-
+ 
+ 
+ 
             btn.classList.add("active")
-
-
-
+ 
+ 
+ 
             content.querySelectorAll(".tab-panel-q[data-tab-group='question']")
                 .forEach(p => p.classList.remove("active"))
-
-
-
+ 
+ 
+ 
             content.querySelector(
                 `.tab-panel-q[data-tab-group='question'][data-tab-panel="${btn.dataset.tabKey}"]`
             ).classList.add("active")
-
+ 
         }
-
+ 
     })
-
-
-
+ 
+ 
+ 
     content.querySelectorAll(".question-chip").forEach(chip => {
-
+ 
         chip.onclick = () => {
-
+ 
             textarea.value = chip.dataset.q
-
+ 
         }
-
+ 
     })
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#question-skip")
         .onclick = () => {
-
+ 
             closeCardModal()
-
-
-
+ 
+ 
+ 
             drawSpread(spread.id, "")
-
+ 
         }
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#question-start")
         .onclick = () => {
-
+ 
             const question =
                 textarea.value.trim()
-
-
-
+ 
+ 
+ 
             closeCardModal()
-
-
-
+ 
+ 
+ 
             drawSpread(spread.id, question)
-
+ 
         }
-
+ 
 }
-
-
+ 
+ 
 function closeCardModal() {
-
+ 
     const modal =
         document.querySelector("#card-modal")
-
-
-
+ 
+ 
+ 
     modal.classList.add("closing")
-
-
-
+ 
+ 
+ 
     setTimeout(() => {
-
+ 
         modal.classList.add("hidden")
-
-
-
+ 
+ 
+ 
         modal.classList.remove("closing")
-
+ 
     }, 200)
-
+ 
 }
-
-
+ 
+ 
 document
     .querySelector("#card-modal")
     .onclick = (e) => {
-
+ 
         if (e.target.id === "card-modal") {
-
+ 
             closeCardModal()
-
+ 
         }
-
+ 
     }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Загрузка раскладов
 // ==========================================
-
-
+ 
+ 
 let spreadsById = {}
-
-
-
+ 
+ 
+ 
 async function loadSpreads() {
-
-
+ 
+ 
     try {
-
-
+ 
+ 
         const spreads =
             await GetSpreads()
-
-
-
+ 
+ 
+ 
         spreads.forEach(spread => {
-
-
+ 
+ 
             spreadsById[spread.id] = spread
-
-
-
+ 
+ 
+ 
             const button =
                 document.createElement("button")
-
-
-
+ 
+ 
+ 
             button.className =
                 "spread-button"
-
-
-
+ 
+ 
+ 
             button.textContent =
                 "◈ " + spread.name
-
-
+ 
+ 
             button.onclick =
                 () => {
-
+ 
                     setActive(button)
-
+ 
                     if (isMobileLayout()) {
-
+ 
                         button.scrollIntoView({
                             inline: "center",
                             block: "nearest",
                             behavior: "smooth",
                         })
-
+ 
                     }
-
+ 
                     openQuestionModal(spread)
-
+ 
                 }
-
-
+ 
+ 
             spreadList.appendChild(button)
-
+ 
         })
-
-
-
+ 
+ 
+ 
         requestAnimationFrame(updateSpreadStrip)
-
-
+ 
+ 
     }
-
-
+ 
+ 
     catch (e) {
-
-
+ 
+ 
         console.error(e)
-
-
+ 
+ 
     }
-
-
+ 
+ 
 }
-
-
+ 
+ 
 // ==========================================
 // Телефон: верхняя строка, меню раскладов, заголовок режима
 // ==========================================
-
-
+ 
+ 
 const layoutEl =
     document.querySelector(".layout")
-
+ 
 const topbar =
     document.querySelector("#topbar")
-
+ 
 const topbarTitle =
     document.querySelector("#topbar-title")
-
-
-
+ 
+ 
+ 
 // Меню раскладов — оверлей по центру на затемнённом фоне
-
+ 
 function closeMenu() {
-
+ 
     layoutEl.classList.remove("menu-open")
-
+ 
 }
-
-
-
+ 
+ 
+ 
 document
     .querySelector("#topbar-menu")
     .onclick = () => layoutEl.classList.toggle("menu-open")
-
+ 
 document
     .querySelector("#menu-backdrop")
     .onclick = closeMenu
-
+ 
 // выбрали расклад или действие — меню закрывается сразу, одновременно
 // с появлением окна вопроса
-
+ 
 document
     .querySelector("#menu-panel")
     .addEventListener("click", (e) => {
-
+ 
         if (e.target.closest(".action-button, .spread-button")) closeMenu()
-
+ 
     })
-
-
-
+ 
+ 
+ 
 // Пока на сцене расклад, сцена занимает весь экран, а верхняя строка
 // и нижняя панель — полупрозрачные поверх неё (класс spread-mode).
 // Высоты панелей и заголовок режима обновляем здесь.
-
+ 
 function updateChrome() {
-
+ 
     const hasSpread =
         !!result.querySelector(".spread-area")
-
+ 
     layoutEl.classList.toggle("spread-mode", hasSpread)
-
-
-
+ 
+ 
+ 
     let title = ""
-
+ 
     const marked =
         result.querySelector("[data-topbar]")
-
+ 
     if (marked) title = marked.dataset.topbar
-
+ 
     else if (result.querySelector(".daily-card")) title = "Карта дня"
-
+ 
     else if (result.querySelector(":scope > .card")) title = "Вытянуть карту"
-
+ 
     topbarTitle.textContent = title
-
-
-
+ 
+ 
+ 
     const bar =
         document.querySelector(".icon-row")
-
+ 
     layoutEl.style.setProperty(
         "--topbar-h",
         Math.round(topbar.offsetHeight) + "px"
     )
-
+ 
     layoutEl.style.setProperty(
         "--bar-h",
         (bar ? bar.offsetHeight : 0) + "px"
     )
-
+ 
 }
-
-
-
+ 
+ 
+ 
 new MutationObserver(() => {
-
+ 
     const was =
         layoutEl.classList.contains("spread-mode")
-
+ 
     updateChrome()
-
+ 
     const now =
         layoutEl.classList.contains("spread-mode")
-
+ 
     if (now && !was && currentSpreadRelayout) currentSpreadRelayout()
-
+ 
 }).observe(result, { childList: true })
-
-
-
+ 
+ 
+ 
 // Фон приложения. Варианты: "amethyst" (Аметист), "midnight" (Полночь),
 // "twilight" (Сумерки), "starry" (Звёздная ночь), "classic" (прежний фон с узором). Чтобы вернуть
 // прежний простой фон, удалите следующую строку.
-
+ 
 document.body.dataset.bg = "classic"
-
-
-
+ 
+ 
+ 
 // Только вертикальная ориентация (где браузер это позволяет;
 // в Android-приложении ориентацию задаёт AndroidManifest.xml)
-
+ 
 try {
-
+ 
     screen.orientation?.lock?.("portrait")?.catch(() => { })
-
+ 
 }
-
+ 
 catch (e) { }
-
-
-
+ 
+ 
+ 
 // Поворот экрана / изменение ширины окна.
 // Смену только высоты (клавиатура) игнорируем — иначе расклад
 // «прыгал» бы при вводе комментария.
-
+ 
 let lastWindowWidth =
     window.innerWidth
-
-
-
+ 
+ 
+ 
 let resizeTimer =
     null
-
-
-
+ 
+ 
+ 
 window.addEventListener("resize", () => {
-
+ 
     clearTimeout(resizeTimer)
-
-
-
+ 
+ 
+ 
     resizeTimer = setTimeout(() => {
-
+ 
         updateSpreadStrip()
-
+ 
         updateChrome()
-
-
-
+ 
+ 
+ 
         if (window.innerWidth !== lastWindowWidth) {
-
+ 
             lastWindowWidth = window.innerWidth
-
-
-
+ 
+ 
+ 
             if (currentSpreadRelayout) currentSpreadRelayout()
-
+ 
         }
-
+ 
     }, 150)
-
+ 
 })
-
-
-
+ 
+ 
+ 
 loadSpreads()
-
-
-
+ 
+ 
+ 
 showWelcomeDeck()
-
-
-
+ 
+ 
+ 
 initSettings()
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Перемешивание
 // ==========================================
-
+ 
 document
     .querySelector("#shuffle")
     .onclick = async () => {
-
-
+ 
+ 
         try {
-
-
+ 
+ 
             setActive(
                 document.querySelector("#shuffle")
             )
-
-
-
+ 
+ 
+ 
             showWelcomeDeck()
-
-
-
+ 
+ 
+ 
             await playShuffleAnimation()
-
-
-
+ 
+ 
+ 
             const text =
                 await Shuffle()
-
-
-
+ 
+ 
+ 
             showToast(text)
-
-
-
+ 
+ 
+ 
         }
-
-
+ 
+ 
         catch (e) {
-
-
+ 
+ 
             console.error(e)
-
-
+ 
+ 
         }
-
-
+ 
+ 
     }
-
-
+ 
+ 
 // Карта центрируется по высоте, поэтому, если картинка догружается
 // уже после показа, карта «подпрыгивает». Загружаем её заранее
 // (не дольше 1.5 с, чтобы не зависнуть на медленной загрузке).
-
+ 
 function preloadImage(path, timeout = 1500) {
-
+ 
     return new Promise(resolve => {
-
+ 
         if (!path) return resolve()
-
+ 
         const img = new Image()
-
+ 
         const done = () => resolve()
-
+ 
         img.onload = done
-
+ 
         img.onerror = done
-
+ 
         img.src = "/" + path
-
+ 
         setTimeout(done, timeout)
-
+ 
     })
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Вытянуть карту
 // ==========================================
-
-
+ 
+ 
 document
     .querySelector("#draw")
     .onclick = async () => {
-
-
+ 
+ 
         try {
-
-
+ 
+ 
             setActive(
                 document.querySelector("#draw")
             )
-
-
-
+ 
+ 
+ 
             const answer =
                 await DrawCard()
-
-
-
+ 
+ 
+ 
             await preloadImage(answer.card.image)
-
-
-
+ 
+ 
+ 
             showCard(answer)
-
-
-
+ 
+ 
+ 
         }
-
-
+ 
+ 
         catch (e) {
-
-
+ 
+ 
             console.error(e)
-
-
-
+ 
+ 
+ 
             showMessage(
                 "Ошибка получения карты"
             )
-
-
+ 
+ 
         }
-
-
+ 
+ 
     }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Карта дня
 // ==========================================
-
-
+ 
+ 
 document
     .querySelector("#daily")
     .onclick = async () => {
-
-
+ 
+ 
         try {
-
-
+ 
+ 
             setActive(
                 document.querySelector("#daily")
             )
-
-
-
+ 
+ 
+ 
             const daily =
                 await GetDailyCard()
-
-
-
+ 
+ 
+ 
             await preloadImage(daily.card.card.image)
-
-
-
+ 
+ 
+ 
             showDailyCard(daily)
-
-
-
+ 
+ 
+ 
         }
-
-
+ 
+ 
         catch (e) {
-
-
+ 
+ 
             console.error(e)
-
-
-
+ 
+ 
+ 
             showMessage(
                 "Ошибка карты дня"
             )
-
-
+ 
+ 
         }
-
-
+ 
+ 
     }
-
+ 
 // ==========================================
 // История 
 // ==========================================
-
-
+ 
+ 
 document
     .querySelector("#history")
     .onclick = () => {
-
+ 
         setActive(
             document.querySelector("#history")
         )
-
+ 
         showHistoryList()
-
+ 
     }
-
+ 
 // ==========================================
 // Настройки — открытие экрана
 // ==========================================
-
-
+ 
+ 
 document
     .querySelector("#settings")
     .onclick = () => {
-
+ 
         setActive(
             document.querySelector("#settings")
         )
-
+ 
         showSettings()
-
+ 
     }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Приветственная колода
 // ==========================================
-
+ 
 function showWelcomeDeck() {
-
-
+ 
+ 
     setInterpretation(`
  
         <div class="interpretation-item">
@@ -1957,8 +1957,8 @@ function showWelcomeDeck() {
         </div>
  
     `)
-
-
+ 
+ 
     result.innerHTML = `
  
  
@@ -2001,20 +2001,20 @@ function showWelcomeDeck() {
  
  
     `
-
-
+ 
+ 
 }
-
-
-
-
+ 
+ 
+ 
+ 
 // ==========================================
 // Сообщение
 // ==========================================
-
+ 
 function showMessage(text) {
-
-
+ 
+ 
     setInterpretation(`
  
         <div class="interpretation-item">
@@ -2028,9 +2028,9 @@ function showMessage(text) {
         </div>
  
     `)
-
-
-
+ 
+ 
+ 
     result.innerHTML = `
  
  
@@ -2042,73 +2042,73 @@ function showMessage(text) {
  
  
     `
-
-
+ 
+ 
 }
-
+ 
 // ==========================================
 // Всплывающее сообщение (тост)
 // ==========================================
-
-
+ 
+ 
 let toastTimeout =
     null
-
-
-
+ 
+ 
+ 
 function showToast(text) {
-
+ 
     const toast =
         document.querySelector("#toast")
-
-
-
+ 
+ 
+ 
     toast.textContent = text
-
-
-
+ 
+ 
+ 
     toast.classList.add("show")
-
-
-
+ 
+ 
+ 
     clearTimeout(toastTimeout)
-
-
-
+ 
+ 
+ 
     toastTimeout =
         setTimeout(() => {
-
+ 
             toast.classList.remove("show")
-
+ 
         }, 2500)
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Показ одной карты
 // ==========================================
-
-
+ 
+ 
 function showCard(answer) {
-
+ 
     let currentComment = ""
-
-
+ 
+ 
     const card =
         answer.card
-
-
-
+ 
+ 
+ 
     const meaning =
         answer.isReversed
             ? card.reversed
             : card.upright
-
-
-
-
+ 
+ 
+ 
+ 
     result.innerHTML = `
  
     
@@ -2188,36 +2188,36 @@ ${answer.historyId ? `
  
  
     `
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
     const commentBtn =
         result.querySelector(".comment-icon-btn")
-
-
-
+ 
+ 
+ 
     if (commentBtn) {
-
+ 
         commentBtn.onclick = () => {
-
+ 
             openCommentModal(
                 Number(commentBtn.dataset.historyId),
                 currentComment,
                 (savedText) => {
-
+ 
                     currentComment = savedText
-
+ 
                 }
             )
-
+ 
         }
-
+ 
     }
-
-
+ 
+ 
     setInterpretation(`
  
         <div class="interpretation-item">
@@ -2247,32 +2247,32 @@ ${answer.historyId ? `
         </div>
  
     `)
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Карта дня
 // ==========================================
-
-
+ 
+ 
 function showDailyCard(daily) {
-
+ 
     let currentComment = ""
-
+ 
     const drawn =
         daily.card
-
+ 
     const card =
         drawn.card
-
+ 
     const meaning =
         drawn.isReversed
             ? card.reversed
             : card.upright
-
-
+ 
+ 
     result.innerHTML = `
  
  
@@ -2350,32 +2350,32 @@ function showDailyCard(daily) {
  
  
     `
-
+ 
     const commentBtn =
         result.querySelector(".comment-icon-btn")
-
-
-
+ 
+ 
+ 
     if (commentBtn) {
-
+ 
         commentBtn.onclick = () => {
-
+ 
             openCommentModal(
                 Number(commentBtn.dataset.historyId),
                 currentComment,
                 (savedText) => {
-
+ 
                     currentComment = savedText
-
+ 
                 }
             )
-
+ 
         }
-
+ 
     }
-
-
-
+ 
+ 
+ 
     setInterpretation(`
  
         <div class="interpretation-item">
@@ -2405,682 +2405,682 @@ function showDailyCard(daily) {
         </div>
  
     `)
-
-
+ 
+ 
 }
-
-
+ 
+ 
 // ==========================================
 // Расклад
 // ==========================================
-
+ 
 async function drawSpread(id, question) {
-
-
+ 
+ 
     result.classList.add("loading")
-
+ 
     await new Promise(resolve => setTimeout(resolve, 450))
-
-
-
+ 
+ 
+ 
     try {
-
-
+ 
+ 
         const data =
             await DrawSpread(
                 id,
                 question || ""
             )
-
-
-
+ 
+ 
+ 
         renderSpread(data, question)
-
-
-
+ 
+ 
+ 
     }
-
-
+ 
+ 
     catch (e) {
-
-
+ 
+ 
         console.error(e)
-
-
-
+ 
+ 
+ 
         showMessage(
             "Ошибка расклада"
         )
-
-
+ 
+ 
     }
-
-
+ 
+ 
     finally {
-
-
+ 
+ 
         result.classList.remove("loading")
-
-
+ 
+ 
     }
-
-
+ 
+ 
 }
-
+ 
 // ==========================================
 // Мобильная вёрстка: подгонка расклада под экран
 // ==========================================
-
-
+ 
+ 
 // function-объявление поднимается, поэтому безопасно вызывать
 // из showWelcomeDeck() на старте; matchMedia читаем каждый раз
-
+ 
 function isMobileLayout() {
-
+ 
     return window.matchMedia("(max-width: 900px)").matches
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // Карта, положенная поперёк (≈90° / 270°), как «Препятствие»
 // в Кельтском кресте
-
+ 
 function isCrossRotation(rotation) {
-
+ 
     const r =
         (((rotation || 0) % 180) + 180) % 180
-
-
-
+ 
+ 
+ 
     return Math.abs(r - 90) < 15
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // Точки расклада для телефона. Координаты карт растягиваем на всю
 // область (одинаковые поля со всех сторон). В раскладах с поперечной
 // картой («Кельтский крест») правый столбец раскладываем симметрично
 // относительно центра креста.
-
+ 
 function mobileSpreadPoints(data, W, H, force = false) {
-
+ 
     const pts =
         data.cards.map(c => ({
             x: c.position.x,
             y: c.position.y,
             rotation: c.position.rotation || 0,
         }))
-
-
-
+ 
+ 
+ 
     if (!force && !isMobileLayout()) return pts
-
-
-
+ 
+ 
+ 
     const tolX = W * 0.04
-
+ 
     const cross =
         pts.find(p => isCrossRotation(p.rotation))
-
-
-
+ 
+ 
+ 
     if (cross) {
-
+ 
         const maxX =
             Math.max(...pts.map(p => p.x))
-
+ 
         const col =
             pts.filter(p => maxX - p.x < tolX && p !== cross)
-
-
-
+ 
+ 
+ 
         if (col.length >= 3) {
-
+ 
             col.sort((a, b) => a.y - b.y)
-
+ 
             const span =
                 col[col.length - 1].y - col[0].y
-
+ 
             const half =
                 Math.min(span / 2, cross.y, H - cross.y)
-
+ 
             col.forEach((p, i) => {
-
+ 
                 p.y = cross.y - half + (2 * half * i) / (col.length - 1)
-
+ 
             })
-
+ 
         }
-
+ 
     }
-
-
-
+ 
+ 
+ 
     const fill = (key, size) => {
-
+ 
         const vals =
             pts.map(p => p[key])
-
+ 
         const min =
             Math.min(...vals)
-
+ 
         const span =
             Math.max(...vals) - min
-
+ 
         pts.forEach(p => {
-
+ 
             p[key] =
                 span > 0 ? ((p[key] - min) / span) * size : size / 2
-
+ 
         })
-
+ 
     }
-
-
-
+ 
+ 
+ 
     fill("x", W)
-
+ 
     fill("y", H)
-
-
-
+ 
+ 
+ 
     return pts
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // На телефоне расклад всегда целиком умещается на экране, без
 // прокрутки: подбираем наибольший размер карт, при котором ни карты,
 // ни их подписи не налезают друг на друга. Возвращает масштаб карт
 // и положение центров карт в процентах холста (pos[i] = {left, top}).
-
+ 
 function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, baseScale) {
-
+ 
     canvas.style.width = ""
-
+ 
     canvas.style.height = ""
-
-
-
+ 
+ 
+ 
     if (!isMobileLayout()) {
-
+ 
         return { scale: baseScale, pos: null }
-
+ 
     }
-
-
-
+ 
+ 
+ 
     const viewport =
         canvas.parentElement
-
+ 
     const vw =
         viewport.clientWidth
-
+ 
     const vh =
         viewport.clientHeight
-
+ 
     const count =
         pts.length
-
-
-
+ 
+ 
+ 
     // желаемая ширина картинки карты, px
     const preferred =
         count <= 3 ? 100
             : count <= 6 ? 88
                 : count <= 7 ? 80
                     : 76
-
+ 
     const floor = 26
-
+ 
     const padX = 6
-
+ 
     const padY = 6
-
+ 
     const gap = 6
-
+ 
     const labelW = 62
-
+ 
     const tolX = spreadWidth * 0.04
-
+ 
     const tolY = spreadHeight * 0.04
-
+ 
     const hasCross =
         pts.some(p => isCrossRotation(p.rotation))
-
-
-
+ 
+ 
+ 
     // размеры «коробки» карты (картинка + подписи)
     function geometry(iw) {
-
+ 
         const boxW =
             Math.max(iw * 1.125 + 6, labelW)
-
+ 
         const boxH =
             iw * 1.75 + 64
-
+ 
         // карта, положенная поперёк: ширина и высота меняются местами
         return { iw, boxW, boxH, crossW: boxH, crossH: boxW }
-
+ 
     }
-
-
-
+ 
+ 
+ 
     function ext(p, g) {
-
+ 
         return isCrossRotation(p.rotation)
             ? { w: g.crossW, h: g.crossH }
             : { w: g.boxW, h: g.boxH }
-
+ 
     }
-
-
-
+ 
+ 
+ 
     // Центры карт по горизонтали, px. Для креста: столбцы (по близким x)
     // раздвигаем так, чтобы коробки соседних столбцов не пересекались,
     // а свободное место делим пропорционально исходным промежуткам.
     // null — при таком размере карт в ширину не помещается.
-
+ 
     function layoutX(g) {
-
+ 
         if (!hasCross) {
-
+ 
             return pts.map(p =>
                 padX + g.boxW / 2
                 + (p.x / spreadWidth) * (vw - padX * 2 - g.boxW)
             )
-
+ 
         }
-
-
-
+ 
+ 
+ 
         const order =
             pts.map((p, i) => i).sort((a, b) => pts[a].x - pts[b].x)
-
+ 
         const columns = []
-
-
-
+ 
+ 
+ 
         order.forEach(i => {
-
+ 
             const last =
                 columns[columns.length - 1]
-
+ 
             if (last && pts[i].x - pts[last.members[last.members.length - 1]].x < tolX) {
-
+ 
                 last.members.push(i)
-
+ 
             }
-
+ 
             else {
-
+ 
                 columns.push({ members: [i] })
-
+ 
             }
-
+ 
         })
-
-
-
+ 
+ 
+ 
         columns.forEach(c => {
-
+ 
             c.cx =
                 c.members.reduce((s, i) => s + pts[i].x, 0) / c.members.length
-
+ 
             c.w =
                 Math.max(...c.members.map(i => ext(pts[i], g).w))
-
+ 
         })
-
-
-
+ 
+ 
+ 
         const avail =
             vw - padX * 2
-
+ 
         const minTotal =
             columns.reduce((s, c) => s + c.w, 0) + gap * (columns.length - 1)
-
-
-
+ 
+ 
+ 
         if (minTotal > avail) return null
-
-
-
+ 
+ 
+ 
         const slack =
             avail - minTotal
-
+ 
         const origSpan =
             columns[columns.length - 1].cx - columns[0].cx
-
+ 
         const xs =
             new Array(pts.length)
-
+ 
         let x =
             padX + columns[0].w / 2
-
-
-
+ 
+ 
+ 
         columns.forEach((c, k) => {
-
+ 
             if (k > 0) {
-
+ 
                 const prev =
                     columns[k - 1]
-
+ 
                 const share =
                     origSpan > 0 ? (c.cx - prev.cx) / origSpan : 0
-
+ 
                 x += (prev.w + c.w) / 2 + gap + slack * share
-
+ 
             }
-
+ 
             c.members.forEach(i => { xs[i] = x })
-
+ 
         })
-
-
-
+ 
+ 
+ 
         return xs
-
+ 
     }
-
-
-
+ 
+ 
+ 
     // Положение по вертикали: доля высоты y/H → px.
     // Возвращает нужную высоту области, чтобы карты не налезали друг на друга.
-
+ 
     function neededHeight(g, xs) {
-
+ 
         let need = 0
-
-
-
+ 
+ 
+ 
         for (let i = 0; i < pts.length; i++) {
-
+ 
             for (let j = i + 1; j < pts.length; j++) {
-
+ 
                 const dx =
                     Math.abs(pts[i].x - pts[j].x)
-
+ 
                 const dy =
                     Math.abs(pts[i].y - pts[j].y)
-
-
-
+ 
+ 
+ 
                 // одна «ячейка» (карта, положенная поперёк другой)
                 if (dx < tolX && dy < tolY) continue
-
-
-
+ 
+ 
+ 
                 const a =
                     ext(pts[i], g)
-
+ 
                 const b =
                     ext(pts[j], g)
-
-
-
+ 
+ 
+ 
                 // по горизонтали не пересекаются — по вертикали можно не разносить
                 if (Math.abs(xs[i] - xs[j]) >= (a.w + b.w) / 2 + 2) continue
-
-
-
+ 
+ 
+ 
                 if (dy < tolY) return Infinity
-
-
-
+ 
+ 
+ 
                 need = Math.max(
                     need,
                     ((a.h + b.h) / 2) * spreadHeight / dy
                 )
-
+ 
             }
-
+ 
         }
-
-
-
+ 
+ 
+ 
         return need + g.boxH + padY * 2
-
+ 
     }
-
-
-
+ 
+ 
+ 
     // top/bottom — сколько px сверху и снизу области занимают панели
     // (карты стараемся не прятать под ними)
-
+ 
     function build(g, xs, top, height, need) {
-
+ 
         // по вертикали карты не растягиваем сильнее, чем нужно: иначе
         // расклад из двух рядов расползается к краям экрана с пустотой
         // посередине. Но и не теснее минимально необходимого.
-
+ 
         const fullH =
             Math.max(0, height - padY * 2 - g.boxH)
-
+ 
         const minH =
             Math.max(0, need - padY * 2 - g.boxH)
-
+ 
         const capH =
             Math.max(minH, (vw - padX * 2 - g.boxW) * 1.0)
-
+ 
         const availH =
             Math.min(fullH, capH)
-
+ 
         top += (fullH - availH) / 2
-
-
-
+ 
+ 
+ 
         const cyOf =
             i => top + padY + g.boxH / 2 + (pts[i].y / spreadHeight) * availH
-
+ 
         const tops =
             pts.map((p, i) => cyOf(i))
-
+ 
         // Кельтский крест: верхнюю карту («Сознание») немного опускаем,
         // нижнюю («Подсознание») поднимаем на столько же — так нижняя не
         // налезает на плашку с вопросом, а расклад выглядит симметрично.
         // Сдвиг не больше свободного места до центральной карты.
-
+ 
         const crossI =
             pts.findIndex(p => isCrossRotation(p.rotation))
-
+ 
         if (crossI >= 0) {
-
+ 
             const col =
                 pts.map((p, i) => i).filter(i =>
                     i !== crossI
                     && Math.abs(pts[i].x - pts[crossI].x) < tolX
                     && Math.abs(pts[i].y - pts[crossI].y) >= tolY
                 )
-
+ 
             const upper =
                 col.filter(i => pts[i].y < pts[crossI].y)
                     .sort((a, b) => pts[a].y - pts[b].y)[0]
-
+ 
             const lower =
                 col.filter(i => pts[i].y > pts[crossI].y)
                     .sort((a, b) => pts[b].y - pts[a].y)[0]
-
+ 
             if (upper !== undefined && lower !== undefined) {
-
+ 
                 const cC = tops[crossI]
-
+ 
                 const room =
                     Math.min(cC - tops[upper], tops[lower] - cC) - g.boxH
-
+ 
                 // базовый сдвиг ~5% расстояния до центра
                 let d =
                     0.05 * Math.min(cC - tops[upper], tops[lower] - cC)
-
+ 
                 const qEl =
                     document.querySelector(".spread-question")
-
+ 
                 if (qEl) {
-
+ 
                     const limit =
                         vh - barH - 8 - qEl.offsetHeight - 6
-
+ 
                     d = Math.max(d, tops[lower] + g.boxH / 2 - limit)
-
+ 
                 }
-
+ 
                 d = Math.max(0, Math.min(d, room))
-
+ 
                 tops[upper] += d
-
+ 
                 tops[lower] -= d
-
+ 
             }
-
+ 
         }
-
+ 
         return {
-
+ 
             iw: g.iw,
-
+ 
             scale: g.iw / 160,
-
+ 
             pos: pts.map((p, i) => ({
-
+ 
                 left: (xs[i] / vw) * 100,
-
+ 
                 top: (tops[i] / vh) * 100,
-
+ 
             })),
-
+ 
         }
-
+ 
     }
-
-
-
+ 
+ 
+ 
     // наибольший размер карт, при котором расклад помещается
     // в область высотой height (top — отступ сверху)
-
+ 
     function solve(top, bottom) {
-
+ 
         const height =
             vh - top - bottom
-
+ 
         if (height <= 0) return null
-
-
-
+ 
+ 
+ 
         for (let iw = preferred; iw >= floor; iw -= 2) {
-
+ 
             const g =
                 geometry(iw)
-
+ 
             const xs =
                 layoutX(g)
-
+ 
             const need =
                 xs ? neededHeight(g, xs) : Infinity
-
+ 
             if (xs && need <= height) {
-
+ 
                 return build(g, xs, top, height, need)
-
+ 
             }
-
+ 
         }
-
+ 
         return null
-
+ 
     }
-
-
-
+ 
+ 
+ 
     const cs =
         getComputedStyle(layoutEl)
-
+ 
     const barTop =
         parseFloat(cs.getPropertyValue("--topbar-h")) || 0
-
+ 
     const barH =
         parseFloat(cs.getPropertyValue("--bar-h")) || 0
-
-
-
+ 
+ 
+ 
     // плашка «Общий ответ» лежит под верхней строкой и закрывает карты —
     // место под неё резервируем всегда
-
+ 
     const answer =
         document.querySelector(".spread-answer")
-
+ 
     const answerTop =
         answer ? barTop + answer.offsetHeight + 12 : 0
-
-
-
+ 
+ 
+ 
     // плашка с вопросом и кнопка 📝 лежат над нижней панелью
-
+ 
     const q =
         document.querySelector(".spread-question")
-
+ 
     const cb =
         document.querySelector(".comment-icon-btn")
-
+ 
     const db =
         document.querySelector(".download-icon-btn")
-
+ 
     const lowH =
         q ? q.offsetHeight + 10 : 0
-
-
-
+ 
+ 
+ 
     const full =
         solve(answerTop, 0)
-
+ 
     if (full) {
-
+ 
         // сначала пробуем не заходить под панели; заходим, только если
         // иначе карты пришлось бы заметно уменьшить
-
+ 
         const levels = [
             [Math.max(answerTop, barTop), barH + lowH],
             [Math.max(answerTop, barTop / 2), barH / 2 + lowH],
         ]
-
+ 
         for (const [t, b] of levels) {
-
+ 
             const r =
                 solve(t, b)
-
+ 
             if (r && r.iw >= full.iw * 0.88) return r
-
+ 
         }
-
+ 
         return full
-
+ 
     }
-
-
-
+ 
+ 
+ 
     // совсем тесно: берём минимальный размер, пусть чуть налезают
     // (прокрутки нет, всё остаётся на экране)
-
+ 
     const g =
         geometry(floor)
-
+ 
     const xs =
         layoutX(g)
         || pts.map(p => padX + g.boxW / 2 + (p.x / spreadWidth) * (vw - padX * 2 - g.boxW))
-
+ 
     return build(g, xs, 0, vh, 0)
-
+ 
 }
-
-
-
+ 
+ 
+ 
 function renderSpread(data, question) {
-
+ 
     let currentComment = ""
-
+ 
     result.innerHTML = `
  
     ${question ? `
@@ -3135,85 +3135,85 @@ function renderSpread(data, question) {
     <div class="spread-area" data-topbar="${data.spread.name || ""}"><div class="spread-canvas"></div></div>
  
 `
-
-
-
-
+ 
+ 
+ 
+ 
     updateChrome()
-
-
-
+ 
+ 
+ 
     const area =
         document.querySelector(".spread-canvas")
-
-
-
+ 
+ 
+ 
     const spreadWidth =
         data.spread.width || 100
-
-
-
+ 
+ 
+ 
     const spreadHeight =
         data.spread.height || 100
-
-
-
+ 
+ 
+ 
     const margin = 12
-
-
-
+ 
+ 
+ 
     // на телефоне положение карт считает fitSpreadToViewport (pos[i]),
     // на десктопе — проценты от размера области с полями margin
-
+ 
     const mobilePts =
         mobileSpreadPoints(data, spreadWidth, spreadHeight)
-
+ 
     let layoutPos = null
-
-
-
+ 
+ 
+ 
     function normalize(x, y, i) {
-
+ 
         if (layoutPos) {
-
+ 
             return {
                 left: layoutPos[i].left,
                 top: layoutPos[i].top,
             }
-
+ 
         }
-
+ 
         const nx =
             (x / spreadWidth) * 100
-
+ 
         const ny =
             (y / spreadHeight) * 100
-
+ 
         return {
-
+ 
             left: margin + (nx * (100 - margin * 2)) / 100,
-
+ 
             top: margin + (ny * (100 - margin * 2)) / 100,
-
+ 
         }
-
+ 
     }
-
-
-
+ 
+ 
+ 
     const count =
         data.cards.length
-
-
-
+ 
+ 
+ 
     const scale =
         count <= 3 ? 1
             : count <= 6 ? 0.8
                 : count <= 7 ? 0.65
                     : 0.55
-
-
-
+ 
+ 
+ 
     const fit =
         fitSpreadToViewport(
             area,
@@ -3223,54 +3223,55 @@ function renderSpread(data, question) {
             margin,
             scale
         )
-
-
-
+ 
+ 
+ 
     layoutPos = fit.pos
-
-
-
+ 
+ 
+ 
     area.style.setProperty(
         "--card-scale",
         fit.scale
     )
-
-
-
+ 
+ 
+ 
+ 
     const placed = []
-
-
-
+ 
+ 
+ 
     data.cards.forEach(
         (item, index) => {
-
-
+ 
+ 
             const p =
                 item.position
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
             const cardRotation =
                 p.rotation || 0
-
-
+ 
+ 
             const pos =
                 normalize(p.x, p.y, index)
-
-
-
+ 
+ 
+ 
             const card =
                 document.createElement("div")
-
-
-
+ 
+ 
+ 
             card.className =
                 "spread-card"
-
-
-
+ 
+ 
+ 
             card.innerHTML = `
  
  
@@ -3296,27 +3297,27 @@ function renderSpread(data, question) {
  
  
             `
-
+ 
             card.onclick =
                 () => openCardModal(item)
-
-
-
+ 
+ 
+ 
             card.style.cursor =
                 "pointer"
-
-
-
+ 
+ 
+ 
             card.style.left =
                 pos.left + "%"
-
-
-
+ 
+ 
+ 
             card.style.top =
                 pos.top + "%"
-
-
-
+ 
+ 
+ 
             card.style.transform = `
  
                 translate(-50%, -50%)
@@ -3326,26 +3327,26 @@ function renderSpread(data, question) {
                 rotate(${cardRotation}deg)
  
             `
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
             area.appendChild(card)
-
-
-
+ 
+ 
+ 
             placed.push({ el: card, index })
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
             setTimeout(() => {
-
-
+ 
+ 
                 card.style.transform = `
  
                     translate(-50%, -50%)
@@ -3355,36 +3356,36 @@ function renderSpread(data, question) {
                     rotate(${cardRotation}deg)
  
                 `
-
-
-
-
+ 
+ 
+ 
+ 
                 card.style.opacity =
                     "1"
-
-
-
+ 
+ 
+ 
             },
-
+ 
                 200 + index * 170)
-
-
-
-
+ 
+ 
+ 
+ 
         }
-
+ 
     )
-
-
-
+ 
+ 
+ 
     // пересчёт размера холста и позиций карт без перерисовки расклада
-
+ 
     currentSpreadRelayout = () => {
-
+ 
         if (!area.isConnected) return
-
-
-
+ 
+ 
+ 
         const f =
             fitSpreadToViewport(
                 area,
@@ -3394,49 +3395,49 @@ function renderSpread(data, question) {
                 margin,
                 scale
             )
-
-
-
+ 
+ 
+ 
         layoutPos = f.pos
-
-
-
+ 
+ 
+ 
         area.style.setProperty("--card-scale", f.scale)
-
-
-
+ 
+ 
+ 
         placed.forEach(({ el, index }) => {
-
+ 
             const p =
                 data.cards[index].position
-
+ 
             const pos =
                 normalize(p.x, p.y, index)
-
-
-
+ 
+ 
+ 
             el.style.left =
                 pos.left + "%"
-
-
-
+ 
+ 
+ 
             el.style.top =
                 pos.top + "%"
-
+ 
         })
-
+ 
     }
-
-
-
+ 
+ 
+ 
     const interpretationHTML =
         data.cards.map(item => {
-
+ 
             const m =
                 item.isReversed
                     ? item.card.reversed
                     : item.card.upright
-
+ 
             return `
  
                 <div class="interpretation-item">
@@ -3466,99 +3467,99 @@ function renderSpread(data, question) {
                 </div>
  
             `
-
+ 
         }).join("")
-
-
-
+ 
+ 
+ 
     setInterpretation(interpretationHTML)
-
-
+ 
+ 
     const commentBtn =
         result.querySelector(".comment-icon-btn")
-
-
-
+ 
+ 
+ 
     if (commentBtn) {
-
+ 
         commentBtn.onclick = () => {
-
+ 
             openCommentModal(
                 Number(commentBtn.dataset.historyId),
                 currentComment,
                 (savedText) => {
-
+ 
                     currentComment = savedText
-
+ 
                 }
             )
-
+ 
         }
-
+ 
     }
-
-
+ 
+ 
 }
-
-
+ 
+ 
 // ==========================================
 // История — иконка типа записи
 // ==========================================
-
-
+ 
+ 
 function historyTypeIcon(type) {
-
+ 
     switch (type) {
-
+ 
         case "daily":
             return "☀"
-
+ 
         case "spread":
             return "◈"
-
+ 
         default:
             return "🂠"
-
+ 
     }
-
+ 
 }
-
-
-
+ 
+ 
+ 
 function formatHistoryDate(dateStr) {
-
+ 
     const d =
         new Date(dateStr)
-
-
-
+ 
+ 
+ 
     return d.toLocaleString("ru-RU", {
-
+ 
         day: "2-digit",
-
+ 
         month: "2-digit",
-
+ 
         year: "numeric",
-
+ 
         hour: "2-digit",
-
+ 
         minute: "2-digit",
-
+ 
     })
-
+ 
 }
-
-
+ 
+ 
 // ==========================================
 // История — список
 // ==========================================
-
+ 
 async function showHistoryList() {
-
-
+ 
+ 
     try {
-
-
+ 
+ 
         setInterpretation(`
  
             <div class="interpretation-item">
@@ -3572,20 +3573,19 @@ async function showHistoryList() {
             </div>
  
         `)
-
-
-
+ 
+ 
         const records =
             await GetHistory()
-
-
-
+ 
+ 
+ 
         const sorted =
             [...records].reverse()
-
-
+ 
+ 
         if (sorted.length === 0) {
-
+ 
             result.innerHTML = `
  
         <div class="history-empty">
@@ -3609,14 +3609,14 @@ async function showHistoryList() {
         </div>
  
     `
-
-
-
+ 
+ 
+ 
             return
-
+ 
         }
-
-
+ 
+ 
         result.innerHTML = `
  
     <div class="history-list">
@@ -3693,148 +3693,148 @@ async function showHistoryList() {
             </div>
  
         `
-
-
-
+ 
+ 
+ 
         result.querySelectorAll(".history-item-main").forEach(el => {
-
+ 
             el.onclick = () => {
-
+ 
                 const id =
                     Number(el.closest(".history-item").dataset.id)
-
-
-
+ 
+ 
+ 
                 const record =
                     sorted.find(r => r.id === id)
-
-
-
+ 
+ 
+ 
                 if (record) openHistoryRecord(record)
-
+ 
             }
-
+ 
         })
-
-
-
+ 
+ 
+ 
         result.querySelectorAll(".history-download").forEach(btn => {
-
+ 
             btn.onclick = (e) => {
-
+ 
                 e.stopPropagation()
-
+ 
                 const record =
                     sorted.find(r => r.id === Number(btn.dataset.id))
-
+ 
                 if (record) downloadRecordImage(record)
-
+ 
             }
-
+ 
         })
-
-
-
+ 
+ 
+ 
         result.querySelectorAll(".history-delete").forEach(btn => {
-
+ 
             btn.onclick = async (e) => {
-
+ 
                 e.stopPropagation()
-
-
-
+ 
+ 
+ 
                 const id =
                     Number(btn.dataset.id)
-
-
-
+ 
+ 
+ 
                 try {
-
+ 
                     await DeleteHistoryRecord(id)
-
-
-
+ 
+ 
+ 
                     showHistoryList()
-
-
-
+ 
+ 
+ 
                 }
-
+ 
                 catch (err) {
-
+ 
                     console.error(err)
-
+ 
                 }
-
+ 
             }
-
+ 
         })
-
-
+ 
+ 
         document
             .querySelector("#clear-history")
             .onclick = () => {
-
+ 
                 showConfirm(
                     "Удалить всю историю гаданий без возможности восстановления?",
-
+ 
                     async () => {
-
+ 
                         try {
-
+ 
                             await ClearHistory()
-
-
-
+ 
+ 
+ 
                             showHistoryList()
-
-
-
+ 
+ 
+ 
                             showToast("История очищена")
-
-
-
+ 
+ 
+ 
                         }
-
+ 
                         catch (err) {
-
+ 
                             console.error(err)
-
+ 
                         }
-
+ 
                     }
                 )
-
+ 
             }
-
-
+ 
+ 
     }
-
-
+ 
+ 
     catch (e) {
-
-
+ 
+ 
         console.error(e)
-
-
-
+ 
+ 
+ 
         showMessage("Ошибка загрузки истории")
-
-
+ 
+ 
     }
-
-
+ 
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // История — открыть конкретную запись
 // ==========================================
-
-
+ 
+ 
 function backToHistoryButton() {
-
+ 
     return `
  
         <button class="back-to-history" id="back-to-history">
@@ -3844,123 +3844,123 @@ function backToHistoryButton() {
         </button>
  
     `
-
+ 
 }
-
+ 
 function openHistoryRecord(record) {
-
-
+ 
+ 
     if (record.type === "single") {
-
-
+ 
+ 
         showCard({ ...record.cards[0], historyId: record.id })
-
-
-
+ 
+ 
+ 
         result.insertAdjacentHTML(
             "afterbegin",
             backToHistoryButton()
         )
-
-
-
+ 
+ 
+ 
         rebindCommentButton(record)
-
-
+ 
+ 
     }
-
+ 
     else if (record.type === "daily") {
-
-
+ 
+ 
         showDailyCard({ card: { ...record.cards[0], historyId: record.id } })
-
-
-
+ 
+ 
+ 
         result.insertAdjacentHTML(
             "afterbegin",
             backToHistoryButton()
         )
-
+ 
         rebindCommentButton(record)
-
-
+ 
+ 
     }
-
+ 
     else if (record.type === "spread") {
-
-
+ 
+ 
         console.log("record.spreadId:", JSON.stringify(record.spreadId))
-
+ 
         console.log("available keys:", Object.keys(spreadsById))
-
+ 
         console.log("full record:", record)
-
-
-
+ 
+ 
+ 
         const spreadDef =
             spreadsById[record.spreadId]
-
-
-
+ 
+ 
+ 
         if (!spreadDef) {
-
+ 
             showMessage("Данные расклада недоступны")
-
+ 
             return
-
+ 
         }
-
+ 
         const data = {
-
+ 
             spread: spreadDef,
-
+ 
             cards: record.cards.map((card, i) => ({
-
+ 
                 position: spreadDef.positions[i],
-
+ 
                 card: card.card,
-
+ 
                 isReversed: card.isReversed,
-
+ 
                 quickAnswer: card.quickAnswer,
-
+ 
             })),
-
+ 
         }
-
+ 
         data.historyId = record.id
-
-
-
+ 
+ 
+ 
         renderSpread(data, record.question)
-
-
-
+ 
+ 
+ 
         result.insertAdjacentHTML(
             "afterbegin",
             backToHistoryButton()
         )
-
+ 
         rebindCommentButton(record)
-
-
+ 
+ 
     }
-
+ 
     const backBtn =
         document.querySelector("#back-to-history")
-
-
-
+ 
+ 
+ 
     if (backBtn) {
-
+ 
         backBtn.onclick = () => showHistoryList()
-
+ 
     }
-
-
+ 
+ 
 }
-
-
+ 
+ 
 // ==========================================
 // Скачивание записи истории в виде картинки (PNG)
 // ==========================================
@@ -3971,812 +3971,906 @@ function openHistoryRecord(record) {
 //  2) на телефоне — системное меню «Поделиться» (там можно сохранить
 //     в «Файлы», Google Диск, отправить в мессенджер);
 //  3) запасной вариант — картинка на экране с кнопкой «Скачать».
-
-
+ 
+ 
 function loadImageSafe(src, timeout = 5000) {
-
+ 
     return new Promise(resolve => {
-
+ 
         const img = new Image()
-
+ 
         let done = false
-
+ 
         const finish = ok => {
-
+ 
             if (done) return
-
+ 
             done = true
-
+ 
             resolve(ok ? img : null)
-
+ 
         }
-
+ 
         img.onload = () => finish(true)
-
+ 
         img.onerror = () => finish(false)
-
+ 
         setTimeout(() => finish(false), timeout)
-
+ 
         img.src = src
-
+ 
     })
-
+ 
 }
-
-
-
+ 
+ 
+ 
 function exportRoundRect(ctx, x, y, w, h, r) {
-
+ 
     r = Math.min(r, w / 2, h / 2)
-
+ 
     ctx.beginPath()
-
+ 
     ctx.moveTo(x + r, y)
-
+ 
     ctx.arcTo(x + w, y, x + w, y + h, r)
-
+ 
     ctx.arcTo(x + w, y + h, x, y + h, r)
-
+ 
     ctx.arcTo(x, y + h, x, y, r)
-
+ 
     ctx.arcTo(x, y, x + w, y, r)
-
+ 
     ctx.closePath()
-
+ 
 }
-
-
-
+ 
+ 
+ 
 function exportWrap(ctx, text, maxW) {
-
+ 
     const out = []
-
+ 
     String(text || "").split("\n").forEach(par => {
-
+ 
         const words = par.split(/\s+/).filter(Boolean)
-
+ 
         if (!words.length) {
-
+ 
             out.push("")
-
+ 
             return
-
+ 
         }
-
+ 
         let line = ""
-
+ 
         words.forEach(w => {
-
+ 
             const t = line ? line + " " + w : w
-
+ 
             if (!line || ctx.measureText(t).width <= maxW) line = t
-
+ 
             else {
-
+ 
                 out.push(line)
-
+ 
                 line = w
-
+ 
             }
-
+ 
         })
-
+ 
         if (line) out.push(line)
-
+ 
     })
-
+ 
     return out
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // подбор размера карт и их центров (в пикселях области AW × AH)
-
+ 
 function exportSpreadLayout(spreadDef, items, AW, ratio) {
-
+ 
     const sw = spreadDef.width || 100
-
+ 
     const sh = spreadDef.height || 100
-
+ 
     const pts =
         mobileSpreadPoints(
             { cards: items.map(it => ({ position: it.position })) },
             sw, sh, true
         )
-
+ 
     const cross =
         pts.map(p => isCrossRotation(p.rotation))
-
+ 
     const n = pts.length
-
-
-
+ 
+ 
+ 
     function place(iw, AH) {
-
+ 
         const bw = iw * 1.12 + 14
-
+ 
         const bh = iw * ratio + 116
-
+ 
         const padX = bw / 2 + 14
-
+ 
         const padY = bh / 2 + 14
-
+ 
         if (AH < bh + 28 || AW < bw + 28) return null
-
+ 
         const pos =
             pts.map(p => ({
                 x: n === 1 ? AW / 2 : padX + (p.x / sw) * (AW - 2 * padX),
                 y: n === 1 ? AH / 2 : padY + (p.y / sh) * (AH - 2 * padY),
             }))
-
+ 
         for (let i = 0; i < n; i++) {
-
+ 
             for (let j = i + 1; j < n; j++) {
-
+ 
                 const d =
                     Math.hypot(pos[i].x - pos[j].x, pos[i].y - pos[j].y)
-
+ 
                 if ((cross[i] || cross[j]) && d < iw * 0.5) continue
-
+ 
                 const wi = cross[i] ? iw * ratio + 8 : bw
-
+ 
                 const hi = cross[i] ? iw + 8 : bh
-
+ 
                 const wj = cross[j] ? iw * ratio + 8 : bw
-
+ 
                 const hj = cross[j] ? iw + 8 : bh
-
+ 
                 if (
                     Math.abs(pos[i].x - pos[j].x) < (wi + wj) / 2 &&
                     Math.abs(pos[i].y - pos[j].y) < (hi + hj) / 2
                 ) return null
-
+ 
             }
-
+ 
         }
-
+ 
         return pos
-
+ 
     }
-
-
-
+ 
+ 
+ 
     if (n === 1) {
-
+ 
         const iw = 320
-
+ 
         return { iw, AH: Math.round(iw * ratio + 150), pos: place(iw, iw * ratio + 150) }
-
+ 
     }
-
+ 
     const cands = []
-
+ 
     for (let AH = 500; AH <= 2400; AH += 50) {
-
+ 
         for (let iw = 300; iw >= 60; iw -= 4) {
-
+ 
             const pos = place(iw, AH)
-
+ 
             if (pos) {
-
+ 
                 cands.push({ iw, AH, pos })
-
+ 
                 break
-
+ 
             }
-
+ 
         }
-
+ 
     }
-
+ 
     if (!cands.length) {
-
+ 
         const iw = 60, AH = 2400
-
+ 
         return { iw, AH, pos: place(iw, AH) || pts.map(p => ({ x: (p.x / sw) * AW, y: (p.y / sh) * AH })) }
-
+ 
     }
-
+ 
     const maxIw = Math.max(...cands.map(c => c.iw))
-
+ 
     return cands.find(c => c.iw >= maxIw * 0.92)
-
+ 
 }
-
-
-
-async function renderRecordImage(record) {
-
+ 
+ 
+ 
+async function renderRecordImage(record, onStage) {
+ 
     const W = 1080
-
+ 
     const PAD = 56
-
+ 
     const FONT = '"Segoe UI", Arial, sans-serif'
-
+ 
     const GOLD = "#e2b94f"
-
+ 
     const TEXT = "#ece4f6"
-
+ 
     const MUTED = "#b4a8cc"
-
-
-
+ 
+ 
+ 
     const spreadDef =
         record.type === "spread" ? spreadsById[record.spreadId] : null
-
+ 
     const items =
         record.cards.map((c, i) => ({
-
+ 
             card: c.card,
-
+ 
             isReversed: !!c.isReversed,
-
+ 
             quickAnswer: c.quickAnswer,
-
+ 
             position:
                 spreadDef
                     ? (spreadDef.positions[i] || {})
                     : (c.position || {}),
-
+ 
         }))
-
+ 
     const imgs =
         await Promise.all(
             items.map(it => loadImageSafe("/" + it.card.image))
         )
-
+ 
     const firstImg = imgs.find(Boolean)
-
+ 
     const ratio =
         firstImg && firstImg.naturalWidth
             ? firstImg.naturalHeight / firstImg.naturalWidth
             : 1.75
-
+ 
     const title =
         record.name ||
         (record.type === "daily" ? "Карта дня"
             : record.type === "spread" ? "Расклад" : "Карта")
-
+ 
     const quick =
         record.quickAnswer ||
         (record.type !== "spread" && items[0] ? items[0].quickAnswer : "")
-
+ 
     const layout =
         spreadDef && items.length > 1
             ? exportSpreadLayout(spreadDef, items, W - 2 * PAD, ratio)
             : null
-
-
+ 
+ 
+ 
     // run(ctx, draw): считает высоту; при draw=true ещё и рисует
-    function run(ctx, draw) {
-
+    const marks = {}
+ 
+    // stage: 0 силуэты, 1 фон и рамка, 2 заголовок, 3 карты, 4 толкование,
+    // 5 комментарий и подпись (99 — всё сразу)
+ 
+    function run(ctx, D, stage = 99) {
+ 
+        let draw = D && stage >= 2
+ 
+        let cardsPhase = false
+ 
+        const sil = stage < 3
+ 
         let y = PAD
-
+ 
         const innerW = W - 2 * PAD
-
+ 
         const text = (str, x, yy, font, color, align = "left") => {
-
-            if (!draw) return
-
+ 
+            if (!draw || (cardsPhase && sil)) return
+ 
             ctx.font = font
-
+ 
             ctx.fillStyle = color
-
+ 
             ctx.textAlign = align
-
+ 
             ctx.textBaseline = "alphabetic"
-
+ 
             ctx.fillText(str, x, yy)
-
+ 
         }
-
+ 
         const para = (str, x, font, color, lh, maxW, align = "left") => {
-
+ 
             ctx.font = font
-
+ 
             const lines = exportWrap(ctx, str, maxW)
-
+ 
             lines.forEach((ln, i) => text(ln, x, y + lh * (i + 0.8), font, color, align))
-
+ 
             y += lines.length * lh
-
+ 
         }
-
+ 
         const rule = () => {
-
+ 
             if (draw) {
-
+ 
                 ctx.strokeStyle = "rgba(226,185,79,.35)"
-
+ 
                 ctx.lineWidth = 2
-
+ 
                 ctx.beginPath()
-
+ 
                 ctx.moveTo(PAD, y)
-
+ 
                 ctx.lineTo(W - PAD, y)
-
+ 
                 ctx.stroke()
-
+ 
             }
-
+ 
             y += 34
-
+ 
         }
-
-
-
+ 
+ 
+ 
         text("✦  Tarot Oracle  ✦", W / 2, y + 28, `600 28px ${FONT}`, "rgba(226,185,79,.75)", "center")
-
+ 
         y += 64
-
+ 
         para(title, W / 2, `700 56px ${FONT}`, GOLD, 66, innerW, "center")
-
+ 
         y += 8
-
+ 
         text(formatHistoryDate(record.date), W / 2, y + 26, `400 28px ${FONT}`, MUTED, "center")
-
+ 
         y += 52
-
+ 
         if (record.question) {
-
+ 
             ctx.font = `italic 400 32px ${FONT}`
-
+ 
             para("«" + record.question + "»", W / 2, `italic 400 32px ${FONT}`, TEXT, 44, innerW - 40, "center")
-
+ 
             y += 10
-
+ 
         }
-
+ 
         if (quick) {
-
+ 
             ctx.font = `700 34px ${FONT}`
-
+ 
             const label = "Общий ответ: " + quick
-
+ 
             const tw = ctx.measureText(label).width + 56
-
+ 
             const positive = /^(скорее )?да/i.test(quick)
-
+ 
             const negative = /^(скорее )?нет/i.test(quick)
-
+ 
             if (draw) {
-
+ 
                 exportRoundRect(ctx, (W - tw) / 2, y, tw, 64, 32)
-
+ 
                 ctx.fillStyle = positive ? "rgba(90,200,130,.22)" : negative ? "rgba(220,90,90,.22)" : "rgba(226,185,79,.18)"
-
+ 
                 ctx.fill()
-
+ 
                 ctx.strokeStyle = positive ? "#5ac882" : negative ? "#dc5a5a" : GOLD
-
+ 
                 ctx.lineWidth = 2
-
+ 
                 ctx.stroke()
-
+ 
             }
-
+ 
             text(label, W / 2, y + 43, `700 34px ${FONT}`, positive ? "#8ee6ad" : negative ? "#ff9a9a" : GOLD, "center")
-
+ 
             y += 64 + 20
-
+ 
         }
-
+ 
         y += 6
-
+ 
         rule()
-
-
-
+ 
+ 
+ 
         // ---- карты ----
-
+ 
+        marks.cards = y
+ 
+        draw = D
+ 
+        cardsPhase = true
+ 
         const drawCard = (it, img, cx, cy, iw, withLabels) => {
-
+ 
             const ih = iw * ratio
-
+ 
             if (!draw) return
-
+ 
+            if (sil) {
+ 
+                // силуэт будущей карты
+ 
+                ctx.save()
+ 
+                ctx.translate(cx, cy)
+ 
+                ctx.rotate(((it.position.rotation || 0) * Math.PI) / 180)
+ 
+                exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
+ 
+                ctx.fillStyle = "rgba(255,255,255,.035)"
+ 
+                ctx.fill()
+ 
+                ctx.setLineDash([10, 8])
+ 
+                ctx.strokeStyle = "rgba(226,185,79,.4)"
+ 
+                ctx.lineWidth = 3
+ 
+                ctx.stroke()
+ 
+                ctx.restore()
+ 
+                return
+ 
+            }
+ 
             const rot = ((it.position.rotation || 0) + (it.isReversed ? 180 : 0)) * Math.PI / 180
-
+ 
             if (withLabels && it.position.name) {
-
+ 
                 ctx.font = `600 ${Math.max(20, Math.round(iw * 0.115))}px ${FONT}`
-
+ 
                 ctx.fillStyle = MUTED
-
+ 
                 ctx.textAlign = "center"
-
+ 
                 ctx.fillText(it.position.name, cx, cy - ih / 2 - 14)
-
+ 
             }
-
+ 
             ctx.save()
-
+ 
             ctx.translate(cx, cy)
-
+ 
             ctx.rotate(((it.position.rotation || 0) * Math.PI) / 180)
-
+ 
             ctx.rotate(it.isReversed ? Math.PI : 0)
-
+ 
             ctx.shadowColor = "rgba(226,185,79,.55)"
-
+ 
             ctx.shadowBlur = 28
-
+ 
             exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
-
+ 
             ctx.fillStyle = "#4a3475"
-
+ 
             ctx.fill()
-
+ 
             ctx.shadowBlur = 0
-
+ 
             ctx.save()
-
+ 
             exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
-
+ 
             ctx.clip()
-
+ 
             if (img) ctx.drawImage(img, -iw / 2, -ih / 2, iw, ih)
-
+ 
             ctx.restore()
-
+ 
             exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
-
+ 
             ctx.strokeStyle = "rgba(226,185,79,.85)"
-
+ 
             ctx.lineWidth = 3
-
+ 
             ctx.stroke()
-
+ 
             ctx.restore()
-
+ 
             if (withLabels) {
-
+ 
                 const nm = it.card.name + (it.isReversed ? " (п.)" : "")
-
+ 
                 const fs = Math.max(20, Math.round(iw * 0.105))
-
+ 
                 ctx.font = `500 ${fs}px ${FONT}`
-
+ 
                 ctx.fillStyle = TEXT
-
+ 
                 ctx.textAlign = "center"
-
+ 
                 const lines = exportWrap(ctx, nm, iw * 1.2 + 10)
-
+ 
                 lines.slice(0, 3).forEach((ln, k) => ctx.fillText(ln, cx, cy + ih / 2 + fs * 1.3 + k * fs * 1.2))
-
+ 
             }
-
+ 
         }
-
+ 
         if (layout) {
-
+ 
             if (draw) {
-
+ 
                 items.forEach((it, i) => {
-
+ 
                     const isCross = isCrossRotation(it.position.rotation)
-
+ 
                     drawCard(it, imgs[i], PAD + layout.pos[i].x, y + layout.pos[i].y, layout.iw, !isCross)
-
+ 
                 })
-
+ 
             }
-
+ 
             y += layout.AH + 10
-
+ 
         } else if (items[0]) {
-
+ 
             const iw = 320
-
+ 
             const ih = iw * ratio
-
+ 
             const cx = W / 2
-
+ 
             drawCard(items[0], imgs[0], cx, y + ih / 2 + 8, iw, false)
-
+ 
             y += ih + 30
-
+ 
             const nm = items[0].card.name + (items[0].isReversed ? " (перевёрнутая)" : "")
-
+ 
             ctx.font = `700 44px ${FONT}`
-
+ 
             para(nm, W / 2, `700 44px ${FONT}`, GOLD, 54, innerW, "center")
-
+ 
             y += 8
-
+ 
         }
-
+ 
+        cardsPhase = false
+ 
+        draw = D && stage >= 4
+ 
         rule()
-
-
-
+ 
+ 
+ 
         // ---- толкование ----
-
+ 
+        marks.interp = y
+ 
         text("Толкование", PAD, y + 34, `700 38px ${FONT}`, GOLD)
-
+ 
         y += 64
-
+ 
         items.forEach(it => {
-
+ 
             const m =
                 it.isReversed ? it.card.reversed : it.card.upright
-
+ 
             const body =
                 spreadDef
                     ? (m.advice || m.text || "")
                     : [m.text, m.advice ? "Совет: " + m.advice : ""].filter(Boolean).join("\n\n")
-
+ 
             const nm = it.card.name + (it.isReversed ? " (перевёрнутая)" : "")
-
+ 
             const blockTop = y
-
+ 
             ctx.font = `400 29px ${FONT}`
-
+ 
             const lines = exportWrap(ctx, body, innerW - 56)
-
+ 
             const h = 20 + (it.position.name ? 36 : 0) + 52 + lines.length * 41 + 18
-
+ 
             if (draw) {
-
+ 
                 exportRoundRect(ctx, PAD, blockTop, innerW, h, 18)
-
+ 
                 ctx.fillStyle = "rgba(255,255,255,.055)"
-
+ 
                 ctx.fill()
-
+ 
                 ctx.fillStyle = "rgba(226,185,79,.8)"
-
+ 
                 exportRoundRect(ctx, PAD, blockTop, 7, h, 3)
-
+ 
                 ctx.fill()
-
+ 
             }
-
+ 
             let yy = blockTop + 20
-
+ 
             if (it.position.name) {
-
+ 
                 text(it.position.name.toUpperCase(), PAD + 30, yy + 24, `600 24px ${FONT}`, MUTED)
-
+ 
                 yy += 36
-
+ 
             }
-
+ 
             text(nm, PAD + 30, yy + 32, `700 32px ${FONT}`, GOLD)
-
+ 
             yy += 52
-
+ 
             lines.forEach((ln, k) => text(ln, PAD + 30, yy + 30 + k * 41 - 8, `400 29px ${FONT}`, TEXT))
-
+ 
             y = blockTop + h + 16
-
+ 
         })
-
-
-
+ 
+ 
+ 
         // ---- комментарий ----
-
+ 
+        draw = D && stage >= 5
+ 
         if (record.comment && String(record.comment).trim()) {
-
+ 
             y += 8
-
+ 
             text("Комментарий", PAD, y + 34, `700 38px ${FONT}`, GOLD)
-
+ 
             y += 64
-
+ 
             ctx.font = `italic 400 30px ${FONT}`
-
+ 
             const lines = exportWrap(ctx, record.comment, innerW - 56)
-
+ 
             const h = 36 + lines.length * 42
-
+ 
             if (draw) {
-
+ 
                 exportRoundRect(ctx, PAD, y, innerW, h, 18)
-
+ 
                 ctx.fillStyle = "rgba(226,185,79,.09)"
-
+ 
                 ctx.fill()
-
+ 
                 ctx.strokeStyle = "rgba(226,185,79,.4)"
-
+ 
                 ctx.lineWidth = 2
-
+ 
                 ctx.stroke()
-
+ 
             }
-
+ 
             lines.forEach((ln, k) => text(ln, PAD + 28, y + 18 + 31 + k * 42 - 4, `italic 400 30px ${FONT}`, TEXT))
-
+ 
             y += h + 20
-
+ 
         }
-
+ 
         y += 10
-
+ 
         text("✦ Tarot Oracle ✦", W / 2, y + 22, `500 24px ${FONT}`, "rgba(226,185,79,.55)", "center")
-
+ 
         y += 22 + PAD
-
+ 
         return y
-
+ 
     }
-
-
-
+ 
+ 
+ 
     const scratch = document.createElement("canvas").getContext("2d")
-
+ 
     const H = Math.ceil(run(scratch, false))
-
+ 
     const canvas = document.createElement("canvas")
-
+ 
     canvas.width = W
-
+ 
     canvas.height = Math.min(H, 16000)
-
+ 
     const ctx = canvas.getContext("2d")
-
-    const bg = ctx.createRadialGradient(W / 2, 0, 0, W / 2, 0, Math.max(W, H))
-
-    bg.addColorStop(0, "#3b2b57")
-
-    bg.addColorStop(0.45, "#1b1528")
-
-    bg.addColorStop(1, "#09070d")
-
-    ctx.fillStyle = bg
-
-    ctx.fillRect(0, 0, W, H)
-
-    ctx.strokeStyle = "rgba(226,185,79,.45)"
-
-    ctx.lineWidth = 3
-
-    exportRoundRect(ctx, 14, 14, W - 28, H - 28, 26)
-
-    ctx.stroke()
-
-    run(ctx, true)
-
+ 
+    const CH = canvas.height
+ 
+    const paint = (stage) => {
+ 
+        ctx.clearRect(0, 0, W, CH)
+ 
+        if (stage < 1) {
+ 
+            ctx.fillStyle = "#09070d"
+ 
+            ctx.fillRect(0, 0, W, CH)
+ 
+        }
+ 
+        else {
+ 
+            const bg = ctx.createRadialGradient(W / 2, 0, 0, W / 2, 0, Math.max(W, H))
+ 
+            bg.addColorStop(0, "#3b2b57")
+ 
+            bg.addColorStop(0.45, "#1b1528")
+ 
+            bg.addColorStop(1, "#09070d")
+ 
+            ctx.fillStyle = bg
+ 
+            ctx.fillRect(0, 0, W, CH)
+ 
+            ctx.strokeStyle = "rgba(226,185,79,.45)"
+ 
+            ctx.lineWidth = 3
+ 
+            ctx.setLineDash([])
+ 
+            exportRoundRect(ctx, 14, 14, W - 28, CH - 28, 26)
+ 
+            ctx.stroke()
+ 
+        }
+ 
+        ctx.setLineDash([])
+ 
+        run(ctx, true, stage)
+ 
+    }
+ 
+    if (onStage) {
+ 
+        for (let st = 0; st <= 5; st++) {
+ 
+            paint(st)
+ 
+            await onStage(st, canvas, marks)
+ 
+        }
+ 
+    }
+ 
+    paint(99)
+ 
     return new Promise((resolve, reject) =>
         canvas.toBlob(b => b ? resolve(b) : reject(new Error("toBlob")), "image/png")
     )
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // Кнопка ⬇ внутри открытой карты / расклада: берём сохранённую запись
 // из истории (с актуальным комментарием) и скачиваем её картинкой
-
+ 
 result.addEventListener("click", async (e) => {
-
+ 
     const btn = e.target.closest(".download-icon-btn")
-
+ 
     if (!btn) return
-
+ 
     try {
-
+ 
         const id = Number(btn.dataset.historyId)
-
+ 
         const records = await GetHistory()
-
+ 
         const record = records.find(r => r.id === id)
-
+ 
         if (record) downloadRecordImage(record)
-
+ 
         else showToast("Запись не найдена в истории")
-
+ 
     }
-
+ 
     catch (err) {
-
+ 
         console.error(err)
-
+ 
         showToast("Не удалось создать картинку")
-
+ 
     }
-
+ 
 })
-
-
-
+ 
+ 
+ 
 function recordFileName(record) {
-
+ 
     const d = new Date(record.date)
-
+ 
     const p = n => String(n).padStart(2, "0")
-
+ 
     const stamp =
         isNaN(d)
             ? ""
             : `_${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`
-
+ 
     const name =
         (record.name || "Tarot")
             .replace(/[^\p{L}\p{N}]+/gu, "_")
             .replace(/^_+|_+$/g, "")
-
+ 
     return `Tarot_${name}${stamp}.png`
-
+ 
 }
-
-
-
+ 
+ 
+ 
 function blobToBase64(blob) {
-
+ 
     return new Promise((resolve, reject) => {
-
+ 
         const r = new FileReader()
-
+ 
         r.onload = () => resolve(String(r.result).split(",")[1] || "")
-
+ 
         r.onerror = () => reject(r.error)
-
+ 
         r.readAsDataURL(blob)
-
+ 
     })
-
+ 
 }
-
-
-
+ 
+ 
+ 
 async function saveViaAndroid(blob, fileName) {
-
+ 
     try {
-
+ 
         if (!window.TarotNative || typeof window.TarotNative.saveImage !== "function") return false
-
+ 
         const res = String(window.TarotNative.saveImage(fileName, await blobToBase64(blob)))
-
+ 
         if (res.indexOf("ok:") === 0) {
-
+ 
             showToast("Сохранено в галерее: Pictures/TarotOracle")
-
+ 
             return true
-
+ 
         }
-
+ 
         console.warn("TarotNative:", res)
-
+ 
     }
-
+ 
     catch (e) {
-
+ 
         console.warn("TarotNative:", e)
-
+ 
     }
-
+ 
     return false
-
+ 
 }
-
-
-
+ 
+ 
+ 
 function showImagePreview(blob, fileName) {
-
+ 
     const url = URL.createObjectURL(blob)
-
+ 
     const box = document.createElement("div")
-
+ 
     box.className = "image-preview"
-
+ 
     // панель встаёт ровно на уровень верхней строки приложения («Расклады»)
     const tb = document.querySelector("#topbar")
-
+ 
     const r = tb ? tb.getBoundingClientRect() : null
-
+ 
     if (r && r.height > 0) {
-
+ 
         box.style.paddingTop = Math.round(r.top) + "px"
-
+ 
         box.style.setProperty("--preview-bar-h", Math.round(r.height) + "px")
-
+ 
     }
-
+ 
     box.innerHTML = `
  
         <div class="image-preview-bar">
@@ -4792,143 +4886,443 @@ function showImagePreview(blob, fileName) {
         <div class="image-preview-scroll"><img src="${url}" alt=""></div>
  
     `
-
+ 
     const close = () => {
-
+ 
         box.remove()
-
+ 
         URL.revokeObjectURL(url)
-
+ 
     }
-
+ 
     box.querySelector('[data-act="close"]').addEventListener("click", close)
-
+ 
     const saveBtn = box.querySelector('[data-act="save"]')
-
+ 
     if (window.TarotNative) {
-
+ 
         saveBtn.addEventListener("click", async (ev) => {
-
+ 
             ev.preventDefault()
-
+ 
             await saveViaAndroid(blob, fileName)
-
+ 
         })
-
+ 
     }
-
+ 
     document.body.appendChild(box)
-
+ 
 }
-
-
-
-async function downloadRecordImage(record) {
-
+ 
+ 
+ 
+const RITUAL_STEPS = [
+    "Собираем ваш расклад…",
+    "Добавляем фон и рамку…",
+    "Пишем заголовок и вопрос…",
+    "Подготавливаем изображения карт…",
+    "Добавляем толкование…",
+    "Добавляем последние штрихи…",
+    "Сохраняем файл…",
+]
+ 
+const sleep = ms => new Promise(r => setTimeout(r, ms))
+ 
+async function saveBlobAnywhere(blob, fileName) {
+ 
+    // Android: в галерею (Pictures/TarotOracle)
+ 
+    if (window.TarotNative && typeof window.TarotNative.saveImage === "function") {
+ 
+        try {
+ 
+            const res = String(window.TarotNative.saveImage(fileName, await blobToBase64(blob)))
+ 
+            if (res.indexOf("ok:") === 0) return { ok: true, kind: "gallery", uri: res.slice(3) }
+ 
+            console.warn("TarotNative:", res)
+ 
+        }
+ 
+        catch (e) {
+ 
+            console.warn("TarotNative:", e)
+ 
+        }
+ 
+        return { ok: false }
+ 
+    }
+ 
+    // компьютер: Go кладёт файл в «Загрузки»
+ 
+    const save = TarotApi["SaveImage"]
+ 
+    if (typeof save === "function") {
+ 
+        try {
+ 
+            const path = await save(fileName, await blobToBase64(blob))
+ 
+            return { ok: true, kind: "file", path }
+ 
+        }
+ 
+        catch (e) {
+ 
+            console.warn("SaveImage:", e)
+ 
+        }
+ 
+    }
+ 
+    // браузер
+ 
     try {
-
-        showToast("Готовлю картинку…")
-
-        const blob = await renderRecordImage(record)
-
-        const fileName = recordFileName(record)
-
-        // Android: окно с кнопками «Скачать» / «Закрыть»
-
-        if (window.TarotNative) {
-
-            showImagePreview(blob, fileName)
-
-            return
-
-        }
-
-        // 1) компьютер: Go сохраняет файл в «Загрузки»
-
-        const methodName = "SaveImage"
-
-        const save = TarotApi[methodName]
-
-        if (typeof save === "function") {
-
-            try {
-
-                const path = await save(fileName, await blobToBase64(blob))
-
-                showToast("Сохранено: " + path)
-
-                return
-
-            }
-
-            catch (e) {
-
-                console.warn("SaveImage:", e)
-
-            }
-
-        }
-
-        // 2) телефон: системное меню «Поделиться»
-
-        const file = new File([blob], fileName, { type: "image/png" })
-
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-
-            try {
-
-                await navigator.share({ files: [file], title: "Tarot Oracle" })
-
-                return
-
-            }
-
-            catch (e) {
-
-                if (e && e.name === "AbortError") return
-
-                console.warn("share:", e)
-
-            }
-
-        }
-
-        // 3) запасной вариант
-
-        showImagePreview(blob, fileName)
-
+ 
+        const url = URL.createObjectURL(blob)
+ 
+        const a = document.createElement("a")
+ 
+        a.href = url
+ 
+        a.download = fileName
+ 
+        document.body.appendChild(a)
+ 
+        a.click()
+ 
+        a.remove()
+ 
+        setTimeout(() => URL.revokeObjectURL(url), 4000)
+ 
+        return { ok: true, kind: "browser" }
+ 
     }
-
+ 
     catch (e) {
-
-        console.error(e)
-
-        showToast("Не удалось создать картинку")
-
+ 
+        return { ok: false }
+ 
     }
-
+ 
 }
 
-
-
+async function shareSaved(saved, blob, fileName) {
+ 
+    if (saved.uri && window.TarotNative && typeof window.TarotNative.shareImage === "function") {
+ 
+        window.TarotNative.shareImage(saved.uri)
+ 
+        return
+ 
+    }
+ 
+    const file = new File([blob], fileName, { type: "image/png" })
+ 
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+ 
+        try {
+ 
+            await navigator.share({ files: [file], title: "Tarot Oracle" })
+ 
+        }
+ 
+        catch (e) {
+ 
+            if (!e || e.name !== "AbortError") showToast("Не удалось поделиться")
+ 
+        }
+ 
+        return
+ 
+    }
+ 
+    showToast("Поделиться здесь недоступно")
+ 
+}
+ 
+function canShareSaved(saved, blob, fileName) {
+ 
+    if (saved.uri && window.TarotNative && typeof window.TarotNative.shareImage === "function") return true
+ 
+    try {
+ 
+        const file = new File([blob], fileName, { type: "image/png" })
+ 
+        return !!(navigator.canShare && navigator.canShare({ files: [file] }))
+ 
+    }
+ 
+    catch (e) {
+ 
+        return false
+ 
+    }
+ 
+}
+ 
+function openRitual() {
+ 
+    const box = document.createElement("div")
+ 
+    box.className = "ritual"
+ 
+    box.innerHTML = `
+ 
+        <div class="ritual-stage"><div class="ritual-slot"></div></div>
+ 
+        <div class="ritual-status">
+ 
+            <div class="ritual-spinner"></div>
+ 
+            <div class="ritual-bar"><i></i></div>
+ 
+            <div class="ritual-label"></div>
+ 
+        </div>
+ 
+        <div class="ritual-done" hidden></div>
+ 
+    `
+ 
+    document.body.appendChild(box)
+ 
+    requestAnimationFrame(() => box.classList.add("show"))
+ 
+    const stageEl = box.querySelector(".ritual-stage")
+ 
+    const slot = box.querySelector(".ritual-slot")
+ 
+    const labelEl = box.querySelector(".ritual-label")
+ 
+    const barEl = box.querySelector(".ritual-bar i")
+ 
+    let canvasEl = null
+ 
+    const setLabel = (text) => {
+ 
+        labelEl.classList.remove("in")
+ 
+        void labelEl.offsetWidth
+ 
+        labelEl.textContent = text
+ 
+        labelEl.classList.add("in")
+ 
+    }
+ 
+    const follow = (canvas, y) => {
+ 
+        // прокручиваем картинку к месту, которое сейчас «рисуется»
+ 
+        const sw = stageEl.clientWidth
+ 
+        const k = sw / canvas.width
+ 
+        const dispH = canvas.height * k
+ 
+        const maxShift = Math.max(0, dispH - stageEl.clientHeight)
+ 
+        const shift = Math.min(maxShift, Math.max(0, y * k - 24))
+ 
+        slot.style.transform = `translateY(${-shift}px)`
+ 
+    }
+ 
+    setLabel(RITUAL_STEPS[0])
+ 
+    return {
+ 
+        async stage(st, canvas, marks) {
+ 
+            if (!canvasEl) {
+ 
+                canvasEl = canvas
+ 
+                canvas.className = "ritual-canvas"
+ 
+                slot.appendChild(canvas)
+ 
+                await sleep(450)
+ 
+            }
+ 
+            setLabel(RITUAL_STEPS[st])
+ 
+            barEl.style.width = Math.round(((st + 1) / 8) * 100) + "%"
+ 
+            canvas.classList.remove("pulse")
+ 
+            void canvas.offsetWidth
+ 
+            canvas.classList.add("pulse")
+ 
+            const target =
+                st <= 2 ? 0
+                    : st === 3 ? (marks.cards || 0) - 40
+                        : st === 4 ? (marks.interp || 0) - 20
+                            : canvas.height
+ 
+            follow(canvas, target)
+ 
+            await sleep(st === 0 ? 800 : 700)
+ 
+        },
+ 
+        saving(text) {
+ 
+            setLabel(text)
+ 
+            barEl.style.width = "92%"
+ 
+        },
+ 
+        async finish(saved, blob, fileName) {
+ 
+            barEl.style.width = "100%"
+ 
+            await sleep(350)
+ 
+            slot.style.transform = "translateY(0)"
+ 
+            box.classList.add("done")
+ 
+            const done = box.querySelector(".ritual-done")
+ 
+            let title = "Расклад сохранён"
+ 
+            let sub = ""
+ 
+            if (!saved.ok) {
+ 
+                title = "Не удалось сохранить"
+ 
+                sub = "Попробуйте ещё раз"
+ 
+            }
+ 
+            else if (saved.kind === "gallery") {
+ 
+                title = "Расклад сохранён в галерее"
+ 
+                sub = "Pictures / TarotOracle"
+ 
+            }
+ 
+            else if (saved.kind === "file") {
+ 
+                title = "Расклад сохранён"
+ 
+                sub = "Папка «Загрузки»"
+ 
+            }
+ 
+            const share = saved.ok && canShareSaved(saved, blob, fileName)
+ 
+            done.innerHTML = `
+ 
+                ${saved.ok ? `
+                <svg class="ritual-check" viewBox="0 0 52 52" aria-hidden="true">
+                    <circle cx="26" cy="26" r="23" />
+                    <path d="M15 27 L23 35 L38 18" />
+                </svg>` : `<div class="ritual-fail">!</div>`}
+ 
+                <div class="ritual-title">${title}</div>
+ 
+                ${sub ? `<div class="ritual-sub">${sub}</div>` : ""}
+ 
+                <div class="ritual-actions">
+ 
+                    ${share ? `<button type="button" class="ritual-btn ghost" data-act="share">Поделиться</button>` : ""}
+ 
+                    <button type="button" class="ritual-btn" data-act="ok">Готово</button>
+ 
+                </div>
+ 
+            `
+ 
+            done.hidden = false
+ 
+            requestAnimationFrame(() => done.classList.add("in"))
+ 
+            done.querySelector('[data-act="ok"]').addEventListener("click", () => {
+ 
+                box.classList.remove("show")
+ 
+                setTimeout(() => box.remove(), 320)
+ 
+            })
+ 
+            const sb = done.querySelector('[data-act="share"]')
+ 
+            if (sb) sb.addEventListener("click", () => shareSaved(saved, blob, fileName))
+ 
+        },
+ 
+        fail() {
+ 
+            box.classList.remove("show")
+ 
+            setTimeout(() => box.remove(), 320)
+ 
+        },
+ 
+    }
+ 
+}
+ 
+async function downloadRecordImage(record) {
+ 
+    const ui = openRitual()
+ 
+    try {
+ 
+        const blob = await renderRecordImage(record, (st, canvas, marks) => ui.stage(st, canvas, marks))
+ 
+        const fileName = recordFileName(record)
+ 
+        ui.saving(window.TarotNative ? "Сохраняем файл в галерее…" : RITUAL_STEPS[6])
+ 
+        const [saved] = await Promise.all([saveBlobAnywhere(blob, fileName), sleep(700)])
+ 
+        await ui.finish(saved, blob, fileName)
+ 
+    }
+ 
+    catch (e) {
+ 
+        console.error(e)
+ 
+        ui.fail()
+ 
+        showToast("Не удалось создать картинку")
+ 
+    }
+ 
+}
+ 
+ 
+ 
 // ==========================================
 // Настройки
 // ==========================================
-
-
+ 
+ 
 const APP_INFO = {
-
+ 
     name: "Tarot Oracle",
-
+ 
     version: "1.0.0",
-
+ 
     description: "Приложение для гаданий на картах Таро: расклады, карта дня и толкования.",
-
+ 
 }
-
+ 
 function showSettings() {
-
-
+ 
+ 
     result.innerHTML = `
  
  
@@ -5189,207 +5583,207 @@ function showSettings() {
  
  
     `
-
-
-
+ 
+ 
+ 
     result.querySelectorAll(".settings-option[data-setting]").forEach(btn => {
-
+ 
         btn.onclick = async () => {
-
+ 
             const key =
                 btn.dataset.setting
-
-
-
+ 
+ 
+ 
             const value =
                 btn.dataset.value
-
-
-
+ 
+ 
+ 
             appSettings[key] = value
-
-
-
+ 
+ 
+ 
             try {
-
+ 
                 await UpdateSetting(key, value)
-
-
+ 
+ 
                 if (key === "deckMode") {
-
+ 
                     showToast("Колода обновлена")
-
+ 
                 }
-
-
-
+ 
+ 
+ 
                 showSettings()
-
-
-
+ 
+ 
+ 
             }
-
+ 
             catch (e) {
-
+ 
                 console.error(e)
-
+ 
             }
-
+ 
         }
-
+ 
     })
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#open-about")
         .onclick = () => {
-
+ 
             showInfoModal(
-
+ 
                 APP_INFO.name,
-
+ 
                 `Версия ${APP_INFO.version}<br><br>${APP_INFO.description}`
-
+ 
             )
-
+ 
         }
-
+ 
     document
         .querySelector("#open-guide")
         .onclick = () => {
-
+ 
             showGuideScreen(
                 "✦ Руководство пользователя ✦",
                 GetGuide
             )
-
+ 
         }
-
+ 
     document
         .querySelector("#open-about-tarot")
         .onclick = () => {
-
+ 
             showGuideScreen(
                 "✦ О картах Таро ✦",
                 GetAboutTarot
             )
-
+ 
         }
-
+ 
     document
         .querySelector("#open-privacy")
         .onclick = async () => {
-
+ 
             try {
-
+ 
                 const legal =
                     await GetLegal()
-
-
-
+ 
+ 
+ 
                 const section =
                     legal?.privacy
-
-
-
+ 
+ 
+ 
                 if (!section) {
-
+ 
                     showInfoModal("Политика конфиденциальности", "Текст пока недоступен.")
-
-
-
+ 
+ 
+ 
                     return
-
+ 
                 }
-
-
-
+ 
+ 
+ 
                 showInfoModal(
-
+ 
                     section.title,
-
+ 
                     section.paragraphs.map(p => `<p>${p}</p>`).join("")
-
+ 
                 )
-
-
+ 
+ 
             }
-
+ 
             catch (e) {
-
+ 
                 console.error(e)
-
+ 
             }
-
+ 
         }
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#open-terms")
         .onclick = async () => {
-
+ 
             try {
-
+ 
                 const legal =
                     await GetLegal()
-
-
-
+ 
+ 
+ 
                 const section =
                     legal?.terms
-
-
-
+ 
+ 
+ 
                 if (!section) {
-
+ 
                     showInfoModal("Условия использования", "Текст пока недоступен.")
-
-
-
+ 
+ 
+ 
                     return
-
+ 
                 }
-
-
-
+ 
+ 
+ 
                 showInfoModal(
-
+ 
                     section.title,
-
+ 
                     section.paragraphs.map(p => `<p>${p}</p>`).join("")
-
+ 
                 )
-
-
+ 
+ 
             }
-
+ 
             catch (e) {
-
+ 
                 console.error(e)
-
+ 
             }
-
+ 
         }
-
-
+ 
+ 
 }
-
-
-
+ 
+ 
+ 
 function showInfoModal(title, html) {
-
+ 
     const modal =
         document.querySelector("#card-modal")
-
-
-
+ 
+ 
+ 
     const content =
         document.querySelector("#modal-content")
-
-
-
+ 
+ 
+ 
     content.innerHTML = `
  
  
@@ -5409,75 +5803,75 @@ function showInfoModal(title, html) {
  
  
     `
-
+ 
     modal.classList.remove("hidden")
-
-
-
+ 
+ 
+ 
     modal.classList.remove("opening")
-
+ 
     modal.classList.remove("closing")
-
-
-
+ 
+ 
+ 
     requestAnimationFrame(() => {
-
+ 
         requestAnimationFrame(() => {
-
+ 
             modal.classList.add("opening")
-
+ 
         })
-
+ 
     })
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#modal-close")
         .onclick = closeCardModal
-
+ 
 }
-
-
-
+ 
+ 
+ 
 // ==========================================
 // Очистка сцены
 // ==========================================
-
-
+ 
+ 
 function clearScene() {
-
+ 
     showWelcomeDeck()
-
+ 
 }
-
+ 
 // ==========================================
 // Колода
 // ==========================================
-
+ 
 document
     .querySelector("#deck-info")
     .onclick = () => {
-
+ 
         if (activeButton === document.querySelector("#deck-info")) {
-
+ 
             return
-
+ 
         }
-
-
-
+ 
+ 
+ 
         setActive(
             document.querySelector("#deck-info")
         )
-
+ 
         showDeckScreen()
-
+ 
     }
-
-
+ 
+ 
 function cardGridItemHTML(card, isReversed) {
-
+ 
     return `
  
         <div class="deck-card-item">
@@ -5497,12 +5891,12 @@ function cardGridItemHTML(card, isReversed) {
         </div>
  
     `
-
+ 
 }
-
+ 
 async function showDeckScreen() {
-
-
+ 
+ 
     result.innerHTML = `
  
         <div class="deck-screen">
@@ -5575,108 +5969,108 @@ async function showDeckScreen() {
         </div>
  
     `
-
-
-
+ 
+ 
+ 
     result.querySelectorAll(".tab-btn[data-tab-group='deck']").forEach(btn => {
-
+ 
         btn.onclick = () => {
-
+ 
             result.querySelectorAll(".tab-btn[data-tab-group='deck']")
                 .forEach(b => b.classList.remove("active"))
-
-
-
+ 
+ 
+ 
             btn.classList.add("active")
-
-
-
+ 
+ 
+ 
             result.querySelectorAll(".tab-panel-deck[data-tab-group='deck']")
                 .forEach(p => p.classList.remove("active"))
-
-
-
+ 
+ 
+ 
             result.querySelector(
                 `.tab-panel-deck[data-tab-group='deck'][data-tab-panel="${btn.dataset.tabKey}"]`
             ).classList.add("active")
-
+ 
         }
-
+ 
     })
-
-
-
+ 
+ 
+ 
     const groupLabels = {
-
+ 
         major: "Старшие арканы",
-
+ 
         wands: "Жезлы",
-
+ 
         cups: "Кубки",
-
+ 
         swords: "Мечи",
-
+ 
         pentacles: "Пентакли",
-
+ 
     }
-
-
-
+ 
+ 
+ 
     const groupKeys =
         Object.keys(groupLabels)
-
-
-
+ 
+ 
+ 
     function groupCards(cards) {
-
+ 
         const grouped = {
-
+ 
             major: [],
-
+ 
             wands: [],
-
+ 
             cups: [],
-
+ 
             swords: [],
-
+ 
             pentacles: [],
-
+ 
         }
-
-
-
+ 
+ 
+ 
         cards.forEach(card => {
-
+ 
             const key =
                 card.arcana === "major"
                     ? "major"
                     : card.suit
-
-
-
+ 
+ 
+ 
             if (grouped[key]) {
-
+ 
                 grouped[key].push(card)
-
+ 
             }
-
+ 
         })
-
-
-
+ 
+ 
+ 
         return grouped
-
+ 
     }
-
-
-
+ 
+ 
+ 
     function renderGroupedPanel(panelSelector, subtabPrefix, grouped, onCardClick) {
-
+ 
         const panel =
             result.querySelector(panelSelector)
-
-
-
+ 
+ 
+ 
         panel.innerHTML = `
  
             <div class="deck-subtabs">
@@ -5732,67 +6126,67 @@ async function showDeckScreen() {
             </div>
  
         `
-
-
-
+ 
+ 
+ 
         panel.querySelectorAll(`.tab-btn[data-tab-group='${subtabPrefix}']`).forEach(btn => {
-
+ 
             btn.onclick = () => {
-
+ 
                 panel.querySelectorAll(`.tab-btn[data-tab-group='${subtabPrefix}']`)
                     .forEach(b => b.classList.remove("active"))
-
-
-
+ 
+ 
+ 
                 btn.classList.add("active")
-
-
-
+ 
+ 
+ 
                 panel.querySelectorAll(`.tab-panel-suit[data-tab-group='${subtabPrefix}']`)
                     .forEach(p => p.classList.remove("active"))
-
-
-
+ 
+ 
+ 
                 panel.querySelector(
                     `.tab-panel-suit[data-tab-group='${subtabPrefix}'][data-tab-panel="${btn.dataset.tabKey}"]`
                 ).classList.add("active")
-
+ 
             }
-
+ 
         })
 
-
-
+ 
+ 
         groupKeys.forEach(key => {
-
+ 
             panel
                 .querySelector(`.tab-panel-suit[data-tab-panel="${key}"]`)
                 .querySelectorAll(".deck-card-item")
                 .forEach((el, i) => {
-
+ 
                     el.onclick = () => onCardClick(grouped[key][i])
-
+ 
                 })
-
+ 
         })
-
+ 
     }
-
-
+ 
+ 
     try {
-
+ 
         const remaining =
             await RemainingCardsList()
-
-
-
+ 
+ 
+ 
         document.querySelector("#remaining-total-count").textContent =
             remaining ? remaining.length : 0
-
-
-
+ 
+ 
+ 
         if (!remaining || remaining.length === 0) {
-
+ 
             result.querySelector(
                 '.tab-panel-deck[data-tab-panel="remaining"]'
             ).innerHTML = `
@@ -5800,101 +6194,101 @@ async function showDeckScreen() {
             <p class="deck-empty-text">Колода пуста</p>
  
         `
-
+ 
         }
-
+ 
         else {
-
+ 
             renderGroupedPanel(
-
+ 
                 '.tab-panel-deck[data-tab-panel="remaining"]',
-
+ 
                 "deck-suit-remaining",
-
+ 
                 groupCards(remaining),
-
+ 
                 card => openCardModal({
-
+ 
                     card,
-
+ 
                     isReversed: false,
-
+ 
                     quickAnswer: "",
-
+ 
                 })
             )
-
+ 
         }
-
+ 
     }
-
+ 
     catch (e) {
-
+ 
         console.error(e)
-
+ 
     }
-
-
+ 
+ 
     try {
-
+ 
         const full =
             await FullDeck()
-
-
-
+ 
+ 
+ 
         document.querySelector("#full-total-count").textContent =
             full.length
-
-
-
+ 
+ 
+ 
         renderGroupedPanel(
-
+ 
             '.tab-panel-deck[data-tab-panel="full"]',
-
+ 
             "deck-suit-full",
-
+ 
             groupCards(full),
-
+ 
             card => openCardModal({
-
+ 
                 card,
-
+ 
                 isReversed: false,
-
+ 
                 quickAnswer: "",
-
+ 
             })
         )
-
+ 
     }
-
+ 
     catch (e) {
-
+ 
         console.error(e)
-
+ 
     }
-
-
+ 
+ 
 }
-
-
+ 
+ 
 // ==========================================
 // Руководство пользователя
 // ==========================================
-
+ 
 async function showGuideScreen(title, fetchFn) {
-
-
+ 
+ 
     const screenTitle =
         title || "✦ Руководство пользователя ✦"
-
-
-
+ 
+ 
+ 
     const loader =
         fetchFn || GetGuide
-
-
-
+ 
+ 
+ 
     result.innerHTML = `
  
         <div class="guide-screen">
@@ -5926,51 +6320,51 @@ async function showGuideScreen(title, fetchFn) {
         </div>
  
     `
-
-
-
+ 
+ 
+ 
     document
         .querySelector("#back-from-guide")
         .onclick = () => {
-
+ 
             setActive(
                 document.querySelector("#settings")
             )
-
+ 
             showSettings()
-
+ 
         }
-
-
-
+ 
+ 
+ 
     try {
-
+ 
         const sections =
             await loader()
-
-
-
+ 
+ 
+ 
         const contentEl =
             document.querySelector("#guide-content")
-
-
-
+ 
+ 
+ 
         if (!sections || sections.length === 0) {
-
+ 
             contentEl.innerHTML = `
  
                 <p class="deck-empty-text">Раздел пока недоступен</p>
  
             `
-
-
-
+ 
+ 
+ 
             return
-
+ 
         }
-
-
-
+ 
+ 
+ 
         contentEl.innerHTML =
             sections.map(section => `
  
@@ -5995,20 +6389,20 @@ async function showGuideScreen(title, fetchFn) {
                 </div>
  
             `).join("")
-
-
+ 
+ 
     }
-
+ 
     catch (e) {
-
+ 
         console.error(e)
-
+ 
     }
-
-
+ 
+ 
 }
-
-
+ 
+ 
 // ==========================================
 // В будущем
 // ==========================================
@@ -6017,4 +6411,5 @@ async function showGuideScreen(title, fetchFn) {
 // Избранные карты
 // Звуки
 // Анимация переворота
-// Полн
+// Полноэкранный режим
+//

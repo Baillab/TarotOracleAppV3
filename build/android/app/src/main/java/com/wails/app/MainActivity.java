@@ -2,6 +2,7 @@ package com.wails.app;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -238,6 +239,31 @@ public class MainActivity extends AppCompatActivity {
                 return "error:android < 10 not supported";
             } catch (Exception e) {
                 Log.e(TAG, "saveImage failed", e);
+                return "error:" + e.getMessage();
+            }
+        }
+
+        /** Share an already saved image (content:// uri returned by saveImage). */
+        @JavascriptInterface
+        public String shareImage(final String uriStr) {
+            try {
+                final Uri uri = Uri.parse(uriStr);
+                runOnUiThread(() -> {
+                    try {
+                        Intent send = new Intent(Intent.ACTION_SEND);
+                        send.setType("image/png");
+                        send.putExtra(Intent.EXTRA_STREAM, uri);
+                        send.setClipData(ClipData.newRawUri("", uri));
+                        send.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        Intent chooser = Intent.createChooser(send, "Поделиться");
+                        chooser.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        startActivity(chooser);
+                    } catch (Exception e) {
+                        Log.e(TAG, "shareImage failed", e);
+                    }
+                });
+                return "ok";
+            } catch (Exception e) {
                 return "error:" + e.getMessage();
             }
         }

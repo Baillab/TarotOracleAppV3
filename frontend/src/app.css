@@ -2997,6 +2997,7 @@ body {
 
 @keyframes modalAppear {
 
+
     from {
 
 
@@ -4096,6 +4097,7 @@ body {
 
 
     font-size: 13px;
+
 
 
     font-style: italic;
@@ -7180,4 +7182,249 @@ body[data-bg="classic"] {
 
     margin: 0 0 0 8px;
 
+}
+
+
+/* ---------- Ритуал сохранения картинки ---------- */
+
+.ritual {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: env(safe-area-inset-top, 0px) 16px env(safe-area-inset-bottom, 0px);
+    background: radial-gradient(ellipse at 50% 30%, rgba(52, 36, 84, .92), rgba(8, 5, 14, .96) 70%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity .45s ease;
+    touch-action: manipulation;
+}
+
+.ritual.show {
+    opacity: 1;
+}
+
+.ritual-stage {
+    position: relative;
+    width: min(78vw, 340px);
+    height: min(56vh, 520px);
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 0 0 1px rgba(226, 185, 79, .35), 0 0 46px rgba(226, 185, 79, .22);
+    background: #09070d;
+    transform: scale(.94);
+    transition: transform .6s ease, filter .6s ease;
+}
+
+.ritual.show .ritual-stage {
+    transform: scale(1);
+}
+
+.ritual-slot {
+    width: 100%;
+    transition: transform 1s cubic-bezier(.4, 0, .2, 1);
+}
+
+.ritual-canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.ritual-canvas.pulse {
+    animation: ritualPulse .7s ease;
+}
+
+@keyframes ritualPulse {
+    0% {
+        filter: brightness(1.55) saturate(1.3);
+    }
+
+    100% {
+        filter: none;
+    }
+}
+
+.ritual-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: min(78vw, 340px);
+    transition: opacity .35s ease;
+}
+
+.ritual-spinner {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid rgba(226, 185, 79, .2);
+    border-top-color: #e2b94f;
+    animation: ritualSpin .9s linear infinite;
+}
+
+@keyframes ritualSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ritual-bar {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(226, 185, 79, .15);
+    overflow: hidden;
+}
+
+.ritual-bar i {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #b88a2c, #f2deb0);
+    transition: width .6s ease;
+}
+
+.ritual-label {
+    min-height: 20px;
+    color: #f2deb0;
+    font-size: 14px;
+    letter-spacing: .3px;
+    text-align: center;
+    opacity: 0;
+}
+
+.ritual-label.in {
+    animation: ritualLabel .5s ease forwards;
+}
+
+@keyframes ritualLabel {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* завершение: картинка остаётся фоном, поверх — галочка и кнопки */
+
+.ritual.done .ritual-status {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ritual.done .ritual-stage {
+    filter: brightness(.32) blur(1.5px);
+}
+
+.ritual-done {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 24px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.ritual-done[hidden] {
+    display: none;
+}
+
+.ritual-done.in {
+    opacity: 1;
+}
+
+.ritual-check {
+    width: 76px;
+    height: 76px;
+    fill: none;
+    stroke: #e2b94f;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 10px rgba(226, 185, 79, .6));
+}
+
+.ritual-check circle {
+    stroke-dasharray: 145;
+    stroke-dashoffset: 145;
+    animation: ritualDraw .7s ease .1s forwards;
+}
+
+.ritual-check path {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: ritualDraw .45s ease .65s forwards;
+}
+
+@keyframes ritualDraw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.ritual-fail {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #dc5a5a;
+    color: #ff9a9a;
+    font-size: 36px;
+    line-height: 58px;
+    font-weight: 700;
+}
+
+.ritual-title {
+    color: #f6e7bd;
+    font-size: 20px;
+    font-weight: 600;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .7);
+    animation: ritualLabel .6s ease .9s both;
+}
+
+.ritual-sub {
+    color: #b4a8cc;
+    font-size: 13px;
+    animation: ritualLabel .6s ease 1.05s both;
+}
+
+.ritual-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(70vw, 260px);
+    margin-top: 14px;
+    animation: ritualLabel .6s ease 1.2s both;
+}
+
+.ritual-btn {
+    height: 44px;
+    border-radius: 22px;
+    border: 1px solid rgba(226, 185, 79, .7);
+    background: linear-gradient(180deg, #e2b94f, #b88a2c);
+    color: #1b1226;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.ritual-btn.ghost {
+    background: rgba(226, 185, 79, .12);
+    color: #f2deb0;
 }
