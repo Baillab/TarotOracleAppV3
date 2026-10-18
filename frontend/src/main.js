@@ -1,5 +1,6 @@
 
 import './app.css'
+import overviewTexts from './overview.json'
 
 import {
     DrawCard,
@@ -2008,7 +2009,7 @@ function showWelcomeDeck() {
  
  
             </div>
-
+ 
  
  
             <h2 class="welcome-title">
@@ -3106,6 +3107,120 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 
 
 
+// ==========================================
+// Общая картина расклада (встроенный разбор по правилам)
+// Тексты фраз — в overview.json
+// ==========================================
+function ovFill(tpl, vars) {
+    return tpl.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : ""))
+}
+
+function overviewData(items) {
+    if (!items || items.length < 3) return null
+
+    const T = overviewTexts
+    const n = items.length
+    const majors = items.filter(i => i.card.arcana === "major")
+    const minors = items.filter(i => i.card.arcana !== "major")
+    const reversed = items.filter(i => i.isReversed)
+    const suitCount = { wands: 0, cups: 0, swords: 0, pentacles: 0 }
+    minors.forEach(i => { if (suitCount[i.card.suit] !== undefined) suitCount[i.card.suit]++ })
+
+    const courts = minors.filter(i => i.card.number >= 11)
+    const aces = minors.filter(i => i.card.number === 1)
+    const tens = minors.filter(i => i.card.number === 10)
+
+    const lines = []
+    const add = (tpl, vars) => lines.push(ovFill(tpl, vars))
+
+    // 1. Старшие арканы — масштаб вопроса
+    if (majors.length === 0) add(T.majors.none, {})
+    else if (majors.length / n >= 0.5) add(T.majors.many, { n: majors.length, total: n })
+    else if (majors.length === 1) add(T.majors.one, { card: majors[0].card.name })
+    else add(T.majors.some, { n: majors.length, total: n })
+
+    // 2. Масти
+    const ranked = Object.entries(suitCount).sort((a, b) => b[1] - a[1])
+    const [topSuit, topCnt] = ranked[0]
+    const second = ranked[1][1]
+    if (minors.length >= 3 && topCnt >= 2 && topCnt > second) {
+        add(T.suit.dominant, { suit: T.suits[topSuit].name, n: topCnt, theme: T.suits[topSuit].theme })
+    } else if (minors.length >= 4 && topCnt === second && topCnt >= 2) {
+        const tie = ranked.filter(r => r[1] === topCnt).map(r => T.suits[r[0]].name)
+        add(T.suit.tie, { suits: tie.join(" и ") })
+    }
+    if (n >= 5 && minors.length >= 4) {
+        const lacking = ranked.filter(r => r[1] === 0).map(r => r[0])
+        if (lacking.length === 1) {
+            add(T.suit.lacking, { suit_gen: T.suits[lacking[0]].gen, lack: T.suits[lacking[0]].lack })
+        }
+    }
+
+    // 3. Перевёрнутые
+    const rr = reversed.length / n
+    const rv = { n: reversed.length, total: n }
+    if (reversed.length === 0) add(T.reversed.none, rv)
+    else if (rr >= 0.6) add(T.reversed.many, rv)
+    else if (rr <= 0.25) add(T.reversed.few, rv)
+    else add(T.reversed.mixed, rv)
+
+    // 4. Люди, начала, завершения
+    if (courts.length >= 2) add(T.courts.many, { n: courts.length, cards: courts.map(i => i.card.name).join(", ") })
+    else if (courts.length === 1) add(T.courts.one, { card: courts[0].card.name })
+    if (aces.length > 1) add(T.aces.many, {})
+    else if (aces.length === 1) add(T.aces.one, { card: aces[0].card.name })
+    if (tens.length > 1) add(T.tens.many, {})
+    else if (tens.length === 1) add(T.tens.one, { card: tens[0].card.name })
+
+    // 5. Итоговая карта
+    const last = items[n - 1]
+    const kw = (last.card.keywords && last.card.keywords.length)
+        ? last.card.keywords.slice(0, 3).join(", ")
+        : ""
+    const lm = last.isReversed ? last.card.reversed : last.card.upright
+    const finalName = `${last.card.name}${last.isReversed ? " (" + T.final.reversed + ")" : ""}`
+    const posName = last.position && last.position.name ? `«${last.position.name}»` : T.final.label
+
+    const chips = [
+        ovFill(T.chips.majors, { n: majors.length }),
+        ...Object.entries(suitCount).filter(r => r[1] > 0).map(r => `${T.suits[r[0]].name}: ${r[1]}`),
+        ovFill(T.chips.reversed, { n: reversed.length }),
+    ]
+
+    return {
+        title: T.title,
+        note: T.note,
+        chips,
+        lines,
+        posName,
+        finalName,
+        kw,
+        advice: lm && lm.advice ? lm.advice : "",
+    }
+}
+
+function buildOverview(items) {
+    const o = overviewData(items)
+    if (!o) return ""
+
+    return `
+        <div class="interpretation-item overview">
+            <div class="interpretation-position">${o.title}</div>
+            <div class="overview-chips">
+                ${o.chips.map(c => `<span>${c}</span>`).join("")}
+            </div>
+            <ul class="overview-list">
+                ${o.lines.map(l => `<li>${l}</li>`).join("")}
+            </ul>
+            <div class="overview-final">
+                <b>${o.posName}:</b> ${o.finalName}${o.kw ? ` — ${o.kw}` : ""}.
+                ${o.advice ? `<div class="interpretation-advice">${o.advice}</div>` : ""}
+            </div>
+            <div class="overview-note">${o.note}</div>
+        </div>
+    `
+}
+
 function renderSpread(data, question) {
 
     let currentComment = ""
@@ -3460,6 +3575,7 @@ function renderSpread(data, question) {
 
 
     const interpretationHTML =
+        buildOverview(data.cards) +
         data.cards.map(item => {
 
             const m =
@@ -3506,6 +3622,7 @@ function renderSpread(data, question) {
 
     const commentBtn =
         result.querySelector(".comment-icon-btn")
+
 
 
     if (commentBtn) {
@@ -4271,6 +4388,8 @@ async function renderRecordImage(record, onStage) {
         record.quickAnswer ||
         (record.type !== "spread" && items[0] ? items[0].quickAnswer : "")
 
+    const ov = spreadDef ? overviewData(items) : null
+
     const layout =
         spreadDef && items.length > 1
             ? exportSpreadLayout(spreadDef, items, W - 2 * PAD, ratio)
@@ -4577,6 +4696,76 @@ async function renderRecordImage(record, onStage) {
         // ---- толкование ----
 
         marks.interp = y
+
+        if (ov) {
+
+            text(ov.title, PAD, y + 34, `700 38px ${FONT}`, GOLD)
+
+            y += 64
+
+            const TX = PAD + 30
+
+            const ops = []
+
+            let oy = 20
+
+            const put = (str, font, color, lh, x, maxW) => {
+
+                ctx.font = font
+
+                exportWrap(ctx, str, maxW).forEach((ln, k) => ops.push({ ln, font, color, x, y: oy + lh * (k + 0.8) }))
+
+                oy += exportWrap(ctx, str, maxW).length * lh
+
+            }
+
+            put(ov.chips.join("  ·  "), `600 25px ${FONT}`, MUTED, 34, TX, innerW - 60)
+
+            oy += 12
+
+            ov.lines.forEach(l => {
+
+                ctx.font = `400 29px ${FONT}`
+
+                const wl = exportWrap(ctx, l, innerW - 56 - 34)
+
+                ops.push({ ln: "•", font: `700 29px ${FONT}`, color: GOLD, x: TX, y: oy + 41 * 0.8 })
+
+                wl.forEach((ln, k) => ops.push({ ln, font: `400 29px ${FONT}`, color: TEXT, x: TX + 34, y: oy + 41 * (k + 0.8) }))
+
+                oy += wl.length * 41 + 6
+
+            })
+
+            oy += 8
+
+            put(`${ov.posName}: ${ov.finalName}${ov.kw ? " — " + ov.kw : ""}.`, `700 30px ${FONT}`, GOLD, 40, TX, innerW - 60)
+
+            if (ov.advice) put(ov.advice, `italic 400 28px ${FONT}`, TEXT, 38, TX, innerW - 60)
+
+            const oh = oy + 18
+
+            if (draw) {
+
+                exportRoundRect(ctx, PAD, y, innerW, oh, 18)
+
+                ctx.fillStyle = "rgba(255,255,255,.055)"
+
+                ctx.fill()
+
+                ctx.fillStyle = "rgba(226,185,79,.8)"
+
+                exportRoundRect(ctx, PAD, y, 7, oh, 3)
+
+                ctx.fill()
+
+            }
+
+            ops.forEach(o => text(o.ln, o.x, y + o.y, o.font, o.color))
+
+            y += oh + 22
+
+        }
 
         text("Толкование", PAD, y + 34, `700 38px ${FONT}`, GOLD)
 
@@ -5036,6 +5225,7 @@ async function saveBlobAnywhere(blob, fileName) {
         document.body.appendChild(a)
 
         a.click()
+
         a.remove()
 
         setTimeout(() => URL.revokeObjectURL(url), 4000)
@@ -5760,7 +5950,6 @@ function showSettings() {
                 }
 
 
-
                 showSettings()
 
 
@@ -6126,6 +6315,7 @@ async function showDeckScreen() {
 
 
             btn.classList.add("active")
+
 
 
             result.querySelectorAll(".tab-panel-deck[data-tab-group='deck']")

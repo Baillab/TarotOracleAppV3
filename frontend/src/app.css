@@ -1497,10 +1497,6 @@ body {
 
 
 
-
-
-
-
 /* =====================================================
    Ключевые слова
 ===================================================== */
@@ -2004,6 +2000,7 @@ body {
             rgba(45, 31, 62, .98),
 
             rgba(21, 14, 30, .98));
+
 
 
 
@@ -3523,6 +3520,7 @@ body {
 
 .history-header {
 
+
     display: flex;
 
 
@@ -4519,7 +4517,6 @@ body {
 
 }
 
-
 /* =====================================================
    Экран "Колода"
 ===================================================== */
@@ -4998,6 +4995,7 @@ body {
 
 
     color: #e8dcc8;
+
 
 
     font-size: 14px;
@@ -7525,4 +7523,47 @@ body[data-bg="classic"] {
 .ritual.done .ritual-head {
     opacity: 0;
     transition: opacity .4s ease;
+}
+
+
+/* Общая картина расклада */
+.overview-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 7px 0 4px;
+}
+
+.overview-chips span {
+    font-size: 11px;
+    color: #5c4a30;
+    border: 1px solid rgba(92, 61, 31, .35);
+    border-radius: 10px;
+    padding: 2px 8px;
+}
+
+.overview-list {
+    margin: 6px 0 0;
+    padding-left: 18px;
+    color: #4a3520;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.overview-list li {
+    margin-bottom: 4px;
+}
+
+.overview-final {
+    margin-top: 8px;
+    color: #4a3520;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.overview-note {
+    margin-top: 8px;
+    color: #8a7355;
+    font-size: 11px;
+    font-style: italic;
 }
