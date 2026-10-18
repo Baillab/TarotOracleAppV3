@@ -1,4 +1,3 @@
-
 package com.wails.app;
 
 import android.annotation.SuppressLint;
@@ -113,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
         webView = findViewById(R.id.webview);
         bridge.setWebView(webView);
 
+        // never show a white frame while the page is (re)loading
+        webView.setBackgroundColor(0xFF0B0812);
+        getWindow().getDecorView().setBackgroundColor(0xFF0B0812);
+
         // Configure WebView settings
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -201,8 +204,9 @@ public class MainActivity extends AppCompatActivity {
                 if (DEBUG)
                     Log.d(TAG, "Page loaded: " + url);
                 bridge.onPageFinished(url);
-                // fade the cover out once the fresh page has had time to paint
-                view.postDelayed(() -> hideResetCover(), 350);
+                // fade the cover out once the app reports its first screen is painted
+                // (appReady)
+                view.postDelayed(() -> hideResetCover(), 1800); // fallback; normally JS calls appReady() sooner
                 // Now that JS listeners are mounted, push a snapshot of the
                 // current battery / network / theme so the UI starts populated.
                 emitSystemSnapshot();
@@ -252,6 +256,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "saveImage failed", e);
                 return "error:" + e.getMessage();
             }
+        }
+
+        /** JS calls this when the start screen is painted: remove the dark cover. */
+        @JavascriptInterface
+        public void appReady() {
+            runOnUiThread(() -> hideResetCover());
         }
 
         /** Share an already saved image (content:// uri returned by saveImage). */

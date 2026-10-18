@@ -1,4 +1,3 @@
-
 import './app.css'
 import overviewTexts from './overview.json'
 
@@ -1603,7 +1602,6 @@ document
     })
 
 
-
 // Пока на сцене расклад, сцена занимает весь экран, а верхняя строка
 // и нижняя панель — полупрозрачные поверх неё (класс spread-mode).
 // Высоты панелей и заголовок режима обновляем здесь.
@@ -1741,7 +1739,10 @@ loadSpreads()
 
 showWelcomeDeck()
 
-
+// сообщаем Android, что стартовый экран нарисован (убрать тёмную заслонку)
+requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(() => {
+    try { window.TarotNative && window.TarotNative.appReady && window.TarotNative.appReady() } catch (e) { }
+}, 120)))
 
 initSettings()
 
@@ -3172,14 +3173,12 @@ function overviewData(items) {
     if (tens.length > 1) add(T.tens.many, {})
     else if (tens.length === 1) add(T.tens.one, { card: tens[0].card.name })
 
-    // 5. Итоговая карта
-    const last = items[n - 1]
-    const kw = (last.card.keywords && last.card.keywords.length)
-        ? last.card.keywords.slice(0, 3).join(", ")
-        : ""
-    const lm = last.isReversed ? last.card.reversed : last.card.upright
-    const finalName = `${last.card.name}${last.isReversed ? " (" + T.final.reversed + ")" : ""}`
-    const posName = last.position && last.position.name ? `«${last.position.name}»` : T.final.label
+    // 5. Совет расклада — общий вектор (темп + фокус), без пересказа отдельных карт
+    const tempo = reversed.length === 0 || rr <= 0.25 ? "open" : rr >= 0.6 ? "slow" : "mixed"
+    let focus = "balanced"
+    if (minors.length >= 2 && topCnt >= 2 && topCnt > second) focus = topSuit
+    else if (majors.length / n >= 0.5) focus = "majors"
+    const advice = `${T.advice.tempo[tempo]} ${T.advice.focus[focus]}`
 
     const chips = [
         ovFill(T.chips.majors, { n: majors.length }),
@@ -3189,13 +3188,10 @@ function overviewData(items) {
 
     return {
         title: T.title,
-        note: T.note,
         chips,
         lines,
-        posName,
-        finalName,
-        kw,
-        advice: lm && lm.advice ? lm.advice : "",
+        adviceTitle: T.advice.title,
+        advice,
     }
 }
 
@@ -3213,10 +3209,8 @@ function buildOverview(items) {
                 ${o.lines.map(l => `<li>${l}</li>`).join("")}
             </ul>
             <div class="overview-final">
-                <b>${o.posName}:</b> ${o.finalName}${o.kw ? ` — ${o.kw}` : ""}.
-                ${o.advice ? `<div class="interpretation-advice">${o.advice}</div>` : ""}
+                <b>${o.adviceTitle}.</b> ${o.advice}
             </div>
-            <div class="overview-note">${o.note}</div>
         </div>
     `
 }
@@ -4739,9 +4733,7 @@ async function renderRecordImage(record, onStage) {
 
             oy += 8
 
-            put(`${ov.posName}: ${ov.finalName}${ov.kw ? " — " + ov.kw : ""}.`, `700 30px ${FONT}`, GOLD, 40, TX, innerW - 60)
-
-            if (ov.advice) put(ov.advice, `italic 400 28px ${FONT}`, TEXT, 38, TX, innerW - 60)
+            put(`${ov.adviceTitle}. ${ov.advice}`, `italic 600 29px ${FONT}`, GOLD, 40, TX, innerW - 60)
 
             const oh = oy + 18
 
@@ -5948,6 +5940,7 @@ function showSettings() {
                     showToast("Колода обновлена")
 
                 }
+
 
 
                 showSettings()
