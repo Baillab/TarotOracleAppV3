@@ -1,3 +1,4 @@
+
 package com.wails.app;
 
 import android.annotation.SuppressLint;
@@ -25,6 +26,8 @@ import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -198,8 +201,8 @@ public class MainActivity extends AppCompatActivity {
                 if (DEBUG)
                     Log.d(TAG, "Page loaded: " + url);
                 bridge.onPageFinished(url);
-                // reveal the page (after a short delay so the first frame is painted)
-                view.postDelayed(() -> view.setVisibility(View.VISIBLE), 200);
+                // fade the cover out once the fresh page has had time to paint
+                view.postDelayed(() -> hideResetCover(), 350);
                 // Now that JS listeners are mounted, push a snapshot of the
                 // current battery / network / theme so the UI starts populated.
                 emitSystemSnapshot();
@@ -275,6 +278,39 @@ public class MainActivity extends AppCompatActivity {
                 return "error:" + e.getMessage();
             }
         }
+    }
+
+    // ---- Dark cover shown while the app restarts after a long absence ----
+    private View resetCover;
+
+    private void showResetCover() {
+        hideResetCoverNow();
+        resetCover = new View(this);
+        resetCover.setBackgroundColor(0xFF0B0812);
+        ((ViewGroup) findViewById(android.R.id.content)).addView(resetCover,
+                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+        // safety net: never leave the cover on screen
+        resetCover.postDelayed(() -> hideResetCover(), 4000);
+    }
+
+    private void hideResetCover() {
+        final View c = resetCover;
+        if (c == null)
+            return;
+        resetCover = null;
+        c.animate().alpha(0f).setDuration(250).withEndAction(() -> {
+            ViewGroup parent = (ViewGroup) c.getParent();
+            if (parent != null)
+                parent.removeView(c);
+        }).start();
+    }
+
+    private void hideResetCoverNow() {
+        View c = resetCover;
+        resetCover = null;
+        if (c != null && c.getParent() != null)
+            ((ViewGroup) c.getParent()).removeView(c);
     }
 
     private void loadApplication() {
@@ -889,9 +925,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if (stoppedAtMs > 0 && webView != null
                 && System.currentTimeMillis() - stoppedAtMs > AWAY_RESET_MINUTES * 60_000L) {
-            // hide the stale screen until the fresh page has loaded
-            findViewById(android.R.id.content).setBackgroundColor(0xFF0B0812);
-            webView.setVisibility(View.INVISIBLE);
+            // cover the stale screen with a dark layer while the fresh page loads
+            showResetCover();
             loadApplication();
         }
         stoppedAtMs = 0;
