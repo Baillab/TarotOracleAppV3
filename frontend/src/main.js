@@ -2008,7 +2008,7 @@ function showWelcomeDeck() {
  
  
             </div>
- 
+
  
  
             <h2 class="welcome-title">
@@ -3506,7 +3506,6 @@ function renderSpread(data, question) {
 
     const commentBtn =
         result.querySelector(".comment-icon-btn")
-
 
 
     if (commentBtn) {
@@ -5037,7 +5036,6 @@ async function saveBlobAnywhere(blob, fileName) {
         document.body.appendChild(a)
 
         a.click()
-
         a.remove()
 
         setTimeout(() => URL.revokeObjectURL(url), 4000)
@@ -5110,6 +5108,16 @@ function canShareSaved(saved, blob, fileName) {
 
 }
 
+function ritualWhere() {
+
+    if (window.TarotNative) return "Сохранение в галерею"
+
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) return "Подготовка картинки"
+
+    return "Сохранение в «Загрузки»"
+
+}
+
 function openRitual() {
 
     const box = document.createElement("div")
@@ -5122,6 +5130,14 @@ function openRitual() {
     if (window.TarotNative) box.classList.add("ritual-rich")
 
     box.innerHTML = `
+ 
+        <div class="ritual-head">
+ 
+            <div class="ritual-head-title">Запечатлеваем расклад</div>
+ 
+            <div class="ritual-head-sub">${ritualWhere()}</div>
+ 
+        </div>
  
         <div class="ritual-stage"><div class="ritual-slot"></div></div>
  
@@ -6112,7 +6128,6 @@ async function showDeckScreen() {
             btn.classList.add("active")
 
 
-
             result.querySelectorAll(".tab-panel-deck[data-tab-group='deck']")
                 .forEach(p => p.classList.remove("active"))
 
@@ -6412,7 +6427,8 @@ async function showGuideScreen(title, fetchFn) {
 
 
 
-    const loader = fetchFn || GetGuide
+    const loader =
+        fetchFn || GetGuide
 
 
 

@@ -2007,7 +2007,6 @@ body {
 
 
 
-
     border: 1px solid rgba(215, 180, 90, .35);
 
 
@@ -3524,7 +3523,6 @@ body {
 
 .history-header {
 
-
     display: flex;
 
 
@@ -3984,7 +3982,6 @@ body {
 
 
 }
-
 
 
 
@@ -5001,7 +4998,6 @@ body {
 
 
     color: #e8dcc8;
-
 
 
     font-size: 14px;
@@ -6090,6 +6086,7 @@ button,
     display: none;
 
 }
+
 
 
 @media (max-width: 900px) {
@@ -7502,4 +7499,30 @@ body[data-bg="classic"] {
         display: none;
     }
 
+}
+
+
+.ritual-head {
+    text-align: center;
+    width: min(86vw, 360px);
+}
+
+.ritual-head-title {
+    color: #f6e7bd;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: .6px;
+    text-shadow: 0 2px 14px rgba(226, 185, 79, .35);
+}
+
+.ritual-head-sub {
+    margin-top: 4px;
+    color: #b4a8cc;
+    font-size: 13px;
+    letter-spacing: .3px;
+}
+
+.ritual.done .ritual-head {
+    opacity: 0;
+    transition: opacity .4s ease;
 }

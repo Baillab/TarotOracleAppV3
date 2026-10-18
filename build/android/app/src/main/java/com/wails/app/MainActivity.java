@@ -24,6 +24,7 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -197,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
                 if (DEBUG)
                     Log.d(TAG, "Page loaded: " + url);
                 bridge.onPageFinished(url);
+                // reveal the page (after a short delay so the first frame is painted)
+                view.postDelayed(() -> view.setVisibility(View.VISIBLE), 200);
                 // Now that JS listeners are mounted, push a snapshot of the
                 // current battery / network / theme so the UI starts populated.
                 emitSystemSnapshot();
@@ -886,6 +889,9 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if (stoppedAtMs > 0 && webView != null
                 && System.currentTimeMillis() - stoppedAtMs > AWAY_RESET_MINUTES * 60_000L) {
+            // hide the stale screen until the fresh page has loaded
+            findViewById(android.R.id.content).setBackgroundColor(0xFF0B0812);
+            webView.setVisibility(View.INVISIBLE);
             loadApplication();
         }
         stoppedAtMs = 0;
