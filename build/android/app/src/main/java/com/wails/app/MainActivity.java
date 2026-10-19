@@ -1,3 +1,4 @@
+
 package com.wails.app;
 
 import android.annotation.SuppressLint;
@@ -293,15 +294,30 @@ public class MainActivity extends AppCompatActivity {
     // ---- Dark cover shown while the app restarts after a long absence ----
     private View resetCover;
 
+    /**
+     * Puts the dark cover over the content. Idempotent: reuses an existing cover.
+     */
     private void showResetCover() {
-        hideResetCoverNow();
+        if (resetCover != null && resetCover.getParent() != null) {
+            resetCover.animate().cancel();
+            resetCover.setAlpha(1f);
+            return;
+        }
         resetCover = new View(this);
         resetCover.setBackgroundColor(0xFF0B0812);
         ((ViewGroup) findViewById(android.R.id.content)).addView(resetCover,
                 new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT));
-        // safety net: never leave the cover on screen
-        resetCover.postDelayed(() -> hideResetCover(), 4000);
+    }
+
+    /** Safety net: never leave the cover on screen after a reload. */
+    private void armResetCoverSafety() {
+        final View c = resetCover;
+        if (c != null)
+            c.postDelayed(() -> {
+                if (resetCover == c)
+                    hideResetCover();
+            }, 4000);
     }
 
     private void hideResetCover() {
@@ -935,9 +951,15 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if (stoppedAtMs > 0 && webView != null
                 && System.currentTimeMillis() - stoppedAtMs > AWAY_RESET_MINUTES * 60_000L) {
-            // cover the stale screen with a dark layer while the fresh page loads
+            // the cover was already put on in onStop, so the stale screen is never
+            // shown; keep it while the fresh page loads (removed by appReady())
             showResetCover();
+            armResetCoverSafety();
             loadApplication();
+        } else {
+            // short absence: keep the screen as it was, drop the cover before the first
+            // frame
+            hideResetCoverNow();
         }
         stoppedAtMs = 0;
         // Battery: only monitor system events while the app is visible.
@@ -970,6 +992,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         stoppedAtMs = System.currentTimeMillis();
+        // cover the screen right away (while the user is not looking), so on return
+        // the system can never flash the last frame of the previous spread
+        showResetCover();
         if (systemReceiversRegistered) {
             unregisterSystemEventReceivers();
             systemReceiversRegistered = false;
