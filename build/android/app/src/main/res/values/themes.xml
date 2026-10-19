@@ -10,5 +10,7 @@
         <item name="android:navigationBarColor">@color/wails_background</item>
         <!-- Window background -->
         <item name="android:windowBackground">@color/wails_background</item>
+        <item name="android:windowSplashScreenBackground">@color/wails_background</item>
+        <item name="android:windowSplashScreenBackground">@color/wails_background</item>
     </style>
 </resources>

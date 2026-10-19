@@ -97,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Android keeps a screenshot of the last screen and shows it as a "starting
+        // window" when the app comes back. That is the old spread flashing on return,
+        // and no in-app cover can hide it. Turn the screenshot off (Android 13+).
+        if (Build.VERSION.SDK_INT >= 33) {
+            setRecentsScreenshotEnabled(false);
+        }
+
         // Initialize the native Go library
         bridge = new WailsBridge(this);
         bridge.initialize();
