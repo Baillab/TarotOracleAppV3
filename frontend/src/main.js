@@ -73,7 +73,7 @@ document.querySelector("#app").innerHTML = `
  
         <div class="spread-title">
  
-            РАСКЛАДЫ
+            Выберите расклад
  
         </div>
  
@@ -1767,7 +1767,6 @@ document
             )
 
 
-
             showWelcomeDeck()
 
 
@@ -3153,6 +3152,7 @@ function overviewDataRaw(items) {
 
     const lines = []
     const add = (tpl, vars) => lines.push(ovFill(tpl, vars))
+    const ctx = {}   // выводы для «Совета расклада»
 
     // 1. Старшие арканы — масштаб вопроса
     if (majors.length === 0) add(T.majors.none, {})
@@ -3173,11 +3173,12 @@ function overviewDataRaw(items) {
     if (n >= 5 && minors.length >= 4) {
         const lacking = ranked.filter(r => r[1] === 0).map(r => r[0])
         if (lacking.length === 1) {
+            ctx.lackSuit = lacking[0]
             add(T.suit.lacking, { suit_gen: T.suits[lacking[0]].gen, lack: T.suits[lacking[0]].lack })
         }
     }
 
-    // 2б. Стихии (масть младших + традиционная стихия старших)
+    // 2б. Стихии (масть младших + традиционная стихия старших) — работают в раскладах от 3 карт
     if (T.elements) try {
         const elCount = { fire: 0, water: 0, air: 0, earth: 0 }
         items.forEach(i => {
@@ -3185,20 +3186,35 @@ function overviewDataRaw(items) {
             if (e) elCount[e]++
         })
         const elRanked = Object.entries(elCount).sort((a, b) => b[1] - a[1])
-        if (n >= 4 && elRanked[0][1] / n >= 0.4 && elRanked[0][1] > elRanked[1][1]) {
-            const e = elRanked[0][0]
-            add(T.elements.dominant, { el: T.elements.names[e], n: elRanked[0][1], total: n, theme: T.elements.theme[e] })
+        const present = elRanked.filter(r => r[1] > 0)
+        const top = elRanked[0], sec = elRanked[1]
+        const minTop = n >= 4 ? Math.max(2, Math.ceil(n * 0.4)) : 2
+        const lowNames = list => list.map(r => T.elements.names[r[0]].toLowerCase())
+        if (top[1] >= minTop && top[1] > sec[1]) {
+            add(T.elements.dominant, { el: T.elements.names[top[0]], n: top[1], total: n, theme: T.elements.theme[top[0]] })
+        } else if (top[1] >= 2 && top[1] === sec[1] && T.elements.tie) {
+            const tl = lowNames(elRanked.filter(r => r[1] === top[1]))
+            add(T.elements.tie, { list: tl.length > 2 ? tl.slice(0, -1).join(", ") + " и " + tl[tl.length - 1] : tl.join(" и ") })
+        } else if (present.length >= 2 && T.elements.balanced) {
+            add(T.elements.balanced, { list: lowNames(present).join(", ") })
         }
         if (n >= 5) {
             const absent = elRanked.filter(r => r[1] === 0).map(r => r[0])
-            if (absent.length === 1) {
+            if (absent.length === 1 && !(ctx.lackSuit && SUIT_ELEMENT[ctx.lackSuit] === absent[0])) {
                 add(T.elements.missing, { el_gen: T.elements.genitive[absent[0]], lack: T.elements.lack[absent[0]] })
             }
         }
-        if (elCount.fire >= 2 && elCount.water >= 2) add(T.elements.conflict.fire_water, {})
-        else if (elCount.air >= 2 && elCount.earth >= 2) add(T.elements.conflict.air_earth, {})
-        else if (elCount.fire >= 2 && elCount.air >= 2) add(T.elements.harmony.fire_air, {})
-        else if (elCount.water >= 2 && elCount.earth >= 2) add(T.elements.harmony.water_earth, {})
+        // взаимодействие стихий: в больших раскладах — по две карты каждой,
+        // в малых — когда в раскладе ровно две стихии
+        const has = (a, b) => n >= 5
+            ? (elCount[a] >= 2 && elCount[b] >= 2)
+            : (elCount[a] >= 1 && elCount[b] >= 1 && present.length === 2)
+        if (has("fire", "water")) { ctx.conflict = true; add(T.elements.conflict.fire_water, {}) }
+        else if (has("air", "earth")) { ctx.conflict = true; add(T.elements.conflict.air_earth, {}) }
+        else if (has("fire", "air")) { ctx.harmony = true; add(T.elements.harmony.fire_air, {}) }
+        else if (has("water", "earth")) { ctx.harmony = true; add(T.elements.harmony.water_earth, {}) }
+        else if (T.elements.pair && has("fire", "earth")) add(T.elements.pair.fire_earth, {})
+        else if (T.elements.pair && has("water", "air")) add(T.elements.pair.water_air, {})
     } catch (e) { console.error("overview/elements:", e) }
 
     // 3. Перевёрнутые
@@ -3217,14 +3233,47 @@ function overviewDataRaw(items) {
     if (tens.length > 1) add(T.tens.many, {})
     else if (tens.length === 1) add(T.tens.one, { card: tens[0].card.name })
 
+    // 4а. Позиции: что означают ключевые места расклада и какие карты в них выпали
+    if (T.positions) try {
+        const named = items.filter(i => i.position && i.position.name)
+        const used = new Set()
+        const found = []
+        const kwOf = it => {
+            const k = Array.isArray(it.card.keywords) ? it.card.keywords.slice(0, 3).join(", ").toLowerCase() : ""
+            return k ? ": " + k : ""
+        }
+        for (const role of T.positions.roles) {
+            if (found.length >= (T.positions.max || 3)) break
+            const re = new RegExp(role.match)
+            const it = named.find(x => !used.has(x) && re.test(String(x.position.name).toLowerCase()))
+            if (it) { used.add(it); found.push({ role, it }) }
+        }
+        found.sort((a, b) => named.indexOf(a.it) - named.indexOf(b.it))
+        found.forEach(({ role, it }) => {
+            add(it.isReversed ? role.rev : role.up, { pos: it.position.name, card: it.card.name, kw: kwOf(it) })
+            if (role.key === "outcome") ctx.outcome = { rev: !!it.isReversed }
+            if (role.key === "obstacle") ctx.obstacle = { rev: !!it.isReversed }
+        })
+        if (found.length < 2 && named.length >= 2 && T.positions.arc) {
+            const f = named[0], l = named[named.length - 1]
+            add(T.positions.arc, { first: f.position.name, card1: f.card.name, last: l.position.name, card2: l.card.name })
+        }
+    } catch (e) { console.error("overview/positions:", e) }
+
     // 4б. Нумерология: числа старших арканов и младших от туза до десятки (придворные не считаются)
     if (T.numerology) try {
-        const numCards = items.filter(i =>
-            (i.card.arcana === "major" && i.card.number > 0) ||
-            (i.card.arcana !== "major" && i.card.number >= 1 && i.card.number <= 10))
+        const numOf = i => {
+            const x = Number(i.card.number)
+            if (i.card.arcana === "major") return x > 0 ? x : 0
+            if (x >= 1 && x <= 10) return x
+            if (x >= 11 && x <= 14) return x - 9   // Паж 2, Рыцарь 3, Королева 4, Король 5
+            return 0
+        }
+        const numCards = items.filter(i => numOf(i) > 0)
         if (numCards.length >= 2) {
-            const raw = numCards.reduce((a, i) => a + Number(i.card.number), 0)
+            const raw = numCards.reduce((a, i) => a + numOf(i), 0)
             const r = numReduce(raw)
+            ctx.num = r
             if (T.numerology.meanings[r]) {
                 add(T.numerology.sum, {
                     sum: r,
@@ -3234,7 +3283,7 @@ function overviewDataRaw(items) {
             }
             const byDigit = {}
             numCards.forEach(i => {
-                const d = numReduce(Number(i.card.number))
+                const d = numReduce(numOf(i))
                 const key = d > 9 ? numReduce(String(d).split("").reduce((a, c) => a + Number(c), 0)) : d
                 byDigit[key] = (byDigit[key] || 0) + 1
             })
@@ -3245,12 +3294,42 @@ function overviewDataRaw(items) {
         }
     } catch (e) { console.error("overview/numerology:", e) }
 
-    // 5. Совет расклада — общий вектор (темп + фокус), без пересказа отдельных карт
+    // 5. Совет расклада — составной: темп + фокус + 1–2 нюанса, варианты текста выбираются
+    // по самим картам (для одного и того же расклада совет всегда одинаков)
     const tempo = reversed.length === 0 || rr <= 0.25 ? "open" : rr >= 0.6 ? "slow" : "mixed"
     let focus = "balanced"
     if (minors.length >= 2 && topCnt >= 2 && topCnt > second) focus = topSuit
     else if (majors.length / n >= 0.5) focus = "majors"
-    const advice = `${T.advice.tempo[tempo]} ${T.advice.focus[focus]}`
+    const seed = items.reduce((a, i, k) =>
+        a + (Number(i.card.id) || String(i.card.name || "").length) * (k + 1) + (i.isReversed ? 7 : 0), 0) + n
+    const pick = (v, salt) => Array.isArray(v) ? v[(seed + (salt || 0)) % v.length] : v
+    const parts = [pick(T.advice.tempo[tempo], 0), pick(T.advice.focus[focus], 1)]
+    try {
+        const N = T.advice.nuance
+        if (N) {
+            const c = []
+            if (ctx.outcome) c.push(pick(ctx.outcome.rev ? N.outcome_rev : N.outcome_up, 2))
+            if (ctx.obstacle) c.push(pick(ctx.obstacle.rev ? N.obstacle_rev : N.obstacle_up, 3))
+            if (ctx.conflict) c.push(N.conflict)
+            if (ctx.harmony) c.push(N.harmony)
+            if (ctx.lackSuit && N.lack_suit) c.push(N.lack_suit[ctx.lackSuit])
+            if (courts.length >= 2) c.push(N.courts)
+            if (aces.length) c.push(N.aces)
+            if (tens.length) c.push(N.tens)
+            if (majors.length / n >= 0.5) c.push(N.majors_many)
+            if (ctx.num && T.numerology && T.numerology.advice) c.push(T.numerology.advice[ctx.num])
+            const list = c.filter(Boolean)
+            if (list.length) {
+                const a = list[seed % list.length]
+                parts.push(a)
+                if (list.length > 1) {
+                    const b = list[(seed + 1 + (Math.floor(seed / list.length) % (list.length - 1))) % list.length]
+                    if (b !== a) parts.push(b)
+                }
+            }
+        }
+    } catch (e) { console.error("overview/advice:", e) }
+    const advice = parts.join(" ")
 
     const chips = [
         ovFill(T.chips.majors, { n: majors.length }),
@@ -3454,6 +3533,7 @@ function renderSpread(data, question) {
         "--card-scale",
         fit.scale
     )
+
 
 
 
@@ -6260,7 +6340,12 @@ document
     .querySelector("#deck-info")
     .onclick = () => {
 
-        if (activeButton === document.querySelector("#deck-info")) {
+        // экран колоды уже открыт — ничего не делаем; после «✕» кнопка
+        // осталась «активной», а экрана нет — тогда открываем заново
+        if (
+            activeButton === document.querySelector("#deck-info")
+            && result.querySelector(".deck-screen")
+        ) {
 
             return
 
@@ -6786,11 +6871,7 @@ async function showGuideScreen(title, fetchFn) {
  
  
  
-                    <p class="guide-section-text">
- 
-                        ${section.text}
- 
-                    </p>
+                    <p class="guide-section-text">${section.text}</p>
  
  
                 </div>

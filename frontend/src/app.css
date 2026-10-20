@@ -1600,7 +1600,6 @@ body {
 }
 
 
-
 .tab-btn {
 
 
@@ -3251,7 +3250,6 @@ body {
     display: flex;
 
 
-
     flex-direction: column;
 
 
@@ -4819,6 +4817,7 @@ body {
     aspect-ratio: 2 / 3;
 
 
+
     object-fit: cover;
 
 
@@ -4993,6 +4992,7 @@ body {
 
 .guide-section-text {
 
+    white-space: pre-line;
 
     margin: 0;
 
@@ -6626,9 +6626,9 @@ button,
 
         text-align: center;
 
-        font-size: 13px;
+        font-size: 15px;
 
-        letter-spacing: 3px;
+        letter-spacing: 2px;
 
     }
 
