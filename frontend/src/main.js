@@ -1,3 +1,4 @@
+
 import './app.css'
 import overviewTexts from './overview.json'
 
@@ -1602,6 +1603,7 @@ document
     })
 
 
+
 // Пока на сцене расклад, сцена занимает весь экран, а верхняя строка
 // и нижняя панель — полупрозрачные поверх неё (класс spread-mode).
 // Высоты панелей и заголовок режима обновляем здесь.
@@ -3116,7 +3118,25 @@ function ovFill(tpl, vars) {
     return tpl.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : ""))
 }
 
-function overviewData(items) {
+// Стихии старших арканов (традиция Золотой Зари: планеты и знаки зодиака)
+const MAJOR_ELEMENT = {
+    0: "air", 1: "air", 2: "water", 3: "earth", 4: "fire", 5: "earth", 6: "air",
+    7: "water", 8: "fire", 9: "earth", 10: "fire", 11: "air", 12: "water",
+    13: "water", 14: "fire", 15: "earth", 16: "fire", 17: "air", 18: "water",
+    19: "fire", 20: "fire", 21: "earth",
+}
+const SUIT_ELEMENT = { wands: "fire", cups: "water", swords: "air", pentacles: "earth" }
+
+// Сведение числа к одной цифре (11 и 22 оставляем как «главные числа»)
+function numReduce(x) {
+    x = Number(x)
+    for (let k = 0; k < 6 && x > 9 && x !== 11 && x !== 22; k++) {
+        x = String(Math.floor(x)).split("").reduce((a, d) => a + Number(d), 0)
+    }
+    return x
+}
+
+function overviewDataRaw(items) {
     if (!items || items.length < 3) return null
 
     const T = overviewTexts
@@ -3157,6 +3177,30 @@ function overviewData(items) {
         }
     }
 
+    // 2б. Стихии (масть младших + традиционная стихия старших)
+    if (T.elements) try {
+        const elCount = { fire: 0, water: 0, air: 0, earth: 0 }
+        items.forEach(i => {
+            const e = i.card.arcana === "major" ? MAJOR_ELEMENT[i.card.number] : SUIT_ELEMENT[i.card.suit]
+            if (e) elCount[e]++
+        })
+        const elRanked = Object.entries(elCount).sort((a, b) => b[1] - a[1])
+        if (n >= 4 && elRanked[0][1] / n >= 0.4 && elRanked[0][1] > elRanked[1][1]) {
+            const e = elRanked[0][0]
+            add(T.elements.dominant, { el: T.elements.names[e], n: elRanked[0][1], total: n, theme: T.elements.theme[e] })
+        }
+        if (n >= 5) {
+            const absent = elRanked.filter(r => r[1] === 0).map(r => r[0])
+            if (absent.length === 1) {
+                add(T.elements.missing, { el_gen: T.elements.genitive[absent[0]], lack: T.elements.lack[absent[0]] })
+            }
+        }
+        if (elCount.fire >= 2 && elCount.water >= 2) add(T.elements.conflict.fire_water, {})
+        else if (elCount.air >= 2 && elCount.earth >= 2) add(T.elements.conflict.air_earth, {})
+        else if (elCount.fire >= 2 && elCount.air >= 2) add(T.elements.harmony.fire_air, {})
+        else if (elCount.water >= 2 && elCount.earth >= 2) add(T.elements.harmony.water_earth, {})
+    } catch (e) { console.error("overview/elements:", e) }
+
     // 3. Перевёрнутые
     const rr = reversed.length / n
     const rv = { n: reversed.length, total: n }
@@ -3172,6 +3216,34 @@ function overviewData(items) {
     else if (aces.length === 1) add(T.aces.one, { card: aces[0].card.name })
     if (tens.length > 1) add(T.tens.many, {})
     else if (tens.length === 1) add(T.tens.one, { card: tens[0].card.name })
+
+    // 4б. Нумерология: числа старших арканов и младших от туза до десятки (придворные не считаются)
+    if (T.numerology) try {
+        const numCards = items.filter(i =>
+            (i.card.arcana === "major" && i.card.number > 0) ||
+            (i.card.arcana !== "major" && i.card.number >= 1 && i.card.number <= 10))
+        if (numCards.length >= 2) {
+            const raw = numCards.reduce((a, i) => a + Number(i.card.number), 0)
+            const r = numReduce(raw)
+            if (T.numerology.meanings[r]) {
+                add(T.numerology.sum, {
+                    sum: r,
+                    via: raw !== r ? ovFill(T.numerology.via, { raw, r }) : "",
+                    meaning: T.numerology.meanings[r],
+                })
+            }
+            const byDigit = {}
+            numCards.forEach(i => {
+                const d = numReduce(Number(i.card.number))
+                const key = d > 9 ? numReduce(String(d).split("").reduce((a, c) => a + Number(c), 0)) : d
+                byDigit[key] = (byDigit[key] || 0) + 1
+            })
+            const rep = Object.entries(byDigit).sort((a, b) => b[1] - a[1] || a[0] - b[0])[0]
+            if (rep && rep[1] >= 2 && T.numerology.meanings[rep[0]]) {
+                add(T.numerology.repeat, { num: rep[0], k_cards: rep[1] + ((rep[1] % 10 >= 2 && rep[1] % 10 <= 4 && (rep[1] < 12 || rep[1] > 14)) ? " карты" : " карт"), meaning: T.numerology.meanings[rep[0]] })
+            }
+        }
+    } catch (e) { console.error("overview/numerology:", e) }
 
     // 5. Совет расклада — общий вектор (темп + фокус), без пересказа отдельных карт
     const tempo = reversed.length === 0 || rr <= 0.25 ? "open" : rr >= 0.6 ? "slow" : "mixed"
@@ -3192,6 +3264,16 @@ function overviewData(items) {
         lines,
         adviceTitle: T.advice.title,
         advice,
+    }
+}
+
+// «Общая картина» — только дополнение: любая ошибка в ней не должна ломать расклад
+function overviewData(items) {
+    try {
+        return overviewDataRaw(items)
+    } catch (e) {
+        console.error("overview:", e)
+        return null
     }
 }
 
@@ -3372,7 +3454,6 @@ function renderSpread(data, question) {
         "--card-scale",
         fit.scale
     )
-
 
 
 
@@ -6102,6 +6183,7 @@ function showInfoModal(title, html) {
 
     const modal =
         document.querySelector("#card-modal")
+
 
 
     const content =
