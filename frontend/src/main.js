@@ -1,4 +1,3 @@
-
 import './app.css'
 import overviewTexts from './overview.json'
 
@@ -1669,7 +1668,6 @@ new MutationObserver(() => {
 }).observe(result, { childList: true })
 
 
-
 // Фон приложения. Варианты: "amethyst" (Аметист), "midnight" (Полночь),
 // "twilight" (Сумерки), "starry" (Звёздная ночь), "classic" (прежний фон с узором). Чтобы вернуть
 // прежний простой фон, удалите следующую строку.
@@ -1765,6 +1763,7 @@ document
             setActive(
                 document.querySelector("#shuffle")
             )
+
 
 
             showWelcomeDeck()
@@ -6063,6 +6062,14 @@ function showSettings() {
                 </button>
  
  
+ 
+                <button class="settings-link" id="open-credits">
+ 
+                    Источники и лицензии
+ 
+                </button>
+ 
+ 
             </div>
  
  
@@ -6185,7 +6192,6 @@ function showSettings() {
                 }
 
 
-
                 showInfoModal(
 
                     section.title,
@@ -6253,6 +6259,26 @@ function showSettings() {
             }
 
         }
+
+
+    // Источники изображений и лицензии — текст прямо здесь (не зависит от legal.json)
+    const creditsBtn = document.querySelector("#open-credits")
+
+    if (creditsBtn) creditsBtn.onclick = () => {
+
+        showInfoModal(
+
+            "Источники и лицензии",
+
+            [
+                "<p><b>Изображения карт.</b> Используются иллюстрации колоды Райдера-Уэйта-Смит (1909–1910), художница — Памела Колман Смит (1878–1951). Изображения находятся в общественном достоянии (Public domain). Источник файлов — Wikimedia Commons, коллекция участника TaionWC.</p>",
+                "<p><b>Открытое программное обеспечение.</b> Приложение создано с использованием Wails и других библиотек с открытым исходным кодом, которые распространяются под собственными лицензиями (в основном MIT).</p>",
+            ].join("")
+
+        )
+
+    }
+
 
 
 }
