@@ -2,16 +2,56 @@
 // показывается сам ключ, поэтому приложение не может остаться «без текста».
 // Словари: src/locales/<код>.json  { "русский текст": "перевод" }
 
-const dictionaries = {}   // { en: {...}, fr: {...} } — подключаются на следующих шагах
+// Подключённые словари (заполняются на следующих шагах): { en: {...}, fr: {...} }
+const dictionaries = {}
+
+// ready: язык можно выбирать в «Настройках»
+export const LANGS = [
+    { code: "ru", name: "Русский", ready: true },
+    { code: "en", name: "English", ready: false },
+    { code: "fr", name: "Français", ready: false },
+]
+
+const STORAGE_KEY = "tarot.lang"
 
 let current = "ru"
 
-export function setLang(code) {
-    current = dictionaries[code] || code === "ru" ? code : "ru"
+function isAvailable(code) {
+    return code === "ru" || (!!dictionaries[code] && LANGS.some(l => l.code === code && l.ready))
+}
+
+function readSaved() {
+    try { return localStorage.getItem(STORAGE_KEY) } catch (e) { return null }
+}
+
+function writeSaved(code) {
+    try { localStorage.setItem(STORAGE_KEY, code) } catch (e) { /* без сохранения тоже работаем */ }
+}
+
+// Язык при запуске: сохранённый выбор → язык устройства (если он поддержан) → русский
+function initLang() {
+    const saved = readSaved()
+    if (saved && isAvailable(saved)) {
+        current = saved
+    } else {
+        let dev = ""
+        try { dev = String(navigator.language || "").slice(0, 2).toLowerCase() } catch (e) { /* */ }
+        current = isAvailable(dev) ? dev : "ru"
+    }
+    try { document.documentElement.lang = current } catch (e) { /* */ }
 }
 
 export function getLang() {
     return current
+}
+
+// Меняет язык и запоминает выбор. Возвращает true, если язык действительно сменился.
+export function setLang(code) {
+    if (!isAvailable(code) || code === current) return false
+    current = code
+    writeSaved(code)
+    try { document.documentElement.lang = code } catch (e) { /* */ }
+    return true
 }
 
 // t("Текст") или t("Записей: {n}", { n: 5 })
@@ -26,3 +66,6 @@ export function t(key, vars) {
     }
     return s
 }
+
+// Выполняется при загрузке модуля — раньше любого кода, который вызывает t()
+initLang()

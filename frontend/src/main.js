@@ -1,6 +1,7 @@
+
 import './app.css'
 import overviewTexts from './overview.json'
-import { t } from './i18n.js'
+import { t, getLang, setLang, LANGS } from './i18n.js'
 
 import {
     DrawCard,
@@ -604,7 +605,7 @@ function openCommentModal(historyId, existingComment, onSaved) {
 
 
 
-                showToast("Комментарий сохранён")
+                showToast(t("Комментарий сохранён"))
 
 
             }
@@ -1670,8 +1671,6 @@ new MutationObserver(() => {
     if (now && !was && currentSpreadRelayout) currentSpreadRelayout()
 
 }).observe(result, { childList: true })
-
-
 
 // Фон приложения. Варианты: "amethyst" (Аметист), "midnight" (Полночь),
 // "twilight" (Сумерки), "starry" (Звёздная ночь), "classic" (прежний фон с узором). Чтобы вернуть
@@ -3219,7 +3218,8 @@ function overviewDataRaw(items) {
         else if (has("water", "earth")) { ctx.harmony = true; add(T.elements.harmony.water_earth, {}) }
         else if (T.elements.pair && has("fire", "earth")) add(T.elements.pair.fire_earth, {})
         else if (T.elements.pair && has("water", "air")) add(T.elements.pair.water_air, {})
-    } catch (e) { console.error("overview/elements:", e) }
+    } catch
+        (e) { console.error("overview/elements:", e) }
 
     // 3. Перевёрнутые
     const rr = reversed.length / n
@@ -4095,7 +4095,7 @@ async function showHistoryList() {
 
 
 
-                            showToast("История очищена")
+                            showToast(t("История очищена"))
 
 
 
@@ -4924,7 +4924,7 @@ async function renderRecordImage(record, onStage) {
 
         }
 
-        text("Толкование", PAD, y + 34, `700 38px ${FONT}`, GOLD)
+        text(t("Толкование"), PAD, y + 34, `700 38px ${FONT}`, GOLD)
 
         y += 64
 
@@ -4994,7 +4994,7 @@ async function renderRecordImage(record, onStage) {
 
             y += 8
 
-            text("Комментарий", PAD, y + 34, `700 38px ${FONT}`, GOLD)
+            text(t("Комментарий"), PAD, y + 34, `700 38px ${FONT}`, GOLD)
 
             y += 64
 
@@ -5137,7 +5137,7 @@ result.addEventListener("click", async (e) => {
 
         if (record) downloadRecordImage(record)
 
-        else showToast("Запись не найдена в истории")
+        else showToast(t("Запись не найдена в истории"))
 
     }
 
@@ -5145,7 +5145,7 @@ result.addEventListener("click", async (e) => {
 
         console.error(err)
 
-        showToast("Не удалось создать картинку")
+        showToast(t("Не удалось создать картинку"))
 
     }
 
@@ -5203,7 +5203,7 @@ async function saveViaAndroid(blob, fileName) {
 
         if (res.indexOf("ok:") === 0) {
 
-            showToast("Сохранено в галерее: Pictures/TarotOracle")
+            showToast(t("Сохранено в галерее: Pictures/TarotOracle"))
 
             return true
 
@@ -5421,7 +5421,7 @@ async function shareSaved(saved, blob, fileName) {
 
         catch (e) {
 
-            if (!e || e.name !== "AbortError") showToast("Не удалось поделиться")
+            if (!e || e.name !== "AbortError") showToast(t("Не удалось поделиться"))
 
         }
 
@@ -5788,7 +5788,7 @@ async function downloadRecordImage(record) {
 
         ui.fail()
 
-        showToast("Не удалось создать картинку")
+        showToast(t("Не удалось создать картинку"))
 
     }
 
@@ -5987,7 +5987,7 @@ function showSettings() {
  
                 <div class="settings-group-title">
  
-                    ${t("Язык")} <span class="settings-soon">${t("Скоро")}</span>
+                    ${t("Язык")}${LANGS.some(l => !l.ready) ? ` <span class="settings-soon">${t("Скоро")}</span>` : ""}
  
                 </div>
  
@@ -5995,21 +5995,13 @@ function showSettings() {
  
                 <div class="settings-options">
  
- 
-                    <button class="settings-option active" disabled>
- 
-                        ${t("Русский")}
- 
-                    </button>
- 
- 
- 
-                    <button class="settings-option" disabled>
- 
-                        English
- 
-                    </button>
- 
+                    ${LANGS.map(l => `
+                        <button
+                            class="settings-option ${l.code === getLang() ? "active" : ""}"
+                            data-lang="${l.code}"
+                            ${l.ready ? "" : "disabled"}
+                        >${l.name}</button>
+                    `).join("")}
  
                 </div>
  
@@ -6110,7 +6102,7 @@ function showSettings() {
 
                 if (key === "deckMode") {
 
-                    showToast("Колода обновлена")
+                    showToast(t("Колода обновлена"))
 
                 }
 
@@ -6127,6 +6119,19 @@ function showSettings() {
                 console.error(e)
 
             }
+
+        }
+
+    })
+
+
+
+    // выбор языка: запоминаем и перезапускаем экран, чтобы все тексты собрались заново
+    result.querySelectorAll(".settings-option[data-lang]").forEach(btn => {
+
+        btn.onclick = () => {
+
+            if (setLang(btn.dataset.lang)) location.reload()
 
         }
 
