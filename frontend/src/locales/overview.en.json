@@ -1,0 +1,275 @@
+{
+    "title": "Overview of the Spread",
+    "chips": {
+        "majors": "Major Arcana: {n}",
+        "reversed": "Reversed: {n}"
+    },
+    "suits": {
+        "wands": {
+            "name": "Wands",
+            "gen": "Wands",
+            "theme": "action, energy, ambition",
+            "lack": "initiative and fire are missing"
+        },
+        "cups": {
+            "name": "Cups",
+            "gen": "Cups",
+            "theme": "feelings, relationships, intuition",
+            "lack": "emotions and relationships have received little attention"
+        },
+        "swords": {
+            "name": "Swords",
+            "gen": "Swords",
+            "theme": "thoughts, decisions, conflict",
+            "lack": "clarity and a sober assessment are lacking"
+        },
+        "pentacles": {
+            "name": "Pentacles",
+            "gen": "Pentacles",
+            "theme": "money, work, home, results",
+            "lack": "solid ground has not been established yet"
+        }
+    },
+    "majors": {
+        "none": "There are no Major Arcana — the situation is down to earth and depends largely on your own decisions.",
+        "many": "There are many Major Arcana ({n} of {total}) — this is a fateful matter: circumstances and lessons shape events more strongly than ordinary choices.",
+        "one": "One Major Arcana — {card}: this is the main theme of the spread and deserves special attention.",
+        "some": "{n} of {total} cards are Major Arcana — the situation has important turning points, but much remains within your power."
+    },
+    "suit": {
+        "dominant": "{suit} dominate ({n}) — the theme of the spread: {theme}.",
+        "tie": "Several suits are equally strong: {suits} — areas of life are closely intertwined.",
+        "lacking": "No {suit_gen} — {lack}."
+    },
+    "reversed": {
+        "none": "All cards are upright — energy flows freely and the situation itself holds few obstacles.",
+        "many": "Many cards are reversed ({n} of {total}) — expect delays, inner doubt, or something that has not surfaced yet. Do not rush events.",
+        "few": "Almost all cards are upright ({n} reversed) — the way is generally open, and the reversed cards mark where to be more careful.",
+        "mixed": "Reversed cards: {n} of {total} — clear and hidden, not yet revealed sides of the situation are mixed."
+    },
+    "courts": {
+        "many": "{n} court cards ({cards}) — people, their characters and intentions play a noticeable role.",
+        "one": "{card} — a specific person, or your own role, is involved in the situation."
+    },
+    "aces": {
+        "many": "Aces — a sign of a new beginning and an opportunity worth noticing.",
+        "one": "{card} — a sign of a new beginning and an opportunity worth noticing."
+    },
+    "tens": {
+        "many": "Tens — one of the cycles is coming to an end.",
+        "one": "{card} — one of the cycles is coming to an end."
+    },
+    "advice": {
+        "title": "Advice from the spread",
+        "tempo": {
+            "open": [
+                "The way is open — do not postpone what has ripened.",
+                "Conditions are favorable: it is time to move from thinking to doing.",
+                "The situation itself holds few obstacles — you can move ahead with confidence."
+            ],
+            "slow": [
+                "It is better to slow down and listen to yourself now: haste will only add to the confusion.",
+                "Do not force events — much has not surfaced yet, and hurry is a poor adviser.",
+                "Give the situation time to ripen and avoid hasty decisions."
+            ],
+            "mixed": [
+                "Move forward, but check the details — part of the picture is still hidden.",
+                "Part of the path is clear, part is in fog: act where you can see and clarify the rest as you go.",
+                "Go step by step and check each next step."
+            ]
+        },
+        "focus": {
+            "wands": [
+                "Direct your strength into one main task rather than several at once.",
+                "You have enough energy — the key is not to scatter it and to choose a priority.",
+                "Show initiative, but do not flare up: fire is for the work, not for arguments."
+            ],
+            "cups": [
+                "Trust your feelings and speak about them openly — that is where the key lies.",
+                "Listen to your heart and to the mood of those close to you: the answer lies in relationships.",
+                "Do not hide your emotions — an honest conversation matters more than any calculation right now."
+            ],
+            "swords": [
+                "Before deciding, clarify the facts and call things by their names.",
+                "Think soberly and do not let anxious thoughts make decisions for you.",
+                "Important words and agreements are best stated clearly and, where possible, put in writing."
+            ],
+            "pentacles": [
+                "Rely on concrete steps and verifiable results.",
+                "Bet on practice: money, time, health — whatever can be measured.",
+                "Build a reliable plan and follow it without haste."
+            ],
+            "majors": [
+                "The question is bigger than you — accept what happens as a lesson and do not push events.",
+                "This is a turning point: look at the situation more broadly than just today.",
+                "Some circumstances are beyond your control — focus on what you can choose."
+            ],
+            "balanced": [
+                "No single area outweighs the others — keep the whole picture in view and do not fixate on one card.",
+                "The spread is well-rounded: do not single out the main thing too early, check every side of the question.",
+                "Your forces are evenly spread — act steadily and avoid extremes."
+            ]
+        },
+        "nuance": {
+            "outcome_up": [
+                "The final card supports you — treat it as your goal.",
+                "The outcome of the spread is favorable: keep your course."
+            ],
+            "outcome_rev": [
+                "The outcome is not yet settled: what can change it lies in your own behavior now.",
+                "The final card is a warning — recheck your plan while there is time."
+            ],
+            "obstacle_rev": [
+                "The main obstacle is inside: start with an honest talk with yourself."
+            ],
+            "obstacle_up": [
+                "The obstacle is real, so prepare a fallback option in advance."
+            ],
+            "conflict": "When impulse and feelings, or ideas and practicality, pull in different directions, choose one line and hold to it consistently.",
+            "harmony": "Lean on the harmony of the elements in the spread: what you have in mind is supported by circumstances.",
+            "courts": "Much depends on the people around you: state your boundaries and expectations clearly.",
+            "aces": "Notice the opportunity at the very beginning — it will not come again in the same form.",
+            "tens": "Do not fear endings: a closed cycle frees energy for the next one.",
+            "lack_suit": {
+                "wands": "Bring more initiative and genuine interest into the situation.",
+                "cups": "Pay attention to feelings and relationships — they found no place in the spread.",
+                "swords": "Check the facts: the spread lacks a sober assessment.",
+                "pentacles": "Think about the practical side: deadlines, money, resources."
+            },
+            "majors_many": "Do not try to control everything: part of what is happening is a lesson, not a task."
+        }
+    },
+    "elements": {
+        "names": {
+            "fire": "Fire",
+            "water": "Water",
+            "air": "Air",
+            "earth": "Earth"
+        },
+        "genitive": {
+            "fire": "fire",
+            "water": "water",
+            "air": "air",
+            "earth": "earth"
+        },
+        "theme": {
+            "fire": "will, passion, action",
+            "water": "feelings, intuition, relationships",
+            "air": "thoughts, words, decisions",
+            "earth": "body, money, practicality"
+        },
+        "lack": {
+            "fire": "determination and inner fire are missing",
+            "water": "emotions stay in the shadows",
+            "air": "clarity and a sober view are lacking",
+            "earth": "grounding and practicality are missing"
+        },
+        "dominant": "The element of the spread is {el} ({n} of {total}): {theme}.",
+        "missing": "No {el_gen} element — {lack}.",
+        "conflict": {
+            "fire_water": "Fire and Water clash — impulse and feelings pull in different directions; take care not to extinguish one with the other.",
+            "air_earth": "Air and Earth diverge — ideas argue with practice: check whether your plan is feasible."
+        },
+        "harmony": {
+            "fire_air": "Fire and Air strengthen each other — ideas easily turn into action.",
+            "water_earth": "Water and Earth support each other — feelings find a reliable foundation."
+        },
+        "balanced": "The cards belong to different elements ({list}) — the spread is well-rounded and no single area draws all the attention.",
+        "tie": "Elements {list} are equally represented — their forces balance one another.",
+        "pair": {
+            "fire_earth": "Fire and Earth — impulse meets practicality: energy takes shape and can become a result.",
+            "water_air": "Water and Air — feelings and reason speak different languages: it matters to put into words what you feel."
+        }
+    },
+    "numerology": {
+        "sum": "The number of the spread is {sum}{via}: {meaning}.",
+        "via": " (the card numbers add up to {raw}, reduced to {r})",
+        "repeat": "The number {num} repeats ({k_cards}): {meaning} — this theme runs through the whole spread.",
+        "meanings": {
+            "1": "beginning, initiative, a new start",
+            "2": "choice, partnership, balance",
+            "3": "growth, creativity, communication",
+            "4": "stability, order, foundation",
+            "5": "change, freedom, a trial",
+            "6": "harmony, care, responsibility",
+            "7": "search for meaning, analysis, inner work",
+            "8": "strength, achievement, material results",
+            "9": "completion, wisdom, taking stock",
+            "11": "insight and intuition, heightened tension",
+            "22": "realizing a large undertaking, great building"
+        },
+        "advice": {
+            "1": "Do not wait for the perfect moment — the first step matters more than the plan.",
+            "2": "Weigh your choice calmly and do not decide alone if there is someone you can trust.",
+            "3": "Do not keep ideas to yourself: conversation and creativity help right now.",
+            "4": "Put things in order and build a solid foundation before moving on.",
+            "5": "Be ready for change and do not cling to the familiar.",
+            "6": "Look after those close to you and after fairness in relationships — harmony rests on responsibility.",
+            "7": "Give yourself time for silence and reflection: the answer will come from within.",
+            "8": "Act with confidence and answer for the result — you have the strength for it.",
+            "9": "Take stock and let go of what has served its purpose — it makes room for the new.",
+            "11": "Listen to your intuition, but do not let tension make decisions for you.",
+            "22": "The task is within reach if you break it into clear stages."
+        }
+    },
+    "positions": {
+        "arc": "The spread runs from “{first}” ({card1}) to “{last}” ({card2}) — the main line of events passes between these cards.",
+        "max": 3,
+        "roles": [
+            {
+                "key": "outcome",
+                "match": "outcome|result|final|conclusion|how it ends",
+                "up": "Outcome — {card}{kw}. Things develop in your favor if you keep your course.",
+                "rev": "Outcome — {card} (reversed){kw}, but in a hidden or distorted form. The result is not predetermined: much depends on your actions."
+            },
+            {
+                "key": "obstacle",
+                "match": "obstacle|challenge|block|difficult|crossing|weakness|shadow|hindrance",
+                "up": "Main obstacle — {card}{kw}. It is real, but understandable and surmountable.",
+                "rev": "Main obstacle — {card} (reversed){kw}. It is largely inner: doubt, fear or a postponed decision."
+            },
+            {
+                "key": "advice",
+                "match": "advice|recommend|what to do|how to act|action|guidance",
+                "up": "Advice of the card — {card}{kw}. This is a direct pointer on how to act.",
+                "rev": "Advice of the card — {card} (reversed){kw}. More of a warning: what to avoid and where to slow down."
+            },
+            {
+                "key": "future",
+                "match": "future|near|develop|prospect|potential|what will|ahead|next",
+                "up": "Near future — {card}{kw}. Events are moving in exactly this direction.",
+                "rev": "Near future — {card} (reversed){kw}. The direction is hindered: delays or a change of plan are possible."
+            },
+            {
+                "key": "present",
+                "match": "present|heart|core|situation|now|current|^you$|yourself|^self$|^me$|centre|center",
+                "up": "Heart of the matter — {card}{kw}. This is the center of the spread — a place to start from.",
+                "rev": "Heart of the matter — {card} (reversed){kw}. The main theme is hidden or blocked for now — look at it more closely."
+            },
+            {
+                "key": "past",
+                "match": "past|cause|foundation|root|basis|origin|base|beginning",
+                "up": "Roots of the situation — {card}{kw}. Past experience works in your favor.",
+                "rev": "Roots of the situation — {card} (reversed){kw}. Something unresolved remains in the past and echoes today."
+            },
+            {
+                "key": "hopes",
+                "match": "hope|fear|expect|desire|worr|feel|subconscious|inner|unconscious",
+                "up": "Inner state — {card}{kw}. Your expectations and feelings are in tune with the situation.",
+                "rev": "Inner state — {card} (reversed){kw}. Hopes and fears are mixed up: what you fear may not be the main thing."
+            },
+            {
+                "key": "goal",
+                "match": "goal|aim|aspiration|conscious|ideal|aspire",
+                "up": "Goal — {card}{kw}. This is what your mind truly reaches for.",
+                "rev": "Goal — {card} (reversed){kw}. The goal is vague or needs to be reconsidered."
+            },
+            {
+                "key": "env",
+                "match": "environment|people|others|external|partner|other person|surround|influence",
+                "up": "Environment and outside influences — {card}{kw}. Circumstances and people tend to support you.",
+                "rev": "Environment and outside influences — {card} (reversed){kw}. Other people’s intentions or circumstances may not match your expectations."
+            }
+        ]
+    }
+}

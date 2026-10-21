@@ -1600,6 +1600,7 @@ body {
 }
 
 
+
 .tab-btn {
 
 
@@ -3248,6 +3249,7 @@ body {
 
 
     display: flex;
+
 
 
     flex-direction: column;
@@ -6289,6 +6291,18 @@ button,
     .layout.header-collapsed .header-toggle::after {
 
         content: "Меню";
+
+    }
+
+    :root[lang="en"] .header-toggle::after {
+
+        content: "Hide menu";
+
+    }
+
+    :root[lang="en"] .layout.header-collapsed .header-toggle::after {
+
+        content: "Menu";
 
     }
 
