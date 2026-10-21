@@ -1,0 +1,275 @@
+{
+    "title": "Aperçu du tirage",
+    "chips": {
+        "majors": "Arcanes majeurs : {n}",
+        "reversed": "Inversées : {n}"
+    },
+    "suits": {
+        "wands": {
+            "name": "Bâtons",
+            "gen": "de Bâtons",
+            "theme": "action, énergie, ambition",
+            "lack": "l’initiative et le feu font défaut"
+        },
+        "cups": {
+            "name": "Coupes",
+            "gen": "de Coupes",
+            "theme": "sentiments, relations, intuition",
+            "lack": "les émotions et les relations ont reçu peu d’attention"
+        },
+        "swords": {
+            "name": "Épées",
+            "gen": "d’Épées",
+            "theme": "pensées, décisions, conflit",
+            "lack": "la clarté et un regard lucide manquent"
+        },
+        "pentacles": {
+            "name": "Pentacles",
+            "gen": "de Pentacles",
+            "theme": "argent, travail, foyer, résultats",
+            "lack": "le terrain solide n’est pas encore posé"
+        }
+    },
+    "majors": {
+        "none": "Aucun arcane majeur — la situation est concrète et dépend surtout de vos propres décisions.",
+        "many": "Beaucoup d’arcanes majeurs ({n} sur {total}) — l’enjeu est lourd de destin : les circonstances et les leçons pèsent plus que les choix ordinaires.",
+        "one": "Un seul arcane majeur — {card} : c’est le thème central du tirage, il mérite une attention particulière.",
+        "some": "{n} cartes sur {total} sont des arcanes majeurs — la situation comporte des tournants importants, mais beaucoup reste en votre pouvoir."
+    },
+    "suit": {
+        "dominant": "Les {suit} dominent ({n}) — le thème du tirage : {theme}.",
+        "tie": "Plusieurs couleurs sont à égalité : {suits} — les domaines de vie sont étroitement liés.",
+        "lacking": "Aucune carte {suit_gen} — {lack}."
+    },
+    "reversed": {
+        "none": "Toutes les cartes sont à l’endroit — l’énergie circule librement et la situation elle-même offre peu d’obstacles.",
+        "many": "Beaucoup de cartes sont inversées ({n} sur {total}) — attendez-vous à des retards, à des doutes intérieurs ou à quelque chose qui n’a pas encore émergé. Ne précipitez pas les événements.",
+        "few": "Presque toutes les cartes sont à l’endroit ({n} inversée(s)) — la voie est globalement ouverte, et les cartes inversées montrent où se montrer plus prudent.",
+        "mixed": "Cartes inversées : {n} sur {total} — les aspects clairs et cachés, pas encore révélés, de la situation se mêlent."
+    },
+    "courts": {
+        "many": "{n} figures ({cards}) — les personnes, leur caractère et leurs intentions jouent un rôle notable.",
+        "one": "{card} — une personne précise, ou votre propre rôle, est impliquée dans la situation."
+    },
+    "aces": {
+        "many": "Des As — signe d’un nouveau départ et d’une occasion à saisir.",
+        "one": "{card} — signe d’un nouveau départ et d’une occasion à saisir."
+    },
+    "tens": {
+        "many": "Des Dix — l’un des cycles touche à sa fin.",
+        "one": "{card} — l’un des cycles touche à sa fin."
+    },
+    "advice": {
+        "title": "Conseil du tirage",
+        "tempo": {
+            "open": [
+                "La voie est ouverte — ne remettez pas à plus tard ce qui est mûr.",
+                "Les conditions sont favorables : il est temps de passer de la réflexion à l’action.",
+                "La situation elle-même offre peu d’obstacles — vous pouvez avancer avec confiance."
+            ],
+            "slow": [
+                "Mieux vaut ralentir et vous écouter maintenant : la hâte ne ferait qu’ajouter à la confusion.",
+                "Ne forcez pas les événements — beaucoup de choses n’ont pas encore émergé, et la précipitation est mauvaise conseillère.",
+                "Laissez à la situation le temps de mûrir et évitez les décisions hâtives."
+            ],
+            "mixed": [
+                "Avancez, mais vérifiez les détails — une partie du tableau reste cachée.",
+                "Une partie du chemin est claire, une autre dans le brouillard : agissez là où vous voyez, et précisez le reste chemin faisant.",
+                "Allez pas à pas et vérifiez chaque étape suivante."
+            ]
+        },
+        "focus": {
+            "wands": [
+                "Concentrez votre force sur une tâche principale plutôt que sur plusieurs à la fois.",
+                "Vous avez assez d’énergie — l’essentiel est de ne pas vous disperser et de choisir une priorité.",
+                "Montrez de l’initiative sans vous emporter : le feu est fait pour le travail, pas pour les disputes."
+            ],
+            "cups": [
+                "Faites confiance à vos sentiments et parlez-en ouvertement — c’est là que se trouve la clé.",
+                "Écoutez votre cœur et l’humeur de vos proches : la réponse se trouve dans les relations.",
+                "Ne cachez pas vos émotions — une conversation sincère compte plus que n’importe quel calcul en ce moment."
+            ],
+            "swords": [
+                "Avant de décider, clarifiez les faits et appelez les choses par leur nom.",
+                "Pensez avec lucidité et ne laissez pas les pensées anxieuses décider à votre place.",
+                "Les mots et les accords importants gagnent à être formulés clairement et, si possible, mis par écrit."
+            ],
+            "pentacles": [
+                "Appuyez-vous sur des démarches concrètes et des résultats vérifiables.",
+                "Misez sur la pratique : argent, temps, santé — tout ce qui peut être mesuré.",
+                "Construisez un plan fiable et suivez-le sans hâte."
+            ],
+            "majors": [
+                "La question vous dépasse — acceptez ce qui arrive comme une leçon et ne forcez pas les événements.",
+                "C’est un tournant : regardez la situation plus largement qu’à l’échelle d’aujourd’hui.",
+                "Certaines circonstances échappent à votre contrôle — concentrez-vous sur ce que vous pouvez choisir."
+            ],
+            "balanced": [
+                "Aucun domaine ne l’emporte sur les autres — gardez l’ensemble en vue et ne vous fixez pas sur une seule carte.",
+                "Le tirage est équilibré : ne désignez pas trop tôt l’essentiel, examinez tous les aspects de la question.",
+                "Vos forces sont réparties de façon égale — agissez avec constance et évitez les extrêmes."
+            ]
+        },
+        "nuance": {
+            "outcome_up": [
+                "La dernière carte vous soutient — prenez-la pour objectif.",
+                "L’issue du tirage est favorable : gardez votre cap."
+            ],
+            "outcome_rev": [
+                "L’issue n’est pas encore fixée : ce qui peut la changer tient à votre comportement actuel.",
+                "La dernière carte est un avertissement — revoyez votre plan tant qu’il en est temps."
+            ],
+            "obstacle_rev": [
+                "L’obstacle principal est intérieur : commencez par une discussion honnête avec vous-même."
+            ],
+            "obstacle_up": [
+                "L’obstacle est bien réel, prévoyez donc une solution de repli à l’avance."
+            ],
+            "conflict": "Quand l’élan et les sentiments, ou les idées et le sens pratique, tirent dans des directions opposées, choisissez une ligne et tenez-vous-y avec constance.",
+            "harmony": "Appuyez-vous sur l’harmonie des éléments du tirage : ce que vous avez en tête est soutenu par les circonstances.",
+            "courts": "Beaucoup dépend de votre entourage : exprimez clairement vos limites et vos attentes.",
+            "aces": "Repérez l’occasion dès le début — elle ne se représentera pas sous la même forme.",
+            "tens": "N’ayez pas peur des fins : un cycle clos libère de l’énergie pour le suivant.",
+            "lack_suit": {
+                "wands": "Apportez plus d’initiative et d’intérêt sincère à la situation.",
+                "cups": "Prêtez attention aux sentiments et aux relations — ils n’ont pas trouvé de place dans le tirage.",
+                "swords": "Vérifiez les faits : le tirage manque d’un regard lucide.",
+                "pentacles": "Pensez au côté pratique : échéances, argent, ressources."
+            },
+            "majors_many": "N’essayez pas de tout contrôler : une partie de ce qui arrive est une leçon, pas une tâche."
+        }
+    },
+    "elements": {
+        "names": {
+            "fire": "Feu",
+            "water": "Eau",
+            "air": "Air",
+            "earth": "Terre"
+        },
+        "genitive": {
+            "fire": "feu",
+            "water": "eau",
+            "air": "air",
+            "earth": "terre"
+        },
+        "theme": {
+            "fire": "volonté, passion, action",
+            "water": "sentiments, intuition, relations",
+            "air": "pensées, paroles, décisions",
+            "earth": "corps, argent, sens pratique"
+        },
+        "lack": {
+            "fire": "la détermination et le feu intérieur font défaut",
+            "water": "les émotions restent dans l’ombre",
+            "air": "la clarté et un regard lucide manquent",
+            "earth": "l’ancrage et le sens pratique font défaut"
+        },
+        "dominant": "Élément dominant du tirage — {el} ({n} sur {total}) : {theme}.",
+        "missing": "L’élément {el_gen} est absent — {lack}.",
+        "conflict": {
+            "fire_water": "Le Feu et l’Eau s’opposent — l’élan et les sentiments tirent dans des directions différentes ; veillez à ne pas éteindre l’un par l’autre.",
+            "air_earth": "L’Air et la Terre divergent — les idées se heurtent à la pratique : vérifiez que votre plan est réalisable."
+        },
+        "harmony": {
+            "fire_air": "Le Feu et l’Air se renforcent — les idées se transforment facilement en actes.",
+            "water_earth": "L’Eau et la Terre se soutiennent — les sentiments trouvent un fondement solide."
+        },
+        "balanced": "Les cartes relèvent d’éléments différents ({list}) — le tirage est équilibré et aucun domaine n’attire toute l’attention.",
+        "tie": "Les éléments {list} sont représentés à parts égales — leurs forces s’équilibrent.",
+        "pair": {
+            "fire_earth": "Feu et Terre — l’élan rencontre le sens pratique : l’énergie prend forme et peut devenir un résultat.",
+            "water_air": "Eau et Air — les sentiments et la raison parlent des langues différentes : il est important de mettre en mots ce que vous ressentez."
+        }
+    },
+    "numerology": {
+        "sum": "Le nombre du tirage est {sum}{via} : {meaning}.",
+        "via": " (les numéros des cartes totalisent {raw}, réduit à {r})",
+        "repeat": "Le nombre {num} se répète ({k_cards}) : {meaning} — ce thème traverse tout le tirage.",
+        "meanings": {
+            "1": "commencement, initiative, nouveau départ",
+            "2": "choix, partenariat, équilibre",
+            "3": "croissance, créativité, communication",
+            "4": "stabilité, ordre, fondation",
+            "5": "changement, liberté, épreuve",
+            "6": "harmonie, soin, responsabilité",
+            "7": "quête de sens, analyse, travail intérieur",
+            "8": "force, réussite, résultats matériels",
+            "9": "achèvement, sagesse, bilan",
+            "11": "intuition et clairvoyance, tension accrue",
+            "22": "réalisation d’une grande entreprise, grande construction"
+        },
+        "advice": {
+            "1": "N’attendez pas le moment parfait — le premier pas compte plus que le plan.",
+            "2": "Pesez votre choix calmement et ne décidez pas seul(e) si vous pouvez vous appuyer sur quelqu’un de confiance.",
+            "3": "Ne gardez pas vos idées pour vous : la conversation et la créativité aident en ce moment.",
+            "4": "Mettez de l’ordre et posez des fondations solides avant d’aller plus loin.",
+            "5": "Soyez prêt(e) au changement et ne vous accrochez pas à ce qui est familier.",
+            "6": "Prenez soin de vos proches et de l’équité dans vos relations — l’harmonie repose sur la responsabilité.",
+            "7": "Accordez-vous du temps pour le silence et la réflexion : la réponse viendra de l’intérieur.",
+            "8": "Agissez avec assurance et répondez du résultat — vous en avez la force.",
+            "9": "Faites le bilan et laissez partir ce qui a rempli son rôle — cela fait de la place au nouveau.",
+            "11": "Écoutez votre intuition, mais ne laissez pas la tension décider à votre place.",
+            "22": "La tâche est à votre portée si vous la découpez en étapes claires."
+        }
+    },
+    "positions": {
+        "arc": "Le tirage va de « {first} » ({card1}) à « {last} » ({card2}) — la ligne principale des événements passe entre ces cartes.",
+        "max": 3,
+        "roles": [
+            {
+                "key": "outcome",
+                "match": "issue|résultat|dénouement|conclusion|final|comment ça finit",
+                "up": "Issue — {card}{kw}. Les choses évoluent en votre faveur si vous gardez votre cap.",
+                "rev": "Issue — {card} (inversée){kw}, mais sous une forme cachée ou déformée. Le résultat n’est pas écrit d’avance : beaucoup dépend de vos actes."
+            },
+            {
+                "key": "obstacle",
+                "match": "obstacle|défi|blocage|difficult|croisement|faiblesse|ombre|frein",
+                "up": "Obstacle principal — {card}{kw}. Il est réel, mais compréhensible et surmontable.",
+                "rev": "Obstacle principal — {card} (inversée){kw}. Il est en grande partie intérieur : doute, peur ou décision repoussée."
+            },
+            {
+                "key": "advice",
+                "match": "conseil|recommand|que faire|comment agir|action|guidance",
+                "up": "Conseil de la carte — {card}{kw}. C’est une indication directe sur la façon d’agir.",
+                "rev": "Conseil de la carte — {card} (inversée){kw}. Plutôt une mise en garde : ce qu’il faut éviter et où ralentir."
+            },
+            {
+                "key": "future",
+                "match": "futur|proche|évolution|perspective|potentiel|avenir|à venir|suite",
+                "up": "Futur proche — {card}{kw}. Les événements vont précisément dans cette direction.",
+                "rev": "Futur proche — {card} (inversée){kw}. La direction est freinée : des retards ou un changement de plan sont possibles."
+            },
+            {
+                "key": "present",
+                "match": "présent|cœur|coeur|noyau|situation|maintenant|actuel|^vous$|^moi$|centre",
+                "up": "Cœur du sujet — {card}{kw}. C’est le centre du tirage — un point de départ.",
+                "rev": "Cœur du sujet — {card} (inversée){kw}. Le thème principal est pour l’instant caché ou bloqué — regardez-le de plus près."
+            },
+            {
+                "key": "past",
+                "match": "passé|cause|fondement|racine|base|origine|début",
+                "up": "Racines de la situation — {card}{kw}. L’expérience passée joue en votre faveur.",
+                "rev": "Racines de la situation — {card} (inversée){kw}. Quelque chose d’irrésolu demeure dans le passé et résonne aujourd’hui."
+            },
+            {
+                "key": "hopes",
+                "match": "espoir|crainte|attente|désir|inquiét|sentiment|inconscient|intérieur",
+                "up": "État intérieur — {card}{kw}. Vos attentes et vos sentiments sont en phase avec la situation.",
+                "rev": "État intérieur — {card} (inversée){kw}. Espoirs et craintes sont mêlés : ce que vous redoutez n’est peut-être pas l’essentiel."
+            },
+            {
+                "key": "goal",
+                "match": "objectif|^but$|aspiration|^conscient|idéal|aspir",
+                "up": "Objectif — {card}{kw}. C’est ce que votre esprit cherche réellement à atteindre.",
+                "rev": "Objectif — {card} (inversée){kw}. Le but est flou ou mérite d’être reconsidéré."
+            },
+            {
+                "key": "env",
+                "match": "entourage|autres|extérieur|externe|partenaire|autre personne|environnement|influence",
+                "up": "Entourage et influences extérieures — {card}{kw}. Les circonstances et les personnes vous soutiennent plutôt.",
+                "rev": "Entourage et influences extérieures — {card} (inversée){kw}. Les intentions des autres ou les circonstances peuvent ne pas répondre à vos attentes."
+            }
+        ]
+    }
+}

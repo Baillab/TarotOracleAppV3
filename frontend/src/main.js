@@ -1,6 +1,8 @@
+
 import './app.css'
 import overviewRu from './overview.json'
 import overviewEn from './locales/overview.en.json'
+import overviewFr from './locales/overview.fr.json'
 import { t, getLang, setLang, LANGS } from './i18n.js'
 
 import * as TarotApi from '../bindings/tarotoracleapp/tarotservice.js'
@@ -709,6 +711,46 @@ document.addEventListener("click", (e) => {
 })
 
 
+
+function resetInterpretation() {
+    setInterpretation(`
+        <div class="interpretation-item">
+            <div class="interpretation-advice">
+                ${t("Выберите карту или расклад, чтобы увидеть толкование.")}
+            </div>
+        </div>
+    `)
+}
+
+// ==========================================
+// Быстрый ответ (копия таблицы из tarot/quickanswer.go — нужна, чтобы
+// ответ был и у записей истории, где он не хранится)
+// ==========================================
+const QA_MAJOR = [["Да", "Нет"], ["Да", "Нет"], ["Неопределённо", "Нет"], ["Да", "Скорее нет"], ["Да", "Нет"], ["Да", "Скорее нет"], ["Да", "Нет"], ["Да", "Нет"], ["Да", "Скорее нет"], ["Скорее нет", "Нет"], ["Да", "Нет"], ["Да", "Нет"], ["Скорее нет", "Нет"], ["Нет", "Скорее нет"], ["Да", "Нет"], ["Нет", "Скорее да"], ["Нет", "Скорее нет"], ["Да", "Скорее нет"], ["Скорее нет", "Скорее да"], ["Да", "Скорее да"], ["Да", "Скорее нет"], ["Да", "Скорее нет"]]
+const QA_NUM = { 1: ["Да", "Скорее нет"], 2: ["Скорее да", "Скорее нет"], 3: ["Да", "Скорее нет"], 4: ["Скорее да", "Нет"], 5: ["Нет", "Скорее да"], 6: ["Да", "Скорее нет"], 7: ["Скорее нет", "Скорее да"], 8: ["Скорее да", "Нет"], 9: ["Скорее да", "Нет"], 10: ["Да", "Нет"], 11: ["Скорее да", "Нет"], 12: ["Скорее да", "Нет"], 13: ["Да", "Скорее нет"], 14: ["Да", "Скорее нет"] }
+const QA_SWORDS = { 3: ["Нет", "Скорее да"], 6: ["Скорее да", "Нет"], 9: ["Нет", "Скорее да"], 10: ["Нет", "Скорее да"] }
+const QA_SCORE = { "Да": 2, "Скорее да": 1, "Неопределённо": 0, "Скорее нет": -1, "Нет": -2 }
+
+function quickAnswerFor(cardId, isReversed) {
+    const m = /^(major|wands|cups|swords|pentacles)_(\d{2})$/.exec(cardId || "")
+    if (!m) return ""
+    const n = Number(m[2])
+    let pair
+    if (m[1] === "major") pair = QA_MAJOR[n]
+    else pair = (m[1] === "swords" && QA_SWORDS[n]) || QA_NUM[n]
+    return pair ? pair[isReversed ? 1 : 0] : ""
+}
+
+function aggregateQuickAnswer(answers) {
+    const sc = answers.map(a => QA_SCORE[a]).filter(v => v !== undefined)
+    if (!sc.length) return ""
+    const avg = sc.reduce((a, b) => a + b, 0) / sc.length
+    if (avg >= 1.5) return "Да"
+    if (avg >= 0.5) return "Скорее да"
+    if (avg > -0.5) return "Неопределённо"
+    if (avg > -1.5) return "Скорее нет"
+    return "Нет"
+}
 
 // ==========================================
 // Класс цвета для быстрого ответа
@@ -1654,6 +1696,7 @@ function updateChrome() {
         result.children.length === 0 || !!result.querySelector(".welcome-deck")
 
 
+
     const bar =
         document.querySelector(".icon-row")
 
@@ -1798,7 +1841,7 @@ document
 
 
 
-            showToast(text)
+            showToast(t(text))
 
 
 
@@ -3132,7 +3175,7 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 // Тексты фраз — в overview.json
 // ==========================================
 // Тексты «Общей картины» по языкам (при нехватке перевода — русские)
-const OVERVIEW_BY_LANG = { ru: overviewRu, en: overviewEn }
+const OVERVIEW_BY_LANG = { ru: overviewRu, en: overviewEn, fr: overviewFr }
 
 function ovFill(tpl, vars) {
     return tpl.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : ""))
@@ -3158,6 +3201,7 @@ function numReduce(x) {
 
 // «2 карты», «5 карт» / «2 cards»
 function cardsCount(k) {
+    if (getLang() === "fr") return k + " cartes"
     if (getLang() !== "ru") return k + " cards"
     return k + ((k % 10 >= 2 && k % 10 <= 4 && (k < 12 || k > 14)) ? " карты" : " карт")
 }
@@ -3267,7 +3311,7 @@ function overviewDataRaw(items) {
         const found = []
         const kwOf = it => {
             const k = Array.isArray(it.card.keywords) ? it.card.keywords.slice(0, 3).join(", ").toLowerCase() : ""
-            return k ? ": " + k : ""
+            return k ? (getLang() === "fr" ? " : " : ": ") + k : ""
         }
         for (const role of T.positions.roles) {
             if (found.length >= (T.positions.max || 3)) break
@@ -3360,7 +3404,7 @@ function overviewDataRaw(items) {
 
     const chips = [
         ovFill(T.chips.majors, { n: majors.length }),
-        ...Object.entries(suitCount).filter(r => r[1] > 0).map(r => `${T.suits[r[0]].name}: ${r[1]}`),
+        ...Object.entries(suitCount).filter(r => r[1] > 0).map(r => `${T.suits[r[0]].name}${getLang() === "fr" ? " : " : ": "}${r[1]}`),
         ovFill(T.chips.reversed, { n: reversed.length }),
     ]
 
@@ -4256,6 +4300,8 @@ function openHistoryRecord(record) {
 
         }
 
+        data.quickAnswer = record.quickAnswer || aggregateQuickAnswer(data.cards.map(c => c.quickAnswer || quickAnswerFor(c.card && c.card.id, c.isReversed)))
+
         data.historyId = record.id
 
 
@@ -4566,9 +4612,10 @@ async function renderRecordImage(record, onStage) {
         (record.type === "daily" ? t("Карта дня")
             : record.type === "spread" ? t("Расклад") : t("Карта"))
 
+    const perCard = items.map(it => it.quickAnswer || quickAnswerFor(it.card && it.card.id, it.isReversed))
     const quick =
         record.quickAnswer ||
-        (record.type !== "spread" && items[0] ? items[0].quickAnswer : "")
+        (record.type !== "spread" ? (perCard[0] || "") : aggregateQuickAnswer(perCard))
 
     const ov = spreadDef ? overviewData(items) : null
 
@@ -4921,7 +4968,8 @@ async function renderRecordImage(record, onStage) {
 
             oy += 8
 
-            put(`${ov.adviceTitle}. ${ov.advice}`, `italic 600 29px ${FONT}`, GOLD, 40, TX, innerW - 60)
+            put(ov.adviceTitle, `700 29px ${FONT}`, GOLD, 40, TX, innerW - 60)
+            put(ov.advice, `italic 400 29px ${FONT}`, TEXT, 40, TX, innerW - 60)
 
             const oh = oy + 18
 
@@ -5835,6 +5883,7 @@ const APP_INFO = {
 }
 
 function showSettings() {
+    resetInterpretation()
 
 
     result.innerHTML = `
@@ -5916,7 +5965,7 @@ function showSettings() {
  
  
         <button
- 
+
             class="settings-option ${appSettings.drawMode !== "random" ? "active" : ""}"
  
             data-setting="drawMode"
@@ -6447,6 +6496,7 @@ function cardGridItemHTML(card, isReversed) {
 }
 
 async function showDeckScreen() {
+    resetInterpretation()
 
 
     result.innerHTML = `
@@ -6829,6 +6879,7 @@ async function showDeckScreen() {
 // ==========================================
 
 async function showGuideScreen(title, fetchFn) {
+    resetInterpretation()
 
 
     const screenTitle =
@@ -6958,4 +7009,6 @@ async function showGuideScreen(title, fetchFn) {
 // История гаданий
 // Избранные карты
 // Звуки
-// Анимация пере
+// Анимация переворота
+// Полноэкранный режим
+//

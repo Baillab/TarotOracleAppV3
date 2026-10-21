@@ -1,17 +1,19 @@
+
 // Переводы интерфейса. Ключ — исходный русский текст: если перевода нет,
 // показывается сам ключ, поэтому приложение не может остаться «без текста».
 // Словари: src/locales/<код>.json  { "русский текст": "перевод" }
 
 import en from './locales/en.json'
+import fr from './locales/fr.json'
 
 // Подключённые словари: { en: {...}, fr: {...} }
-const dictionaries = { en }
+const dictionaries = { en, fr }
 
 // ready: язык можно выбирать в «Настройках»
 export const LANGS = [
     { code: "ru", name: "Русский", ready: true },
     { code: "en", name: "English", ready: true },
-    { code: "fr", name: "Français", ready: false },
+    { code: "fr", name: "Français", ready: true },
 ]
 
 const STORAGE_KEY = "tarot.lang"

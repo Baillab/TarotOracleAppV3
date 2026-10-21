@@ -6306,6 +6306,18 @@ button,
 
     }
 
+    :root[lang="fr"] .header-toggle::after {
+
+        content: "Masquer le menu";
+
+    }
+
+    :root[lang="fr"] .layout.header-collapsed .header-toggle::after {
+
+        content: "Menu";
+
+    }
+
     .layout.header-collapsed .logo,
     .layout.header-collapsed .menu,
     .layout.header-collapsed .spread-strip {

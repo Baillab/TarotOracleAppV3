@@ -131,5 +131,8 @@
     "Скорее да": "Probably yes",
     "Неопределённо": "Unclear",
     "Скорее нет": "Probably no",
-    "Нет": "No"
+    "Нет": "No",
+    "Колода восстановлена и перемешана": "The deck has been restored and shuffled",
+    "Колода восстановлена и перемешана.": "The deck has been restored and shuffled.",
+    "Колода восстановлена и перемешана!": "The deck has been restored and shuffled!"
 }
