@@ -1,30 +1,44 @@
-
 import './app.css'
-import overviewTexts from './overview.json'
+import overviewRu from './overview.json'
+import overviewEn from './locales/overview.en.json'
 import { t, getLang, setLang, LANGS } from './i18n.js'
 
+import * as TarotApi from '../bindings/tarotoracleapp/tarotservice.js'
 import {
-    DrawCard,
+    localizeData,
+    localizeQuestions,
+    localizeGuide,
+    localizeAbout,
+    localizeLegal,
+} from './localize.js'
+
+// Всё, что приходит из Go и содержит тексты, пропускаем через перевод
+// (для русского языка данные возвращаются без изменений)
+const {
     Shuffle,
-    GetDailyCard,
-    DrawSpread,
-    GetSpreads,
-    GetHistory,
     DeleteHistoryRecord,
     ClearHistory,
-    GetQuestions,
     GetSettings,
     UpdateSetting,
     RemainingCards,
-    RemainingCardsList,
-    FullDeck,
-    GetGuide,
-    GetLegal,
     UpdateHistoryComment,
-    GetAboutTarot
-} from '../bindings/tarotoracleapp/tarotservice.js'
+} = TarotApi
 
-import * as TarotApi from '../bindings/tarotoracleapp/tarotservice.js'
+const localized = (fn, convert = localizeData) =>
+    async (...args) => convert(await fn(...args))
+
+const DrawCard = localized(TarotApi.DrawCard)
+const GetDailyCard = localized(TarotApi.GetDailyCard)
+const DrawSpread = localized(TarotApi.DrawSpread)
+const GetSpreads = localized(TarotApi.GetSpreads)
+const GetHistory = localized(TarotApi.GetHistory)
+const RemainingCardsList = localized(TarotApi.RemainingCardsList)
+const FullDeck = localized(TarotApi.FullDeck)
+const GetQuestions = localized(TarotApi.GetQuestions, localizeQuestions)
+const GetGuide = localized(TarotApi.GetGuide, localizeGuide)
+const GetAboutTarot = localized(TarotApi.GetAboutTarot, localizeAbout)
+const GetLegal = localized(TarotApi.GetLegal, localizeLegal)
+
 
 
 
@@ -1640,7 +1654,6 @@ function updateChrome() {
         result.children.length === 0 || !!result.querySelector(".welcome-deck")
 
 
-
     const bar =
         document.querySelector(".icon-row")
 
@@ -1671,6 +1684,8 @@ new MutationObserver(() => {
     if (now && !was && currentSpreadRelayout) currentSpreadRelayout()
 
 }).observe(result, { childList: true })
+
+
 
 // Фон приложения. Варианты: "amethyst" (Аметист), "midnight" (Полночь),
 // "twilight" (Сумерки), "starry" (Звёздная ночь), "classic" (прежний фон с узором). Чтобы вернуть
@@ -3116,6 +3131,9 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 // Общая картина расклада (встроенный разбор по правилам)
 // Тексты фраз — в overview.json
 // ==========================================
+// Тексты «Общей картины» по языкам (при нехватке перевода — русские)
+const OVERVIEW_BY_LANG = { ru: overviewRu, en: overviewEn }
+
 function ovFill(tpl, vars) {
     return tpl.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : ""))
 }
@@ -3138,10 +3156,16 @@ function numReduce(x) {
     return x
 }
 
+// «2 карты», «5 карт» / «2 cards»
+function cardsCount(k) {
+    if (getLang() !== "ru") return k + " cards"
+    return k + ((k % 10 >= 2 && k % 10 <= 4 && (k < 12 || k > 14)) ? " карты" : " карт")
+}
+
 function overviewDataRaw(items) {
     if (!items || items.length < 3) return null
 
-    const T = overviewTexts
+    const T = OVERVIEW_BY_LANG[getLang()] || overviewRu
     const n = items.length
     const majors = items.filter(i => i.card.arcana === "major")
     const minors = items.filter(i => i.card.arcana !== "major")
@@ -3218,8 +3242,7 @@ function overviewDataRaw(items) {
         else if (has("water", "earth")) { ctx.harmony = true; add(T.elements.harmony.water_earth, {}) }
         else if (T.elements.pair && has("fire", "earth")) add(T.elements.pair.fire_earth, {})
         else if (T.elements.pair && has("water", "air")) add(T.elements.pair.water_air, {})
-    } catch
-        (e) { console.error("overview/elements:", e) }
+    } catch (e) { console.error("overview/elements:", e) }
 
     // 3. Перевёрнутые
     const rr = reversed.length / n
@@ -3293,7 +3316,7 @@ function overviewDataRaw(items) {
             })
             const rep = Object.entries(byDigit).sort((a, b) => b[1] - a[1] || a[0] - b[0])[0]
             if (rep && rep[1] >= 2 && T.numerology.meanings[rep[0]]) {
-                add(T.numerology.repeat, { num: rep[0], k_cards: rep[1] + ((rep[1] % 10 >= 2 && rep[1] % 10 <= 4 && (rep[1] < 12 || rep[1] > 14)) ? " карты" : " карт"), meaning: T.numerology.meanings[rep[0]] })
+                add(T.numerology.repeat, { num: rep[0], k_cards: cardsCount(rep[1]), meaning: T.numerology.meanings[rep[0]] })
             }
         }
     } catch (e) { console.error("overview/numerology:", e) }
@@ -6935,6 +6958,4 @@ async function showGuideScreen(title, fetchFn) {
 // История гаданий
 // Избранные карты
 // Звуки
-// Анимация переворота
-// Полноэкранный режим
-//
+// Анимация пере

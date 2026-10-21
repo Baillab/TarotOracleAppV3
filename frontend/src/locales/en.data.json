@@ -1,0 +1,2269 @@
+{
+    "cards": {
+        "major_00": {
+            "name": "The Fool",
+            "keywords": [
+                "beginning",
+                "freedom",
+                "journey",
+                "risk"
+            ],
+            "upright": {
+                "text": "A new beginning, freedom and readiness to walk an unknown path.",
+                "love": "A new acquaintance, lightness and fresh feelings.",
+                "career": "A new project, learning or a change of direction.",
+                "finance": "New opportunities, but caution is needed.",
+                "health": "Renewing habits and caring for yourself.",
+                "advice": "Trust life, but consider the consequences."
+            },
+            "reversed": {
+                "text": "Carelessness, chaos and reckless risk.",
+                "love": "Instability or a lack of seriousness.",
+                "career": "This is not the time to act without a plan.",
+                "finance": "Impulsive spending.",
+                "health": "Pay closer attention to how you feel.",
+                "advice": "Stop and assess the situation."
+            }
+        },
+        "major_01": {
+            "name": "The Magician",
+            "keywords": [
+                "will",
+                "creativity",
+                "mastery"
+            ],
+            "upright": {
+                "text": "Willpower, knowledge and the ability to create something new.",
+                "love": "Initiative and active development of the relationship.",
+                "career": "Using your skills to reach your goal.",
+                "finance": "New ways to earn.",
+                "health": "Energy and recovery.",
+                "advice": "Use your abilities."
+            },
+            "reversed": {
+                "text": "Manipulation and misuse of power.",
+                "love": "Insincerity and hidden motives.",
+                "career": "Mistakes born of overconfidence.",
+                "finance": "Risk of being deceived.",
+                "health": "Drained energy.",
+                "advice": "Be honest with yourself."
+            }
+        },
+        "major_02": {
+            "name": "The High Priestess",
+            "keywords": [
+                "intuition",
+                "mystery",
+                "knowledge"
+            ],
+            "upright": {
+                "text": "Intuition and a deep understanding of what is hidden.",
+                "love": "A subtle emotional bond.",
+                "career": "Observation and analysis.",
+                "finance": "Do not rush into decisions.",
+                "health": "Listen to yourself.",
+                "advice": "Trust your inner voice."
+            },
+            "reversed": {
+                "text": "Ignoring your intuition and hidden information.",
+                "love": "Things left unsaid.",
+                "career": "A lack of clarity.",
+                "finance": "Not all the information is known.",
+                "health": "Do not ignore your body’s signals.",
+                "advice": "Look for hidden causes."
+            }
+        },
+        "major_03": {
+            "name": "The Empress",
+            "keywords": [
+                "creation",
+                "abundance",
+                "growth"
+            ],
+            "upright": {
+                "text": "Creativity, fertility and development.",
+                "love": "Harmony, care and deep feelings.",
+                "career": "Growth of projects and creative ideas.",
+                "finance": "Material well-being.",
+                "health": "Recovery and care for the body.",
+                "advice": "Create and nurture."
+            },
+            "reversed": {
+                "text": "Stagnation, dependence or a lack of growth.",
+                "love": "A lack of attention.",
+                "career": "A creative block.",
+                "finance": "Unwise spending.",
+                "health": "Rest is needed.",
+                "advice": "Restore the balance."
+            }
+        },
+        "major_04": {
+            "name": "The Emperor",
+            "keywords": [
+                "order",
+                "authority",
+                "structure"
+            ],
+            "upright": {
+                "text": "Stability, responsibility and control.",
+                "love": "Reliability and seriousness.",
+                "career": "Leadership and organization.",
+                "finance": "A stable position.",
+                "health": "Discipline and routine.",
+                "advice": "Build a solid foundation."
+            },
+            "reversed": {
+                "text": "Rigidity and excessive control.",
+                "love": "Domination in the relationship.",
+                "career": "Conflicts with authority.",
+                "finance": "Problems caused by control.",
+                "health": "Overstrain.",
+                "advice": "Be more flexible."
+            }
+        },
+        "major_05": {
+            "name": "The Hierophant",
+            "keywords": [
+                "tradition",
+                "learning",
+                "wisdom"
+            ],
+            "upright": {
+                "text": "Knowledge, mentorship and a spiritual path.",
+                "love": "A serious relationship.",
+                "career": "Learning and working within rules.",
+                "finance": "Reliable decisions.",
+                "health": "Traditional methods of recovery.",
+                "advice": "Learn from experience."
+            },
+            "reversed": {
+                "text": "Breaking rules and doubting traditions.",
+                "love": "A mismatch of values.",
+                "career": "A conflict with the system.",
+                "finance": "The risk of unconventional decisions.",
+                "health": "Find your own approach.",
+                "advice": "Think for yourself."
+            }
+        },
+        "major_06": {
+            "name": "The Lovers",
+            "keywords": [
+                "love",
+                "choice",
+                "harmony"
+            ],
+            "upright": {
+                "text": "A choice, a union and harmony.",
+                "love": "A deep connection.",
+                "career": "An important decision.",
+                "finance": "Choosing the right path.",
+                "health": "Balance of body and soul.",
+                "advice": "Follow your heart."
+            },
+            "reversed": {
+                "text": "Conflict or a wrong choice.",
+                "love": "Disagreements.",
+                "career": "Doubts.",
+                "finance": "Mistaken decisions.",
+                "health": "Lost balance.",
+                "advice": "Reconsider your choice."
+            }
+        },
+        "major_07": {
+            "name": "The Chariot",
+            "keywords": [
+                "movement",
+                "victory",
+                "goal"
+            ],
+            "upright": {
+                "text": "Moving forward and reaching your goal.",
+                "love": "The relationship develops.",
+                "career": "Success through action.",
+                "finance": "Advancement.",
+                "health": "Strength and energy.",
+                "advice": "Move ahead with confidence."
+            },
+            "reversed": {
+                "text": "Loss of control and a lost direction.",
+                "love": "Tension.",
+                "career": "Delays.",
+                "finance": "Uncontrolled spending.",
+                "health": "Exhaustion.",
+                "advice": "Regain control."
+            }
+        },
+        "major_08": {
+            "name": "Strength",
+            "keywords": [
+                "courage",
+                "will",
+                "inner strength"
+            ],
+            "upright": {
+                "text": "Inner strength, patience and confidence.",
+                "love": "Deep attachment and trust.",
+                "career": "Confidently overcoming difficulties.",
+                "finance": "Stability through discipline.",
+                "health": "A good reserve of energy.",
+                "advice": "Act calmly and confidently."
+            },
+            "reversed": {
+                "text": "Doubt, weakness or loss of control.",
+                "love": "Insecurity.",
+                "career": "A lack of determination.",
+                "finance": "A lack of self-control.",
+                "health": "Depleted strength.",
+                "advice": "Restore your inner balance."
+            }
+        },
+        "major_09": {
+            "name": "The Hermit",
+            "keywords": [
+                "wisdom",
+                "search",
+                "solitude"
+            ],
+            "upright": {
+                "text": "Self-reflection and the search for inner truth.",
+                "love": "A time for reflection.",
+                "career": "Gaining experience and knowledge.",
+                "finance": "A cautious approach.",
+                "health": "Rest and recovery.",
+                "advice": "Listen to yourself."
+            },
+            "reversed": {
+                "text": "Isolation and withdrawal from the world.",
+                "love": "Emotional distance.",
+                "career": "Slowed development.",
+                "finance": "Fear of change.",
+                "health": "Do not shut out help.",
+                "advice": "Return to people."
+            }
+        },
+        "major_10": {
+            "name": "Wheel of Fortune",
+            "keywords": [
+                "change",
+                "fate",
+                "cycle"
+            ],
+            "upright": {
+                "text": "A new stage and unexpected changes.",
+                "love": "Changes in the relationship.",
+                "career": "New opportunities.",
+                "finance": "A change in your financial situation.",
+                "health": "Renewal.",
+                "advice": "Accept change."
+            },
+            "reversed": {
+                "text": "Delays and resistance to change.",
+                "love": "Repeating old patterns.",
+                "career": "Temporary difficulties.",
+                "finance": "Instability.",
+                "health": "Habits need to change.",
+                "advice": "Do not hold on to the past."
+            }
+        },
+        "major_11": {
+            "name": "Justice",
+            "keywords": [
+                "balance",
+                "law",
+                "truth"
+            ],
+            "upright": {
+                "text": "Honesty, equilibrium and the consequences of decisions.",
+                "love": "An honest conversation.",
+                "career": "A fair assessment.",
+                "finance": "A responsible approach.",
+                "health": "Balance and order.",
+                "advice": "Be objective."
+            },
+            "reversed": {
+                "text": "Imbalance and injustice.",
+                "love": "Misunderstanding.",
+                "career": "An unfair situation.",
+                "finance": "Errors in calculations.",
+                "health": "Lost balance.",
+                "advice": "Look at the situation honestly."
+            }
+        },
+        "major_12": {
+            "name": "The Hanged Man",
+            "keywords": [
+                "pause",
+                "new perspective",
+                "sacrifice"
+            ],
+            "upright": {
+                "text": "A stop for the sake of rethinking.",
+                "love": "Time is needed to understand.",
+                "career": "A new view of the situation.",
+                "finance": "Do not rush to act.",
+                "health": "Recovery.",
+                "advice": "Look at it differently."
+            },
+            "reversed": {
+                "text": "Stagnation and resistance to change.",
+                "love": "Unwillingness to change.",
+                "career": "No movement.",
+                "finance": "Putting off decisions.",
+                "health": "Ignoring problems.",
+                "advice": "Let go of the old."
+            }
+        },
+        "major_13": {
+            "name": "Death",
+            "keywords": [
+                "transformation",
+                "ending",
+                "renewal"
+            ],
+            "upright": {
+                "text": "The end of one stage and the beginning of another.",
+                "love": "A deep transformation of the relationship.",
+                "career": "A change of direction.",
+                "finance": "A change of approach.",
+                "health": "Renewing habits.",
+                "advice": "Do not fear change."
+            },
+            "reversed": {
+                "text": "Resistance to inevitable change.",
+                "love": "Attachment to the past.",
+                "career": "Fear of the new.",
+                "finance": "Stagnation.",
+                "health": "Your lifestyle needs to change.",
+                "advice": "Let the old go."
+            }
+        },
+        "major_14": {
+            "name": "Temperance",
+            "keywords": [
+                "harmony",
+                "balance",
+                "healing"
+            ],
+            "upright": {
+                "text": "Equilibrium, calm and gradual development.",
+                "love": "A harmonious relationship.",
+                "career": "Successful cooperation.",
+                "finance": "Stability through moderation.",
+                "health": "Restoring balance.",
+                "advice": "Do not hurry, everything comes in its time."
+            },
+            "reversed": {
+                "text": "Imbalance and a lack of moderation.",
+                "love": "Conflicts and emotional extremes.",
+                "career": "Disrupted balance at work.",
+                "finance": "Careless spending.",
+                "health": "Overexertion.",
+                "advice": "Restore harmony."
+            }
+        },
+        "major_15": {
+            "name": "The Devil",
+            "keywords": [
+                "desire",
+                "attachment",
+                "temptation"
+            ],
+            "upright": {
+                "text": "Strong desires and material attachments.",
+                "love": "Passion and strong attraction.",
+                "career": "Ambition and a drive for success.",
+                "finance": "Material goals.",
+                "health": "Pay attention to your habits.",
+                "advice": "Recognize your limitations."
+            },
+            "reversed": {
+                "text": "Freedom from dependence.",
+                "love": "Breaking unhealthy ties.",
+                "career": "Escaping limitations.",
+                "finance": "Control over spending.",
+                "health": "Getting rid of harmful habits.",
+                "advice": "Win back your freedom."
+            }
+        },
+        "major_16": {
+            "name": "The Tower",
+            "keywords": [
+                "change",
+                "destruction",
+                "liberation"
+            ],
+            "upright": {
+                "text": "Sudden change and the collapse of the old.",
+                "love": "A reassessment of the relationship.",
+                "career": "A change of circumstances.",
+                "finance": "Unexpected changes.",
+                "health": "Your habits need a review.",
+                "advice": "Accept change."
+            },
+            "reversed": {
+                "text": "Fear of change and resistance.",
+                "love": "Avoiding an important conversation.",
+                "career": "Putting off decisions.",
+                "finance": "An attempt to keep the old.",
+                "health": "Do not ignore the signals.",
+                "advice": "Do not hold on to the past."
+            }
+        },
+        "major_17": {
+            "name": "The Star",
+            "keywords": [
+                "hope",
+                "inspiration",
+                "light"
+            ],
+            "upright": {
+                "text": "Hope, renewal and inspiration.",
+                "love": "Openness and trust.",
+                "career": "Creative success.",
+                "finance": "Positive prospects.",
+                "health": "Recovery.",
+                "advice": "Keep the faith."
+            },
+            "reversed": {
+                "text": "Lost confidence.",
+                "love": "Disappointment.",
+                "career": "A lack of inspiration.",
+                "finance": "Doubts.",
+                "health": "Support is needed.",
+                "advice": "Bring back hope."
+            }
+        },
+        "major_18": {
+            "name": "The Moon",
+            "keywords": [
+                "mystery",
+                "intuition",
+                "illusion"
+            ],
+            "upright": {
+                "text": "Hidden emotions and uncertainty.",
+                "love": "Strong feelings, but there are secrets.",
+                "career": "Not all the information is open.",
+                "finance": "Caution is needed.",
+                "health": "Pay attention to your inner state.",
+                "advice": "Trust your intuition."
+            },
+            "reversed": {
+                "text": "The hidden comes to light.",
+                "love": "The situation becomes clear.",
+                "career": "Receiving information.",
+                "finance": "Things become clearer.",
+                "health": "Emerging from anxiety.",
+                "advice": "Look at the facts."
+            }
+        },
+        "major_19": {
+            "name": "The Sun",
+            "keywords": [
+                "joy",
+                "success",
+                "clarity"
+            ],
+            "upright": {
+                "text": "Success, energy and positivity.",
+                "love": "A happy relationship.",
+                "career": "Recognition and achievements.",
+                "finance": "Growth and prosperity.",
+                "health": "Vital energy.",
+                "advice": "Act openly."
+            },
+            "reversed": {
+                "text": "Temporary obstacles.",
+                "love": "A lack of warmth.",
+                "career": "Success is delayed.",
+                "finance": "Patience is needed.",
+                "health": "Rebuild your strength.",
+                "advice": "Do not lose your optimism."
+            }
+        },
+        "major_20": {
+            "name": "Judgement",
+            "keywords": [
+                "rebirth",
+                "decision",
+                "awakening"
+            ],
+            "upright": {
+                "text": "Awakening and an important decision.",
+                "love": "A new stage.",
+                "career": "Recognition of results.",
+                "finance": "A reassessment of goals.",
+                "health": "Recovery.",
+                "advice": "Draw your conclusions."
+            },
+            "reversed": {
+                "text": "Doubt and refusal to make a decision.",
+                "love": "The past is unfinished.",
+                "career": "Fear of change.",
+                "finance": "Postponed decisions.",
+                "health": "Ignoring signals.",
+                "advice": "Be honest with yourself."
+            }
+        },
+        "major_21": {
+            "name": "The World",
+            "keywords": [
+                "completion",
+                "wholeness",
+                "success"
+            ],
+            "upright": {
+                "text": "The completion of a cycle and reaching your goal.",
+                "love": "A harmonious union.",
+                "career": "Successfully completing a project.",
+                "finance": "Stability.",
+                "health": "Balance and recovery.",
+                "advice": "Accept the result of the journey."
+            },
+            "reversed": {
+                "text": "Incompleteness and delay.",
+                "love": "A feeling of something unfinished.",
+                "career": "What you started needs to be finished.",
+                "finance": "Postponed results.",
+                "health": "Recovery needs to be completed.",
+                "advice": "Close the old matters."
+            }
+        },
+        "wands_01": {
+            "name": "Ace of Wands",
+            "keywords": [
+                "energy",
+                "beginning",
+                "inspiration"
+            ],
+            "upright": {
+                "text": "New energy, an idea and the start of a new path.",
+                "love": "Passion and new feelings.",
+                "career": "A new project and inspiration.",
+                "finance": "New opportunities.",
+                "health": "A surge of strength.",
+                "advice": "Act boldly."
+            },
+            "reversed": {
+                "text": "Delays and a loss of motivation.",
+                "love": "Feelings cooling off.",
+                "career": "No movement.",
+                "finance": "Do not rush into decisions.",
+                "health": "Rest is needed.",
+                "advice": "Restore your energy."
+            }
+        },
+        "wands_02": {
+            "name": "Two of Wands",
+            "keywords": [
+                "plan",
+                "choice",
+                "future"
+            ],
+            "upright": {
+                "text": "Planning the future and choosing a direction.",
+                "love": "Reflecting on where the relationship is going.",
+                "career": "New prospects.",
+                "finance": "Strategic planning.",
+                "health": "Looking for balance.",
+                "advice": "Look wider."
+            },
+            "reversed": {
+                "text": "Uncertainty and fear of change.",
+                "love": "Doubts.",
+                "career": "There is no clear plan.",
+                "finance": "Strategic errors.",
+                "health": "Do not overload yourself.",
+                "advice": "Define your goal."
+            }
+        },
+        "wands_03": {
+            "name": "Three of Wands",
+            "keywords": [
+                "growth",
+                "anticipation",
+                "expansion"
+            ],
+            "upright": {
+                "text": "Development and first results.",
+                "love": "Widening horizons.",
+                "career": "The project grows.",
+                "finance": "Promising opportunities.",
+                "health": "Gradual improvement.",
+                "advice": "Keep moving."
+            },
+            "reversed": {
+                "text": "Delays and obstacles.",
+                "love": "Disappointment.",
+                "career": "Slow progress.",
+                "finance": "Plans need to be reconsidered.",
+                "health": "Patience is needed.",
+                "advice": "Correct your course."
+            }
+        },
+        "wands_04": {
+            "name": "Four of Wands",
+            "keywords": [
+                "celebration",
+                "home",
+                "stability"
+            ],
+            "upright": {
+                "text": "Joy, stability and harmony.",
+                "love": "A happy relationship.",
+                "career": "A successful stage.",
+                "finance": "Stability.",
+                "health": "Good condition.",
+                "advice": "Appreciate what you have achieved."
+            },
+            "reversed": {
+                "text": "Instability and delays.",
+                "love": "Tension.",
+                "career": "Temporary problems.",
+                "finance": "Control is needed.",
+                "health": "Recovery is needed.",
+                "advice": "Create order."
+            }
+        },
+        "wands_05": {
+            "name": "Five of Wands",
+            "keywords": [
+                "struggle",
+                "competition",
+                "trial"
+            ],
+            "upright": {
+                "text": "Competition and a test of strength.",
+                "love": "Arguments and emotions.",
+                "career": "Rivalry.",
+                "finance": "A competitive environment.",
+                "health": "Too much tension.",
+                "advice": "Use your energy wisely."
+            },
+            "reversed": {
+                "text": "Avoiding conflict.",
+                "love": "An attempt at reconciliation.",
+                "career": "Tension eases.",
+                "finance": "Caution.",
+                "health": "Rest.",
+                "advice": "Look for a compromise."
+            }
+        },
+        "wands_06": {
+            "name": "Six of Wands",
+            "keywords": [
+                "victory",
+                "recognition",
+                "success"
+            ],
+            "upright": {
+                "text": "Victory and recognition of your achievements.",
+                "love": "Pride in the relationship.",
+                "career": "Success and recognition.",
+                "finance": "Positive results.",
+                "health": "Restored confidence.",
+                "advice": "Accept your success."
+            },
+            "reversed": {
+                "text": "Doubts and a lack of recognition.",
+                "love": "Insecurity.",
+                "career": "A delayed result.",
+                "finance": "A lack of confidence.",
+                "health": "Support is needed.",
+                "advice": "Do not undervalue yourself."
+            }
+        },
+        "wands_07": {
+            "name": "Seven of Wands",
+            "keywords": [
+                "defense",
+                "resilience",
+                "struggle"
+            ],
+            "upright": {
+                "text": "Defending your position and strength of character.",
+                "love": "Standing up for the relationship.",
+                "career": "Defending your ideas.",
+                "finance": "Keeping what you have achieved.",
+                "health": "Strength to resist.",
+                "advice": "Do not give up."
+            },
+            "reversed": {
+                "text": "Weariness and lost confidence.",
+                "love": "Difficulty defending your feelings.",
+                "career": "Pressure from circumstances.",
+                "finance": "Risk of losses.",
+                "health": "Exhaustion.",
+                "advice": "Save your strength."
+            }
+        },
+        "wands_08": {
+            "name": "Eight of Wands",
+            "keywords": [
+                "speed",
+                "news",
+                "movement"
+            ],
+            "upright": {
+                "text": "Events develop quickly.",
+                "love": "Rapid development.",
+                "career": "Fast changes.",
+                "finance": "New opportunities.",
+                "health": "A surge of energy.",
+                "advice": "Act in time."
+            },
+            "reversed": {
+                "text": "Delays and obstacles.",
+                "love": "The relationship slows down.",
+                "career": "Postponed plans.",
+                "finance": "Do not hurry.",
+                "health": "Rest is needed.",
+                "advice": "Be patient."
+            }
+        },
+        "wands_09": {
+            "name": "Nine of Wands",
+            "keywords": [
+                "experience",
+                "endurance",
+                "defense"
+            ],
+            "upright": {
+                "text": "Resilience after trials.",
+                "love": "Caution after past experience.",
+                "career": "Continuing the struggle.",
+                "finance": "Preserving resources.",
+                "health": "Do not give up.",
+                "advice": "Keep going."
+            },
+            "reversed": {
+                "text": "Weariness and distrust.",
+                "love": "Being closed off.",
+                "career": "Loss of motivation.",
+                "finance": "Fear of risk.",
+                "health": "Overtiredness.",
+                "advice": "Give yourself a rest."
+            }
+        },
+        "wands_10": {
+            "name": "Ten of Wands",
+            "keywords": [
+                "responsibility",
+                "burden",
+                "hard work"
+            ],
+            "upright": {
+                "text": "Great responsibility and a heavy load.",
+                "love": "Too many obligations.",
+                "career": "A lot of work.",
+                "finance": "Large commitments.",
+                "health": "The load needs to be reduced.",
+                "advice": "Do not carry everything alone."
+            },
+            "reversed": {
+                "text": "Freeing yourself of the excess.",
+                "love": "Releasing tension.",
+                "career": "Redistributing tasks.",
+                "finance": "Pressure eases.",
+                "health": "Recovery.",
+                "advice": "Allow yourself to rest."
+            }
+        },
+        "wands_11": {
+            "name": "Page of Wands",
+            "keywords": [
+                "news",
+                "enthusiasm",
+                "learning"
+            ],
+            "upright": {
+                "text": "New ideas, news and a desire to learn.",
+                "love": "Light flirting and new emotions.",
+                "career": "The start of learning or a new venture.",
+                "finance": "New ideas for earning.",
+                "health": "Energy and activity.",
+                "advice": "Study something new."
+            },
+            "reversed": {
+                "text": "Immaturity and a lack of direction.",
+                "love": "Frivolity.",
+                "career": "A lack of experience.",
+                "finance": "Ill-considered ideas.",
+                "health": "Unstable energy.",
+                "advice": "Prepare first."
+            }
+        },
+        "wands_12": {
+            "name": "Knight of Wands",
+            "keywords": [
+                "action",
+                "adventure",
+                "courage"
+            ],
+            "upright": {
+                "text": "Activity, movement and decisive action.",
+                "love": "Passion and vivid emotions.",
+                "career": "Rapid advancement.",
+                "finance": "Bold decisions.",
+                "health": "Plenty of energy.",
+                "advice": "Act with confidence."
+            },
+            "reversed": {
+                "text": "Impulsiveness and haste.",
+                "love": "Instability.",
+                "career": "Mistakes made in a rush.",
+                "finance": "Risky decisions.",
+                "health": "An excess of energy.",
+                "advice": "Think first."
+            }
+        },
+        "wands_13": {
+            "name": "Queen of Wands",
+            "keywords": [
+                "confidence",
+                "charisma",
+                "creativity"
+            ],
+            "upright": {
+                "text": "Confidence, attractiveness and strength of personality.",
+                "love": "Warmth and passion.",
+                "career": "Leadership and creativity.",
+                "finance": "Confident management.",
+                "health": "Vital energy.",
+                "advice": "Show yourself."
+            },
+            "reversed": {
+                "text": "Insecurity and jealousy.",
+                "love": "Emotional difficulties.",
+                "career": "A lack of confidence.",
+                "finance": "Disorganization.",
+                "health": "Exhaustion.",
+                "advice": "Restore your inner strength."
+            }
+        },
+        "wands_14": {
+            "name": "King of Wands",
+            "keywords": [
+                "leadership",
+                "goal",
+                "vision"
+            ],
+            "upright": {
+                "text": "Leadership, experience and confident movement toward a goal.",
+                "love": "A strong and mature bond.",
+                "career": "Management and success.",
+                "finance": "Growth through initiative.",
+                "health": "Strength and activity.",
+                "advice": "Take responsibility."
+            },
+            "reversed": {
+                "text": "Domineering and excessive self-assurance.",
+                "love": "Control in the relationship.",
+                "career": "Conflicts with management.",
+                "finance": "Risk caused by overconfidence.",
+                "health": "Overstrain.",
+                "advice": "Be wiser."
+            }
+        },
+        "cups_01": {
+            "name": "Ace of Cups",
+            "keywords": [
+                "emotion",
+                "love",
+                "beginning",
+                "intuition"
+            ],
+            "upright": {
+                "text": "The start of a new emotional period, an open heart and inspiration.",
+                "love": "New love, mutual feelings or a strengthening of an existing relationship.",
+                "career": "Work brings satisfaction and new opportunities.",
+                "finance": "A favorable period for calm growth.",
+                "health": "Emotional recovery and a surge of vitality.",
+                "advice": "Open yourself to feelings and new opportunities."
+            },
+            "reversed": {
+                "text": "Suppressed emotions, disappointment or emotional closedness.",
+                "love": "Things left unsaid or cooling feelings.",
+                "career": "Emotional burnout.",
+                "finance": "Do not make decisions under the influence of emotions.",
+                "health": "Pay attention to your emotional state.",
+                "advice": "Allow yourself to express your feelings."
+            }
+        },
+        "cups_02": {
+            "name": "Two of Cups",
+            "keywords": [
+                "union",
+                "partnership",
+                "harmony"
+            ],
+            "upright": {
+                "text": "Harmonious cooperation and mutual understanding.",
+                "love": "Mutual love, trust and a strong bond.",
+                "career": "A successful partnership or agreement.",
+                "finance": "Joint projects will bring benefit.",
+                "health": "Emotional balance.",
+                "advice": "Build relationships on trust."
+            },
+            "reversed": {
+                "text": "Misunderstanding, conflict or a broken bond.",
+                "love": "Quarrels and emotional distance.",
+                "career": "Disagreements with colleagues.",
+                "finance": "Do not rush into joint investments.",
+                "health": "Stress affects your well-being.",
+                "advice": "Learn to listen to each other."
+            }
+        },
+        "cups_03": {
+            "name": "Three of Cups",
+            "keywords": [
+                "celebration",
+                "friends",
+                "joy"
+            ],
+            "upright": {
+                "text": "Joy, friendship and pleasant events.",
+                "love": "A happy time together and pleasant meetings.",
+                "career": "Support from the team and good news.",
+                "finance": "A reason for a small celebration.",
+                "health": "A good mood helps recovery.",
+                "advice": "Share your joy with those close to you."
+            },
+            "reversed": {
+                "text": "Excess, gossip or disappointment.",
+                "love": "A third party or distrust.",
+                "career": "Do not take part in intrigues.",
+                "finance": "Keep entertainment spending under control.",
+                "health": "Avoid overexertion.",
+                "advice": "Focus on true friends."
+            }
+        },
+        "cups_04": {
+            "name": "Four of Cups",
+            "keywords": [
+                "reflection",
+                "apathy",
+                "pause"
+            ],
+            "upright": {
+                "text": "A time to rethink and look for new meaning.",
+                "love": "An emotional pause or doubts.",
+                "career": "Do not miss a new opportunity.",
+                "finance": "Avoid indifference to important matters.",
+                "health": "Do not forget to take care of yourself.",
+                "advice": "Look at the situation from a new angle."
+            },
+            "reversed": {
+                "text": "Emerging from stagnation and regaining interest in life.",
+                "love": "New feelings or reconciliation.",
+                "career": "Prospects appear.",
+                "finance": "You can take advantage of a chance.",
+                "health": "Your emotional state improves.",
+                "advice": "Do not be afraid to accept the new."
+            }
+        },
+        "cups_05": {
+            "name": "Five of Cups",
+            "keywords": [
+                "loss",
+                "sorrow",
+                "hope"
+            ],
+            "upright": {
+                "text": "Losses and regrets, but not everything is lost yet.",
+                "love": "Distress after a conflict or a breakup.",
+                "career": "A failure becomes valuable experience.",
+                "finance": "Temporary financial difficulties.",
+                "health": "Emotional recovery takes time.",
+                "advice": "Look at what is still left."
+            },
+            "reversed": {
+                "text": "Accepting the past and moving forward.",
+                "love": "Healing after a difficult period.",
+                "career": "New opportunities appear.",
+                "finance": "The situation gradually improves.",
+                "health": "Recovery after stress.",
+                "advice": "Leave the past behind."
+            }
+        },
+        "cups_06": {
+            "name": "Six of Cups",
+            "keywords": [
+                "memories",
+                "childhood",
+                "sincerity"
+            ],
+            "upright": {
+                "text": "Pleasant memories, kindness and a return to important people or events.",
+                "love": "The return of feelings, romance and sincerity.",
+                "career": "Past experience will help in the present.",
+                "finance": "Help may come from relatives or old partners.",
+                "health": "Emotional recovery.",
+                "advice": "Remember the past, but live in the present."
+            },
+            "reversed": {
+                "text": "Being stuck in the past or reluctance to grow up.",
+                "love": "Past relationships get in the way of new ones.",
+                "career": "Do not live only on old achievements.",
+                "finance": "Avoid repeating old mistakes.",
+                "health": "Free yourself from the emotional baggage.",
+                "advice": "Look ahead."
+            }
+        },
+        "cups_07": {
+            "name": "Seven of Cups",
+            "keywords": [
+                "choice",
+                "dreams",
+                "illusions"
+            ],
+            "upright": {
+                "text": "Many opportunities to choose from, but not all of them are real.",
+                "love": "Strong emotions may hinder objectivity.",
+                "career": "Several prospects lie before you.",
+                "finance": "Do not trust offers that are too tempting.",
+                "health": "Do not ignore real symptoms.",
+                "advice": "Separate dreams from facts."
+            },
+            "reversed": {
+                "text": "Clarity of thought and the right choice.",
+                "love": "An understanding of true feelings emerges.",
+                "career": "The right direction becomes clear.",
+                "finance": "Decisions become more balanced.",
+                "health": "Clarity about treatment appears.",
+                "advice": "Focus on one goal."
+            }
+        },
+        "cups_08": {
+            "name": "Eight of Cups",
+            "keywords": [
+                "departure",
+                "search",
+                "change"
+            ],
+            "upright": {
+                "text": "Walking away from what no longer brings satisfaction.",
+                "love": "The relationship needs to be reconsidered.",
+                "career": "A search for a new path or a change of job.",
+                "finance": "It is time to give up ineffective decisions.",
+                "health": "A change of lifestyle will do you good.",
+                "advice": "Do not be afraid to leave the past."
+            },
+            "reversed": {
+                "text": "Fear of change and unwillingness to move on.",
+                "love": "It is hard to let the relationship go.",
+                "career": "Stagnation caused by indecision.",
+                "finance": "Do not cling to unprofitable projects.",
+                "health": "Do not put off necessary changes.",
+                "advice": "Allow yourself to start anew."
+            }
+        },
+        "cups_09": {
+            "name": "Nine of Cups",
+            "keywords": [
+                "fulfillment",
+                "satisfaction",
+                "success"
+            ],
+            "upright": {
+                "text": "A wish fulfilled, satisfaction and emotional well-being.",
+                "love": "A harmonious relationship and mutual joy.",
+                "career": "Good results and recognition.",
+                "finance": "Financial stability and plenty.",
+                "health": "Good well-being.",
+                "advice": "Allow yourself to enjoy what you have achieved."
+            },
+            "reversed": {
+                "text": "Inflated expectations or temporary disappointment.",
+                "love": "Do not idealize your partner.",
+                "career": "Do not stop at what you have achieved.",
+                "finance": "Do not spend more than necessary.",
+                "health": "Keep to moderation.",
+                "advice": "Appreciate what you already have."
+            }
+        },
+        "cups_10": {
+            "name": "Ten of Cups",
+            "keywords": [
+                "family",
+                "harmony",
+                "happiness"
+            ],
+            "upright": {
+                "text": "Complete emotional fulfillment, family happiness and harmony.",
+                "love": "A strong relationship, family and mutual understanding.",
+                "career": "A favorable atmosphere in the team.",
+                "finance": "Stability and a sense of security.",
+                "health": "Emotional and physical well-being.",
+                "advice": "Cherish the people who make you happy."
+            },
+            "reversed": {
+                "text": "Family disagreements or broken harmony.",
+                "love": "Misunderstanding between loved ones.",
+                "career": "A tense atmosphere.",
+                "finance": "Do not let money ruin relationships.",
+                "health": "Emotional tension affects your well-being.",
+                "advice": "Begin with an open conversation."
+            }
+        },
+        "cups_11": {
+            "name": "Page of Cups",
+            "keywords": [
+                "intuition",
+                "news",
+                "feelings"
+            ],
+            "upright": {
+                "text": "Pleasant news, openness to feelings and developing intuition.",
+                "love": "A romantic meeting, sincere feelings or a confession.",
+                "career": "New creative ideas and learning.",
+                "finance": "Small but good opportunities.",
+                "health": "Emotional recovery.",
+                "advice": "Be open to new feelings and knowledge."
+            },
+            "reversed": {
+                "text": "Emotional immaturity, disappointed expectations or doubts.",
+                "love": "Misunderstanding of feelings or insincerity.",
+                "career": "A lack of experience or discipline.",
+                "finance": "Avoid ill-considered spending.",
+                "health": "Watch your emotional state.",
+                "advice": "Do not take everything too much to heart."
+            }
+        },
+        "cups_12": {
+            "name": "Knight of Cups",
+            "keywords": [
+                "romance",
+                "proposal",
+                "dreams"
+            ],
+            "upright": {
+                "text": "Following a dream, romance and inspiration.",
+                "love": "A beautiful romance, a confession of feelings or a proposal.",
+                "career": "A creative project or an interesting offer.",
+                "finance": "A profitable offer requires careful study.",
+                "health": "A good emotional state aids recovery.",
+                "advice": "Follow your heart without forgetting common sense."
+            },
+            "reversed": {
+                "text": "Illusions, empty promises or emotional instability.",
+                "love": "Do not idealize the person.",
+                "career": "Do not trust beautiful promises without facts.",
+                "finance": "Check the terms of offers.",
+                "health": "Avoid emotional overexertion.",
+                "advice": "Look at the situation realistically."
+            }
+        },
+        "cups_13": {
+            "name": "Queen of Cups",
+            "keywords": [
+                "wisdom",
+                "compassion",
+                "intuition"
+            ],
+            "upright": {
+                "text": "Emotional maturity, deep intuition and care for others.",
+                "love": "Tenderness, understanding and sincerity.",
+                "career": "The ability to find an approach to people.",
+                "finance": "Sensible decisions based on experience.",
+                "health": "Good emotional balance.",
+                "advice": "Trust your intuition."
+            },
+            "reversed": {
+                "text": "Heightened sensitivity, emotional dependence or closedness.",
+                "love": "Resentment or jealousy.",
+                "career": "Do not let emotions influence your decisions.",
+                "finance": "Avoid impulsive purchases.",
+                "health": "Take care of your psychological comfort.",
+                "advice": "Keep your inner balance."
+            }
+        },
+        "cups_14": {
+            "name": "King of Cups",
+            "keywords": [
+                "control",
+                "wisdom",
+                "calm"
+            ],
+            "upright": {
+                "text": "Emotional stability, wisdom and the ability to support others.",
+                "love": "A mature relationship, trust and mutual respect.",
+                "career": "A strong leader, diplomacy and experience.",
+                "finance": "Stability thanks to balanced decisions.",
+                "health": "Good emotional and physical condition.",
+                "advice": "Stay calm even in difficult situations."
+            },
+            "reversed": {
+                "text": "Emotional coldness, hidden feelings or manipulation.",
+                "love": "A lack of openness in the relationship.",
+                "career": "Do not let emotions run the team.",
+                "finance": "Avoid risky decisions.",
+                "health": "Pay attention to emotional tension.",
+                "advice": "Learn to express your feelings openly."
+            }
+        },
+        "swords_01": {
+            "name": "Ace of Swords",
+            "keywords": [
+                "truth",
+                "clarity",
+                "decision",
+                "reason"
+            ],
+            "upright": {
+                "text": "Clarity of thought, an important decision and the victory of reason.",
+                "love": "An honest conversation and clearing up the relationship.",
+                "career": "A new idea or a successful solution to a difficult task.",
+                "finance": "Well-weighed decisions will bring benefit.",
+                "health": "You come to understand the cause of the problem.",
+                "advice": "Act honestly and rely on facts."
+            },
+            "reversed": {
+                "text": "Confusion, false information or a wrong decision.",
+                "love": "Things left unsaid and mistrust.",
+                "career": "Avoid hasty conclusions.",
+                "finance": "Check all the documents.",
+                "health": "Do not put off a check-up.",
+                "advice": "Do not let emotions cloud your reason."
+            }
+        },
+        "swords_02": {
+            "name": "Two of Swords",
+            "keywords": [
+                "choice",
+                "doubt",
+                "equilibrium"
+            ],
+            "upright": {
+                "text": "The need to make a decision after a period of doubt.",
+                "love": "Both partners avoid an important conversation.",
+                "career": "The time has come to make a choice.",
+                "finance": "Do not put off financial decisions.",
+                "health": "Pay attention to symptoms.",
+                "advice": "Stop postponing the decision."
+            },
+            "reversed": {
+                "text": "The situation either breaks out of the deadlock or becomes even more tangled.",
+                "love": "Accumulated problems need to be discussed.",
+                "career": "The uncertainty is ending.",
+                "finance": "Be careful with risks.",
+                "health": "Do not ignore the advice of specialists.",
+                "advice": "Face the truth."
+            }
+        },
+        "swords_03": {
+            "name": "Three of Swords",
+            "keywords": [
+                "pain",
+                "disappointment",
+                "loss"
+            ],
+            "upright": {
+                "text": "Emotional pain, disappointment or an unpleasant truth.",
+                "love": "A breakup, a conflict or a hard conversation.",
+                "career": "A failure becomes an important lesson.",
+                "finance": "Temporary losses.",
+                "health": "Do not forget about psychological recovery.",
+                "advice": "Accept what is happening and move on."
+            },
+            "reversed": {
+                "text": "Healing and a gradual release from pain.",
+                "love": "A chance of reconciliation appears.",
+                "career": "The mistakes of the past are left behind.",
+                "finance": "The situation begins to improve.",
+                "health": "Emotional recovery.",
+                "advice": "Allow yourself to let go of the past."
+            }
+        },
+        "swords_04": {
+            "name": "Four of Swords",
+            "keywords": [
+                "rest",
+                "recovery",
+                "silence"
+            ],
+            "upright": {
+                "text": "A pause, rest and recovery of strength.",
+                "love": "A little distance will help the relationship.",
+                "career": "It is better not to make important decisions right now.",
+                "finance": "Refrain from risky actions.",
+                "health": "Your body needs rest.",
+                "advice": "Allow yourself to recover."
+            },
+            "reversed": {
+                "text": "It is time to return to active life.",
+                "love": "The time for a conversation is coming.",
+                "career": "The stagnation is ending.",
+                "finance": "You can gradually get back to business.",
+                "health": "Your energy is recovering.",
+                "advice": "Do not drag out the pause."
+            }
+        },
+        "swords_05": {
+            "name": "Five of Swords",
+            "keywords": [
+                "conflict",
+                "victory",
+                "consequences"
+            ],
+            "upright": {
+                "text": "A conflict in which victory may prove too costly.",
+                "love": "Quarrels and mutual grievances.",
+                "career": "Avoid unnecessary struggle.",
+                "finance": "Do not risk anything for a dubious gain.",
+                "health": "Stress harms your body.",
+                "advice": "Sometimes it is better to give way."
+            },
+            "reversed": {
+                "text": "Reconciliation, the end of a conflict and a search for compromise.",
+                "love": "A chance to rebuild trust appears.",
+                "career": "The tension gradually fades.",
+                "finance": "Avoid old mistakes.",
+                "health": "Stress levels go down.",
+                "advice": "Choose peace over conflict."
+            }
+        },
+        "swords_06": {
+            "name": "Six of Swords",
+            "keywords": [
+                "transition",
+                "journey",
+                "recovery"
+            ],
+            "upright": {
+                "text": "A transition to a calmer period, moving forward and gradual recovery.",
+                "love": "The relationship comes out of a difficult stage.",
+                "career": "A move to a new job or the end of a hard period.",
+                "finance": "The financial situation gradually stabilizes.",
+                "health": "Recovery and regained strength.",
+                "advice": "Do not be afraid to leave the past behind."
+            },
+            "reversed": {
+                "text": "Difficulty letting go of the past or moving on.",
+                "love": "Old grievances continue to affect the relationship.",
+                "career": "Changes are postponed.",
+                "finance": "Do not cling to ineffective decisions.",
+                "health": "Do not delay treatment.",
+                "advice": "Allow change to happen."
+            }
+        },
+        "swords_07": {
+            "name": "Seven of Swords",
+            "keywords": [
+                "cunning",
+                "strategy",
+                "secret"
+            ],
+            "upright": {
+                "text": "The need to act carefully and thoughtfully.",
+                "love": "Reticence or hidden feelings.",
+                "career": "Use strategic thinking.",
+                "finance": "Be attentive to documents and contracts.",
+                "health": "Do not put off a check-up.",
+                "advice": "Think through every step."
+            },
+            "reversed": {
+                "text": "A secret is revealed, or you need to be completely honest.",
+                "love": "What is hidden becomes clear.",
+                "career": "It is better to give up dubious methods.",
+                "finance": "Do not look for easy ways.",
+                "health": "Honestly assess your condition.",
+                "advice": "Choose openness."
+            }
+        },
+        "swords_08": {
+            "name": "Eight of Swords",
+            "keywords": [
+                "restriction",
+                "fear",
+                "doubt"
+            ],
+            "upright": {
+                "text": "A feeling of having no way out, largely created by your own fears.",
+                "love": "Insecurity gets in the way of the relationship.",
+                "career": "Do not limit yourself with negative beliefs.",
+                "finance": "Do not make decisions out of fear.",
+                "health": "Stress needs attention.",
+                "advice": "You are freer than you think."
+            },
+            "reversed": {
+                "text": "Freedom from inner limitations.",
+                "love": "Self-confidence appears.",
+                "career": "New opportunities open up.",
+                "finance": "You begin to see a way out.",
+                "health": "Your emotional state improves.",
+                "advice": "Trust your own strength."
+            }
+        },
+        "swords_09": {
+            "name": "Nine of Swords",
+            "keywords": [
+                "anxiety",
+                "fear",
+                "worry"
+            ],
+            "upright": {
+                "text": "Worry, sleeplessness and strong inner turmoil.",
+                "love": "Excessive fears get in the way of the relationship.",
+                "career": "Do not let anxiety make your decisions.",
+                "finance": "Do not dramatize the situation.",
+                "health": "It is important to pay attention to your psychological state.",
+                "advice": "Do not stay alone with your fears."
+            },
+            "reversed": {
+                "text": "Gradual release from anxiety and the return of inner calm.",
+                "love": "Hope for improvement appears.",
+                "career": "Problems begin to be solved.",
+                "finance": "The situation becomes clearer.",
+                "health": "Stress levels go down.",
+                "advice": "Do not be afraid to ask for support."
+            }
+        },
+        "swords_10": {
+            "name": "Ten of Swords",
+            "keywords": [
+                "completion",
+                "ending",
+                "new stage"
+            ],
+            "upright": {
+                "text": "The end of a hard period and the start of a new stage of life.",
+                "love": "The end of a relationship that has run its course.",
+                "career": "The completion of a project or a change of direction.",
+                "finance": "It is time to leave past mistakes behind.",
+                "health": "Recovery begins after the crisis.",
+                "advice": "Let the old come to an end."
+            },
+            "reversed": {
+                "text": "Slow recovery after difficult events.",
+                "love": "Gradual emotional healing.",
+                "career": "A chance to start over appears.",
+                "finance": "Financial difficulties are receding.",
+                "health": "Your body is recovering.",
+                "advice": "Look forward, not back."
+            }
+        },
+        "swords_11": {
+            "name": "Page of Swords",
+            "keywords": [
+                "observation",
+                "knowledge",
+                "news"
+            ],
+            "upright": {
+                "text": "Curiosity, a search for truth and a desire to gain new knowledge.",
+                "love": "An honest conversation and an effort to understand the other person’s feelings.",
+                "career": "Learning, analysis and new ideas.",
+                "finance": "Gather more information before making decisions.",
+                "health": "Pay attention to your body’s signals.",
+                "advice": "Study the situation before acting."
+            },
+            "reversed": {
+                "text": "Haste, rumors and wrong conclusions.",
+                "love": "Mistrust and suspicion.",
+                "career": "A lack of experience may get in the way.",
+                "finance": "Check the details of deals.",
+                "health": "Do not ignore important signs.",
+                "advice": "Do not draw conclusions without facts."
+            }
+        },
+        "swords_12": {
+            "name": "Knight of Swords",
+            "keywords": [
+                "speed",
+                "decision",
+                "action"
+            ],
+            "upright": {
+                "text": "Decisive action, courage and rapid movement toward the goal.",
+                "love": "An important conversation or a strong emotional impulse.",
+                "career": "Active advancement and quick decisions.",
+                "finance": "Opportunities require fast action.",
+                "health": "Plenty of energy, but avoid overexertion.",
+                "advice": "Act boldly, but thoughtfully."
+            },
+            "reversed": {
+                "text": "Impulsiveness, aggression and haste.",
+                "love": "Quarrels over harsh words.",
+                "career": "Haste can lead to mistakes.",
+                "finance": "Do not take risks without a plan.",
+                "health": "Watch your stress level.",
+                "advice": "Think first, then act."
+            }
+        },
+        "swords_13": {
+            "name": "Queen of Swords",
+            "keywords": [
+                "clarity",
+                "independence",
+                "wisdom"
+            ],
+            "upright": {
+                "text": "Honesty, a clear mind and the ability to see the situation objectively.",
+                "love": "A mature relationship and openness.",
+                "career": "Professionalism and analytical thinking.",
+                "finance": "Sensible money management.",
+                "health": "A balance of emotion and reason is important.",
+                "advice": "Trust logic."
+            },
+            "reversed": {
+                "text": "Coldness, excessive criticism or closedness.",
+                "love": "Emotional distance.",
+                "career": "Excessive strictness hinders development.",
+                "finance": "Do not make decisions out of irritation.",
+                "health": "Avoid emotional tension.",
+                "advice": "Be gentler with yourself and others."
+            }
+        },
+        "swords_14": {
+            "name": "King of Swords",
+            "keywords": [
+                "reason",
+                "authority",
+                "justice"
+            ],
+            "upright": {
+                "text": "Wise leadership, logic and fair decisions.",
+                "love": "The relationship is built on respect and honesty.",
+                "career": "Authority, leadership and professional success.",
+                "finance": "Sound planning and calculation.",
+                "health": "Take a sensible approach to caring for yourself.",
+                "advice": "Make decisions calmly and objectively."
+            },
+            "reversed": {
+                "text": "Harshness, control and misuse of power.",
+                "love": "Coldness or a wish to control your partner.",
+                "career": "Conflicts with management.",
+                "finance": "Do not let ambition run your money.",
+                "health": "Lower your level of tension.",
+                "advice": "Combine strength with wisdom."
+            }
+        },
+        "pentacles_01": {
+            "name": "Ace of Pentacles",
+            "keywords": [
+                "opportunity",
+                "prosperity",
+                "beginning"
+            ],
+            "upright": {
+                "text": "A new opportunity, material success and a solid foundation.",
+                "love": "A stable relationship and a new stage.",
+                "career": "A new offer or a promising project.",
+                "finance": "Growing income and new sources of profit.",
+                "health": "Good potential for recovery.",
+                "advice": "Use the opportunities that are opening up."
+            },
+            "reversed": {
+                "text": "A missed opportunity or instability.",
+                "love": "A lack of confidence in the relationship.",
+                "career": "Delays in new undertakings.",
+                "finance": "Be more careful with spending.",
+                "health": "Pay attention to your routine.",
+                "advice": "Do not ignore your chances."
+            }
+        },
+        "pentacles_02": {
+            "name": "Two of Pentacles",
+            "keywords": [
+                "balance",
+                "flexibility",
+                "change"
+            ],
+            "upright": {
+                "text": "The ability to keep your balance among several tasks.",
+                "love": "The need to find a balance in the relationship.",
+                "career": "Multitasking and adaptation.",
+                "finance": "The ability to distribute money wisely.",
+                "health": "Watch the balance between effort and rest.",
+                "advice": "Be flexible."
+            },
+            "reversed": {
+                "text": "Chaos, overload and loss of control.",
+                "love": "The relationship needs more attention.",
+                "career": "Too many tasks at once.",
+                "finance": "An unstable financial position.",
+                "health": "Avoid overexertion.",
+                "advice": "Set your priorities."
+            }
+        },
+        "pentacles_03": {
+            "name": "Three of Pentacles",
+            "keywords": [
+                "mastery",
+                "work",
+                "collaboration"
+            ],
+            "upright": {
+                "text": "Developing skills, quality work and collaboration.",
+                "love": "Building the relationship together.",
+                "career": "Success through teamwork.",
+                "finance": "Income through professional skills.",
+                "health": "Steady work on yourself.",
+                "advice": "Learn and grow."
+            },
+            "reversed": {
+                "text": "A lack of effort or problems in collaboration.",
+                "love": "A lack of mutual effort.",
+                "career": "Work without recognition.",
+                "finance": "Mistakes caused by a lack of experience.",
+                "health": "More systematic self-care is needed.",
+                "advice": "Improve your skills."
+            }
+        },
+        "pentacles_04": {
+            "name": "Four of Pentacles",
+            "keywords": [
+                "saving",
+                "control",
+                "security"
+            ],
+            "upright": {
+                "text": "A desire to keep what you have achieved and protect your resources.",
+                "love": "A need for security.",
+                "career": "Stability and caution.",
+                "finance": "Saving and accumulating.",
+                "health": "Look after your strength.",
+                "advice": "Value what you have."
+            },
+            "reversed": {
+                "text": "Excessive attachment or fear of change.",
+                "love": "Possessiveness and control.",
+                "career": "Fear of new opportunities.",
+                "finance": "Do not cling to money out of fear.",
+                "health": "Learn to relax.",
+                "advice": "Let change come."
+            }
+        },
+        "pentacles_05": {
+            "name": "Five of Pentacles",
+            "keywords": [
+                "hardship",
+                "loss",
+                "trial"
+            ],
+            "upright": {
+                "text": "Temporary difficulties and a feeling of lacking support.",
+                "love": "A feeling of loneliness or distance.",
+                "career": "A difficult period at work.",
+                "finance": "Temporary financial problems.",
+                "health": "Self-care is needed.",
+                "advice": "Look for support."
+            },
+            "reversed": {
+                "text": "Emerging from a hard period and recovering.",
+                "love": "Closeness returns.",
+                "career": "New opportunities appear.",
+                "finance": "The financial situation improves.",
+                "health": "Recovery begins.",
+                "advice": "Do not lose hope."
+            }
+        },
+        "pentacles_06": {
+            "name": "Six of Pentacles",
+            "keywords": [
+                "help",
+                "exchange",
+                "generosity"
+            ],
+            "upright": {
+                "text": "A balance between receiving and giving, help and support.",
+                "love": "Care and reciprocity in the relationship.",
+                "career": "Support from colleagues or recognition of your work.",
+                "finance": "Improved finances and help from others.",
+                "health": "Support aids recovery.",
+                "advice": "Share and accept help."
+            },
+            "reversed": {
+                "text": "An unequal exchange or dependence on help.",
+                "love": "One person gives more than the other.",
+                "career": "Your efforts are undervalued.",
+                "finance": "Be careful with debts.",
+                "health": "Do not forget to take care of yourself.",
+                "advice": "Keep the balance."
+            }
+        },
+        "pentacles_07": {
+            "name": "Seven of Pentacles",
+            "keywords": [
+                "patience",
+                "growth",
+                "waiting"
+            ],
+            "upright": {
+                "text": "Waiting for results after the effort invested.",
+                "love": "The relationship develops gradually.",
+                "career": "Your work will bring results.",
+                "finance": "Investments take time.",
+                "health": "Gradual improvement of your condition.",
+                "advice": "Be patient."
+            },
+            "reversed": {
+                "text": "No satisfaction with the result or lost patience.",
+                "love": "Doubts about the future of the relationship.",
+                "career": "A feeling that the effort was in vain.",
+                "finance": "Unsuccessful investments.",
+                "health": "Do not abandon the treatment you began.",
+                "advice": "Reassess your path."
+            }
+        },
+        "pentacles_08": {
+            "name": "Eight of Pentacles",
+            "keywords": [
+                "mastery",
+                "learning",
+                "labor"
+            ],
+            "upright": {
+                "text": "Developing skills through constant practice.",
+                "love": "The relationship needs attention and work.",
+                "career": "Growth in professionalism.",
+                "finance": "Income through hard work.",
+                "health": "Discipline and routine are beneficial.",
+                "advice": "Perfect your craft."
+            },
+            "reversed": {
+                "text": "A lack of motivation or work without results.",
+                "love": "A lack of attention to the relationship.",
+                "career": "Routine hinders development.",
+                "finance": "Mistakes caused by inattention.",
+                "health": "Do not neglect your habits.",
+                "advice": "Regain your interest in the work."
+            }
+        },
+        "pentacles_09": {
+            "name": "Nine of Pentacles",
+            "keywords": [
+                "success",
+                "independence",
+                "prosperity"
+            ],
+            "upright": {
+                "text": "Self-reliance, well-being and well-earned success.",
+                "love": "Self-confidence and a mature relationship.",
+                "career": "Recognition of professional achievements.",
+                "finance": "Stability and material comfort.",
+                "health": "Good well-being.",
+                "advice": "Value your achievements."
+            },
+            "reversed": {
+                "text": "Dependence on outside circumstances or lost confidence.",
+                "love": "Fear of loneliness.",
+                "career": "Underestimating your abilities.",
+                "finance": "Do not live beyond your means.",
+                "health": "A balance of work and rest is needed.",
+                "advice": "Rely on your own strength."
+            }
+        },
+        "pentacles_10": {
+            "name": "Ten of Pentacles",
+            "keywords": [
+                "family",
+                "legacy",
+                "stability"
+            ],
+            "upright": {
+                "text": "Long-term success, family well-being and stability.",
+                "love": "A strong relationship and family happiness.",
+                "career": "Reliability and long-term prospects.",
+                "finance": "Material security.",
+                "health": "A stable condition.",
+                "advice": "Build a solid foundation."
+            },
+            "reversed": {
+                "text": "Family disagreements or instability.",
+                "love": "Family conflicts.",
+                "career": "Uncertainty about the future.",
+                "finance": "Unexpected expenses.",
+                "health": "Pay attention to balance.",
+                "advice": "Strengthen your foundation."
+            }
+        },
+        "pentacles_11": {
+            "name": "Page of Pentacles",
+            "keywords": [
+                "learning",
+                "opportunity",
+                "development"
+            ],
+            "upright": {
+                "text": "New knowledge, practical opportunities and the start of a path to success.",
+                "love": "Serious interest and a wish to develop the relationship.",
+                "career": "Learning, a new job or a useful skill.",
+                "finance": "A good start for financial growth.",
+                "health": "New habits and care for the body are beneficial.",
+                "advice": "Learn and develop gradually."
+            },
+            "reversed": {
+                "text": "A lack of motivation or missed opportunities.",
+                "love": "A lack of attention to the relationship.",
+                "career": "A lack of preparation.",
+                "finance": "Do not rush into investments.",
+                "health": "Do not put off taking care of yourself.",
+                "advice": "Return to learning and discipline."
+            }
+        },
+        "pentacles_12": {
+            "name": "Knight of Pentacles",
+            "keywords": [
+                "reliability",
+                "work",
+                "patience"
+            ],
+            "upright": {
+                "text": "Steady movement toward the goal, responsibility and stability.",
+                "love": "Loyalty and a serious attitude.",
+                "career": "Persistent work will bring results.",
+                "finance": "Slow but steady growth.",
+                "health": "Discipline improves your condition.",
+                "advice": "Move step by step."
+            },
+            "reversed": {
+                "text": "Stagnation, stubbornness or a lack of movement.",
+                "love": "The relationship has become too monotonous.",
+                "career": "No development because of routine.",
+                "finance": "Do not be afraid to change your approach.",
+                "health": "Add more activity.",
+                "advice": "Do not get stuck in one place."
+            }
+        },
+        "pentacles_13": {
+            "name": "Queen of Pentacles",
+            "keywords": [
+                "care",
+                "abundance",
+                "comfort"
+            ],
+            "upright": {
+                "text": "Practicality, care and the ability to create stability.",
+                "love": "A warm relationship and support.",
+                "career": "Organization and professionalism.",
+                "finance": "Sensible management of resources.",
+                "health": "Care for the body and comfort.",
+                "advice": "Create harmony around you."
+            },
+            "reversed": {
+                "text": "Overload with worries or lost balance.",
+                "love": "Excessive protectiveness.",
+                "career": "Weariness from obligations.",
+                "finance": "Do not forget your own needs.",
+                "health": "Rest is needed.",
+                "advice": "Take care of yourself as you do of others."
+            }
+        },
+        "pentacles_14": {
+            "name": "King of Pentacles",
+            "keywords": [
+                "wealth",
+                "success",
+                "stability"
+            ],
+            "upright": {
+                "text": "Material success, experience and the ability to create prosperity.",
+                "love": "Reliability, loyalty and serious intentions.",
+                "career": "Successful management and high professional status.",
+                "finance": "Stability and sound money management.",
+                "health": "A good level of energy and resilience.",
+                "advice": "Use your experience to reach your goals."
+            },
+            "reversed": {
+                "text": "Greed, excessive control or material dependence.",
+                "love": "The relationship may be built only on advantage.",
+                "career": "Ambition hinders development.",
+                "finance": "Do not take risks for profit.",
+                "health": "Do not forget the balance of life.",
+                "advice": "Value more than just material results."
+            }
+        }
+    },
+    "spreads": {
+        "one": {
+            "name": "One Card",
+            "description": "A quick answer to your question.",
+            "positions": {
+                "answer": {
+                    "name": "",
+                    "description": "The main answer."
+                }
+            }
+        },
+        "three": {
+            "name": "Three Cards",
+            "description": "Past, present and future.",
+            "positions": {
+                "past": {
+                    "name": "Past",
+                    "description": "What led to the situation."
+                },
+                "present": {
+                    "name": "Present",
+                    "description": "What is happening now."
+                },
+                "future": {
+                    "name": "Future",
+                    "description": "The likely development."
+                }
+            }
+        },
+        "relationship": {
+            "name": "Relationship",
+            "description": "An analysis of the relationship.",
+            "positions": {
+                "relationship": {
+                    "name": "Heart of the Relationship",
+                    "description": "The foundation of the union"
+                },
+                "you": {
+                    "name": "You",
+                    "description": "Your state"
+                },
+                "partner": {
+                    "name": "Partner",
+                    "description": "Their state"
+                },
+                "feelings_you": {
+                    "name": "Your Feelings",
+                    "description": "What you feel"
+                },
+                "feelings_partner": {
+                    "name": "Their Feelings",
+                    "description": "What your partner feels"
+                },
+                "future": {
+                    "name": "Future",
+                    "description": "The outlook"
+                }
+            }
+        },
+        "horseshoe": {
+            "name": "Horseshoe",
+            "description": "A classic spread for a situation.",
+            "positions": {
+                "past": {
+                    "name": "Past",
+                    "description": ""
+                },
+                "present": {
+                    "name": "Present",
+                    "description": ""
+                },
+                "hidden": {
+                    "name": "Hidden",
+                    "description": ""
+                },
+                "obstacle": {
+                    "name": "Obstacle",
+                    "description": ""
+                },
+                "environment": {
+                    "name": "Environment",
+                    "description": ""
+                },
+                "advice": {
+                    "name": "Advice",
+                    "description": ""
+                },
+                "result": {
+                    "name": "Outcome",
+                    "description": ""
+                }
+            }
+        },
+        "celtic_cross": {
+            "name": "Celtic Cross",
+            "description": "A full analysis of the situation.",
+            "positions": {
+                "present": {
+                    "name": "Present",
+                    "description": ""
+                },
+                "cross": {
+                    "name": "Obstacle",
+                    "description": ""
+                },
+                "past": {
+                    "name": "Past",
+                    "description": ""
+                },
+                "future": {
+                    "name": "Future",
+                    "description": ""
+                },
+                "conscious": {
+                    "name": "Conscious",
+                    "description": ""
+                },
+                "subconscious": {
+                    "name": "Subconscious",
+                    "description": ""
+                },
+                "you": {
+                    "name": "You",
+                    "description": ""
+                },
+                "others": {
+                    "name": "Environment",
+                    "description": ""
+                },
+                "hopes": {
+                    "name": "Hopes and Fears",
+                    "description": ""
+                },
+                "result": {
+                    "name": "Outcome",
+                    "description": ""
+                }
+            }
+        }
+    },
+    "about": {
+        "Что такое Таро": {
+            "title": "What Is Tarot",
+            "text": "Tarot is a deck of 78 cards used for divination, self-discovery and reflection on life situations. Each card carries its own symbolic meaning, and their combination in a spread helps you look at a question from a new angle."
+        },
+        "Немного истории": {
+            "title": "A Little History",
+            "text": "The first tarot decks appeared in Italy in the 15th century as ordinary playing cards for the aristocracy. An esoteric meaning was attributed to them much later, in the 18th–19th centuries, in France and England. The best-known deck today, Rider–Waite–Smith, created in 1909, is the basis of the images this app uses."
+        },
+        "Структура колоды": {
+            "title": "Structure of the Deck",
+            "text": "The deck is divided into the Major Arcana (22 cards) — big life themes and archetypes such as the Fool, Death or the Wheel of Fortune — and the Minor Arcana (56 cards), which describe everyday situations. The Minor Arcana are divided into four suits: Wands (energy, action), Cups (feelings, relationships), Swords (thoughts, conflict) and Pentacles (the material world, work, money)."
+        },
+        "Прямое и перевёрнутое положение": {
+            "title": "Upright and Reversed",
+            "text": "A card that falls upright usually points to a clear, active expression of its meaning. A reversed card more often indicates a blocked, internal or distorted version of the same meaning — a delay, resistance or a lesson that is still to be learned."
+        },
+        "Как читать расклад": {
+            "title": "How to Read a Spread",
+            "text": "In a spread, it is not only the individual card that matters but also its position — the position sets the question the card answers (“Past”, “Your Feelings”, “Outcome” and so on). Try to look at the cards not one by one but as a single story: how they complement or contradict each other."
+        },
+        "Одна карта": {
+            "title": "One Card",
+            "text": "The quickest spread — one card answers a specific question. It suits moments when you need a short, clear pointer."
+        },
+        "Три карты": {
+            "title": "Three Cards",
+            "text": "The classic “Past — Present — Future” layout. It shows how the situation developed, what is happening now and where everything is heading."
+        },
+        "Отношения": {
+            "title": "Relationship",
+            "text": "Six cards reveal the heart of a relationship: the state of each partner, their feelings for each other and the couple’s overall outlook."
+        },
+        "Подкова": {
+            "title": "Horseshoe",
+            "text": "Seven cards in an arc — past, present, hidden influences, obstacle, environment, advice and outcome. Good for analyzing a particular situation as it develops."
+        },
+        "Кельтский крест": {
+            "title": "Celtic Cross",
+            "text": "The most detailed spread, with ten cards. It reveals the situation from every side: the heart of the matter, the obstacle, past, future, conscious and subconscious attitudes, the influence of the surroundings, hopes and fears, and the outcome."
+        }
+    },
+    "legal": {
+        "privacy": {
+            "title": "Privacy Policy",
+            "paragraphs": [
+                "Tarot Oracle is a local app. It does not connect to the internet and does not send any data to external servers.",
+                "All data (reading history, settings, the card of the day) is stored only on your device, in a local database file (tarot.db) next to the app itself.",
+                "The app does not collect personal data, does not use analytics and does not show ads.",
+                "You can delete your reading history at any time, entirely or entry by entry, in the “History” section.",
+                "Uninstalling the app or deleting the tarot.db file will irreversibly erase all saved data — backups are not created automatically."
+            ]
+        },
+        "terms": {
+            "title": "Terms of Use",
+            "paragraphs": [
+                "Tarot Oracle is intended for entertainment and meditative purposes. Card interpretations are conventional and symbolic in nature and are not professional advice — psychological, medical, financial or legal.",
+                "Decisions made on the basis of reading results remain entirely at the user’s discretion and responsibility.",
+                "The app is provided “as is”, without any guarantee of uninterrupted operation or freedom from errors.",
+                "The interpretations of the cards are based on the classical meanings of Tarot and are intended for general information.",
+                "By using the app, you agree that the developer is not responsible for any decisions or consequences related to the use of reading results."
+            ]
+        }
+    },
+    "questions": {
+        "labels": {
+            "general": "General",
+            "love": "Love",
+            "career": "Career",
+            "finance": "Finances",
+            "health": "Health"
+        },
+        "texts": {
+            "Что меня ждёт?": "What awaits me?",
+            "Что мне нужно знать сейчас?": "What do I need to know right now?",
+            "Каков будет исход ситуации?": "What will be the outcome of the situation?",
+            "Что скрыто от меня?": "What is hidden from me?",
+            "Что ждёт наши отношения?": "What awaits our relationship?",
+            "Что чувствует ко мне этот человек?": "What does this person feel for me?",
+            "Стоит ли мне довериться этим отношениям?": "Should I trust this relationship?",
+            "Как улучшить отношения с партнёром?": "How can I improve my relationship with my partner?",
+            "Стоит ли мне менять работу?": "Should I change jobs?",
+            "Что ждёт меня в карьере?": "What awaits me in my career?",
+            "Как решить конфликт на работе?": "How can I resolve a conflict at work?",
+            "Правильное ли направление я выбрал(а)?": "Have I chosen the right direction?",
+            "Как улучшить своё финансовое положение?": "How can I improve my financial situation?",
+            "Стоит ли делать эту покупку/вложение?": "Should I make this purchase or investment?",
+            "Что ждёт меня в финансах в ближайшее время?": "What awaits me financially in the near future?",
+            "Как избежать финансовых потерь?": "How can I avoid financial losses?",
+            "На что обратить внимание в своём здоровье?": "What should I pay attention to in my health?",
+            "Как улучшить самочувствие?": "How can I improve my well-being?",
+            "Что мешает моему восстановлению?": "What is hindering my recovery?",
+            "Что мне нужно для внутреннего равновесия?": "What do I need for inner balance?"
+        }
+    },
+    "guide": {
+        "✦ Вытянуть карту": {
+            "title": "✦ Draw a Card",
+            "text": "A quick way to get an answer to any question: one card from the deck, with an interpretation and a short answer (Yes/No and in-between variants)."
+        },
+        "☀ Карта дня": {
+            "title": "☀ Card of the Day",
+            "text": "One card for the whole day, drawn only once in 24 hours. Take a look at it in the morning to see what to pay attention to today."
+        },
+        "◈ Расклады": {
+            "title": "◈ Spreads",
+            "text": "Several cards laid out in meaningful positions. A detailed description of each spread is in the “About Tarot Cards” section."
+        },
+        "Вопрос перед раскладом": {
+            "title": "Question Before a Spread",
+            "text": "Before a spread begins, a window opens where you can choose a ready-made question by category (General, Love, Career, Finances, Health) or write your own. You can also begin a spread without any question."
+        },
+        "Толкование карты": {
+            "title": "Card Interpretation",
+            "text": "Tapping any card opens the details: keywords, the general meaning and separate tabs — love, career, finances, health, advice."
+        },
+        "📖 Толкование расклада": {
+            "title": "📖 Spread Reading",
+            "text": "The book icon at the bottom opens the “Reading” panel — a detailed breakdown of the spread. At the top is the “Overview of the Spread” block (for spreads of three or more cards), and below it is the interpretation of each card by its position.\n\nThe overview contains:\n• How many Major Arcana the spread has and which suit dominates or is missing — this shows the scale of the question and the main area of life.\n• Elements: every suit has an element (Wands — Fire, Cups — Water, Swords — Air, Pentacles — Earth), and the Major Arcana have theirs, following the Golden Dawn tradition. The app shows which element leads, which is missing and how the elements combine — whether they support each other or clash.\n• Positions: what the key places in the spread mean (“Outcome”, “Obstacle”, “Advice”, “Past”, “Future” and others) and which cards fell there, upright or reversed.\n• Reversed cards, court cards (people in the situation), aces (new beginnings) and tens (endings).\n• Numerology: the card numbers are added up and reduced to a single digit (11 and 22 stay as special numbers). Court cards count like this: Page — 2, Knight — 3, Queen — 4, King — 5; the Fool (0) is not counted. If a number repeats, it is a theme running through the whole spread.\n• “Advice from the spread” — a short conclusion drawn from all of the above: the tempo (act or wait), the main focus and one or two nuances.\n\nThe analysis is built automatically by rules, so the same spread always gets the same result. The same block is included in the image when you save a spread."
+        },
+        "📝 Добавление комментария": {
+            "title": "📝 Adding a Note",
+            "text": "After the card of the day, a single card or a spread, a notepad icon appears at the bottom. Tapping it opens a window where you can write your own note — for example, how things actually turned out. The note is saved with the entry and can be edited later through “History”."
+        },
+        "⬇ Сохранение расклада картинкой": {
+            "title": "⬇ Saving a Spread as an Image",
+            "text": "The down-arrow icon is on the screen of a card, the card of the day and a spread (on the left, above the notepad), and also in “History” next to each entry. Tap it and the app will put together a beautiful image: the spread with the cards, the interpretation, your note, the question and the date. The whole process is shown on screen: first the silhouettes of the cards appear, then the background and frame, the title, the cards, the interpretation and the finishing touches. When everything is ready, a check mark appears with the words “Spread saved to the gallery”. The “Done” button returns you to the spread, and “Share” opens your phone’s menu so you can send the image to a messenger or social networks."
+        },
+        "Где найти сохранённую картинку": {
+            "title": "Where to Find the Saved Image",
+            "text": "On a phone, images are saved to the gallery, in the “TarotOracle” album (the Pictures/TarotOracle folder). On a computer, they go to the Downloads folder. If you added or changed a note, save the image again: it will contain the current version of the entry."
+        },
+        "✕ Вернуться на стартовый экран": {
+            "title": "✕ Return to the Start Screen",
+            "text": "When a spread, a card or the card of the day is open, a ✕ button appears in the right corner of the top bar. Tap it to close the current image and return to the start screen. Your history, notes and the card of the day are kept. If the app was minimized for more than 10 minutes, it also opens on the start screen when you return."
+        },
+        "Иконки внизу": {
+            "title": "Icons at the Bottom",
+            "text": "The bottom of the screen holds the quick-access icons: 🂠 Shuffle — restores and reshuffles the deck; 🕒 History — past spreads and cards; 🗂 Deck — the remaining cards and the full list; ⚙ Settings — app settings; 📖 Reading — a summary of the current spread."
+        },
+        "🂠 Перемешать": {
+            "title": "🂠 Shuffle",
+            "text": "Restores the deck and shuffles it again. Useful when the cards have run out or you simply want to start over."
+        },
+        "🕒 История": {
+            "title": "🕒 History",
+            "text": "All past spreads, cards of the day and single draws are saved automatically. You can reopen any entry, add or edit a note, save the entry as an image (the ⬇ icon), and delete the ones you no longer need."
+        },
+        "🗂 Колода": {
+            "title": "🗂 Deck",
+            "text": "Shows how many cards are left in the current deck and in what order they lie after shuffling, as well as the full list of all cards by suit."
+        },
+        "⚙ Настройки": {
+            "title": "⚙ Settings",
+            "text": "Here you can switch the deck (full or Major Arcana only), choose how cards are drawn, change the app language and find information about the program."
+        },
+        "Способ вытягивания карт": {
+            "title": "How Cards Are Drawn",
+            "text": "“In order” draws cards one after another from the already shuffled deck, as when dealing real cards. “Random” picks a card anew from all those remaining each time, regardless of their order in the deck. You can switch the method in “Settings”."
+        },
+        "Иконка приложения": {
+            "title": "App Icon",
+            "text": "On your phone’s screen the app appears under the name TarotOracle, with an icon of a golden Tarot card with a star and a moon on a purple background. If the icon or the name did not update after installing a new version, delete the old app and install it again."
+        }
+    },
+    "names": {
+        "Шут": "The Fool",
+        "Маг": "The Magician",
+        "Верховная Жрица": "The High Priestess",
+        "Императрица": "The Empress",
+        "Император": "The Emperor",
+        "Иерофант": "The Hierophant",
+        "Влюблённые": "The Lovers",
+        "Колесница": "The Chariot",
+        "Сила": "Strength",
+        "Отшельник": "The Hermit",
+        "Колесо Фортуны": "Wheel of Fortune",
+        "Справедливость": "Justice",
+        "Повешенный": "The Hanged Man",
+        "Смерть": "Death",
+        "Умеренность": "Temperance",
+        "Дьявол": "The Devil",
+        "Башня": "The Tower",
+        "Звезда": "The Star",
+        "Луна": "The Moon",
+        "Солнце": "The Sun",
+        "Суд": "Judgement",
+        "Мир": "The World",
+        "Туз Жезлов": "Ace of Wands",
+        "Двойка Жезлов": "Two of Wands",
+        "Тройка Жезлов": "Three of Wands",
+        "Четвёрка Жезлов": "Four of Wands",
+        "Пятёрка Жезлов": "Five of Wands",
+        "Шестёрка Жезлов": "Six of Wands",
+        "Семёрка Жезлов": "Seven of Wands",
+        "Восьмёрка Жезлов": "Eight of Wands",
+        "Девятка Жезлов": "Nine of Wands",
+        "Десятка Жезлов": "Ten of Wands",
+        "Паж Жезлов": "Page of Wands",
+        "Рыцарь Жезлов": "Knight of Wands",
+        "Королева Жезлов": "Queen of Wands",
+        "Король Жезлов": "King of Wands",
+        "Туз Кубков": "Ace of Cups",
+        "Двойка Кубков": "Two of Cups",
+        "Тройка Кубков": "Three of Cups",
+        "Четвёрка Кубков": "Four of Cups",
+        "Пятёрка Кубков": "Five of Cups",
+        "Шестёрка Кубков": "Six of Cups",
+        "Семёрка Кубков": "Seven of Cups",
+        "Восьмёрка Кубков": "Eight of Cups",
+        "Девятка Кубков": "Nine of Cups",
+        "Десятка Кубков": "Ten of Cups",
+        "Паж Кубков": "Page of Cups",
+        "Рыцарь Кубков": "Knight of Cups",
+        "Королева Кубков": "Queen of Cups",
+        "Король Кубков": "King of Cups",
+        "Туз Мечей": "Ace of Swords",
+        "Двойка Мечей": "Two of Swords",
+        "Тройка Мечей": "Three of Swords",
+        "Четвёрка Мечей": "Four of Swords",
+        "Пятёрка Мечей": "Five of Swords",
+        "Шестёрка Мечей": "Six of Swords",
+        "Семёрка Мечей": "Seven of Swords",
+        "Восьмёрка Мечей": "Eight of Swords",
+        "Девятка Мечей": "Nine of Swords",
+        "Десятка Мечей": "Ten of Swords",
+        "Паж Мечей": "Page of Swords",
+        "Рыцарь Мечей": "Knight of Swords",
+        "Королева Мечей": "Queen of Swords",
+        "Король Мечей": "King of Swords",
+        "Туз Пентаклей": "Ace of Pentacles",
+        "Двойка Пентаклей": "Two of Pentacles",
+        "Тройка Пентаклей": "Three of Pentacles",
+        "Четвёрка Пентаклей": "Four of Pentacles",
+        "Пятёрка Пентаклей": "Five of Pentacles",
+        "Шестёрка Пентаклей": "Six of Pentacles",
+        "Семёрка Пентаклей": "Seven of Pentacles",
+        "Восьмёрка Пентаклей": "Eight of Pentacles",
+        "Девятка Пентаклей": "Nine of Pentacles",
+        "Десятка Пентаклей": "Ten of Pentacles",
+        "Паж Пентаклей": "Page of Pentacles",
+        "Рыцарь Пентаклей": "Knight of Pentacles",
+        "Королева Пентаклей": "Queen of Pentacles",
+        "Король Пентаклей": "King of Pentacles",
+        "Одна карта": "One Card",
+        "Три карты": "Three Cards",
+        "Отношения": "Relationship",
+        "Подкова": "Horseshoe",
+        "Кельтский крест": "Celtic Cross"
+    }
+}
