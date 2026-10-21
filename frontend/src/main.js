@@ -1,5 +1,6 @@
 import './app.css'
 import overviewTexts from './overview.json'
+import { t } from './i18n.js'
 
 import {
     DrawCard,
@@ -53,7 +54,7 @@ document.querySelector("#app").innerHTML = `
  
             <button id="draw" class="action-button">
  
-                ✦ Вытянуть карту
+                ${t("✦ Вытянуть карту")}
  
             </button>
  
@@ -61,7 +62,7 @@ document.querySelector("#app").innerHTML = `
  
             <button id="daily" class="action-button">
  
-                ✦ Карта дня
+                ${t("✦ Карта дня")}
  
             </button>
  
@@ -72,7 +73,7 @@ document.querySelector("#app").innerHTML = `
  
         <div class="spread-title">
  
-            Выберите расклад
+            ${t("Выберите расклад")}
  
         </div>
  
@@ -80,13 +81,13 @@ document.querySelector("#app").innerHTML = `
  
         <div class="spread-strip" id="spread-strip">
  
-            <button class="strip-arrow strip-arrow-left" id="strip-left" aria-label="Прокрутить расклады влево"><span>‹</span></button>
+            <button class="strip-arrow strip-arrow-left" id="strip-left" aria-label="${t("Прокрутить расклады влево")}"><span>‹</span></button>
  
             <div id="spread-list" class="spread-list">
  
             </div>
  
-            <button class="strip-arrow strip-arrow-right" id="strip-right" aria-label="Прокрутить расклады вправо"><span>›</span></button>
+            <button class="strip-arrow strip-arrow-right" id="strip-right" aria-label="${t("Прокрутить расклады вправо")}"><span>›</span></button>
  
         </div>
         </div>
@@ -96,7 +97,7 @@ document.querySelector("#app").innerHTML = `
         <div class="icon-row">
  
  
-    <button id="shuffle" class="icon-button" title="Перемешать" data-label="Перемешать">
+    <button id="shuffle" class="icon-button" title="${t("Перемешать")}" data-label="${t("Перемешать")}">
  
         🂠
  
@@ -104,7 +105,7 @@ document.querySelector("#app").innerHTML = `
  
  
  
-    <button id="history" class="icon-button" title="История" data-label="История">
+    <button id="history" class="icon-button" title="${t("История")}" data-label="${t("История")}">
  
         🕒
  
@@ -112,7 +113,7 @@ document.querySelector("#app").innerHTML = `
  
  
  
-    <button id="deck-info" class="icon-button" title="Колода" data-label="Колода">
+    <button id="deck-info" class="icon-button" title="${t("Колода")}" data-label="${t("Колода")}">
  
         🗂
  
@@ -120,7 +121,7 @@ document.querySelector("#app").innerHTML = `
  
  
  
-    <button id="settings" class="icon-button" title="Настройки" data-label="Настройки">
+    <button id="settings" class="icon-button" title="${t("Настройки")}" data-label="${t("Настройки")}">
  
         ⚙
  
@@ -128,7 +129,7 @@ document.querySelector("#app").innerHTML = `
  
  
  
-    <button id="interpretation-icon" class="icon-button" title="Толкование расклада" data-label="Толкование">
+    <button id="interpretation-icon" class="icon-button" title="${t("Толкование расклада")}" data-label="${t("Толкование")}">
  
         📖
  
@@ -143,7 +144,7 @@ document.querySelector("#app").innerHTML = `
  
  
     <header class="topbar" id="topbar">
-        <button id="topbar-menu" class="topbar-menu" aria-label="Открыть меню раскладов">☰ Расклады</button>
+        <button id="topbar-menu" class="topbar-menu" aria-label="${t("Открыть меню раскладов")}">${t("☰ Расклады")}</button>
         <div id="topbar-title" class="topbar-title"></div>
         <span></span>
     </header>
@@ -468,7 +469,7 @@ function setInterpretation(html) {
  
             <div class="interpretation-header">
  
-                ✦ Толкование ✦
+                ${t("✦ Толкование ✦")}
  
             </div>
  
@@ -513,7 +514,7 @@ function openCommentModal(historyId, existingComment, onSaved) {
  
         <h2 class="question-title">
  
-            Ваш комментарий
+            ${t("Ваш комментарий")}
  
         </h2>
  
@@ -525,7 +526,7 @@ function openCommentModal(historyId, existingComment, onSaved) {
  
             class="comment-textarea"
  
-            placeholder="Добавьте заметку об этом раскладе..."
+            placeholder="${t("Добавьте заметку об этом раскладе...")}"
  
             rows="5"
  
@@ -538,7 +539,7 @@ function openCommentModal(historyId, existingComment, onSaved) {
  
             <button id="comment-save" class="confirm-btn confirm-yes-gold">
  
-                Сохранить
+                ${t("Сохранить")}
  
             </button>
  
@@ -771,15 +772,15 @@ function cardMeaningTabs(card, isReversed, prefix) {
 
     const tabs = [
 
-        { key: "love", label: "Любовь", value: m.love },
+        { key: "love", label: t("Любовь"), value: m.love },
 
-        { key: "career", label: "Карьера", value: m.career },
+        { key: "career", label: t("Карьера"), value: m.career },
 
-        { key: "finance", label: "Финансы", value: m.finance },
+        { key: "finance", label: t("Финансы"), value: m.finance },
 
-        { key: "health", label: "Здоровье", value: m.health },
+        { key: "health", label: t("Здоровье"), value: m.health },
 
-        { key: "advice", label: "Совет", value: m.advice },
+        { key: "advice", label: t("Совет"), value: m.advice },
 
     ]
 
@@ -787,7 +788,7 @@ function cardMeaningTabs(card, isReversed, prefix) {
 
     const buttons =
         tabs.map(
-            (t, i) => `
+            (tab, i) => `
  
                 <button
  
@@ -795,11 +796,11 @@ function cardMeaningTabs(card, isReversed, prefix) {
  
                     data-tab-group="${prefix}"
  
-                    data-tab-key="${t.key}"
+                    data-tab-key="${tab.key}"
  
                 >
  
-                    ${t.label}
+                    ${tab.label}
  
                 </button>
  
@@ -810,7 +811,7 @@ function cardMeaningTabs(card, isReversed, prefix) {
 
     const panels =
         tabs.map(
-            (t, i) => `
+            (tab, i) => `
  
                 <div
  
@@ -818,11 +819,11 @@ function cardMeaningTabs(card, isReversed, prefix) {
  
                     data-tab-group="${prefix}"
  
-                    data-tab-panel="${t.key}"
+                    data-tab-panel="${tab.key}"
  
                 >
  
-                    ${t.value}
+                    ${tab.value}
  
                 </div>
  
@@ -894,9 +895,12 @@ document.addEventListener("click", (e) => {
 
 
 
-    document
+    // у вкладок колоды свои панели (.tab-panel-deck) — их переключает отдельный
+    // обработчик; здесь панели может не быть
+    const panel = document
         .querySelector(`.tab-panel[data-tab-group="${group}"][data-tab-panel="${key}"]`)
-        .classList.add("active")
+
+    if (panel) panel.classList.add("active")
 
 })
 
@@ -953,7 +957,7 @@ function openCardModal(item) {
  
         <h2>
  
-            ${card.name}${item.isReversed ? " (перевёрнутая)" : ""}
+            ${card.name}${item.isReversed ? t(" (перевёрнутая)") : ""}
  
         </h2>
  
@@ -967,7 +971,7 @@ function openCardModal(item) {
  
             <div class="quick-answer ${answerClass(item.quickAnswer)}">
  
-                ${item.quickAnswer}
+                ${t(item.quickAnswer)}
  
             </div>
  
@@ -1059,7 +1063,7 @@ function showConfirm(text, onConfirm, yesLabel) {
  
             <button id="confirm-yes" class="confirm-btn confirm-yes">
  
-                ${yesLabel || "Да, очистить"}
+                ${yesLabel || t("Да, очистить")}
  
             </button>
  
@@ -1067,7 +1071,7 @@ function showConfirm(text, onConfirm, yesLabel) {
  
             <button id="confirm-no" class="confirm-btn confirm-no">
  
-                Отмена
+                ${t("Отмена")}
  
             </button>
  
@@ -1205,7 +1209,7 @@ async function openQuestionModal(spread) {
  
         <p class="question-subtitle">
  
-            Задайте вопрос или начните без него
+            ${t("Задайте вопрос или начните без него")}
  
         </p>
  
@@ -1269,7 +1273,7 @@ async function openQuestionModal(spread) {
  
             class="question-textarea"
  
-            placeholder="Свой вопрос..."
+            placeholder="${t("Свой вопрос...")}"
  
             rows="3"
  
@@ -1282,7 +1286,7 @@ async function openQuestionModal(spread) {
  
             <button id="question-skip" class="confirm-btn confirm-no">
  
-                Без вопроса
+                ${t("Без вопроса")}
  
             </button>
  
@@ -1290,7 +1294,7 @@ async function openQuestionModal(spread) {
  
             <button id="question-start" class="confirm-btn confirm-yes-gold">
  
-                Начать расклад
+                ${t("Начать расклад")}
  
             </button>
  
@@ -1556,7 +1560,7 @@ topbarClose.className = "topbar-close"
 
 topbarClose.textContent = "✕"
 
-topbarClose.setAttribute("aria-label", "Закрыть и вернуться на стартовый экран")
+topbarClose.setAttribute("aria-label", t("Закрыть и вернуться на стартовый экран"))
 
 topbarClose.hidden = true
 
@@ -1623,9 +1627,9 @@ function updateChrome() {
 
     if (marked) title = marked.dataset.topbar
 
-    else if (result.querySelector(".daily-card")) title = "Карта дня"
+    else if (result.querySelector(".daily-card")) title = t("Карта дня")
 
-    else if (result.querySelector(":scope > .card")) title = "Вытянуть карту"
+    else if (result.querySelector(":scope > .card")) title = t("Вытянуть карту")
 
     topbarTitle.textContent = title
 
@@ -1666,6 +1670,7 @@ new MutationObserver(() => {
     if (now && !was && currentSpreadRelayout) currentSpreadRelayout()
 
 }).observe(result, { childList: true })
+
 
 
 // Фон приложения. Варианты: "amethyst" (Аметист), "midnight" (Полночь),
@@ -1869,7 +1874,7 @@ document
 
 
             showMessage(
-                "Ошибка получения карты"
+                t("Ошибка получения карты")
             )
 
 
@@ -1923,7 +1928,7 @@ document
 
 
             showMessage(
-                "Ошибка карты дня"
+                t("Ошибка карты дня")
             )
 
 
@@ -1981,7 +1986,7 @@ function showWelcomeDeck() {
  
             <div class="interpretation-advice">
  
-                Выберите карту или расклад, чтобы увидеть толкование.
+                ${t("Выберите карту или расклад, чтобы увидеть толкование.")}
  
             </div>
  
@@ -2023,7 +2028,7 @@ function showWelcomeDeck() {
  
             <p class="welcome-text">
  
-                ${isMobileLayout() ? "Выберите карту или расклад, чтобы начать" : "Выберите действие слева, чтобы начать"}
+                ${isMobileLayout() ? t("Выберите карту или расклад, чтобы начать") : t("Выберите действие слева, чтобы начать")}
  
             </p>
  
@@ -2052,7 +2057,7 @@ function showMessage(text) {
  
             <div class="interpretation-advice">
  
-                Выберите карту или расклад, чтобы увидеть толкование.
+                ${t("Выберите карту или расклад, чтобы увидеть толкование.")}
  
             </div>
  
@@ -2160,7 +2165,7 @@ function showCard(answer) {
             <h2>
  
     
-            ${card.name}${answer.isReversed ? " (перевёрнутая)" : ""}
+            ${card.name}${answer.isReversed ? t(" (перевёрнутая)") : ""}
  
  
             </h2>
@@ -2175,7 +2180,7 @@ function showCard(answer) {
  
                 <div class="quick-answer ${answerClass(answer.quickAnswer)}">
  
-                    ${answer.quickAnswer}
+                    ${t(answer.quickAnswer)}
  
                 </div>
  
@@ -2201,7 +2206,7 @@ ${answer.historyId ? `
  
         data-history-id="${answer.historyId}"
  
-        title="Добавить комментарий"
+        title="${t("Добавить комментарий")}"
  
     >
  
@@ -2209,7 +2214,7 @@ ${answer.historyId ? `
  
     </button>
  
-        <button class="download-icon-btn" data-history-id="${answer.historyId}" title="Скачать картинкой">⬇</button>
+        <button class="download-icon-btn" data-history-id="${answer.historyId}" title="${t("Скачать картинкой")}">⬇</button>
  
  
 ` : ""}
@@ -2255,7 +2260,7 @@ ${answer.historyId ? `
  
             <div class="interpretation-position">
  
-                Толкование
+                ${t("Толкование")}
  
             </div>
  
@@ -2263,7 +2268,7 @@ ${answer.historyId ? `
  
             <div class="interpretation-card">
  
-                ${card.name}${answer.isReversed ? " (перевёрнутая)" : ""}
+                ${card.name}${answer.isReversed ? t(" (перевёрнутая)") : ""}
  
             </div>
  
@@ -2322,7 +2327,7 @@ function showDailyCard(daily) {
  
             <h3>
  
-                ${card.name}${drawn.isReversed ? " (перевёрнутая)" : ""}
+                ${card.name}${drawn.isReversed ? t(" (перевёрнутая)") : ""}
  
             </h3>
  
@@ -2336,7 +2341,7 @@ function showDailyCard(daily) {
  
                 <div class="quick-answer ${answerClass(drawn.quickAnswer)}">
  
-                    ${drawn.quickAnswer}
+                    ${t(drawn.quickAnswer)}
  
                 </div>
  
@@ -2363,7 +2368,7 @@ function showDailyCard(daily) {
  
                     data-history-id="${drawn.historyId}"
  
-                    title="Добавить комментарий"
+                    title="${t("Добавить комментарий")}"
  
                 >
  
@@ -2371,7 +2376,7 @@ function showDailyCard(daily) {
  
                 </button>
  
-        <button class="download-icon-btn" data-history-id="${drawn.historyId}" title="Скачать картинкой">⬇</button>
+        <button class="download-icon-btn" data-history-id="${drawn.historyId}" title="${t("Скачать картинкой")}">⬇</button>
  
  
             ` : ""}
@@ -2413,7 +2418,7 @@ function showDailyCard(daily) {
  
             <div class="interpretation-position">
  
-                Толкование
+                ${t("Толкование")}
  
             </div>
  
@@ -2421,7 +2426,7 @@ function showDailyCard(daily) {
  
             <div class="interpretation-card">
  
-                ${card.name}${drawn.isReversed ? " (перевёрнутая)" : ""}
+                ${card.name}${drawn.isReversed ? t(" (перевёрнутая)") : ""}
  
             </div>
  
@@ -2480,7 +2485,7 @@ async function drawSpread(id, question) {
 
 
         showMessage(
-            "Ошибка расклада"
+            t("Ошибка расклада")
         )
 
 
@@ -3167,7 +3172,7 @@ function overviewDataRaw(items) {
         add(T.suit.dominant, { suit: T.suits[topSuit].name, n: topCnt, theme: T.suits[topSuit].theme })
     } else if (minors.length >= 4 && topCnt === second && topCnt >= 2) {
         const tie = ranked.filter(r => r[1] === topCnt).map(r => T.suits[r[0]].name)
-        add(T.suit.tie, { suits: tie.join(" и ") })
+        add(T.suit.tie, { suits: tie.join(t(" и ")) })
     }
     if (n >= 5 && minors.length >= 4) {
         const lacking = ranked.filter(r => r[1] === 0).map(r => r[0])
@@ -3193,7 +3198,7 @@ function overviewDataRaw(items) {
             add(T.elements.dominant, { el: T.elements.names[top[0]], n: top[1], total: n, theme: T.elements.theme[top[0]] })
         } else if (top[1] >= 2 && top[1] === sec[1] && T.elements.tie) {
             const tl = lowNames(elRanked.filter(r => r[1] === top[1]))
-            add(T.elements.tie, { list: tl.length > 2 ? tl.slice(0, -1).join(", ") + " и " + tl[tl.length - 1] : tl.join(" и ") })
+            add(T.elements.tie, { list: tl.length > 2 ? tl.slice(0, -1).join(", ") + t(" и ") + tl[tl.length - 1] : tl.join(t(" и ")) })
         } else if (present.length >= 2 && T.elements.balanced) {
             add(T.elements.balanced, { list: lowNames(present).join(", ") })
         }
@@ -3397,9 +3402,9 @@ function renderSpread(data, question) {
  
         <div class="spread-answer ${answerClass(data.quickAnswer)}">
  
-            <span class="spread-answer-label">Общий ответ:</span>
+            <span class="spread-answer-label">${t("Общий ответ:")}</span>
  
-            <span class="spread-answer-value">${data.quickAnswer}</span>
+            <span class="spread-answer-value">${t(data.quickAnswer)}</span>
  
         </div>
  
@@ -3415,7 +3420,7 @@ function renderSpread(data, question) {
  
             data-history-id="${data.historyId}"
  
-            title="Добавить комментарий"
+            title="${t("Добавить комментарий")}"
  
         >
  
@@ -3423,7 +3428,7 @@ function renderSpread(data, question) {
  
         </button>
  
-        <button class="download-icon-btn" data-history-id="${data.historyId}" title="Скачать картинкой">⬇</button>
+        <button class="download-icon-btn" data-history-id="${data.historyId}" title="${t("Скачать картинкой")}">⬇</button>
  
  
     ` : ""}
@@ -3589,7 +3594,7 @@ function renderSpread(data, question) {
  
                 <div class="card-name">
  
-                    ${item.card.name}${item.isReversed ? " (п.)" : ""}
+                    ${item.card.name}${item.isReversed ? t(" (п.)") : ""}
  
                 </div>
  
@@ -3751,7 +3756,7 @@ function renderSpread(data, question) {
  
                     <div class="interpretation-card">
  
-                        ${item.card.name}${item.isReversed ? " (перевёрнутая)" : ""}
+                        ${item.card.name}${item.isReversed ? t(" (перевёрнутая)") : ""}
  
                     </div>
  
@@ -3865,7 +3870,7 @@ async function showHistoryList() {
  
                 <div class="interpretation-advice">
  
-                    Выберите карту или расклад, чтобы увидеть толкование.
+                    ${t("Выберите карту или расклад, чтобы увидеть толкование.")}
  
                 </div>
  
@@ -3893,7 +3898,7 @@ async function showHistoryList() {
  
             <h2 class="history-title">
  
-                ✦ История гаданий ✦
+                ${t("✦ История гаданий ✦")}
  
             </h2>
  
@@ -3901,7 +3906,7 @@ async function showHistoryList() {
  
             <p class="welcome-text">
  
-                История пока пуста
+                ${t("История пока пуста")}
  
             </p>
  
@@ -3924,7 +3929,7 @@ async function showHistoryList() {
  
         <h2 class="history-title">
  
-            ✦ История гаданий ✦
+            ${t("✦ История гаданий ✦")}
  
         </h2>
  
@@ -3933,13 +3938,13 @@ async function showHistoryList() {
         <div class="history-header">
  
  
-            <span class="history-count">Записей: ${sorted.length}</span>
+            <span class="history-count">${t("Записей: {n}", { n: sorted.length })}</span>
  
  
  
             <button id="clear-history" class="history-clear-btn">
  
-                Очистить всё
+                ${t("Очистить всё")}
  
             </button>
  
@@ -3972,13 +3977,13 @@ async function showHistoryList() {
  
                         <div class="history-actions">
  
-                            <button class="history-download" data-id="${r.id}" title="Скачать картинкой">
+                            <button class="history-download" data-id="${r.id}" title="${t("Скачать картинкой")}">
  
                                 ⬇
  
                             </button>
  
-                            <button class="history-delete" data-id="${r.id}" title="Удалить">
+                            <button class="history-delete" data-id="${r.id}" title="${t("Удалить")}">
  
                                 ✕
  
@@ -4076,7 +4081,7 @@ async function showHistoryList() {
             .onclick = () => {
 
                 showConfirm(
-                    "Удалить всю историю гаданий без возможности восстановления?",
+                    t("Удалить всю историю гаданий без возможности восстановления?"),
 
                     async () => {
 
@@ -4118,7 +4123,7 @@ async function showHistoryList() {
 
 
 
-        showMessage("Ошибка загрузки истории")
+        showMessage(t("Ошибка загрузки истории"))
 
 
     }
@@ -4139,7 +4144,7 @@ function backToHistoryButton() {
  
         <button class="back-to-history" id="back-to-history">
  
-            ← К истории
+            ${t("← К истории")}
  
         </button>
  
@@ -4204,7 +4209,7 @@ function openHistoryRecord(record) {
 
         if (!spreadDef) {
 
-            showMessage("Данные расклада недоступны")
+            showMessage(t("Данные расклада недоступны"))
 
             return
 
@@ -4535,8 +4540,8 @@ async function renderRecordImage(record, onStage) {
 
     const title =
         record.name ||
-        (record.type === "daily" ? "Карта дня"
-            : record.type === "spread" ? "Расклад" : "Карта")
+        (record.type === "daily" ? t("Карта дня")
+            : record.type === "spread" ? t("Расклад") : t("Карта"))
 
     const quick =
         record.quickAnswer ||
@@ -4647,7 +4652,7 @@ async function renderRecordImage(record, onStage) {
 
             ctx.font = `700 34px ${FONT}`
 
-            const label = "Общий ответ: " + quick
+            const label = t("Общий ответ:") + " " + t(quick)
 
             const tw = ctx.measureText(label).width + 56
 
@@ -4783,7 +4788,7 @@ async function renderRecordImage(record, onStage) {
 
             if (withLabels) {
 
-                const nm = it.card.name + (it.isReversed ? " (п.)" : "")
+                const nm = it.card.name + (it.isReversed ? t(" (п.)") : "")
 
                 const fs = Math.max(20, Math.round(iw * 0.105))
 
@@ -4829,7 +4834,7 @@ async function renderRecordImage(record, onStage) {
 
             y += ih + 30
 
-            const nm = items[0].card.name + (items[0].isReversed ? " (перевёрнутая)" : "")
+            const nm = items[0].card.name + (items[0].isReversed ? t(" (перевёрнутая)") : "")
 
             ctx.font = `700 44px ${FONT}`
 
@@ -4931,9 +4936,9 @@ async function renderRecordImage(record, onStage) {
             const body =
                 spreadDef
                     ? (m.advice || m.text || "")
-                    : [m.text, m.advice ? "Совет: " + m.advice : ""].filter(Boolean).join("\n\n")
+                    : [m.text, m.advice ? t("Совет:") + " " + m.advice : ""].filter(Boolean).join("\n\n")
 
-            const nm = it.card.name + (it.isReversed ? " (перевёрнутая)" : "")
+            const nm = it.card.name + (it.isReversed ? t(" (перевёрнутая)") : "")
 
             const blockTop = y
 
@@ -5245,11 +5250,11 @@ function showImagePreview(blob, fileName) {
  
         <div class="image-preview-bar">
  
-            <button class="image-preview-btn" data-act="close" type="button">Закрыть</button>
+            <button class="image-preview-btn" data-act="close" type="button">${t("Закрыть")}</button>
  
             <span class="image-preview-space"></span>
  
-            <a class="image-preview-btn" data-act="save" href="${url}" download="${fileName}">Скачать</a>
+            <a class="image-preview-btn" data-act="save" href="${url}" download="${fileName}">${t("Скачать")}</a>
  
         </div>
  
@@ -5288,13 +5293,13 @@ function showImagePreview(blob, fileName) {
 
 
 const RITUAL_STEPS = [
-    "Собираем ваш расклад…",
-    "Добавляем фон и рамку…",
-    "Пишем заголовок и вопрос…",
-    "Подготавливаем изображения карт…",
-    "Добавляем толкование…",
-    "Добавляем последние штрихи…",
-    "Сохраняем файл…",
+    t("Собираем ваш расклад…"),
+    t("Добавляем фон и рамку…"),
+    t("Пишем заголовок и вопрос…"),
+    t("Подготавливаем изображения карт…"),
+    t("Добавляем толкование…"),
+    t("Добавляем последние штрихи…"),
+    t("Сохраняем файл…"),
 ]
 
 // Время (мс), которое можно регулировать:
@@ -5452,11 +5457,11 @@ function canShareSaved(saved, blob, fileName) {
 
 function ritualWhere() {
 
-    if (window.TarotNative) return "Сохранение в галерею"
+    if (window.TarotNative) return t("Сохранение в галерею")
 
-    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) return "Подготовка картинки"
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) return t("Подготовка картинки")
 
-    return "Сохранение в «Загрузки»"
+    return t("Сохранение в «Загрузки»")
 
 }
 
@@ -5475,7 +5480,7 @@ function openRitual() {
  
         <div class="ritual-head">
  
-            <div class="ritual-head-title">Запечатлеваем расклад</div>
+            <div class="ritual-head-title">${t("Запечатлеваем расклад")}</div>
  
             <div class="ritual-head-sub">${ritualWhere()}</div>
  
@@ -5669,21 +5674,21 @@ function openRitual() {
 
             const done = box.querySelector(".ritual-done")
 
-            let title = "Расклад сохранён"
+            let title = t("Расклад сохранён")
 
             let sub = ""
 
             if (!saved.ok) {
 
-                title = "Не удалось сохранить"
+                title = t("Не удалось сохранить")
 
-                sub = "Попробуйте ещё раз"
+                sub = t("Попробуйте ещё раз")
 
             }
 
             else if (saved.kind === "gallery") {
 
-                title = "Расклад сохранён в галерее"
+                title = t("Расклад сохранён в галерее")
 
                 sub = "Pictures / TarotOracle"
 
@@ -5691,17 +5696,17 @@ function openRitual() {
 
             else if (saved.kind === "file") {
 
-                title = "Расклад сохранён"
+                title = t("Расклад сохранён")
 
-                sub = "Папка «Загрузки»"
+                sub = t("Папка «Загрузки»")
 
             }
 
             if (saved.ok && saved.kind === "ready") {
 
-                title = "Картинка готова"
+                title = t("Картинка готова")
 
-                sub = "Нажмите «Поделиться» и выберите «Сохранить изображение»"
+                sub = t("Нажмите «Поделиться» и выберите «Сохранить изображение»")
 
             }
 
@@ -5721,9 +5726,9 @@ function openRitual() {
  
                 <div class="ritual-actions">
  
-                    ${share ? `<button type="button" class="ritual-btn ghost" data-act="share">Поделиться</button>` : ""}
+                    ${share ? `<button type="button" class="ritual-btn ghost" data-act="share">${t("Поделиться")}</button>` : ""}
  
-                    <button type="button" class="ritual-btn" data-act="ok">Готово</button>
+                    <button type="button" class="ritual-btn" data-act="ok">${t("Готово")}</button>
  
                 </div>
  
@@ -5769,7 +5774,7 @@ async function downloadRecordImage(record) {
 
         const fileName = recordFileName(record)
 
-        ui.saving(window.TarotNative ? "Сохраняем файл в галерее…" : RITUAL_STEPS[6])
+        ui.saving(window.TarotNative ? t("Сохраняем файл в галерее…") : RITUAL_STEPS[6])
 
         const [saved] = await Promise.all([saveBlobAnywhere(blob, fileName), sleep(700)])
 
@@ -5802,7 +5807,7 @@ const APP_INFO = {
 
     version: "1.0.0",
 
-    description: "Приложение для гаданий на картах Таро: расклады, карта дня и толкования.",
+    description: t("Приложение для гаданий на картах Таро: расклады, карта дня и толкования."),
 
 }
 
@@ -5817,7 +5822,7 @@ function showSettings() {
  
             <h2 class="settings-title">
  
-                ✦ Настройки ✦
+                ${t("✦ Настройки ✦")}
  
             </h2>
  
@@ -5826,7 +5831,7 @@ function showSettings() {
             <div class="settings-group">
  
  
-                <div class="settings-group-title">Колода</div>
+                <div class="settings-group-title">${t("Колода")}</div>
  
  
  
@@ -5843,7 +5848,7 @@ function showSettings() {
  
                     >
  
-                        Полная (78 карт)
+                        ${t("Полная (78 карт)")}
  
                     </button>
  
@@ -5859,7 +5864,7 @@ function showSettings() {
  
                     >
  
-                        Старшие арканы (22)
+                        ${t("Старшие арканы (22)")}
  
                     </button>
  
@@ -5870,7 +5875,7 @@ function showSettings() {
  
                 <p class="settings-hint">
  
-                    При смене режима колода будет пересобрана и перемешана.
+                    ${t("При смене режима колода будет пересобрана и перемешана.")}
  
                 </p>
  
@@ -5880,7 +5885,7 @@ function showSettings() {
             <div class="settings-group">
  
  
-    <div class="settings-group-title">Способ вытягивания</div>
+    <div class="settings-group-title">${t("Способ вытягивания")}</div>
  
  
  
@@ -5897,7 +5902,7 @@ function showSettings() {
  
         >
  
-            По порядку
+            ${t("По порядку")}
  
         </button>
  
@@ -5913,7 +5918,7 @@ function showSettings() {
  
         >
  
-            Случайно
+            ${t("Случайно")}
  
         </button>
  
@@ -5924,7 +5929,7 @@ function showSettings() {
  
     <p class="settings-hint">
  
-        «По порядку» — карты вытягиваются последовательно из уже перемешанной колоды. «Случайно» — каждая карта выбирается заново из оставшихся.
+        ${t("«По порядку» — карты вытягиваются последовательно из уже перемешанной колоды. «Случайно» — каждая карта выбирается заново из оставшихся.")}
  
     </p>
  
@@ -5938,7 +5943,7 @@ function showSettings() {
  
                 <div class="settings-group-title">
  
-                    Стиль колоды <span class="settings-soon">Скоро</span>
+                    ${t("Стиль колоды")} <span class="settings-soon">${t("Скоро")}</span>
  
                 </div>
  
@@ -5949,7 +5954,7 @@ function showSettings() {
  
                     <button class="settings-option active" disabled>
  
-                        Классическая
+                        ${t("Классическая")}
  
                     </button>
  
@@ -5957,7 +5962,7 @@ function showSettings() {
  
                     <button class="settings-option" disabled>
  
-                        Тёмная
+                        ${t("Тёмная")}
  
                     </button>
  
@@ -5965,7 +5970,7 @@ function showSettings() {
  
                     <button class="settings-option" disabled>
  
-                        Акварель
+                        ${t("Акварель")}
  
                     </button>
  
@@ -5982,7 +5987,7 @@ function showSettings() {
  
                 <div class="settings-group-title">
  
-                    Язык <span class="settings-soon">Скоро</span>
+                    ${t("Язык")} <span class="settings-soon">${t("Скоро")}</span>
  
                 </div>
  
@@ -5993,7 +5998,7 @@ function showSettings() {
  
                     <button class="settings-option active" disabled>
  
-                        Русский
+                        ${t("Русский")}
  
                     </button>
  
@@ -6016,26 +6021,26 @@ function showSettings() {
             <div class="settings-group">
  
  
-                <div class="settings-group-title">О программе</div>
+                <div class="settings-group-title">${t("О программе")}</div>
  
  
  
                 <button class="settings-link" id="open-about">
  
-                    ${APP_INFO.name} · версия ${APP_INFO.version}
+                    ${APP_INFO.name} · ${t("версия")} ${APP_INFO.version}
  
                 </button>
  
  
                  <button class="settings-link" id="open-guide">
  
-        Руководство пользователя
+        ${t("Руководство пользователя")}
  
     </button>
  
     <button class="settings-link" id="open-about-tarot">
  
-        О картах Таро
+        ${t("О картах Таро")}
  
     </button>
  
@@ -6049,7 +6054,7 @@ function showSettings() {
  
                 <button class="settings-link" id="open-privacy">
  
-                    Политика конфиденциальности
+                    ${t("Политика конфиденциальности")}
  
                 </button>
  
@@ -6057,7 +6062,7 @@ function showSettings() {
  
                 <button class="settings-link" id="open-terms">
  
-                    Условия использования
+                    ${t("Условия использования")}
  
                 </button>
  
@@ -6065,7 +6070,7 @@ function showSettings() {
  
                 <button class="settings-link" id="open-credits">
  
-                    Источники и лицензии
+                    ${t("Источники и лицензии")}
  
                 </button>
  
@@ -6137,7 +6142,7 @@ function showSettings() {
 
                 APP_INFO.name,
 
-                `Версия ${APP_INFO.version}<br><br>${APP_INFO.description}`
+                `${t("Версия")} ${APP_INFO.version}<br><br>${APP_INFO.description}`
 
             )
 
@@ -6148,7 +6153,7 @@ function showSettings() {
         .onclick = () => {
 
             showGuideScreen(
-                "✦ Руководство пользователя ✦",
+                t("✦ Руководство пользователя ✦"),
                 GetGuide
             )
 
@@ -6159,7 +6164,7 @@ function showSettings() {
         .onclick = () => {
 
             showGuideScreen(
-                "✦ О картах Таро ✦",
+                t("✦ О картах Таро ✦"),
                 GetAboutTarot
             )
 
@@ -6183,13 +6188,14 @@ function showSettings() {
 
                 if (!section) {
 
-                    showInfoModal("Политика конфиденциальности", "Текст пока недоступен.")
+                    showInfoModal(t("Политика конфиденциальности"), t("Текст пока недоступен."))
 
 
 
                     return
 
                 }
+
 
 
                 showInfoModal(
@@ -6231,7 +6237,7 @@ function showSettings() {
 
                 if (!section) {
 
-                    showInfoModal("Условия использования", "Текст пока недоступен.")
+                    showInfoModal(t("Условия использования"), t("Текст пока недоступен."))
 
 
 
@@ -6268,11 +6274,11 @@ function showSettings() {
 
         showInfoModal(
 
-            "Источники и лицензии",
+            t("Источники и лицензии"),
 
             [
-                "<p><b>Изображения карт.</b> Используются иллюстрации колоды Райдера-Уэйта-Смит (1909–1910), художница — Памела Колман Смит (1878–1951). Изображения находятся в общественном достоянии (Public domain). Источник файлов — Wikimedia Commons, коллекция участника TaionWC.</p>",
-                "<p><b>Открытое программное обеспечение.</b> Приложение создано с использованием Wails и других библиотек с открытым исходным кодом, которые распространяются под собственными лицензиями (в основном MIT).</p>",
+                "<p><b>" + t("Изображения карт.") + "</b> " + t("Используются иллюстрации колоды Райдера-Уэйта-Смит (1909–1910), художница — Памела Колман Смит (1878–1951). Изображения находятся в общественном достоянии (Public domain). Источник файлов — Wikimedia Commons, коллекция участника TaionWC.") + "</p>",
+                "<p><b>" + t("Открытое программное обеспечение.") + "</b> " + t("Приложение создано с использованием Wails и других библиотек с открытым исходным кодом, которые распространяются под собственными лицензиями (в основном MIT).") + "</p>",
             ].join("")
 
         )
@@ -6422,7 +6428,7 @@ async function showDeckScreen() {
  
             <h2 class="deck-screen-title">
  
-                ✦ Колода ✦
+                ${t("✦ Колода ✦")}
  
             </h2>
  
@@ -6432,7 +6438,7 @@ async function showDeckScreen() {
  
     <button class="tab-btn active" data-tab-group="deck" data-tab-key="remaining">
  
-        Оставшиеся карты
+        ${t("Оставшиеся карты")}
  
         <span class="deck-group-count" id="remaining-total-count"></span>
  
@@ -6442,7 +6448,7 @@ async function showDeckScreen() {
  
     <button class="tab-btn" data-tab-group="deck" data-tab-key="full">
  
-        Вся колода
+        ${t("Вся колода")}
  
         <span class="deck-group-count" id="full-total-count"></span>
  
@@ -6463,7 +6469,7 @@ async function showDeckScreen() {
  
             >
  
-                <div class="deck-loading">Загрузка...</div>
+                <div class="deck-loading">${t("Загрузка...")}</div>
  
             </div>
  
@@ -6479,7 +6485,7 @@ async function showDeckScreen() {
  
             >
  
-                <div class="deck-loading">Загрузка...</div>
+                <div class="deck-loading">${t("Загрузка...")}</div>
  
             </div>
  
@@ -6520,15 +6526,15 @@ async function showDeckScreen() {
 
     const groupLabels = {
 
-        major: "Старшие арканы",
+        major: t("Старшие арканы"),
 
-        wands: "Жезлы",
+        wands: t("Жезлы"),
 
-        cups: "Кубки",
+        cups: t("Кубки"),
 
-        swords: "Мечи",
+        swords: t("Мечи"),
 
-        pentacles: "Пентакли",
+        pentacles: t("Пентакли"),
 
     }
 
@@ -6709,7 +6715,7 @@ async function showDeckScreen() {
                 '.tab-panel-deck[data-tab-panel="remaining"]'
             ).innerHTML = `
  
-            <p class="deck-empty-text">Колода пуста</p>
+            <p class="deck-empty-text">${t("Колода пуста")}</p>
  
         `
 
@@ -6798,7 +6804,7 @@ async function showGuideScreen(title, fetchFn) {
 
 
     const screenTitle =
-        title || "✦ Руководство пользователя ✦"
+        title || t("✦ Руководство пользователя ✦")
 
 
 
@@ -6814,7 +6820,7 @@ async function showGuideScreen(title, fetchFn) {
  
             <button class="back-to-history" id="back-from-guide">
  
-                ← Назад
+                ${t("← Назад")}
  
             </button>
  
@@ -6830,7 +6836,7 @@ async function showGuideScreen(title, fetchFn) {
  
             <div id="guide-content" class="guide-content">
  
-                <div class="deck-loading">Загрузка...</div>
+                <div class="deck-loading">${t("Загрузка...")}</div>
  
             </div>
  
@@ -6871,7 +6877,7 @@ async function showGuideScreen(title, fetchFn) {
 
             contentEl.innerHTML = `
  
-                <p class="deck-empty-text">Раздел пока недоступен</p>
+                <p class="deck-empty-text">${t("Раздел пока недоступен")}</p>
  
             `
 
