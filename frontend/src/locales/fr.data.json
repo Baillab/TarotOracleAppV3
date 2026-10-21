@@ -1,0 +1,2269 @@
+{
+    "cards": {
+        "major_00": {
+            "name": "Le Fou",
+            "keywords": [
+                "commencement",
+                "liberté",
+                "voyage",
+                "risque"
+            ],
+            "upright": {
+                "text": "Un nouveau départ, la liberté et l’envie de s’engager sur un chemin inconnu.",
+                "love": "Une nouvelle rencontre, de la légèreté et des sentiments neufs.",
+                "career": "Un nouveau projet, un apprentissage ou un changement de cap.",
+                "finance": "De nouvelles opportunités, mais la prudence s’impose.",
+                "health": "Renouveler ses habitudes et prendre soin de soi.",
+                "advice": "Faites confiance à la vie, mais pensez aux conséquences."
+            },
+            "reversed": {
+                "text": "Insouciance, chaos et prise de risque imprudente.",
+                "love": "Instabilité ou manque de sérieux.",
+                "career": "Ce n’est pas le moment d’agir sans plan.",
+                "finance": "Dépenses impulsives.",
+                "health": "Soyez plus attentif à votre ressenti.",
+                "advice": "Arrêtez-vous et évaluez la situation."
+            }
+        },
+        "major_01": {
+            "name": "Le Magicien",
+            "keywords": [
+                "volonté",
+                "créativité",
+                "maîtrise"
+            ],
+            "upright": {
+                "text": "Volonté, savoir et capacité à créer quelque chose de nouveau.",
+                "love": "De l’initiative et un développement actif de la relation.",
+                "career": "Mettre vos compétences au service de votre objectif.",
+                "finance": "De nouvelles façons de gagner de l’argent.",
+                "health": "Énergie et rétablissement.",
+                "advice": "Utilisez vos capacités."
+            },
+            "reversed": {
+                "text": "Manipulation et abus de pouvoir.",
+                "love": "Manque de sincérité et motivations cachées.",
+                "career": "Des erreurs nées d’un excès de confiance.",
+                "finance": "Risque de se faire tromper.",
+                "health": "Énergie épuisée.",
+                "advice": "Soyez honnête avec vous-même."
+            }
+        },
+        "major_02": {
+            "name": "La Grande Prêtresse",
+            "keywords": [
+                "intuition",
+                "mystère",
+                "connaissance"
+            ],
+            "upright": {
+                "text": "L’intuition et une compréhension profonde de ce qui est caché.",
+                "love": "Un lien émotionnel subtil.",
+                "career": "Observation et analyse.",
+                "finance": "Ne vous précipitez pas dans vos décisions.",
+                "health": "Écoutez-vous.",
+                "advice": "Faites confiance à votre voix intérieure."
+            },
+            "reversed": {
+                "text": "Intuition ignorée et informations cachées.",
+                "love": "Des non-dits.",
+                "career": "Un manque de clarté.",
+                "finance": "Toutes les informations ne sont pas connues.",
+                "health": "N’ignorez pas les signaux de votre corps.",
+                "advice": "Cherchez les causes cachées."
+            }
+        },
+        "major_03": {
+            "name": "L’Impératrice",
+            "keywords": [
+                "création",
+                "abondance",
+                "croissance"
+            ],
+            "upright": {
+                "text": "Créativité, fécondité et développement.",
+                "love": "Harmonie, attention et sentiments profonds.",
+                "career": "Croissance des projets et idées créatives.",
+                "finance": "Aisance matérielle.",
+                "health": "Rétablissement et soin du corps.",
+                "advice": "Créez et nourrissez."
+            },
+            "reversed": {
+                "text": "Stagnation, dépendance ou manque de croissance.",
+                "love": "Un manque d’attention.",
+                "career": "Un blocage créatif.",
+                "finance": "Dépenses irréfléchies.",
+                "health": "Du repos est nécessaire.",
+                "advice": "Rétablissez l’équilibre."
+            }
+        },
+        "major_04": {
+            "name": "L’Empereur",
+            "keywords": [
+                "ordre",
+                "autorité",
+                "structure"
+            ],
+            "upright": {
+                "text": "Stabilité, responsabilité et maîtrise.",
+                "love": "Fiabilité et sérieux.",
+                "career": "Leadership et organisation.",
+                "finance": "Une situation stable.",
+                "health": "Discipline et routine.",
+                "advice": "Bâtissez des fondations solides."
+            },
+            "reversed": {
+                "text": "Rigidité et contrôle excessif.",
+                "love": "Domination dans la relation.",
+                "career": "Conflits avec l’autorité.",
+                "finance": "Des problèmes causés par le contrôle.",
+                "health": "Surmenage.",
+                "advice": "Soyez plus souple."
+            }
+        },
+        "major_05": {
+            "name": "Le Hiérophante",
+            "keywords": [
+                "tradition",
+                "apprentissage",
+                "sagesse"
+            ],
+            "upright": {
+                "text": "Savoir, guidance et chemin spirituel.",
+                "love": "Une relation sérieuse.",
+                "career": "Apprendre et travailler dans le respect des règles.",
+                "finance": "Des décisions fiables.",
+                "health": "Des méthodes de guérison traditionnelles.",
+                "advice": "Apprenez de l’expérience."
+            },
+            "reversed": {
+                "text": "Transgression des règles et remise en cause des traditions.",
+                "love": "Des valeurs qui ne concordent pas.",
+                "career": "Un conflit avec le système.",
+                "finance": "Le risque de décisions non conventionnelles.",
+                "health": "Trouvez votre propre approche.",
+                "advice": "Pensez par vous-même."
+            }
+        },
+        "major_06": {
+            "name": "Les Amoureux",
+            "keywords": [
+                "amour",
+                "choix",
+                "harmonie"
+            ],
+            "upright": {
+                "text": "Un choix, une union et de l’harmonie.",
+                "love": "Un lien profond.",
+                "career": "Une décision importante.",
+                "finance": "Choisir la bonne voie.",
+                "health": "Équilibre du corps et de l’âme.",
+                "advice": "Suivez votre cœur."
+            },
+            "reversed": {
+                "text": "Conflit ou mauvais choix.",
+                "love": "Des désaccords.",
+                "career": "Des doutes.",
+                "finance": "Des décisions erronées.",
+                "health": "Équilibre perdu.",
+                "advice": "Reconsidérez votre choix."
+            }
+        },
+        "major_07": {
+            "name": "Le Chariot",
+            "keywords": [
+                "mouvement",
+                "victoire",
+                "but"
+            ],
+            "upright": {
+                "text": "Avancer et atteindre son but.",
+                "love": "La relation évolue.",
+                "career": "Le succès par l’action.",
+                "finance": "Une progression.",
+                "health": "Force et énergie.",
+                "advice": "Avancez avec confiance."
+            },
+            "reversed": {
+                "text": "Perte de contrôle et direction perdue.",
+                "love": "Des tensions.",
+                "career": "Des retards.",
+                "finance": "Dépenses incontrôlées.",
+                "health": "Épuisement.",
+                "advice": "Reprenez le contrôle."
+            }
+        },
+        "major_08": {
+            "name": "La Force",
+            "keywords": [
+                "courage",
+                "volonté",
+                "force intérieure"
+            ],
+            "upright": {
+                "text": "Force intérieure, patience et confiance.",
+                "love": "Un attachement profond et de la confiance.",
+                "career": "Surmonter les difficultés avec assurance.",
+                "finance": "Stabilité grâce à la discipline.",
+                "health": "Une bonne réserve d’énergie.",
+                "advice": "Agissez avec calme et assurance."
+            },
+            "reversed": {
+                "text": "Doute, faiblesse ou perte de contrôle.",
+                "love": "De l’insécurité.",
+                "career": "Un manque de détermination.",
+                "finance": "Un manque de maîtrise de soi.",
+                "health": "Forces épuisées.",
+                "advice": "Retrouvez votre équilibre intérieur."
+            }
+        },
+        "major_09": {
+            "name": "L’Ermite",
+            "keywords": [
+                "sagesse",
+                "quête",
+                "solitude"
+            ],
+            "upright": {
+                "text": "Introspection et quête de la vérité intérieure.",
+                "love": "Un temps de réflexion.",
+                "career": "Acquérir de l’expérience et des connaissances.",
+                "finance": "Une approche prudente.",
+                "health": "Repos et rétablissement.",
+                "advice": "Écoutez-vous."
+            },
+            "reversed": {
+                "text": "Isolement et repli sur soi.",
+                "love": "Distance émotionnelle.",
+                "career": "Un développement ralenti.",
+                "finance": "Peur du changement.",
+                "health": "Ne refusez pas l’aide.",
+                "advice": "Revenez vers les autres."
+            }
+        },
+        "major_10": {
+            "name": "La Roue de Fortune",
+            "keywords": [
+                "changement",
+                "destin",
+                "cycle"
+            ],
+            "upright": {
+                "text": "Une nouvelle étape et des changements inattendus.",
+                "love": "Des changements dans la relation.",
+                "career": "De nouvelles opportunités.",
+                "finance": "Un changement de votre situation financière.",
+                "health": "Renouveau.",
+                "advice": "Acceptez le changement."
+            },
+            "reversed": {
+                "text": "Retards et résistance au changement.",
+                "love": "Répétition de schémas anciens.",
+                "career": "Des difficultés passagères.",
+                "finance": "Instabilité.",
+                "health": "Il faut changer certaines habitudes.",
+                "advice": "Ne vous accrochez pas au passé."
+            }
+        },
+        "major_11": {
+            "name": "La Justice",
+            "keywords": [
+                "équilibre",
+                "loi",
+                "vérité"
+            ],
+            "upright": {
+                "text": "Honnêteté, équilibre et conséquences des décisions.",
+                "love": "Une conversation franche.",
+                "career": "Une évaluation juste.",
+                "finance": "Une approche responsable.",
+                "health": "Équilibre et ordre.",
+                "advice": "Soyez objectif."
+            },
+            "reversed": {
+                "text": "Déséquilibre et injustice.",
+                "love": "Malentendu.",
+                "career": "Une situation injuste.",
+                "finance": "Des erreurs de calcul.",
+                "health": "Équilibre perdu.",
+                "advice": "Regardez la situation avec honnêteté."
+            }
+        },
+        "major_12": {
+            "name": "Le Pendu",
+            "keywords": [
+                "pause",
+                "nouveau point de vue",
+                "sacrifice"
+            ],
+            "upright": {
+                "text": "Un arrêt pour repenser les choses.",
+                "love": "Il faut du temps pour comprendre.",
+                "career": "Un regard nouveau sur la situation.",
+                "finance": "Ne vous précipitez pas pour agir.",
+                "health": "Rétablissement.",
+                "advice": "Voyez les choses autrement."
+            },
+            "reversed": {
+                "text": "Stagnation et résistance au changement.",
+                "love": "Refus de changer.",
+                "career": "Aucun mouvement.",
+                "finance": "Décisions repoussées.",
+                "health": "Problèmes ignorés.",
+                "advice": "Lâchez prise sur l’ancien."
+            }
+        },
+        "major_13": {
+            "name": "La Mort",
+            "keywords": [
+                "transformation",
+                "fin",
+                "renouveau"
+            ],
+            "upright": {
+                "text": "La fin d’une étape et le début d’une autre.",
+                "love": "Une profonde transformation de la relation.",
+                "career": "Un changement de direction.",
+                "finance": "Un changement d’approche.",
+                "health": "Renouveler ses habitudes.",
+                "advice": "N’ayez pas peur du changement."
+            },
+            "reversed": {
+                "text": "Résistance à un changement inévitable.",
+                "love": "Attachement au passé.",
+                "career": "Peur du nouveau.",
+                "finance": "Stagnation.",
+                "health": "Votre mode de vie doit changer.",
+                "advice": "Laissez partir l’ancien."
+            }
+        },
+        "major_14": {
+            "name": "La Tempérance",
+            "keywords": [
+                "harmonie",
+                "équilibre",
+                "guérison"
+            ],
+            "upright": {
+                "text": "Équilibre, calme et développement progressif.",
+                "love": "Une relation harmonieuse.",
+                "career": "Une coopération fructueuse.",
+                "finance": "Stabilité grâce à la modération.",
+                "health": "Retrouver l’équilibre.",
+                "advice": "Ne vous pressez pas, chaque chose vient en son temps."
+            },
+            "reversed": {
+                "text": "Déséquilibre et manque de modération.",
+                "love": "Conflits et excès émotionnels.",
+                "career": "Équilibre perturbé au travail.",
+                "finance": "Dépenses inconsidérées.",
+                "health": "Surmenage.",
+                "advice": "Rétablissez l’harmonie."
+            }
+        },
+        "major_15": {
+            "name": "Le Diable",
+            "keywords": [
+                "désir",
+                "attachement",
+                "tentation"
+            ],
+            "upright": {
+                "text": "Désirs intenses et attachements matériels.",
+                "love": "Passion et forte attirance.",
+                "career": "Ambition et soif de réussite.",
+                "finance": "Des objectifs matériels.",
+                "health": "Soyez attentif à vos habitudes.",
+                "advice": "Reconnaissez vos limites."
+            },
+            "reversed": {
+                "text": "Libération de la dépendance.",
+                "love": "Rupture de liens malsains.",
+                "career": "Échapper aux limitations.",
+                "finance": "Maîtrise des dépenses.",
+                "health": "Se défaire des habitudes nocives.",
+                "advice": "Reconquérez votre liberté."
+            }
+        },
+        "major_16": {
+            "name": "La Tour",
+            "keywords": [
+                "changement",
+                "destruction",
+                "libération"
+            ],
+            "upright": {
+                "text": "Un changement soudain et l’effondrement de l’ancien.",
+                "love": "Une remise en question de la relation.",
+                "career": "Un changement de circonstances.",
+                "finance": "Des changements inattendus.",
+                "health": "Vos habitudes doivent être revues.",
+                "advice": "Acceptez le changement."
+            },
+            "reversed": {
+                "text": "Peur du changement et résistance.",
+                "love": "Éviter une conversation importante.",
+                "career": "Décisions repoussées.",
+                "finance": "Une tentative de conserver l’ancien.",
+                "health": "N’ignorez pas les signaux.",
+                "advice": "Ne vous accrochez pas au passé."
+            }
+        },
+        "major_17": {
+            "name": "L’Étoile",
+            "keywords": [
+                "espoir",
+                "inspiration",
+                "lumière"
+            ],
+            "upright": {
+                "text": "Espoir, renouveau et inspiration.",
+                "love": "Ouverture et confiance.",
+                "career": "Un succès créatif.",
+                "finance": "Des perspectives favorables.",
+                "health": "Rétablissement.",
+                "advice": "Gardez la foi."
+            },
+            "reversed": {
+                "text": "Confiance perdue.",
+                "love": "Déception.",
+                "career": "Un manque d’inspiration.",
+                "finance": "Des doutes.",
+                "health": "Un soutien est nécessaire.",
+                "advice": "Ravivez l’espoir."
+            }
+        },
+        "major_18": {
+            "name": "La Lune",
+            "keywords": [
+                "mystère",
+                "intuition",
+                "illusion"
+            ],
+            "upright": {
+                "text": "Émotions cachées et incertitude.",
+                "love": "Des sentiments forts, mais il y a des secrets.",
+                "career": "Toutes les informations ne sont pas accessibles.",
+                "finance": "La prudence est de mise.",
+                "health": "Soyez attentif à votre état intérieur.",
+                "advice": "Faites confiance à votre intuition."
+            },
+            "reversed": {
+                "text": "Ce qui était caché éclate au grand jour.",
+                "love": "La situation s’éclaircit.",
+                "career": "Réception d’informations.",
+                "finance": "Les choses deviennent plus claires.",
+                "health": "Sortie de l’anxiété.",
+                "advice": "Regardez les faits."
+            }
+        },
+        "major_19": {
+            "name": "Le Soleil",
+            "keywords": [
+                "joie",
+                "succès",
+                "clarté"
+            ],
+            "upright": {
+                "text": "Succès, énergie et positivité.",
+                "love": "Une relation heureuse.",
+                "career": "Reconnaissance et réussites.",
+                "finance": "Croissance et prospérité.",
+                "health": "Énergie vitale.",
+                "advice": "Agissez ouvertement."
+            },
+            "reversed": {
+                "text": "Des obstacles passagers.",
+                "love": "Un manque de chaleur.",
+                "career": "Le succès se fait attendre.",
+                "finance": "La patience est nécessaire.",
+                "health": "Reconstituez vos forces.",
+                "advice": "Ne perdez pas votre optimisme."
+            }
+        },
+        "major_20": {
+            "name": "Le Jugement",
+            "keywords": [
+                "renaissance",
+                "décision",
+                "éveil"
+            ],
+            "upright": {
+                "text": "Éveil et décision importante.",
+                "love": "Une nouvelle étape.",
+                "career": "Reconnaissance des résultats.",
+                "finance": "Une réévaluation des objectifs.",
+                "health": "Rétablissement.",
+                "advice": "Tirez vos conclusions."
+            },
+            "reversed": {
+                "text": "Doute et refus de décider.",
+                "love": "Le passé n’est pas réglé.",
+                "career": "Peur du changement.",
+                "finance": "Décisions reportées.",
+                "health": "Signaux ignorés.",
+                "advice": "Soyez honnête avec vous-même."
+            }
+        },
+        "major_21": {
+            "name": "Le Monde",
+            "keywords": [
+                "achèvement",
+                "plénitude",
+                "succès"
+            ],
+            "upright": {
+                "text": "L’achèvement d’un cycle et l’atteinte de votre but.",
+                "love": "Une union harmonieuse.",
+                "career": "Un projet mené à bien.",
+                "finance": "Stabilité.",
+                "health": "Équilibre et rétablissement.",
+                "advice": "Accueillez le fruit du voyage."
+            },
+            "reversed": {
+                "text": "Inachèvement et retard.",
+                "love": "Un sentiment d’inachevé.",
+                "career": "Ce que vous avez commencé doit être terminé.",
+                "finance": "Résultats repoussés.",
+                "health": "Le rétablissement doit être mené à terme.",
+                "advice": "Clôturez les affaires anciennes."
+            }
+        },
+        "wands_01": {
+            "name": "As de Bâtons",
+            "keywords": [
+                "énergie",
+                "commencement",
+                "inspiration"
+            ],
+            "upright": {
+                "text": "Une énergie nouvelle, une idée et le début d'une nouvelle voie.",
+                "love": "Passion et sentiments nouveaux.",
+                "career": "Un nouveau projet et de l'inspiration.",
+                "finance": "De nouvelles opportunités.",
+                "health": "Un regain de force.",
+                "advice": "Agissez avec audace."
+            },
+            "reversed": {
+                "text": "Retards et perte de motivation.",
+                "love": "Des sentiments qui refroidissent.",
+                "career": "Aucun mouvement.",
+                "finance": "Ne précipitez pas vos décisions.",
+                "health": "Du repos est nécessaire.",
+                "advice": "Retrouvez votre énergie."
+            }
+        },
+        "wands_02": {
+            "name": "Deux de Bâtons",
+            "keywords": [
+                "plan",
+                "choix",
+                "avenir"
+            ],
+            "upright": {
+                "text": "Planifier l'avenir et choisir une direction.",
+                "love": "Réfléchir à l'évolution de la relation.",
+                "career": "De nouvelles perspectives.",
+                "finance": "Planification stratégique.",
+                "health": "Recherche d'équilibre.",
+                "advice": "Voyez plus large."
+            },
+            "reversed": {
+                "text": "Incertitude et peur du changement.",
+                "love": "Des doutes.",
+                "career": "Aucun plan clair.",
+                "finance": "Erreurs stratégiques.",
+                "health": "Ne vous surchargez pas.",
+                "advice": "Définissez votre objectif."
+            }
+        },
+        "wands_03": {
+            "name": "Trois de Bâtons",
+            "keywords": [
+                "croissance",
+                "attente",
+                "expansion"
+            ],
+            "upright": {
+                "text": "Développement et premiers résultats.",
+                "love": "Des horizons qui s'élargissent.",
+                "career": "Le projet prend de l'ampleur.",
+                "finance": "Des opportunités prometteuses.",
+                "health": "Amélioration progressive.",
+                "advice": "Continuez d'avancer."
+            },
+            "reversed": {
+                "text": "Retards et obstacles.",
+                "love": "Déception.",
+                "career": "Progrès lent.",
+                "finance": "Les plans sont à reconsidérer.",
+                "health": "De la patience est nécessaire.",
+                "advice": "Corrigez votre cap."
+            }
+        },
+        "wands_04": {
+            "name": "Quatre de Bâtons",
+            "keywords": [
+                "célébration",
+                "foyer",
+                "stabilité"
+            ],
+            "upright": {
+                "text": "Joie, stabilité et harmonie.",
+                "love": "Une relation heureuse.",
+                "career": "Une étape réussie.",
+                "finance": "Stabilité.",
+                "health": "Bonne forme.",
+                "advice": "Appréciez ce que vous avez accompli."
+            },
+            "reversed": {
+                "text": "Instabilité et retards.",
+                "love": "Tension.",
+                "career": "Problèmes passagers.",
+                "finance": "Il faut garder le contrôle.",
+                "health": "Il faut se rétablir.",
+                "advice": "Mettez de l'ordre."
+            }
+        },
+        "wands_05": {
+            "name": "Cinq de Bâtons",
+            "keywords": [
+                "lutte",
+                "compétition",
+                "épreuve"
+            ],
+            "upright": {
+                "text": "Compétition et épreuve de force.",
+                "love": "Disputes et émotions.",
+                "career": "Rivalité.",
+                "finance": "Un environnement compétitif.",
+                "health": "Trop de tension.",
+                "advice": "Utilisez votre énergie à bon escient."
+            },
+            "reversed": {
+                "text": "Éviter le conflit.",
+                "love": "Une tentative de réconciliation.",
+                "career": "La tension retombe.",
+                "finance": "Prudence.",
+                "health": "Repos.",
+                "advice": "Cherchez un compromis."
+            }
+        },
+        "wands_06": {
+            "name": "Six de Bâtons",
+            "keywords": [
+                "victoire",
+                "reconnaissance",
+                "succès"
+            ],
+            "upright": {
+                "text": "Victoire et reconnaissance de vos réussites.",
+                "love": "Fierté dans la relation.",
+                "career": "Succès et reconnaissance.",
+                "finance": "Résultats positifs.",
+                "health": "Confiance retrouvée.",
+                "advice": "Acceptez votre succès."
+            },
+            "reversed": {
+                "text": "Doutes et manque de reconnaissance.",
+                "love": "Insécurité.",
+                "career": "Un résultat retardé.",
+                "finance": "Un manque de confiance.",
+                "health": "Du soutien est nécessaire.",
+                "advice": "Ne vous sous-estimez pas."
+            }
+        },
+        "wands_07": {
+            "name": "Sept de Bâtons",
+            "keywords": [
+                "défense",
+                "résilience",
+                "lutte"
+            ],
+            "upright": {
+                "text": "Défendre sa position et force de caractère.",
+                "love": "Défendre la relation.",
+                "career": "Défendre vos idées.",
+                "finance": "Conserver ce que vous avez acquis.",
+                "health": "La force de résister.",
+                "advice": "Ne renoncez pas."
+            },
+            "reversed": {
+                "text": "Lassitude et confiance perdue.",
+                "love": "Difficulté à défendre ses sentiments.",
+                "career": "Pression des circonstances.",
+                "finance": "Risque de pertes.",
+                "health": "Épuisement.",
+                "advice": "Ménagez vos forces."
+            }
+        },
+        "wands_08": {
+            "name": "Huit de Bâtons",
+            "keywords": [
+                "rapidité",
+                "nouvelles",
+                "mouvement"
+            ],
+            "upright": {
+                "text": "Les événements se précipitent.",
+                "love": "Développement rapide.",
+                "career": "Changements rapides.",
+                "finance": "De nouvelles opportunités.",
+                "health": "Un élan d'énergie.",
+                "advice": "Agissez à temps."
+            },
+            "reversed": {
+                "text": "Retards et obstacles.",
+                "love": "La relation ralentit.",
+                "career": "Projets reportés.",
+                "finance": "Ne vous pressez pas.",
+                "health": "Du repos est nécessaire.",
+                "advice": "Soyez patient."
+            }
+        },
+        "wands_09": {
+            "name": "Neuf de Bâtons",
+            "keywords": [
+                "expérience",
+                "endurance",
+                "défense"
+            ],
+            "upright": {
+                "text": "Résilience après les épreuves.",
+                "love": "Prudence issue de l'expérience passée.",
+                "career": "Poursuite du combat.",
+                "finance": "Préserver ses ressources.",
+                "health": "Ne renoncez pas.",
+                "advice": "Tenez bon."
+            },
+            "reversed": {
+                "text": "Lassitude et méfiance.",
+                "love": "Repli sur soi.",
+                "career": "Perte de motivation.",
+                "finance": "Peur du risque.",
+                "health": "Fatigue excessive.",
+                "advice": "Accordez-vous du repos."
+            }
+        },
+        "wands_10": {
+            "name": "Dix de Bâtons",
+            "keywords": [
+                "responsabilité",
+                "fardeau",
+                "travail acharné"
+            ],
+            "upright": {
+                "text": "Grande responsabilité et lourde charge.",
+                "love": "Trop d'obligations.",
+                "career": "Beaucoup de travail.",
+                "finance": "Engagements importants.",
+                "health": "Il faut alléger la charge.",
+                "advice": "Ne portez pas tout seul."
+            },
+            "reversed": {
+                "text": "Se libérer du superflu.",
+                "love": "Relâcher la tension.",
+                "career": "Redistribuer les tâches.",
+                "finance": "La pression diminue.",
+                "health": "Rétablissement.",
+                "advice": "Autorisez-vous à vous reposer."
+            }
+        },
+        "wands_11": {
+            "name": "Valet de Bâtons",
+            "keywords": [
+                "nouvelles",
+                "enthousiasme",
+                "apprentissage"
+            ],
+            "upright": {
+                "text": "Idées nouvelles, nouvelles à annoncer et envie d’apprendre.",
+                "love": "Flirt léger et émotions nouvelles.",
+                "career": "Début d'un apprentissage ou d'une nouvelle entreprise.",
+                "finance": "De nouvelles idées pour gagner de l'argent.",
+                "health": "Énergie et activité.",
+                "advice": "Étudiez quelque chose de nouveau."
+            },
+            "reversed": {
+                "text": "Immaturité et manque de direction.",
+                "love": "Frivolité.",
+                "career": "Un manque d'expérience.",
+                "finance": "Idées irréfléchies.",
+                "health": "Énergie instable.",
+                "advice": "Préparez-vous d'abord."
+            }
+        },
+        "wands_12": {
+            "name": "Cavalier de Bâtons",
+            "keywords": [
+                "action",
+                "aventure",
+                "courage"
+            ],
+            "upright": {
+                "text": "Activité, mouvement et action décisive.",
+                "love": "Passion et émotions vives.",
+                "career": "Progression rapide.",
+                "finance": "Décisions audacieuses.",
+                "health": "Énergie à revendre.",
+                "advice": "Agissez avec assurance."
+            },
+            "reversed": {
+                "text": "Impulsivité et précipitation.",
+                "love": "Instabilité.",
+                "career": "Erreurs commises dans la hâte.",
+                "finance": "Décisions risquées.",
+                "health": "Un excès d'énergie.",
+                "advice": "Réfléchissez d'abord."
+            }
+        },
+        "wands_13": {
+            "name": "Reine de Bâtons",
+            "keywords": [
+                "confiance",
+                "charisme",
+                "créativité"
+            ],
+            "upright": {
+                "text": "Confiance, attrait et force de personnalité.",
+                "love": "Chaleur et passion.",
+                "career": "Leadership et créativité.",
+                "finance": "Direction assurée.",
+                "health": "Énergie vitale.",
+                "advice": "Montrez-vous."
+            },
+            "reversed": {
+                "text": "Insécurité et jalousie.",
+                "love": "Difficultés émotionnelles.",
+                "career": "Un manque de confiance.",
+                "finance": "Désorganisation.",
+                "health": "Épuisement.",
+                "advice": "Retrouvez votre force intérieure."
+            }
+        },
+        "wands_14": {
+            "name": "Roi de Bâtons",
+            "keywords": [
+                "leadership",
+                "objectif",
+                "vision"
+            ],
+            "upright": {
+                "text": "Leadership, expérience et marche assurée vers un but.",
+                "love": "Un lien fort et mûr.",
+                "career": "Direction et réussite.",
+                "finance": "Croissance par l'initiative.",
+                "health": "Force et activité.",
+                "advice": "Prenez vos responsabilités."
+            },
+            "reversed": {
+                "text": "Autoritarisme et excès d'assurance.",
+                "love": "Contrôle dans la relation.",
+                "career": "Conflits avec la hiérarchie.",
+                "finance": "Risque causé par l'excès de confiance.",
+                "health": "Surmenage.",
+                "advice": "Soyez plus sage."
+            }
+        },
+        "cups_01": {
+            "name": "As de Coupes",
+            "keywords": [
+                "émotion",
+                "amour",
+                "commencement",
+                "intuition"
+            ],
+            "upright": {
+                "text": "Le début d'une nouvelle période émotionnelle, un cœur ouvert et de l'inspiration.",
+                "love": "Nouvel amour, sentiments partagés ou renforcement d'une relation existante.",
+                "career": "Le travail apporte de la satisfaction et de nouvelles opportunités.",
+                "finance": "Une période favorable à une croissance paisible.",
+                "health": "Rétablissement émotionnel et regain de vitalité.",
+                "advice": "Ouvrez-vous aux sentiments et aux nouvelles opportunités."
+            },
+            "reversed": {
+                "text": "Émotions refoulées, déception ou repli émotionnel.",
+                "love": "Non-dits ou sentiments qui se refroidissent.",
+                "career": "Épuisement émotionnel.",
+                "finance": "Ne prenez pas de décisions sous l'emprise des émotions.",
+                "health": "Soyez attentif à votre état émotionnel.",
+                "advice": "Permettez-vous d'exprimer vos sentiments."
+            }
+        },
+        "cups_02": {
+            "name": "Deux de Coupes",
+            "keywords": [
+                "union",
+                "partenariat",
+                "harmonie"
+            ],
+            "upright": {
+                "text": "Coopération harmonieuse et compréhension mutuelle.",
+                "love": "Amour partagé, confiance et lien solide.",
+                "career": "Un partenariat ou un accord réussi.",
+                "finance": "Les projets communs seront profitables.",
+                "health": "Équilibre émotionnel.",
+                "advice": "Construisez vos relations sur la confiance."
+            },
+            "reversed": {
+                "text": "Incompréhension, conflit ou lien rompu.",
+                "love": "Disputes et distance émotionnelle.",
+                "career": "Désaccords avec des collègues.",
+                "finance": "Ne vous précipitez pas dans des investissements communs.",
+                "health": "Le stress affecte votre bien-être.",
+                "advice": "Apprenez à vous écouter mutuellement."
+            }
+        },
+        "cups_03": {
+            "name": "Trois de Coupes",
+            "keywords": [
+                "célébration",
+                "amis",
+                "joie"
+            ],
+            "upright": {
+                "text": "Joie, amitié et événements agréables.",
+                "love": "Un moment heureux à deux et de belles rencontres.",
+                "career": "Le soutien de l'équipe et de bonnes nouvelles.",
+                "finance": "Une occasion de faire une petite fête.",
+                "health": "La bonne humeur favorise la guérison.",
+                "advice": "Partagez votre joie avec vos proches."
+            },
+            "reversed": {
+                "text": "Excès, commérages ou déception.",
+                "love": "Une tierce personne ou de la méfiance.",
+                "career": "Ne prenez pas part aux intrigues.",
+                "finance": "Gardez vos dépenses de loisirs sous contrôle.",
+                "health": "Évitez le surmenage.",
+                "advice": "Concentrez-vous sur les vrais amis."
+            }
+        },
+        "cups_04": {
+            "name": "Quatre de Coupes",
+            "keywords": [
+                "réflexion",
+                "apathie",
+                "pause"
+            ],
+            "upright": {
+                "text": "Un temps pour repenser les choses et chercher un nouveau sens.",
+                "love": "Une pause émotionnelle ou des doutes.",
+                "career": "Ne manquez pas une nouvelle opportunité.",
+                "finance": "Évitez l'indifférence face aux sujets importants.",
+                "health": "N'oubliez pas de prendre soin de vous.",
+                "advice": "Regardez la situation sous un nouvel angle."
+            },
+            "reversed": {
+                "text": "Sortie de la stagnation et regain d'intérêt pour la vie.",
+                "love": "De nouveaux sentiments ou une réconciliation.",
+                "career": "Des perspectives apparaissent.",
+                "finance": "Vous pouvez saisir une chance.",
+                "health": "Votre état émotionnel s'améliore.",
+                "advice": "N'ayez pas peur d'accueillir la nouveauté."
+            }
+        },
+        "cups_05": {
+            "name": "Cinq de Coupes",
+            "keywords": [
+                "perte",
+                "chagrin",
+                "espoir"
+            ],
+            "upright": {
+                "text": "Pertes et regrets, mais tout n'est pas encore perdu.",
+                "love": "Détresse après un conflit ou une rupture.",
+                "career": "Un échec devient une expérience précieuse.",
+                "finance": "Difficultés financières passagères.",
+                "health": "Le rétablissement émotionnel demande du temps.",
+                "advice": "Regardez ce qu'il vous reste."
+            },
+            "reversed": {
+                "text": "Accepter le passé et aller de l'avant.",
+                "love": "Guérison après une période difficile.",
+                "career": "De nouvelles opportunités apparaissent.",
+                "finance": "La situation s'améliore peu à peu.",
+                "health": "Récupération après le stress.",
+                "advice": "Laissez le passé derrière vous."
+            }
+        },
+        "cups_06": {
+            "name": "Six de Coupes",
+            "keywords": [
+                "souvenirs",
+                "enfance",
+                "sincérité"
+            ],
+            "upright": {
+                "text": "Souvenirs agréables, bonté et retour de personnes ou d'événements importants.",
+                "love": "Le retour des sentiments, romantisme et sincérité.",
+                "career": "L'expérience passée vous aidera dans le présent.",
+                "finance": "L'aide peut venir de proches ou d'anciens partenaires.",
+                "health": "Rétablissement émotionnel.",
+                "advice": "Souvenez-vous du passé, mais vivez dans le présent."
+            },
+            "reversed": {
+                "text": "Rester coincé dans le passé ou refuser de grandir.",
+                "love": "Les relations passées entravent les nouvelles.",
+                "career": "Ne vivez pas uniquement sur vos anciens succès.",
+                "finance": "Évitez de répéter les erreurs passées.",
+                "health": "Libérez-vous du poids émotionnel.",
+                "advice": "Regardez vers l'avenir."
+            }
+        },
+        "cups_07": {
+            "name": "Sept de Coupes",
+            "keywords": [
+                "choix",
+                "rêves",
+                "illusions"
+            ],
+            "upright": {
+                "text": "De nombreuses possibilités s'offrent à vous, mais toutes ne sont pas réelles.",
+                "love": "Des émotions fortes peuvent nuire à l'objectivité.",
+                "career": "Plusieurs perspectives s'ouvrent devant vous.",
+                "finance": "Ne vous fiez pas aux offres trop alléchantes.",
+                "health": "N'ignorez pas les symptômes réels.",
+                "advice": "Distinguez les rêves des faits."
+            },
+            "reversed": {
+                "text": "Clarté d'esprit et bon choix.",
+                "love": "Une compréhension des vrais sentiments émerge.",
+                "career": "La bonne direction devient évidente.",
+                "finance": "Les décisions deviennent plus équilibrées.",
+                "health": "Le choix du traitement s'éclaircit.",
+                "advice": "Concentrez-vous sur un seul objectif."
+            }
+        },
+        "cups_08": {
+            "name": "Huit de Coupes",
+            "keywords": [
+                "départ",
+                "quête",
+                "changement"
+            ],
+            "upright": {
+                "text": "S'éloigner de ce qui n'apporte plus de satisfaction.",
+                "love": "La relation doit être reconsidérée.",
+                "career": "La recherche d'une nouvelle voie ou un changement d'emploi.",
+                "finance": "Il est temps d'abandonner les décisions inefficaces.",
+                "health": "Un changement de mode de vie vous fera du bien.",
+                "advice": "N'ayez pas peur de quitter le passé."
+            },
+            "reversed": {
+                "text": "Peur du changement et refus d'avancer.",
+                "love": "Il est difficile de laisser la relation derrière soi.",
+                "career": "Stagnation causée par l'indécision.",
+                "finance": "Ne vous accrochez pas aux projets non rentables.",
+                "health": "Ne repoussez pas les changements nécessaires.",
+                "advice": "Permettez-vous de recommencer à zéro."
+            }
+        },
+        "cups_09": {
+            "name": "Neuf de Coupes",
+            "keywords": [
+                "accomplissement",
+                "satisfaction",
+                "succès"
+            ],
+            "upright": {
+                "text": "Un vœu exaucé, satisfaction et bien-être émotionnel.",
+                "love": "Une relation harmonieuse et une joie partagée.",
+                "career": "De bons résultats et de la reconnaissance.",
+                "finance": "Stabilité financière et abondance.",
+                "health": "Bonne santé.",
+                "advice": "Permettez-vous de profiter de ce que vous avez accompli."
+            },
+            "reversed": {
+                "text": "Attentes exagérées ou déception passagère.",
+                "love": "N'idéalisez pas votre partenaire.",
+                "career": "Ne vous arrêtez pas à ce que vous avez accompli.",
+                "finance": "Ne dépensez pas plus que nécessaire.",
+                "health": "Restez dans la modération.",
+                "advice": "Appréciez ce que vous avez déjà."
+            }
+        },
+        "cups_10": {
+            "name": "Dix de Coupes",
+            "keywords": [
+                "famille",
+                "harmonie",
+                "bonheur"
+            ],
+            "upright": {
+                "text": "Plein épanouissement émotionnel, bonheur familial et harmonie.",
+                "love": "Une relation solide, la famille et la compréhension mutuelle.",
+                "career": "Une atmosphère favorable au sein de l'équipe.",
+                "finance": "Stabilité et sentiment de sécurité.",
+                "health": "Bien-être émotionnel et physique.",
+                "advice": "Chérissez les personnes qui vous rendent heureux."
+            },
+            "reversed": {
+                "text": "Désaccords familiaux ou harmonie rompue.",
+                "love": "Incompréhension entre proches.",
+                "career": "Une atmosphère tendue.",
+                "finance": "Ne laissez pas l'argent gâcher vos relations.",
+                "health": "La tension émotionnelle affecte votre bien-être.",
+                "advice": "Commencez par une conversation franche."
+            }
+        },
+        "cups_11": {
+            "name": "Valet de Coupes",
+            "keywords": [
+                "intuition",
+                "nouvelles",
+                "sentiments"
+            ],
+            "upright": {
+                "text": "Bonnes nouvelles, ouverture aux sentiments et intuition qui se développe.",
+                "love": "Une rencontre romantique, des sentiments sincères ou un aveu.",
+                "career": "De nouvelles idées créatives et un apprentissage.",
+                "finance": "De petites opportunités, mais favorables.",
+                "health": "Rétablissement émotionnel.",
+                "advice": "Soyez ouvert aux nouveaux sentiments et aux nouvelles connaissances."
+            },
+            "reversed": {
+                "text": "Immaturité émotionnelle, attentes déçues ou doutes.",
+                "love": "Sentiments mal compris ou manque de sincérité.",
+                "career": "Manque d'expérience ou de discipline.",
+                "finance": "Évitez les dépenses irréfléchies.",
+                "health": "Surveillez votre état émotionnel.",
+                "advice": "Ne prenez pas tout trop à cœur."
+            }
+        },
+        "cups_12": {
+            "name": "Cavalier de Coupes",
+            "keywords": [
+                "romantisme",
+                "proposition",
+                "rêves"
+            ],
+            "upright": {
+                "text": "Suivre un rêve, romantisme et inspiration.",
+                "love": "Une belle histoire d'amour, un aveu de sentiments ou une demande en mariage.",
+                "career": "Un projet créatif ou une proposition intéressante.",
+                "finance": "Une offre lucrative exige une étude attentive.",
+                "health": "Un bon état émotionnel favorise la guérison.",
+                "advice": "Suivez votre cœur sans oublier le bon sens."
+            },
+            "reversed": {
+                "text": "Illusions, promesses en l'air ou instabilité émotionnelle.",
+                "love": "N'idéalisez pas cette personne.",
+                "career": "Ne croyez pas aux belles promesses sans preuves.",
+                "finance": "Vérifiez les conditions des offres.",
+                "health": "Évitez le surmenage émotionnel.",
+                "advice": "Regardez la situation avec réalisme."
+            }
+        },
+        "cups_13": {
+            "name": "Reine de Coupes",
+            "keywords": [
+                "sagesse",
+                "compassion",
+                "intuition"
+            ],
+            "upright": {
+                "text": "Maturité émotionnelle, intuition profonde et attention aux autres.",
+                "love": "Tendresse, compréhension et sincérité.",
+                "career": "Le talent de savoir parler aux gens.",
+                "finance": "Des décisions sensées fondées sur l'expérience.",
+                "health": "Bon équilibre émotionnel.",
+                "advice": "Faites confiance à votre intuition."
+            },
+            "reversed": {
+                "text": "Sensibilité exacerbée, dépendance affective ou repli sur soi.",
+                "love": "Rancune ou jalousie.",
+                "career": "Ne laissez pas les émotions influencer vos décisions.",
+                "finance": "Évitez les achats impulsifs.",
+                "health": "Prenez soin de votre confort psychologique.",
+                "advice": "Gardez votre équilibre intérieur."
+            }
+        },
+        "cups_14": {
+            "name": "Roi de Coupes",
+            "keywords": [
+                "maîtrise",
+                "sagesse",
+                "calme"
+            ],
+            "upright": {
+                "text": "Stabilité émotionnelle, sagesse et capacité à soutenir les autres.",
+                "love": "Une relation mûre, confiance et respect mutuel.",
+                "career": "Un leader solide, diplomatie et expérience.",
+                "finance": "Stabilité grâce à des décisions équilibrées.",
+                "health": "Bon état émotionnel et physique.",
+                "advice": "Restez calme même dans les situations difficiles."
+            },
+            "reversed": {
+                "text": "Froideur émotionnelle, sentiments cachés ou manipulation.",
+                "love": "Manque d'ouverture dans la relation.",
+                "career": "Ne laissez pas les émotions diriger l'équipe.",
+                "finance": "Évitez les décisions risquées.",
+                "health": "Soyez attentif aux tensions émotionnelles.",
+                "advice": "Apprenez à exprimer vos sentiments ouvertement."
+            }
+        },
+        "swords_01": {
+            "name": "As d’Épées",
+            "keywords": [
+                "vérité",
+                "clarté",
+                "décision",
+                "raison"
+            ],
+            "upright": {
+                "text": "Clarté d’esprit, décision importante et victoire de la raison.",
+                "love": "Une conversation honnête et une relation qui s’éclaircit.",
+                "career": "Une idée nouvelle ou une solution réussie à une tâche difficile.",
+                "finance": "Des décisions bien pesées apporteront un bénéfice.",
+                "health": "Vous comprenez la cause du problème.",
+                "advice": "Agissez avec honnêteté et appuyez-vous sur les faits."
+            },
+            "reversed": {
+                "text": "Confusion, fausses informations ou mauvaise décision.",
+                "love": "Non-dits et méfiance.",
+                "career": "Évitez les conclusions hâtives.",
+                "finance": "Vérifiez tous les documents.",
+                "health": "Ne repoussez pas un bilan de santé.",
+                "advice": "Ne laissez pas les émotions brouiller votre raison."
+            }
+        },
+        "swords_02": {
+            "name": "Deux d’Épées",
+            "keywords": [
+                "choix",
+                "doute",
+                "équilibre"
+            ],
+            "upright": {
+                "text": "La nécessité de décider après une période de doute.",
+                "love": "Les deux partenaires évitent une conversation importante.",
+                "career": "Le moment est venu de faire un choix.",
+                "finance": "Ne repoussez pas les décisions financières.",
+                "health": "Soyez attentif aux symptômes.",
+                "advice": "Cessez de remettre la décision à plus tard."
+            },
+            "reversed": {
+                "text": "La situation sort de l’impasse ou s’embrouille encore davantage.",
+                "love": "Les problèmes accumulés doivent être discutés.",
+                "career": "L’incertitude touche à sa fin.",
+                "finance": "Soyez prudent face aux risques.",
+                "health": "N’ignorez pas l’avis des spécialistes.",
+                "advice": "Regardez la vérité en face."
+            }
+        },
+        "swords_03": {
+            "name": "Trois d’Épées",
+            "keywords": [
+                "douleur",
+                "déception",
+                "perte"
+            ],
+            "upright": {
+                "text": "Douleur émotionnelle, déception ou vérité désagréable.",
+                "love": "Une rupture, un conflit ou une conversation difficile.",
+                "career": "Un échec devient une leçon importante.",
+                "finance": "Pertes temporaires.",
+                "health": "N’oubliez pas la guérison psychologique.",
+                "advice": "Acceptez ce qui arrive et avancez."
+            },
+            "reversed": {
+                "text": "Guérison et libération progressive de la douleur.",
+                "love": "Une chance de réconciliation apparaît.",
+                "career": "Les erreurs du passé sont laissées derrière.",
+                "finance": "La situation commence à s’améliorer.",
+                "health": "Rétablissement émotionnel.",
+                "advice": "Permettez-vous de lâcher le passé."
+            }
+        },
+        "swords_04": {
+            "name": "Quatre d’Épées",
+            "keywords": [
+                "repos",
+                "récupération",
+                "silence"
+            ],
+            "upright": {
+                "text": "Une pause, du repos et un retour des forces.",
+                "love": "Un peu de distance aidera la relation.",
+                "career": "Mieux vaut ne pas prendre de décisions importantes maintenant.",
+                "finance": "Abstenez-vous de toute action risquée.",
+                "health": "Votre corps a besoin de repos.",
+                "advice": "Autorisez-vous à récupérer."
+            },
+            "reversed": {
+                "text": "Il est temps de revenir à une vie active.",
+                "love": "Le moment de parler approche.",
+                "career": "La stagnation prend fin.",
+                "finance": "Vous pouvez progressivement reprendre vos affaires.",
+                "health": "Votre énergie revient.",
+                "advice": "Ne prolongez pas la pause."
+            }
+        },
+        "swords_05": {
+            "name": "Cinq d’Épées",
+            "keywords": [
+                "conflit",
+                "victoire",
+                "conséquences"
+            ],
+            "upright": {
+                "text": "Un conflit dont la victoire pourrait coûter trop cher.",
+                "love": "Disputes et rancœurs mutuelles.",
+                "career": "Évitez les luttes inutiles.",
+                "finance": "Ne risquez rien pour un gain douteux.",
+                "health": "Le stress nuit à votre corps.",
+                "advice": "Parfois, mieux vaut céder."
+            },
+            "reversed": {
+                "text": "Réconciliation, fin d’un conflit et recherche de compromis.",
+                "love": "Une chance de rétablir la confiance apparaît.",
+                "career": "La tension s’apaise peu à peu.",
+                "finance": "Évitez les erreurs passées.",
+                "health": "Le niveau de stress diminue.",
+                "advice": "Choisissez la paix plutôt que le conflit."
+            }
+        },
+        "swords_06": {
+            "name": "Six d’Épées",
+            "keywords": [
+                "transition",
+                "voyage",
+                "guérison"
+            ],
+            "upright": {
+                "text": "Un passage vers une période plus calme, un pas en avant et une guérison progressive.",
+                "love": "La relation sort d’une étape difficile.",
+                "career": "Un changement d’emploi ou la fin d’une période pénible.",
+                "finance": "La situation financière se stabilise peu à peu.",
+                "health": "Rétablissement et forces retrouvées.",
+                "advice": "N’ayez pas peur de laisser le passé derrière vous."
+            },
+            "reversed": {
+                "text": "Difficulté à lâcher le passé ou à avancer.",
+                "love": "D’anciennes rancunes pèsent encore sur la relation.",
+                "career": "Les changements sont reportés.",
+                "finance": "Ne vous accrochez pas à des décisions inefficaces.",
+                "health": "Ne retardez pas les soins.",
+                "advice": "Laissez le changement se produire."
+            }
+        },
+        "swords_07": {
+            "name": "Sept d’Épées",
+            "keywords": [
+                "ruse",
+                "stratégie",
+                "secret"
+            ],
+            "upright": {
+                "text": "La nécessité d’agir avec prudence et réflexion.",
+                "love": "Réserve ou sentiments cachés.",
+                "career": "Faites preuve de pensée stratégique.",
+                "finance": "Soyez attentif aux documents et aux contrats.",
+                "health": "Ne repoussez pas un bilan de santé.",
+                "advice": "Réfléchissez à chaque étape."
+            },
+            "reversed": {
+                "text": "Un secret est révélé, ou vous devez être totalement honnête.",
+                "love": "Ce qui est caché devient clair.",
+                "career": "Mieux vaut renoncer aux méthodes douteuses.",
+                "finance": "Ne cherchez pas la facilité.",
+                "health": "Évaluez honnêtement votre état.",
+                "advice": "Choisissez la transparence."
+            }
+        },
+        "swords_08": {
+            "name": "Huit d’Épées",
+            "keywords": [
+                "entrave",
+                "peur",
+                "doute"
+            ],
+            "upright": {
+                "text": "Le sentiment de ne pas avoir d’issue, en grande partie créé par vos propres peurs.",
+                "love": "Le manque de confiance gêne la relation.",
+                "career": "Ne vous limitez pas par des croyances négatives.",
+                "finance": "Ne prenez pas de décisions par peur.",
+                "health": "Le stress demande de l’attention.",
+                "advice": "Vous êtes plus libre que vous ne le pensez."
+            },
+            "reversed": {
+                "text": "Libération des limites intérieures.",
+                "love": "La confiance en soi apparaît.",
+                "career": "De nouvelles possibilités s’ouvrent.",
+                "finance": "Vous commencez à voir une issue.",
+                "health": "Votre état émotionnel s’améliore.",
+                "advice": "Faites confiance à votre propre force."
+            }
+        },
+        "swords_09": {
+            "name": "Neuf d’Épées",
+            "keywords": [
+                "anxiété",
+                "peur",
+                "inquiétude"
+            ],
+            "upright": {
+                "text": "Inquiétude, insomnie et forte agitation intérieure.",
+                "love": "Des peurs excessives gênent la relation.",
+                "career": "Ne laissez pas l’anxiété décider à votre place.",
+                "finance": "Ne dramatisez pas la situation.",
+                "health": "Il est important de prêter attention à votre état psychologique.",
+                "advice": "Ne restez pas seul avec vos peurs."
+            },
+            "reversed": {
+                "text": "Libération progressive de l’anxiété et retour du calme intérieur.",
+                "love": "L’espoir d’une amélioration apparaît.",
+                "career": "Les problèmes commencent à se résoudre.",
+                "finance": "La situation devient plus claire.",
+                "health": "Le niveau de stress diminue.",
+                "advice": "N’ayez pas peur de demander du soutien."
+            }
+        },
+        "swords_10": {
+            "name": "Dix d’Épées",
+            "keywords": [
+                "achèvement",
+                "fin",
+                "nouvelle étape"
+            ],
+            "upright": {
+                "text": "La fin d’une période difficile et le début d’une nouvelle étape de vie.",
+                "love": "La fin d’une relation arrivée à son terme.",
+                "career": "L’achèvement d’un projet ou un changement de cap.",
+                "finance": "Il est temps de laisser les erreurs passées derrière vous.",
+                "health": "Le rétablissement commence après la crise.",
+                "advice": "Laissez l’ancien se terminer."
+            },
+            "reversed": {
+                "text": "Lente guérison après des événements difficiles.",
+                "love": "Guérison émotionnelle progressive.",
+                "career": "Une chance de repartir de zéro apparaît.",
+                "finance": "Les difficultés financières s’éloignent.",
+                "health": "Votre corps se rétablit.",
+                "advice": "Regardez devant vous, pas derrière."
+            }
+        },
+        "swords_11": {
+            "name": "Valet d’Épées",
+            "keywords": [
+                "observation",
+                "connaissance",
+                "nouvelles"
+            ],
+            "upright": {
+                "text": "Curiosité, quête de vérité et désir d’acquérir de nouvelles connaissances.",
+                "love": "Une conversation honnête et un effort pour comprendre les sentiments de l’autre.",
+                "career": "Études, analyse et idées nouvelles.",
+                "finance": "Rassemblez plus d’informations avant de décider.",
+                "health": "Soyez attentif aux signaux de votre corps.",
+                "advice": "Étudiez la situation avant d’agir."
+            },
+            "reversed": {
+                "text": "Précipitation, rumeurs et conclusions erronées.",
+                "love": "Méfiance et soupçons.",
+                "career": "Un manque d’expérience peut gêner.",
+                "finance": "Vérifiez les détails des transactions.",
+                "health": "N’ignorez pas les signes importants.",
+                "advice": "Ne tirez pas de conclusions sans faits."
+            }
+        },
+        "swords_12": {
+            "name": "Cavalier d’Épées",
+            "keywords": [
+                "rapidité",
+                "décision",
+                "action"
+            ],
+            "upright": {
+                "text": "Action décisive, courage et progression rapide vers le but.",
+                "love": "Une conversation importante ou un fort élan émotionnel.",
+                "career": "Avancement actif et décisions rapides.",
+                "finance": "Les occasions exigent d’agir vite.",
+                "health": "Beaucoup d’énergie, mais évitez le surmenage.",
+                "advice": "Agissez avec audace, mais avec réflexion."
+            },
+            "reversed": {
+                "text": "Impulsivité, agressivité et précipitation.",
+                "love": "Disputes causées par des mots durs.",
+                "career": "La précipitation peut mener à des erreurs.",
+                "finance": "Ne prenez pas de risques sans plan.",
+                "health": "Surveillez votre niveau de stress.",
+                "advice": "Réfléchissez d’abord, agissez ensuite."
+            }
+        },
+        "swords_13": {
+            "name": "Reine d’Épées",
+            "keywords": [
+                "clarté",
+                "indépendance",
+                "sagesse"
+            ],
+            "upright": {
+                "text": "Honnêteté, esprit clair et capacité à voir la situation objectivement.",
+                "love": "Une relation mature et ouverte.",
+                "career": "Professionnalisme et pensée analytique.",
+                "finance": "Gestion sensée de l’argent.",
+                "health": "Il est important d’équilibrer émotion et raison.",
+                "advice": "Faites confiance à la logique."
+            },
+            "reversed": {
+                "text": "Froideur, critique excessive ou fermeture.",
+                "love": "Distance émotionnelle.",
+                "career": "Une rigueur excessive freine le développement.",
+                "finance": "Ne décidez pas sous le coup de l’irritation.",
+                "health": "Évitez les tensions émotionnelles.",
+                "advice": "Soyez plus doux envers vous-même et envers les autres."
+            }
+        },
+        "swords_14": {
+            "name": "Roi d’Épées",
+            "keywords": [
+                "raison",
+                "autorité",
+                "justice"
+            ],
+            "upright": {
+                "text": "Direction sage, logique et décisions équitables.",
+                "love": "La relation repose sur le respect et l’honnêteté.",
+                "career": "Autorité, leadership et réussite professionnelle.",
+                "finance": "Planification et calculs rigoureux.",
+                "health": "Adoptez une approche raisonnable pour prendre soin de vous.",
+                "advice": "Prenez vos décisions calmement et objectivement."
+            },
+            "reversed": {
+                "text": "Dureté, contrôle et abus de pouvoir.",
+                "love": "Froideur ou désir de contrôler votre partenaire.",
+                "career": "Conflits avec la direction.",
+                "finance": "Ne laissez pas l’ambition diriger votre argent.",
+                "health": "Réduisez votre niveau de tension.",
+                "advice": "Alliez la force à la sagesse."
+            }
+        },
+        "pentacles_01": {
+            "name": "As de Pentacles",
+            "keywords": [
+                "opportunité",
+                "prospérité",
+                "commencement"
+            ],
+            "upright": {
+                "text": "Une nouvelle opportunité, une réussite matérielle et des bases solides.",
+                "love": "Une relation stable et une nouvelle étape.",
+                "career": "Une nouvelle offre ou un projet prometteur.",
+                "finance": "Des revenus en hausse et de nouvelles sources de profit.",
+                "health": "Un bon potentiel de rétablissement.",
+                "advice": "Saisissez les opportunités qui s'ouvrent à vous."
+            },
+            "reversed": {
+                "text": "Une occasion manquée ou de l'instabilité.",
+                "love": "Un manque de confiance dans la relation.",
+                "career": "Des retards dans les nouvelles entreprises.",
+                "finance": "Soyez plus prudent dans vos dépenses.",
+                "health": "Prêtez attention à votre routine.",
+                "advice": "N'ignorez pas vos chances."
+            }
+        },
+        "pentacles_02": {
+            "name": "Deux de Pentacles",
+            "keywords": [
+                "équilibre",
+                "souplesse",
+                "changement"
+            ],
+            "upright": {
+                "text": "La capacité de garder l'équilibre entre plusieurs tâches.",
+                "love": "Le besoin de trouver un équilibre dans la relation.",
+                "career": "Polyvalence et adaptation.",
+                "finance": "La capacité de répartir son argent avec sagesse.",
+                "health": "Veillez à l'équilibre entre effort et repos.",
+                "advice": "Soyez souple."
+            },
+            "reversed": {
+                "text": "Chaos, surcharge et perte de contrôle.",
+                "love": "La relation demande plus d'attention.",
+                "career": "Trop de tâches à la fois.",
+                "finance": "Une situation financière instable.",
+                "health": "Évitez le surmenage.",
+                "advice": "Fixez vos priorités."
+            }
+        },
+        "pentacles_03": {
+            "name": "Trois de Pentacles",
+            "keywords": [
+                "maîtrise",
+                "travail",
+                "collaboration"
+            ],
+            "upright": {
+                "text": "Développement des compétences, travail de qualité et collaboration.",
+                "love": "Construire la relation ensemble.",
+                "career": "La réussite par le travail d'équipe.",
+                "finance": "Des revenus grâce à vos compétences professionnelles.",
+                "health": "Un travail régulier sur soi.",
+                "advice": "Apprenez et progressez."
+            },
+            "reversed": {
+                "text": "Un manque d'effort ou des difficultés de collaboration.",
+                "love": "Un manque d'efforts mutuels.",
+                "career": "Un travail sans reconnaissance.",
+                "finance": "Des erreurs dues au manque d'expérience.",
+                "health": "Un soin de soi plus régulier est nécessaire.",
+                "advice": "Perfectionnez vos compétences."
+            }
+        },
+        "pentacles_04": {
+            "name": "Quatre de Pentacles",
+            "keywords": [
+                "épargne",
+                "contrôle",
+                "sécurité"
+            ],
+            "upright": {
+                "text": "Le désir de conserver ce que vous avez acquis et de protéger vos ressources.",
+                "love": "Un besoin de sécurité.",
+                "career": "Stabilité et prudence.",
+                "finance": "Économiser et accumuler.",
+                "health": "Ménagez vos forces.",
+                "advice": "Appréciez ce que vous avez."
+            },
+            "reversed": {
+                "text": "Un attachement excessif ou la peur du changement.",
+                "love": "Possessivité et contrôle.",
+                "career": "La peur des nouvelles opportunités.",
+                "finance": "Ne vous accrochez pas à l'argent par peur.",
+                "health": "Apprenez à vous détendre.",
+                "advice": "Laissez le changement venir."
+            }
+        },
+        "pentacles_05": {
+            "name": "Cinq de Pentacles",
+            "keywords": [
+                "épreuve",
+                "perte",
+                "difficulté"
+            ],
+            "upright": {
+                "text": "Des difficultés temporaires et un sentiment de manque de soutien.",
+                "love": "Un sentiment de solitude ou de distance.",
+                "career": "Une période difficile au travail.",
+                "finance": "Des problèmes financiers temporaires.",
+                "health": "Il faut prendre soin de soi.",
+                "advice": "Cherchez du soutien."
+            },
+            "reversed": {
+                "text": "La sortie d'une période difficile et le rétablissement.",
+                "love": "La proximité revient.",
+                "career": "De nouvelles opportunités apparaissent.",
+                "finance": "La situation financière s'améliore.",
+                "health": "La guérison commence.",
+                "advice": "Ne perdez pas espoir."
+            }
+        },
+        "pentacles_06": {
+            "name": "Six de Pentacles",
+            "keywords": [
+                "aide",
+                "échange",
+                "générosité"
+            ],
+            "upright": {
+                "text": "Un équilibre entre recevoir et donner, aide et soutien.",
+                "love": "Attention et réciprocité dans la relation.",
+                "career": "Le soutien de collègues ou la reconnaissance de votre travail.",
+                "finance": "Des finances améliorées et l'aide des autres.",
+                "health": "Le soutien favorise la guérison.",
+                "advice": "Partagez et acceptez l'aide."
+            },
+            "reversed": {
+                "text": "Un échange inégal ou une dépendance à l'aide.",
+                "love": "L'un donne plus que l'autre.",
+                "career": "Vos efforts sont sous-estimés.",
+                "finance": "Soyez prudent avec les dettes.",
+                "health": "N'oubliez pas de prendre soin de vous.",
+                "advice": "Gardez l'équilibre."
+            }
+        },
+        "pentacles_07": {
+            "name": "Sept de Pentacles",
+            "keywords": [
+                "patience",
+                "croissance",
+                "attente"
+            ],
+            "upright": {
+                "text": "L'attente des résultats après l'effort investi.",
+                "love": "La relation se développe peu à peu.",
+                "career": "Votre travail portera ses fruits.",
+                "finance": "Les investissements demandent du temps.",
+                "health": "Une amélioration progressive de votre état.",
+                "advice": "Soyez patient."
+            },
+            "reversed": {
+                "text": "Aucune satisfaction du résultat ou patience épuisée.",
+                "love": "Des doutes sur l'avenir de la relation.",
+                "career": "Le sentiment que l'effort a été vain.",
+                "finance": "Des investissements malheureux.",
+                "health": "N'abandonnez pas le traitement commencé.",
+                "advice": "Réévaluez votre chemin."
+            }
+        },
+        "pentacles_08": {
+            "name": "Huit de Pentacles",
+            "keywords": [
+                "maîtrise",
+                "apprentissage",
+                "labeur"
+            ],
+            "upright": {
+                "text": "Développer ses compétences par une pratique constante.",
+                "love": "La relation demande attention et travail.",
+                "career": "Une progression professionnelle.",
+                "finance": "Des revenus grâce à un travail acharné.",
+                "health": "Discipline et routine sont bénéfiques.",
+                "advice": "Perfectionnez votre art."
+            },
+            "reversed": {
+                "text": "Un manque de motivation ou un travail sans résultats.",
+                "love": "Un manque d'attention envers la relation.",
+                "career": "La routine freine le développement.",
+                "finance": "Des erreurs dues à l'inattention.",
+                "health": "Ne négligez pas vos habitudes.",
+                "advice": "Retrouvez l'intérêt pour votre travail."
+            }
+        },
+        "pentacles_09": {
+            "name": "Neuf de Pentacles",
+            "keywords": [
+                "réussite",
+                "indépendance",
+                "prospérité"
+            ],
+            "upright": {
+                "text": "Autonomie, bien-être et succès bien mérité.",
+                "love": "Confiance en soi et relation mature.",
+                "career": "Reconnaissance des réalisations professionnelles.",
+                "finance": "Stabilité et confort matériel.",
+                "health": "Un bon état de bien-être.",
+                "advice": "Valorisez vos réalisations."
+            },
+            "reversed": {
+                "text": "Dépendance aux circonstances extérieures ou confiance perdue.",
+                "love": "La peur de la solitude.",
+                "career": "Vous sous-estimez vos capacités.",
+                "finance": "Ne vivez pas au-dessus de vos moyens.",
+                "health": "Un équilibre entre travail et repos est nécessaire.",
+                "advice": "Appuyez-vous sur vos propres forces."
+            }
+        },
+        "pentacles_10": {
+            "name": "Dix de Pentacles",
+            "keywords": [
+                "famille",
+                "héritage",
+                "stabilité"
+            ],
+            "upright": {
+                "text": "Réussite durable, bien-être familial et stabilité.",
+                "love": "Une relation solide et le bonheur familial.",
+                "career": "Fiabilité et perspectives à long terme.",
+                "finance": "Sécurité matérielle.",
+                "health": "Un état stable.",
+                "advice": "Construisez des bases solides."
+            },
+            "reversed": {
+                "text": "Désaccords familiaux ou instabilité.",
+                "love": "Conflits familiaux.",
+                "career": "Incertitude quant à l'avenir.",
+                "finance": "Des dépenses imprévues.",
+                "health": "Prêtez attention à l'équilibre.",
+                "advice": "Renforcez vos fondations."
+            }
+        },
+        "pentacles_11": {
+            "name": "Valet de Pentacles",
+            "keywords": [
+                "apprentissage",
+                "opportunité",
+                "développement"
+            ],
+            "upright": {
+                "text": "De nouvelles connaissances, des opportunités concrètes et le début d'un chemin vers la réussite.",
+                "love": "Un intérêt sérieux et le désir de développer la relation.",
+                "career": "Études, nouvel emploi ou compétence utile.",
+                "finance": "Un bon départ pour la croissance financière.",
+                "health": "De nouvelles habitudes et le soin du corps sont bénéfiques.",
+                "advice": "Apprenez et progressez peu à peu."
+            },
+            "reversed": {
+                "text": "Un manque de motivation ou des occasions manquées.",
+                "love": "Un manque d'attention envers la relation.",
+                "career": "Un manque de préparation.",
+                "finance": "Ne vous précipitez pas dans les investissements.",
+                "health": "Ne remettez pas à plus tard le soin de vous-même.",
+                "advice": "Revenez à l'étude et à la discipline."
+            }
+        },
+        "pentacles_12": {
+            "name": "Cavalier de Pentacles",
+            "keywords": [
+                "fiabilité",
+                "travail",
+                "patience"
+            ],
+            "upright": {
+                "text": "Une progression régulière vers le but, responsabilité et stabilité.",
+                "love": "Fidélité et attitude sérieuse.",
+                "career": "Un travail persévérant portera ses fruits.",
+                "finance": "Une croissance lente mais constante.",
+                "health": "La discipline améliore votre état.",
+                "advice": "Avancez pas à pas."
+            },
+            "reversed": {
+                "text": "Stagnation, entêtement ou manque d'élan.",
+                "love": "La relation est devenue trop monotone.",
+                "career": "Aucun progrès à cause de la routine.",
+                "finance": "N'ayez pas peur de changer d'approche.",
+                "health": "Ajoutez plus d'activité.",
+                "advice": "Ne restez pas figé sur place."
+            }
+        },
+        "pentacles_13": {
+            "name": "Reine de Pentacles",
+            "keywords": [
+                "soin",
+                "abondance",
+                "confort"
+            ],
+            "upright": {
+                "text": "Sens pratique, attention aux autres et art de créer la stabilité.",
+                "love": "Une relation chaleureuse et du soutien.",
+                "career": "Organisation et professionnalisme.",
+                "finance": "Une gestion raisonnable des ressources.",
+                "health": "Soin du corps et confort.",
+                "advice": "Créez l'harmonie autour de vous."
+            },
+            "reversed": {
+                "text": "Surcharge de soucis ou équilibre perdu.",
+                "love": "Une protection excessive.",
+                "career": "Lassitude face aux obligations.",
+                "finance": "N'oubliez pas vos propres besoins.",
+                "health": "Du repos est nécessaire.",
+                "advice": "Prenez soin de vous comme des autres."
+            }
+        },
+        "pentacles_14": {
+            "name": "Roi de Pentacles",
+            "keywords": [
+                "richesse",
+                "réussite",
+                "stabilité"
+            ],
+            "upright": {
+                "text": "Réussite matérielle, expérience et talent pour créer la prospérité.",
+                "love": "Fiabilité, fidélité et intentions sérieuses.",
+                "career": "Une gestion réussie et un statut professionnel élevé.",
+                "finance": "Stabilité et bonne gestion de l'argent.",
+                "health": "Un bon niveau d'énergie et de résistance.",
+                "advice": "Servez-vous de votre expérience pour atteindre vos objectifs."
+            },
+            "reversed": {
+                "text": "Avidité, contrôle excessif ou dépendance matérielle.",
+                "love": "La relation peut reposer uniquement sur l'intérêt.",
+                "career": "L'ambition freine le développement.",
+                "finance": "Ne prenez pas de risques pour le profit.",
+                "health": "N'oubliez pas l'équilibre de vie.",
+                "advice": "Accordez de la valeur à plus que les seuls résultats matériels."
+            }
+        }
+    },
+    "spreads": {
+        "one": {
+            "name": "Une carte",
+            "description": "Une réponse rapide à votre question.",
+            "positions": {
+                "answer": {
+                    "name": "",
+                    "description": "La réponse principale."
+                }
+            }
+        },
+        "three": {
+            "name": "Trois cartes",
+            "description": "Passé, présent et futur.",
+            "positions": {
+                "past": {
+                    "name": "Passé",
+                    "description": "Ce qui a mené à la situation."
+                },
+                "present": {
+                    "name": "Présent",
+                    "description": "Ce qui se passe maintenant."
+                },
+                "future": {
+                    "name": "Futur",
+                    "description": "L’évolution probable."
+                }
+            }
+        },
+        "relationship": {
+            "name": "Relation",
+            "description": "Une analyse de la relation.",
+            "positions": {
+                "relationship": {
+                    "name": "Cœur de la relation",
+                    "description": "Le fondement de l’union"
+                },
+                "you": {
+                    "name": "Vous",
+                    "description": "Votre état"
+                },
+                "partner": {
+                    "name": "Partenaire",
+                    "description": "Son état"
+                },
+                "feelings_you": {
+                    "name": "Vos sentiments",
+                    "description": "Ce que vous ressentez"
+                },
+                "feelings_partner": {
+                    "name": "Ses sentiments",
+                    "description": "Ce que ressent votre partenaire"
+                },
+                "future": {
+                    "name": "Perspectives",
+                    "description": "Les perspectives"
+                }
+            }
+        },
+        "horseshoe": {
+            "name": "Fer à cheval",
+            "description": "Un tirage classique pour une situation.",
+            "positions": {
+                "past": {
+                    "name": "Passé",
+                    "description": ""
+                },
+                "present": {
+                    "name": "Présent",
+                    "description": ""
+                },
+                "hidden": {
+                    "name": "Caché",
+                    "description": ""
+                },
+                "obstacle": {
+                    "name": "Obstacle",
+                    "description": ""
+                },
+                "environment": {
+                    "name": "Entourage",
+                    "description": ""
+                },
+                "advice": {
+                    "name": "Conseil",
+                    "description": ""
+                },
+                "result": {
+                    "name": "Issue",
+                    "description": ""
+                }
+            }
+        },
+        "celtic_cross": {
+            "name": "Croix celtique",
+            "description": "Une analyse complète de la situation.",
+            "positions": {
+                "present": {
+                    "name": "Présent",
+                    "description": ""
+                },
+                "cross": {
+                    "name": "Obstacle",
+                    "description": ""
+                },
+                "past": {
+                    "name": "Passé",
+                    "description": ""
+                },
+                "future": {
+                    "name": "Futur",
+                    "description": ""
+                },
+                "conscious": {
+                    "name": "Conscient",
+                    "description": ""
+                },
+                "subconscious": {
+                    "name": "Inconscient",
+                    "description": ""
+                },
+                "you": {
+                    "name": "Vous",
+                    "description": ""
+                },
+                "others": {
+                    "name": "Entourage",
+                    "description": ""
+                },
+                "hopes": {
+                    "name": "Espoirs et craintes",
+                    "description": ""
+                },
+                "result": {
+                    "name": "Issue",
+                    "description": ""
+                }
+            }
+        }
+    },
+    "about": {
+        "Что такое Таро": {
+            "title": "Qu’est-ce que le tarot",
+            "text": "Le tarot est un jeu de 78 cartes utilisé pour la divination, la connaissance de soi et la réflexion sur les situations de la vie. Chaque carte porte sa propre signification symbolique, et leur combinaison dans un tirage aide à regarder une question sous un angle nouveau."
+        },
+        "Немного истории": {
+            "title": "Un peu d’histoire",
+            "text": "Les premiers jeux de tarot sont apparus en Italie au XVe siècle, comme de simples cartes à jouer pour l’aristocratie. Un sens ésotérique leur a été attribué bien plus tard, aux XVIIIe et XIXe siècles, en France et en Angleterre. Le jeu le plus connu aujourd’hui, le Rider-Waite-Smith, créé en 1909, est la base des images utilisées par cette application."
+        },
+        "Структура колоды": {
+            "title": "Structure du jeu",
+            "text": "Le jeu se divise en arcanes majeurs (22 cartes) — de grands thèmes de vie et des archétypes comme le Fou, la Mort ou la Roue de Fortune — et en arcanes mineurs (56 cartes), qui décrivent des situations du quotidien. Les arcanes mineurs se répartissent en quatre couleurs : Bâtons (énergie, action), Coupes (sentiments, relations), Épées (pensées, conflit) et Pentacles (monde matériel, travail, argent)."
+        },
+        "Прямое и перевёрнутое положение": {
+            "title": "À l’endroit et inversée",
+            "text": "Une carte tirée à l’endroit indique en général une expression claire et active de son sens. Une carte inversée signale plus souvent une version bloquée, intérieure ou déformée du même sens — un retard, une résistance ou une leçon encore à apprendre."
+        },
+        "Как читать расклад": {
+            "title": "Comment lire un tirage",
+            "text": "Dans un tirage, ce n’est pas seulement la carte qui compte, mais aussi sa position — la position fixe la question à laquelle la carte répond (« Passé », « Vos sentiments », « Issue », etc.). Essayez de regarder les cartes non pas une à une, mais comme une seule histoire : comment elles se complètent ou se contredisent."
+        },
+        "Одна карта": {
+            "title": "Une carte",
+            "text": "Le tirage le plus rapide — une carte répond à une question précise. Il convient quand vous avez besoin d’une indication courte et claire."
+        },
+        "Три карты": {
+            "title": "Trois cartes",
+            "text": "La disposition classique « Passé — Présent — Futur ». Elle montre comment la situation s’est développée, ce qui se passe maintenant et où tout se dirige."
+        },
+        "Отношения": {
+            "title": "Relation",
+            "text": "Six cartes révèlent le cœur d’une relation : l’état de chaque partenaire, leurs sentiments l’un pour l’autre et les perspectives du couple."
+        },
+        "Подкова": {
+            "title": "Fer à cheval",
+            "text": "Sept cartes en arc — passé, présent, influences cachées, obstacle, entourage, conseil et issue. Idéal pour analyser une situation précise dans son évolution."
+        },
+        "Кельтский крест": {
+            "title": "Croix celtique",
+            "text": "Le tirage le plus détaillé, avec dix cartes. Il éclaire la situation sous tous les angles : le cœur du sujet, l’obstacle, le passé, le futur, les attitudes conscientes et inconscientes, l’influence de l’entourage, les espoirs et les craintes, et l’issue."
+        }
+    },
+    "legal": {
+        "privacy": {
+            "title": "Politique de confidentialité",
+            "paragraphs": [
+                "Tarot Oracle est une application locale. Elle ne se connecte pas à internet et n’envoie aucune donnée à des serveurs externes.",
+                "Toutes les données (historique des tirages, réglages, carte du jour) sont stockées uniquement sur votre appareil, dans un fichier de base de données local (tarot.db) situé à côté de l’application.",
+                "L’application ne collecte pas de données personnelles, n’utilise pas d’outils d’analyse et n’affiche pas de publicité.",
+                "Vous pouvez supprimer votre historique de tirages à tout moment, en totalité ou entrée par entrée, dans la section « Historique ».",
+                "La désinstallation de l’application ou la suppression du fichier tarot.db effacera de façon irréversible toutes les données enregistrées — aucune sauvegarde n’est créée automatiquement."
+            ]
+        },
+        "terms": {
+            "title": "Conditions d’utilisation",
+            "paragraphs": [
+                "Tarot Oracle est destinée au divertissement et à la méditation. Les interprétations des cartes sont conventionnelles et symboliques et ne constituent pas un conseil professionnel — psychologique, médical, financier ou juridique.",
+                "Les décisions prises à partir des résultats d’un tirage relèvent entièrement de la libre appréciation et de la responsabilité de l’utilisateur.",
+                "L’application est fournie « en l’état », sans garantie de fonctionnement ininterrompu ni d’absence d’erreurs.",
+                "Les interprétations des cartes reposent sur les significations classiques du tarot et sont données à titre d’information générale.",
+                "En utilisant l’application, vous reconnaissez que le développeur n’est pas responsable des décisions ou des conséquences liées à l’utilisation des résultats des tirages."
+            ]
+        }
+    },
+    "questions": {
+        "labels": {
+            "general": "Général",
+            "love": "Amour",
+            "career": "Carrière",
+            "finance": "Finances",
+            "health": "Santé"
+        },
+        "texts": {
+            "Что меня ждёт?": "Que m’attend-il ?",
+            "Что мне нужно знать сейчас?": "Que dois-je savoir maintenant ?",
+            "Каков будет исход ситуации?": "Quelle sera l’issue de la situation ?",
+            "Что скрыто от меня?": "Que me cache-t-on ?",
+            "Что ждёт наши отношения?": "Que réserve l’avenir à notre relation ?",
+            "Что чувствует ко мне этот человек?": "Que ressent cette personne pour moi ?",
+            "Стоит ли мне довериться этим отношениям?": "Dois-je faire confiance à cette relation ?",
+            "Как улучшить отношения с партнёром?": "Comment améliorer ma relation avec mon partenaire ?",
+            "Стоит ли мне менять работу?": "Dois-je changer de travail ?",
+            "Что ждёт меня в карьере?": "Que m’attend-il dans ma carrière ?",
+            "Как решить конфликт на работе?": "Comment résoudre un conflit au travail ?",
+            "Правильное ли направление я выбрал(а)?": "Ai-je choisi la bonne direction ?",
+            "Как улучшить своё финансовое положение?": "Comment améliorer ma situation financière ?",
+            "Стоит ли делать эту покупку/вложение?": "Dois-je faire cet achat ou cet investissement ?",
+            "Что ждёт меня в финансах в ближайшее время?": "Que m’attend-il côté finances prochainement ?",
+            "Как избежать финансовых потерь?": "Comment éviter des pertes financières ?",
+            "На что обратить внимание в своём здоровье?": "À quoi dois-je prêter attention pour ma santé ?",
+            "Как улучшить самочувствие?": "Comment améliorer mon bien-être ?",
+            "Что мешает моему восстановлению?": "Qu’est-ce qui freine mon rétablissement ?",
+            "Что мне нужно для внутреннего равновесия?": "De quoi ai-je besoin pour retrouver mon équilibre intérieur ?"
+        }
+    },
+    "guide": {
+        "✦ Вытянуть карту": {
+            "title": "✦ Tirer une carte",
+            "text": "Un moyen rapide d’obtenir une réponse à n’importe quelle question : une carte du jeu, avec son interprétation et une courte réponse (Oui/Non et variantes intermédiaires)."
+        },
+        "☀ Карта дня": {
+            "title": "☀ Carte du jour",
+            "text": "Une carte pour toute la journée, tirée une seule fois par 24 heures. Regardez-la le matin pour savoir à quoi prêter attention aujourd’hui."
+        },
+        "◈ Расклады": {
+            "title": "◈ Tirages",
+            "text": "Plusieurs cartes disposées à des positions qui ont un sens. Une description détaillée de chaque tirage se trouve dans la section « À propos des cartes de tarot »."
+        },
+        "Вопрос перед раскладом": {
+            "title": "Question avant un tirage",
+            "text": "Avant le début d’un tirage, une fenêtre s’ouvre : vous pouvez y choisir une question toute prête par catégorie (Général, Amour, Carrière, Finances, Santé) ou écrire la vôtre. Vous pouvez aussi commencer un tirage sans aucune question."
+        },
+        "Толкование карты": {
+            "title": "Interprétation d’une carte",
+            "text": "Toucher une carte ouvre les détails : mots-clés, sens général et onglets séparés — amour, carrière, finances, santé, conseil."
+        },
+        "📖 Толкование расклада": {
+            "title": "📖 Lecture du tirage",
+            "text": "L’icône de livre en bas ouvre le panneau « Lecture » — une analyse détaillée du tirage. En haut se trouve le bloc « Aperçu du tirage » (pour les tirages de trois cartes ou plus), puis l’interprétation de chaque carte selon sa position.\n\nL’aperçu contient :\n• Le nombre d’arcanes majeurs du tirage et la couleur qui domine ou qui manque — cela montre l’ampleur de la question et le principal domaine de vie.\n• Les éléments : chaque couleur a un élément (Bâtons — Feu, Coupes — Eau, Épées — Air, Pentacles — Terre), et les arcanes majeurs ont le leur, selon la tradition de la Golden Dawn. L’application indique quel élément domine, lequel manque et comment ils se combinent — s’ils se soutiennent ou s’opposent.\n• Les positions : ce que signifient les places clés du tirage (« Issue », « Obstacle », « Conseil », « Passé », « Futur », etc.) et quelles cartes y sont tombées, à l’endroit ou inversées.\n• Les cartes inversées, les figures (les personnes dans la situation), les As (nouveaux départs) et les Dix (fins).\n• La numérologie : les numéros des cartes sont additionnés et réduits à un seul chiffre (11 et 22 restent des nombres particuliers). Les figures comptent ainsi : Valet — 2, Cavalier — 3, Reine — 4, Roi — 5 ; le Fou (0) n’est pas compté. Si un nombre se répète, c’est un thème qui traverse tout le tirage.\n• « Conseil du tirage » — une courte conclusion tirée de tout ce qui précède : le rythme (agir ou attendre), l’axe principal et une ou deux nuances.\n\nL’analyse est construite automatiquement selon des règles : le même tirage donne donc toujours le même résultat. Le même bloc est inclus dans l’image lorsque vous enregistrez un tirage."
+        },
+        "📝 Добавление комментария": {
+            "title": "📝 Ajouter une note",
+            "text": "Après la carte du jour, une carte seule ou un tirage, une icône de bloc-notes apparaît en bas. Elle ouvre une fenêtre où vous pouvez écrire votre propre note — par exemple, comment les choses se sont réellement passées. La note est enregistrée avec l’entrée et peut être modifiée plus tard via « Historique »."
+        },
+        "⬇ Сохранение расклада картинкой": {
+            "title": "⬇ Enregistrer un tirage en image",
+            "text": "L’icône flèche vers le bas se trouve sur l’écran d’une carte, de la carte du jour et d’un tirage (à gauche, au-dessus du bloc-notes), ainsi que dans « Historique » à côté de chaque entrée. Touchez-la et l’application compose une belle image : le tirage avec les cartes, l’interprétation, votre note, la question et la date. Tout le processus s’affiche à l’écran : d’abord les silhouettes des cartes, puis le fond et le cadre, le titre, les cartes, l’interprétation et les dernières touches. Quand tout est prêt, une coche apparaît avec les mots « Tirage enregistré dans la galerie ». Le bouton « Terminé » vous ramène au tirage, et « Partager » ouvre le menu de votre téléphone pour envoyer l’image à une messagerie ou aux réseaux sociaux."
+        },
+        "Где найти сохранённую картинку": {
+            "title": "Où trouver l’image enregistrée",
+            "text": "Sur un téléphone, les images sont enregistrées dans la galerie, dans l’album « TarotOracle » (le dossier Pictures/TarotOracle). Sur un ordinateur, elles vont dans le dossier Téléchargements. Si vous avez ajouté ou modifié une note, enregistrez de nouveau l’image : elle contiendra la version actuelle de l’entrée."
+        },
+        "✕ Вернуться на стартовый экран": {
+            "title": "✕ Revenir à l’écran d’accueil",
+            "text": "Quand un tirage, une carte ou la carte du jour est ouvert, un bouton ✕ apparaît dans le coin droit de la barre supérieure. Touchez-le pour fermer l’image en cours et revenir à l’écran d’accueil. Votre historique, vos notes et la carte du jour sont conservés. Si l’application est restée réduite plus de 10 minutes, elle s’ouvre aussi sur l’écran d’accueil à votre retour."
+        },
+        "Иконки внизу": {
+            "title": "Icônes du bas",
+            "text": "Le bas de l’écran contient les icônes d’accès rapide : 🂠 Mélanger — reconstitue et mélange de nouveau le jeu ; 🕒 Historique — tirages et cartes passés ; 🗂 Jeu — les cartes restantes et la liste complète ; ⚙ Réglages — paramètres de l’application ; 📖 Lecture — un résumé du tirage en cours."
+        },
+        "🂠 Перемешать": {
+            "title": "🂠 Mélanger",
+            "text": "Reconstitue le jeu et le mélange de nouveau. Utile quand les cartes sont épuisées ou que vous voulez simplement recommencer."
+        },
+        "🕒 История": {
+            "title": "🕒 Historique",
+            "text": "Tous les tirages passés, cartes du jour et tirages d’une carte sont enregistrés automatiquement. Vous pouvez rouvrir n’importe quelle entrée, ajouter ou modifier une note, enregistrer l’entrée en image (l’icône ⬇) et supprimer celles dont vous n’avez plus besoin."
+        },
+        "🗂 Колода": {
+            "title": "🗂 Jeu",
+            "text": "Affiche combien de cartes restent dans le jeu actuel et dans quel ordre elles se trouvent après le mélange, ainsi que la liste complète de toutes les cartes par couleur."
+        },
+        "⚙ Настройки": {
+            "title": "⚙ Réglages",
+            "text": "Vous pouvez ici changer de jeu (complet ou arcanes majeurs seulement), choisir la façon de tirer les cartes, changer la langue de l’application et trouver des informations sur le programme."
+        },
+        "Способ вытягивания карт": {
+            "title": "Façon de tirer les cartes",
+            "text": "« Dans l’ordre » tire les cartes l’une après l’autre dans le jeu déjà mélangé, comme en distribuant de vraies cartes. « Au hasard » choisit à chaque fois une carte parmi toutes celles qui restent, quel que soit leur ordre dans le jeu. Vous pouvez changer de mode dans « Réglages »."
+        },
+        "Иконка приложения": {
+            "title": "Icône de l’application",
+            "text": "Sur l’écran de votre téléphone, l’application apparaît sous le nom TarotOracle, avec l’icône d’une carte de tarot dorée ornée d’une étoile et d’une lune sur fond violet. Si l’icône ou le nom n’a pas été mis à jour après l’installation d’une nouvelle version, supprimez l’ancienne application et réinstallez-la."
+        }
+    },
+    "names": {
+        "Шут": "Le Fou",
+        "Маг": "Le Magicien",
+        "Верховная Жрица": "La Grande Prêtresse",
+        "Императрица": "L’Impératrice",
+        "Император": "L’Empereur",
+        "Иерофант": "Le Hiérophante",
+        "Влюблённые": "Les Amoureux",
+        "Колесница": "Le Chariot",
+        "Сила": "La Force",
+        "Отшельник": "L’Ermite",
+        "Колесо Фортуны": "La Roue de Fortune",
+        "Справедливость": "La Justice",
+        "Повешенный": "Le Pendu",
+        "Смерть": "La Mort",
+        "Умеренность": "La Tempérance",
+        "Дьявол": "Le Diable",
+        "Башня": "La Tour",
+        "Звезда": "L’Étoile",
+        "Луна": "La Lune",
+        "Солнце": "Le Soleil",
+        "Суд": "Le Jugement",
+        "Мир": "Le Monde",
+        "Туз Жезлов": "As de Bâtons",
+        "Двойка Жезлов": "Deux de Bâtons",
+        "Тройка Жезлов": "Trois de Bâtons",
+        "Четвёрка Жезлов": "Quatre de Bâtons",
+        "Пятёрка Жезлов": "Cinq de Bâtons",
+        "Шестёрка Жезлов": "Six de Bâtons",
+        "Семёрка Жезлов": "Sept de Bâtons",
+        "Восьмёрка Жезлов": "Huit de Bâtons",
+        "Девятка Жезлов": "Neuf de Bâtons",
+        "Десятка Жезлов": "Dix de Bâtons",
+        "Паж Жезлов": "Valet de Bâtons",
+        "Рыцарь Жезлов": "Cavalier de Bâtons",
+        "Королева Жезлов": "Reine de Bâtons",
+        "Король Жезлов": "Roi de Bâtons",
+        "Туз Кубков": "As de Coupes",
+        "Двойка Кубков": "Deux de Coupes",
+        "Тройка Кубков": "Trois de Coupes",
+        "Четвёрка Кубков": "Quatre de Coupes",
+        "Пятёрка Кубков": "Cinq de Coupes",
+        "Шестёрка Кубков": "Six de Coupes",
+        "Семёрка Кубков": "Sept de Coupes",
+        "Восьмёрка Кубков": "Huit de Coupes",
+        "Девятка Кубков": "Neuf de Coupes",
+        "Десятка Кубков": "Dix de Coupes",
+        "Паж Кубков": "Valet de Coupes",
+        "Рыцарь Кубков": "Cavalier de Coupes",
+        "Королева Кубков": "Reine de Coupes",
+        "Король Кубков": "Roi de Coupes",
+        "Туз Мечей": "As d’Épées",
+        "Двойка Мечей": "Deux d’Épées",
+        "Тройка Мечей": "Trois d’Épées",
+        "Четвёрка Мечей": "Quatre d’Épées",
+        "Пятёрка Мечей": "Cinq d’Épées",
+        "Шестёрка Мечей": "Six d’Épées",
+        "Семёрка Мечей": "Sept d’Épées",
+        "Восьмёрка Мечей": "Huit d’Épées",
+        "Девятка Мечей": "Neuf d’Épées",
+        "Десятка Мечей": "Dix d’Épées",
+        "Паж Мечей": "Valet d’Épées",
+        "Рыцарь Мечей": "Cavalier d’Épées",
+        "Королева Мечей": "Reine d’Épées",
+        "Король Мечей": "Roi d’Épées",
+        "Туз Пентаклей": "As de Pentacles",
+        "Двойка Пентаклей": "Deux de Pentacles",
+        "Тройка Пентаклей": "Trois de Pentacles",
+        "Четвёрка Пентаклей": "Quatre de Pentacles",
+        "Пятёрка Пентаклей": "Cinq de Pentacles",
+        "Шестёрка Пентаклей": "Six de Pentacles",
+        "Семёрка Пентаклей": "Sept de Pentacles",
+        "Восьмёрка Пентаклей": "Huit de Pentacles",
+        "Девятка Пентаклей": "Neuf de Pentacles",
+        "Десятка Пентаклей": "Dix de Pentacles",
+        "Паж Пентаклей": "Valet de Pentacles",
+        "Рыцарь Пентаклей": "Cavalier de Pentacles",
+        "Королева Пентаклей": "Reine de Pentacles",
+        "Король Пентаклей": "Roi de Pentacles",
+        "Одна карта": "Une carte",
+        "Три карты": "Trois cartes",
+        "Отношения": "Relation",
+        "Подкова": "Fer à cheval",
+        "Кельтский крест": "Croix celtique"
+    }
+}
