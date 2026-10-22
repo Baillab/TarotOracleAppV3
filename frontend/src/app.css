@@ -1638,6 +1638,7 @@ body {
 }
 
 
+
 .tab-btn:hover {
 
 
@@ -1649,7 +1650,6 @@ body {
 
 
 }
-
 
 
 .tab-btn.active {
@@ -4734,7 +4734,6 @@ body {
     display: none;
 
 
-
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
 
 
@@ -5674,7 +5673,6 @@ button,
         max-width: calc(100% - 76px);
 
         padding: 6px 14px;
-
         font-size: 12.5px;
 
     }
@@ -7627,7 +7625,7 @@ body[data-bg="classic"] {
     z-index: 3;
 }
 
-/* «Выбор» и «Неделя»: подпись над картой чуть выше, чтобы не задевать рамку подсветки */
-.spread-card.ring-spread .position-name {
+/* Подпись над картой чуть выше, чтобы не задевать рамку и свечение */
+.spread-card .position-name {
     margin-bottom: 10px;
 }
