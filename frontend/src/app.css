@@ -1652,6 +1652,7 @@ body {
 }
 
 
+
 .tab-btn.active {
 
 
@@ -3190,7 +3191,6 @@ body {
 
 
     background: rgba(45, 31, 62, .95);
-
 
 
     border: 1px solid rgba(215, 180, 90, .35);
@@ -4734,6 +4734,7 @@ body {
     display: none;
 
 
+
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
 
 
@@ -4864,7 +4865,6 @@ body {
 /* =====================================================
    Экран "Руководство пользователя"
 ===================================================== */
-
 
 .guide-screen {
 
@@ -5673,6 +5673,7 @@ button,
         max-width: calc(100% - 76px);
 
         padding: 6px 14px;
+
         font-size: 12.5px;
 
     }
@@ -7628,4 +7629,17 @@ body[data-bg="classic"] {
 /* Подпись над картой чуть выше, чтобы не задевать рамку и свечение */
 .spread-card .position-name {
     margin-bottom: 10px;
+}
+
+/* «Неделя» и «Выбор»: у всех карт блок одинаковой высоты, чтобы карты и подписи
+   в одном ряду стояли на одном уровне (как будто у каждой карты есть рамка) */
+.spread-card.ring-spread .position-name {
+    white-space: nowrap;
+    min-height: 1.2em;
+    line-height: 1.2;
+}
+
+.spread-card.ring-spread .card-name {
+    min-height: 3.6em;
+    line-height: 1.2;
 }
