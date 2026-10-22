@@ -2,6 +2,7 @@
 import './app.css'
 import overviewRu from './overview.json'
 import overviewEn from './locales/overview.en.json'
+import overviewFr from './locales/overview.fr.json'
 import { t, getLang, setLang, LANGS } from './i18n.js'
 
 import * as TarotApi from '../bindings/tarotoracleapp/tarotservice.js'
@@ -1662,7 +1663,6 @@ document
     })
 
 
-
 // Пока на сцене расклад, сцена занимает весь экран, а верхняя строка
 // и нижняя панель — полупрозрачные поверх неё (класс spread-mode).
 // Высоты панелей и заголовок режима обновляем здесь.
@@ -3174,7 +3174,7 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 // Тексты фраз — в overview.json
 // ==========================================
 // Тексты «Общей картины» по языкам (при нехватке перевода — русские)
-const OVERVIEW_BY_LANG = { ru: overviewRu, en: overviewEn }
+const OVERVIEW_BY_LANG = { ru: overviewRu, en: overviewEn, fr: overviewFr }
 
 function ovFill(tpl, vars) {
     return tpl.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : ""))
@@ -3200,6 +3200,7 @@ function numReduce(x) {
 
 // «2 карты», «5 карт» / «2 cards»
 function cardsCount(k) {
+    if (getLang() === "fr") return k + " cartes"
     if (getLang() !== "ru") return k + " cards"
     return k + ((k % 10 >= 2 && k % 10 <= 4 && (k < 12 || k > 14)) ? " карты" : " карт")
 }
@@ -3246,6 +3247,7 @@ function overviewDataRaw(items) {
             add(T.suit.lacking, { suit_gen: T.suits[lacking[0]].gen, lack: T.suits[lacking[0]].lack })
         }
     }
+
     // 2б. Стихии (масть младших + традиционная стихия старших) — работают в раскладах от 3 карт
     if (T.elements) try {
         const elCount = { fire: 0, water: 0, air: 0, earth: 0 }
@@ -3308,7 +3310,7 @@ function overviewDataRaw(items) {
         const found = []
         const kwOf = it => {
             const k = Array.isArray(it.card.keywords) ? it.card.keywords.slice(0, 3).join(", ").toLowerCase() : ""
-            return k ? ": " + k : ""
+            return k ? (getLang() === "fr" ? " : " : ": ") + k : ""
         }
         for (const role of T.positions.roles) {
             if (found.length >= (T.positions.max || 3)) break
@@ -3401,7 +3403,7 @@ function overviewDataRaw(items) {
 
     const chips = [
         ovFill(T.chips.majors, { n: majors.length }),
-        ...Object.entries(suitCount).filter(r => r[1] > 0).map(r => `${T.suits[r[0]].name}: ${r[1]}`),
+        ...Object.entries(suitCount).filter(r => r[1] > 0).map(r => `${T.suits[r[0]].name}${getLang() === "fr" ? " : " : ": "}${r[1]}`),
         ovFill(T.chips.reversed, { n: reversed.length }),
     ]
 
@@ -6017,7 +6019,8 @@ function showSettings() {
                 </div>
  
  
-    <div class="settings-options">
+ 
+                <div class="settings-options">
  
  
                     <button class="settings-option active" disabled>
@@ -6025,7 +6028,6 @@ function showSettings() {
                         ${t("Классическая")}
  
                     </button>
- 
  
  
                     <button class="settings-option" disabled>
