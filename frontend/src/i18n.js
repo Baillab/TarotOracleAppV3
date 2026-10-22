@@ -1,4 +1,3 @@
-
 // Переводы интерфейса. Ключ — исходный русский текст: если перевода нет,
 // показывается сам ключ, поэтому приложение не может остаться «без текста».
 // Словари: src/locales/<код>.json  { "русский текст": "перевод" }
@@ -18,9 +17,9 @@ export const LANGS = [
 
 const STORAGE_KEY = "tarot.lang"
 
-// Подбирать язык по языку устройства при первом запуске. Пока выключено:
-// приложение стартует на русском, пока пользователь сам не выберет другой язык.
-const AUTO_DETECT = false
+// Подбирать язык по языку устройства при первом запуске (дальше — выбор из «Настроек»).
+// Русский — для русских устройств, любой другой неподдержанный язык — английский.
+const AUTO_DETECT = true
 
 let current = "ru"
 
@@ -46,7 +45,7 @@ function initLang() {
         if (AUTO_DETECT) {
             try { dev = String(navigator.language || "").slice(0, 2).toLowerCase() } catch (e) { /* */ }
         }
-        current = isAvailable(dev) ? dev : "ru"
+        current = !dev ? "ru" : isAvailable(dev) ? dev : "en"
     }
     try { document.documentElement.lang = current } catch (e) { /* */ }
 }
