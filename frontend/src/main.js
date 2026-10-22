@@ -1696,7 +1696,6 @@ function updateChrome() {
         result.children.length === 0 || !!result.querySelector(".welcome-deck")
 
 
-
     const bar =
         document.querySelector(".icon-row")
 
@@ -2674,12 +2673,14 @@ function mobileSpreadPoints(data, W, H, force = false) {
 
 
     fill("x", W)
-
     fill("y", H)
-
-
-
+    // «Выбор»: две карты ближе к центру, а не у самых краёв экрана
+    if (data.spread && data.spread.id === "choice" && pts.length === 2) {
+        pts[0].x = W * 0.22
+        pts[1].x = W * 0.78
+    }
     return pts
+
 
 }
 
@@ -3219,6 +3220,26 @@ function ovScore(it) {
     const v = QA_SCORE[ovAnswer(it)]
     return v === undefined ? 0 : v
 }
+// Подсветка карт в раскладах «Выбор» и «Неделя»: лучшая — зелёная, самая трудная — красная
+function spreadHighlights(spreadId, items) {
+    const best = new Set(), worst = new Set()
+    try {
+        if (!items || !items.length) return { best, worst }
+        const sc = items.map(ovScore)
+        if (spreadId === "choice" && items.length === 2) {
+            if (sc[0] !== sc[1]) { best.add(sc[0] > sc[1] ? 0 : 1); worst.add(sc[0] > sc[1] ? 1 : 0) }
+        } else if (spreadId === "week" && items.length === 7) {
+            const mx = Math.max(...sc), mn = Math.min(...sc)
+            if (mx > mn) {
+                sc.forEach((v, i) => {
+                    if (mx >= 1 && v === mx) best.add(i)
+                    if (mn <= -1 && v === mn) worst.add(i)
+                })
+            }
+        }
+    } catch (e) { console.error("highlights:", e) }
+    return { best, worst }
+}
 // «Выбор»: две карты — сравнение вариантов
 function choiceOverview(items, T) {
     const C = T.choice
@@ -3668,10 +3689,14 @@ function renderSpread(data, question) {
 
 
 
+    const hlSet = spreadHighlights(data.spread && data.spread.id, data.cards)
+    if ((hlSet.best.size || hlSet.worst.size) && area) {
+        const lg = document.createElement("div")
+        lg.className = "hl-legend"
+        lg.innerHTML = `<span class="hl-mark-best">▲ ${t("благоприятно")}</span><span class="hl-mark-worst">▼ ${t("непросто")}</span>`
+        area.parentElement.appendChild(lg)
+    }
     const placed = []
-
-
-
     data.cards.forEach(
         (item, index) => {
 
@@ -3698,14 +3723,10 @@ function renderSpread(data, question) {
 
 
             card.className =
-                "spread-card"
-
-
-
+                "spread-card" + (hlSet.best.has(index) ? " hl-best" : hlSet.worst.has(index) ? " hl-worst" : "")
+            const hlMark = hlSet.best.has(index) ? ` <span class="hl-mark hl-mark-best">▲</span>` : hlSet.worst.has(index) ? ` <span class="hl-mark hl-mark-worst">▼</span>` : ""
             card.innerHTML = `
- 
- 
-                ${p.name ? `<div class="position-name">${p.name}</div>` : ""}
+                ${p.name ? `<div class="position-name">${p.name}${hlMark}</div>` : ""}
  
  
  
@@ -4677,6 +4698,8 @@ async function renderRecordImage(record, onStage) {
         record.quickAnswer ||
         (record.type !== "spread" ? (perCard[0] || "") : NO_OVERALL_ANSWER.has(record.spreadId) ? "" : aggregateQuickAnswer(perCard))
 
+    const hlExp = spreadHighlights(spreadDef && spreadDef.id, items)
+    items.forEach((it, i) => { it._hl = hlExp.best.has(i) ? "best" : hlExp.worst.has(i) ? "worst" : "" })
     const ov = spreadDef ? overviewData(items) : null
 
     const layout =
@@ -4805,6 +4828,7 @@ async function renderRecordImage(record, onStage) {
                 ctx.stroke()
 
             }
+
             text(label, W / 2, y + 43, `700 34px ${FONT}`, positive ? "#8ee6ad" : negative ? "#ff9a9a" : GOLD, "center")
 
             y += 64 + 20
@@ -4883,8 +4907,8 @@ async function renderRecordImage(record, onStage) {
 
             ctx.rotate(it.isReversed ? Math.PI : 0)
 
-            ctx.shadowColor = "rgba(226,185,79,.55)"
-
+            const hlc = it._hl === "best" ? ["rgba(90,200,130,.8)", "#5ac882"] : it._hl === "worst" ? ["rgba(220,90,90,.8)", "#dc5a5a"] : ["rgba(226,185,79,.55)", "rgba(226,185,79,.85)"]
+            ctx.shadowColor = hlc[0]
             ctx.shadowBlur = 28
 
             exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
@@ -4906,8 +4930,7 @@ async function renderRecordImage(record, onStage) {
             ctx.restore()
 
             exportRoundRect(ctx, -iw / 2, -ih / 2, iw, ih, iw * 0.06)
-
-            ctx.strokeStyle = "rgba(226,185,79,.85)"
+            ctx.strokeStyle = hlc[1]
 
             ctx.lineWidth = 3
 
@@ -6171,7 +6194,6 @@ function showSettings() {
             </div>
  
  
- 
             <div class="settings-group">
  
  
@@ -6352,6 +6374,7 @@ function showSettings() {
             }
 
         }
+
 
 
     document
@@ -7068,5 +7091,5 @@ async function showGuideScreen(title, fetchFn) {
 // Избранные карты
 // Звуки
 // Анимация переворота
-// Полноэкраный режим
+// Полноэкранный режим
 //

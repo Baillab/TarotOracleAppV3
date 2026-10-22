@@ -1569,7 +1569,6 @@ body {
 
 
 
-
 /* =====================================================
    Вкладки карты
 ===================================================== */
@@ -1636,6 +1635,7 @@ body {
 
 
 }
+
 
 
 .tab-btn:hover {
@@ -3261,8 +3261,8 @@ body {
 }
 
 
-
 .history-item {
+
 
     display: flex;
 
@@ -4853,6 +4853,7 @@ body {
 
 
     text-align: center;
+
 
 
     line-height: 1.3;
@@ -7586,4 +7587,41 @@ body[data-bg="classic"] {
     color: #4a3520;
     font-size: 13px;
     line-height: 1.5;
+}
+
+
+/* Подсветка карт в раскладах «Выбор» и «Неделя» */
+.spread-card.hl-best .card-image {
+    box-shadow: 0 0 0 3px #5ac882, 0 0 22px rgba(90, 200, 130, .75);
+    border-radius: 8px;
+}
+
+.spread-card.hl-worst .card-image {
+    box-shadow: 0 0 0 3px #dc5a5a, 0 0 22px rgba(220, 90, 90, .7);
+    border-radius: 8px;
+}
+
+.hl-mark {
+    font-size: .85em;
+}
+
+.hl-mark-best {
+    color: #6fdc9a;
+}
+
+.hl-mark-worst {
+    color: #ff8a8a;
+}
+
+.hl-legend {
+    position: absolute;
+    top: 54px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 3;
 }
