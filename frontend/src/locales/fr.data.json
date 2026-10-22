@@ -2014,6 +2014,54 @@
                     "description": ""
                 }
             }
+        },
+        "choice": {
+            "name": "Choix",
+            "description": "Une comparaison de deux options.",
+            "positions": {
+                "option_a": {
+                    "name": "Option A",
+                    "description": "Ce qui attend si vous choisissez la première option."
+                },
+                "option_b": {
+                    "name": "Option B",
+                    "description": "Ce qui attend si vous choisissez la seconde option."
+                }
+            }
+        },
+        "week": {
+            "name": "Semaine",
+            "description": "Ce qui vous attend chaque jour de la semaine.",
+            "positions": {
+                "mon": {
+                    "name": "Lundi",
+                    "description": ""
+                },
+                "tue": {
+                    "name": "Mardi",
+                    "description": ""
+                },
+                "wed": {
+                    "name": "Mercredi",
+                    "description": ""
+                },
+                "thu": {
+                    "name": "Jeudi",
+                    "description": ""
+                },
+                "fri": {
+                    "name": "Vendredi",
+                    "description": ""
+                },
+                "sat": {
+                    "name": "Samedi",
+                    "description": ""
+                },
+                "sun": {
+                    "name": "Dimanche",
+                    "description": ""
+                }
+            }
         }
     },
     "about": {
@@ -2041,6 +2089,10 @@
             "title": "Une carte",
             "text": "Le tirage le plus rapide — une carte répond à une question précise. Il convient quand vous avez besoin d’une indication courte et claire."
         },
+        "Выбор": {
+            "title": "Choix",
+            "text": "Deux cartes — une pour chacune des deux options. Le tirage montre comment chaque voie peut se terminer et aide à les comparer. Il convient aux questions du type « A ou B »."
+        },
         "Три карты": {
             "title": "Trois cartes",
             "text": "La disposition classique « Passé — Présent — Futur ». Elle montre comment la situation s’est développée, ce qui se passe maintenant et où tout se dirige."
@@ -2052,6 +2104,10 @@
         "Подкова": {
             "title": "Fer à cheval",
             "text": "Sept cartes en arc — passé, présent, influences cachées, obstacle, entourage, conseil et issue. Idéal pour analyser une situation précise dans son évolution."
+        },
+        "Неделя": {
+            "title": "Semaine",
+            "text": "Sept cartes — une pour chaque jour de la semaine, du lundi au dimanche. Le tirage montre l’ambiance générale de la semaine, les jours les plus favorables et les plus difficiles, et l’évolution de l’énergie vers la fin de la semaine."
         },
         "Кельтский крест": {
             "title": "Croix celtique",
@@ -2264,6 +2320,8 @@
         "Три карты": "Trois cartes",
         "Отношения": "Relation",
         "Подкова": "Fer à cheval",
-        "Кельтский крест": "Croix celtique"
+        "Кельтский крест": "Croix celtique",
+        "Выбор": "Choix",
+        "Неделя": "Semaine"
     }
 }

@@ -271,5 +271,34 @@
                 "rev": "Environment and outside influences — {card} (reversed){kw}. Other people’s intentions or circumstances may not match your expectations."
             }
         ]
+    },
+    "choice": {
+        "title": "Comparing the Options",
+        "opt": {
+            "good": "{pos} — {card}{kw}. This path works in your favor.",
+            "mixed": "{pos} — {card}{kw}. The outcome is mixed: there will be both gains and risks.",
+            "hard": "{pos} — {card}{kw}. This path is not easy: it will take effort and caution."
+        },
+        "answers": "Quick answers: {pos_a} — {ans_a}; {pos_b} — {ans_b}.",
+        "major": "{card} is a Major Arcana: this option carries special weight and is no accident.",
+        "verdict": {
+            "win": "“{win}” looks stronger than “{lose}”: the cards speak in its favor.",
+            "tie_good": "Both options are favorable — choose the one your heart leans toward.",
+            "tie_hard": "Neither path is easy — consider whether there is a third option, or do not rush the decision.",
+            "tie_mixed": "The options are roughly equal in strength — your values and preferences decide."
+        },
+        "advice": {
+            "win": "If you must choose, take “{win}” — but check its weak points first.",
+            "tie_good": "Do not be afraid of making a mistake: either path will open good opportunities.",
+            "tie_hard": "Do not decide under pressure: give yourself time and gather more information.",
+            "tie_mixed": "Write down the pros and cons of each option and check them against your intuition."
+        }
+    },
+    "week": {
+        "best": "The most favorable day is {day} ({card}{kw}). It is best to place what matters on it.",
+        "hard": "The most difficult day is {day} ({card}{kw}). Allow extra time and energy.",
+        "rising": "The week gains strength: the second half goes better than the first.",
+        "falling": "Energy fades toward the end of the week: it is better to do important things early on.",
+        "even": "The week runs evenly, without sharp swings."
     }
 }

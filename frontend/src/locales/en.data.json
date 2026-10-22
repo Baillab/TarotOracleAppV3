@@ -2014,6 +2014,54 @@
                     "description": ""
                 }
             }
+        },
+        "choice": {
+            "name": "Choice",
+            "description": "A comparison of two options.",
+            "positions": {
+                "option_a": {
+                    "name": "Option A",
+                    "description": "What awaits if you choose the first option."
+                },
+                "option_b": {
+                    "name": "Option B",
+                    "description": "What awaits if you choose the second option."
+                }
+            }
+        },
+        "week": {
+            "name": "Week",
+            "description": "What awaits you on each day of the week.",
+            "positions": {
+                "mon": {
+                    "name": "Monday",
+                    "description": ""
+                },
+                "tue": {
+                    "name": "Tuesday",
+                    "description": ""
+                },
+                "wed": {
+                    "name": "Wednesday",
+                    "description": ""
+                },
+                "thu": {
+                    "name": "Thursday",
+                    "description": ""
+                },
+                "fri": {
+                    "name": "Friday",
+                    "description": ""
+                },
+                "sat": {
+                    "name": "Saturday",
+                    "description": ""
+                },
+                "sun": {
+                    "name": "Sunday",
+                    "description": ""
+                }
+            }
         }
     },
     "about": {
@@ -2041,6 +2089,10 @@
             "title": "One Card",
             "text": "The quickest spread — one card answers a specific question. It suits moments when you need a short, clear pointer."
         },
+        "Выбор": {
+            "title": "Choice",
+            "text": "Two cards — one for each of two options. The spread shows how each path may end and helps you compare them. It suits “A or B” questions."
+        },
         "Три карты": {
             "title": "Three Cards",
             "text": "The classic “Past — Present — Future” layout. It shows how the situation developed, what is happening now and where everything is heading."
@@ -2052,6 +2104,10 @@
         "Подкова": {
             "title": "Horseshoe",
             "text": "Seven cards in an arc — past, present, hidden influences, obstacle, environment, advice and outcome. Good for analyzing a particular situation as it develops."
+        },
+        "Неделя": {
+            "title": "Week",
+            "text": "Seven cards — one for each day of the week, from Monday to Sunday. The spread shows the general mood of the week, the most favorable and the most difficult days, and how the energy changes toward the end of the week."
         },
         "Кельтский крест": {
             "title": "Celtic Cross",
@@ -2264,6 +2320,8 @@
         "Три карты": "Three Cards",
         "Отношения": "Relationship",
         "Подкова": "Horseshoe",
-        "Кельтский крест": "Celtic Cross"
+        "Кельтский крест": "Celtic Cross",
+        "Выбор": "Choice",
+        "Неделя": "Week"
     }
 }

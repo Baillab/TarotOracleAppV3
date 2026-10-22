@@ -271,5 +271,34 @@
                 "rev": "Entourage et influences extérieures — {card} (inversée){kw}. Les intentions des autres ou les circonstances peuvent ne pas répondre à vos attentes."
             }
         ]
+    },
+    "choice": {
+        "title": "Comparaison des options",
+        "opt": {
+            "good": "{pos} — {card}{kw}. Cette voie joue en votre faveur.",
+            "mixed": "{pos} — {card}{kw}. L’issue est mitigée : il y aura des gains comme des risques.",
+            "hard": "{pos} — {card}{kw}. Cette voie n’est pas facile : elle demandera des efforts et de la prudence."
+        },
+        "answers": "Réponses rapides : {pos_a} — {ans_a} ; {pos_b} — {ans_b}.",
+        "major": "{card} est un arcane majeur : cette option a un poids particulier et n’est pas due au hasard.",
+        "verdict": {
+            "win": "« {win} » semble plus forte que « {lose} » : les cartes parlent en sa faveur.",
+            "tie_good": "Les deux options sont favorables — choisissez celle vers laquelle votre cœur penche.",
+            "tie_hard": "Aucune des deux voies n’est facile — demandez-vous s’il existe une troisième option, ou ne précipitez pas la décision.",
+            "tie_mixed": "Les options sont à peu près de force égale — vos valeurs et vos préférences décident."
+        },
+        "advice": {
+            "win": "S’il faut choisir, prenez « {win} » — mais vérifiez d’abord ses points faibles.",
+            "tie_good": "N’ayez pas peur de vous tromper : l’une comme l’autre voie ouvrira de belles possibilités.",
+            "tie_hard": "Ne décidez pas sous pression : donnez-vous du temps et rassemblez plus d’informations.",
+            "tie_mixed": "Dressez la liste des avantages et des inconvénients de chaque option et confrontez-la à votre intuition."
+        }
+    },
+    "week": {
+        "best": "Le jour le plus favorable est {day} ({card}{kw}). Mieux vaut y placer l’essentiel.",
+        "hard": "Le jour le plus difficile est {day} ({card}{kw}). Prévoyez une marge de temps et d’énergie.",
+        "rising": "La semaine prend de la force : la seconde moitié se présente mieux que la première.",
+        "falling": "L’énergie diminue vers la fin de la semaine : mieux vaut faire l’important au début.",
+        "even": "La semaine se déroule de façon régulière, sans fortes variations."
     }
 }

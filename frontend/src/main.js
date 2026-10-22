@@ -1663,6 +1663,7 @@ document
     })
 
 
+
 // Пока на сцене расклад, сцена занимает весь экран, а верхняя строка
 // и нижняя панель — полупрозрачные поверх неё (класс spread-mode).
 // Высоты панелей и заголовок режима обновляем здесь.
@@ -3205,10 +3206,58 @@ function cardsCount(k) {
     return k + ((k % 10 >= 2 && k % 10 <= 4 && (k < 12 || k > 14)) ? " карты" : " карт")
 }
 
+// Расклады, у которых нет «общего ответа» Да/Нет (там сравниваются варианты или дни)
+const NO_OVERALL_ANSWER = new Set(["choice", "week"])
+function ovKw(it) {
+    const k = Array.isArray(it.card.keywords) ? it.card.keywords.slice(0, 3).join(", ").toLowerCase() : ""
+    return k ? (getLang() === "fr" ? " : " : ": ") + k : ""
+}
+function ovAnswer(it) {
+    return it.quickAnswer || quickAnswerFor(it.card && it.card.id, it.isReversed)
+}
+function ovScore(it) {
+    const v = QA_SCORE[ovAnswer(it)]
+    return v === undefined ? 0 : v
+}
+// «Выбор»: две карты — сравнение вариантов
+function choiceOverview(items, T) {
+    const C = T.choice
+    if (!C) return null
+    const [a, b] = items
+    const sa = ovScore(a), sb = ovScore(b)
+    const kind = s => (s >= 1 ? "good" : s <= -1 ? "hard" : "mixed")
+    const lines = []
+        ;[a, b].forEach(it => lines.push(ovFill(C.opt[kind(ovScore(it))], { pos: it.position.name, card: it.card.name + (it.isReversed ? t(" (п.)") : ""), kw: ovKw(it) })))
+    lines.push(ovFill(C.answers, {
+        pos_a: a.position.name, ans_a: t(ovAnswer(a) || "—"),
+        pos_b: b.position.name, ans_b: t(ovAnswer(b) || "—"),
+    }))
+        ;[a, b].forEach(it => { if (it.card.arcana === "major") lines.push(ovFill(C.major, { card: it.card.name })) })
+    let verdict, advice
+    if (sa !== sb) {
+        const w = sa > sb ? a : b, l = sa > sb ? b : a
+        verdict = ovFill(C.verdict.win, { win: w.position.name, lose: l.position.name })
+        advice = ovFill(C.advice.win, { win: w.position.name })
+    } else {
+        const k = sa >= 1 ? "tie_good" : sa <= -1 ? "tie_hard" : "tie_mixed"
+        verdict = C.verdict[k]
+        advice = C.advice[k]
+    }
+    lines.push(verdict)
+    const majors = items.filter(i => i.card.arcana === "major")
+    const reversed = items.filter(i => i.isReversed)
+    return {
+        title: C.title,
+        chips: [ovFill(T.chips.majors, { n: majors.length }), ovFill(T.chips.reversed, { n: reversed.length })],
+        lines,
+        adviceTitle: T.advice.title,
+        advice,
+    }
+}
 function overviewDataRaw(items) {
-    if (!items || items.length < 3) return null
-
     const T = OVERVIEW_BY_LANG[getLang()] || overviewRu
+    if (items && items.length === 2 && items[0].position && items[0].position.key === "option_a") return choiceOverview(items, T)
+    if (!items || items.length < 3) return null
     const n = items.length
     const majors = items.filter(i => i.card.arcana === "major")
     const minors = items.filter(i => i.card.arcana !== "major")
@@ -3324,12 +3373,24 @@ function overviewDataRaw(items) {
             if (role.key === "outcome") ctx.outcome = { rev: !!it.isReversed }
             if (role.key === "obstacle") ctx.obstacle = { rev: !!it.isReversed }
         })
-        if (found.length < 2 && named.length >= 2 && T.positions.arc) {
+        if (found.length < 2 && named.length >= 2 && T.positions.arc && named[0].position.key !== "mon") {
             const f = named[0], l = named[named.length - 1]
             add(T.positions.arc, { first: f.position.name, card1: f.card.name, last: l.position.name, card2: l.card.name })
         }
     } catch (e) { console.error("overview/positions:", e) }
 
+    // 4а-2. «Неделя»: самый удачный и самый трудный день, динамика недели
+    if (T.week && items.length === 7 && items.every(i => i.position && i.position.name) && items[0].position.key === "mon") try {
+        const sc = items.map(ovScore)
+        const bestI = sc.indexOf(Math.max(...sc))
+        const hardI = sc.indexOf(Math.min(...sc))
+        const dayVars = i => ({ day: items[i].position.name, card: items[i].card.name + (items[i].isReversed ? t(" (п.)") : ""), kw: ovKw(items[i]) })
+        if (sc[bestI] >= 1) add(T.week.best, dayVars(bestI))
+        if (sc[hardI] <= -1 && hardI !== bestI) add(T.week.hard, dayVars(hardI))
+        const avg = (x, y) => x.slice(y[0], y[1]).reduce((p, q) => p + q, 0) / (y[1] - y[0])
+        const d = avg(sc, [4, 7]) - avg(sc, [0, 3])
+        add(d >= 0.7 ? T.week.rising : d <= -0.7 ? T.week.falling : T.week.even, {})
+    } catch (e) { console.error("overview/week:", e) }
     // 4б. Нумерология: числа старших арканов и младших от туза до десятки (придворные не считаются)
     if (T.numerology) try {
         const numOf = i => {
@@ -3464,7 +3525,7 @@ function renderSpread(data, question) {
  
  
  
-    ${data.quickAnswer ? `
+    ${data.quickAnswer && !NO_OVERALL_ANSWER.has(data.spread && data.spread.id) ? `
  
         <div class="spread-answer ${answerClass(data.quickAnswer)}">
  
@@ -4614,7 +4675,7 @@ async function renderRecordImage(record, onStage) {
     const perCard = items.map(it => it.quickAnswer || quickAnswerFor(it.card && it.card.id, it.isReversed))
     const quick =
         record.quickAnswer ||
-        (record.type !== "spread" ? (perCard[0] || "") : aggregateQuickAnswer(perCard))
+        (record.type !== "spread" ? (perCard[0] || "") : NO_OVERALL_ANSWER.has(record.spreadId) ? "" : aggregateQuickAnswer(perCard))
 
     const ov = spreadDef ? overviewData(items) : null
 
@@ -4744,7 +4805,6 @@ async function renderRecordImage(record, onStage) {
                 ctx.stroke()
 
             }
-
             text(label, W / 2, y + 43, `700 34px ${FONT}`, positive ? "#8ee6ad" : negative ? "#ff9a9a" : GOLD, "center")
 
             y += 64 + 20
@@ -6030,6 +6090,7 @@ function showSettings() {
                     </button>
  
  
+ 
                     <button class="settings-option" disabled>
  
                         ${t("Тёмная")}
@@ -6291,7 +6352,6 @@ function showSettings() {
             }
 
         }
-
 
 
     document
@@ -7008,5 +7068,5 @@ async function showGuideScreen(title, fetchFn) {
 // Избранные карты
 // Звуки
 // Анимация переворота
-// Полноэкранный режим
+// Полноэкраный режим
 //
