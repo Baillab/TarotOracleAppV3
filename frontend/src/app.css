@@ -3091,7 +3091,6 @@ body {
 
 }
 
-
 /* =====================================================
    Адаптация
 ===================================================== */
@@ -5111,7 +5110,6 @@ body {
     border: 1px solid rgba(215, 180, 90, .3);
 
 
-
     background: rgba(45, 31, 62, .85);
 
 
@@ -6306,18 +6304,6 @@ button,
 
     }
 
-    :root[lang="fr"] .header-toggle::after {
-
-        content: "Masquer le menu";
-
-    }
-
-    :root[lang="fr"] .layout.header-collapsed .header-toggle::after {
-
-        content: "Menu";
-
-    }
-
     .layout.header-collapsed .logo,
     .layout.header-collapsed .menu,
     .layout.header-collapsed .spread-strip {
@@ -6463,7 +6449,6 @@ button,
         border-radius: 15px;
 
         border: 1px solid rgba(215, 180, 90, .32);
-
         background: rgba(45, 31, 62, .6);
 
         color: #f2deb0;

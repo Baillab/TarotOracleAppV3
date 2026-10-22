@@ -1,14 +1,13 @@
-S
+
 // Перевод данных, которые приходят из Go (карты, расклады, вопросы, руководство, юридические тексты).
 // Русские данные остаются в assets/tarot/*.json; английские лежат в locales/en.data.json
 // и подставляются по id карты / расклада / ключу позиции / русскому тексту.
 // Если перевода нет — остаётся русский оригинал. Для русского языка данные не трогаются вообще.
 
 import enData from './locales/en.data.json'
-import frData from './locales/fr.data.json'
 import { getLang, t } from './i18n.js'
 
-const DATA = { en: enData, fr: frData }
+const DATA = { en: enData }
 
 const CARD_ID = /^(major|wands|cups|swords|pentacles)_\d{2}$/
 
