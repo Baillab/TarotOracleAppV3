@@ -1632,7 +1632,6 @@ topbarClose.addEventListener("click", () => {
 })
 
 
-
 // Меню раскладов — оверлей по центру на затемнённом фоне
 
 function closeMenu() {
@@ -1694,6 +1693,7 @@ function updateChrome() {
     // На самом стартовом экране кнопки нет.
     topbarClose.hidden =
         result.children.length === 0 || !!result.querySelector(".welcome-deck")
+
 
 
     const bar =
@@ -3723,7 +3723,7 @@ function renderSpread(data, question) {
 
 
             card.className =
-                "spread-card" + (hlSet.best.has(index) ? " hl-best" : hlSet.worst.has(index) ? " hl-worst" : "")
+                "spread-card" + (NO_OVERALL_ANSWER.has(data.spread && data.spread.id) ? " ring-spread" : "") + (hlSet.best.has(index) ? " hl-best" : hlSet.worst.has(index) ? " hl-worst" : "")
             const hlMark = hlSet.best.has(index) ? ` <span class="hl-mark hl-mark-best">▲</span>` : hlSet.worst.has(index) ? ` <span class="hl-mark hl-mark-worst">▼</span>` : ""
             card.innerHTML = `
                 ${p.name ? `<div class="position-name">${p.name}${hlMark}</div>` : ""}
@@ -6194,6 +6194,7 @@ function showSettings() {
             </div>
  
  
+ 
             <div class="settings-group">
  
  
@@ -6402,7 +6403,6 @@ function showSettings() {
                     return
 
                 }
-
 
 
                 showInfoModal(
