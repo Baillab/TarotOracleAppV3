@@ -1766,7 +1766,6 @@ body {
 }
 
 
-
 .tab-panel[data-tab-panel="career"] {
 
     border-left-color: #7ba7e0;
@@ -3193,6 +3192,7 @@ body {
     background: rgba(45, 31, 62, .95);
 
 
+
     border: 1px solid rgba(215, 180, 90, .35);
 
 
@@ -3229,7 +3229,6 @@ body {
 
 
 .history-list {
-
 
     position: absolute;
 
@@ -4866,6 +4865,7 @@ body {
    Экран "Руководство пользователя"
 ===================================================== */
 
+
 .guide-screen {
 
 
@@ -4972,8 +4972,6 @@ body {
 
 
     color: #d7b45a;
-
-
 
     font-size: 15px;
 
@@ -7640,6 +7638,22 @@ body[data-bg="classic"] {
 }
 
 .spread-card.ring-spread .card-name {
+    min-height: 3.6em;
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+/* «Три карты», «Отношения», «Подкова»: блоки подписей одинаковой высоты,
+   чтобы карты на одном уровне стояли ровно */
+.spread-card.align-spread .position-name {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 2.4em;
+    line-height: 1.2;
+}
+
+.spread-card.align-spread .card-name {
     min-height: 3.6em;
     line-height: 1.2;
 }

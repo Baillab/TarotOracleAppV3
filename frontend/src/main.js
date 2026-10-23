@@ -1597,7 +1597,6 @@ async function loadSpreads() {
 // Телефон: верхняя строка, меню раскладов, заголовок режима
 // ==========================================
 
-
 const layoutEl =
     document.querySelector(".layout")
 
@@ -1630,6 +1629,7 @@ topbarClose.addEventListener("click", () => {
     showWelcomeDeck()
 
 })
+
 
 
 // Меню раскладов — оверлей по центру на затемнённом фоне
@@ -3112,7 +3112,6 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 
 
     // плашка с вопросом и кнопка 📝 лежат над нижней панелью
-
     const q =
         document.querySelector(".spread-question")
 
@@ -3209,6 +3208,8 @@ function cardsCount(k) {
 
 // Расклады, у которых нет «общего ответа» Да/Нет (там сравниваются варианты или дни)
 const NO_OVERALL_ANSWER = new Set(["choice", "week"])
+// Расклады, где карты одного ряда выравниваются по высоте (одинаковые блоки подписей)
+const ALIGN_SPREADS = new Set(["three", "relationship", "horseshoe"])
 function ovKw(it) {
     const k = Array.isArray(it.card.keywords) ? it.card.keywords.slice(0, 3).join(", ").toLowerCase() : ""
     return k ? (getLang() === "fr" ? " : " : ": ") + k : ""
@@ -3723,7 +3724,7 @@ function renderSpread(data, question) {
 
 
             card.className =
-                "spread-card" + (NO_OVERALL_ANSWER.has(data.spread && data.spread.id) ? " ring-spread" : "") + (hlSet.best.has(index) ? " hl-best" : hlSet.worst.has(index) ? " hl-worst" : "")
+                "spread-card" + (NO_OVERALL_ANSWER.has(data.spread && data.spread.id) ? " ring-spread" : "") + (ALIGN_SPREADS.has(data.spread && data.spread.id) ? " align-spread" : "") + (hlSet.best.has(index) ? " hl-best" : hlSet.worst.has(index) ? " hl-worst" : "")
             const hlMark = hlSet.best.has(index) ? ` <span class="hl-mark hl-mark-best">▲</span>` : hlSet.worst.has(index) ? ` <span class="hl-mark hl-mark-worst">▼</span>` : ""
             card.innerHTML = `
                 ${p.name ? `<div class="position-name">${p.name}${hlMark}</div>` : ""}
@@ -5573,7 +5574,6 @@ async function shareSaved(saved, blob, fileName) {
         }
 
         catch (e) {
-
             if (!e || e.name !== "AbortError") showToast(t("Не удалось поделиться"))
 
         }
@@ -6403,6 +6403,7 @@ function showSettings() {
                     return
 
                 }
+
 
 
                 showInfoModal(
