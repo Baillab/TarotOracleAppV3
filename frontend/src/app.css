@@ -1678,7 +1678,6 @@ body {
 }
 
 
-
 .card-tab-panels {
 
 
@@ -1717,7 +1716,6 @@ body {
 
 
     border-radius: 10px;
-
 
 
     background: rgba(0, 0, 0, .18);
@@ -1764,6 +1762,7 @@ body {
     background: rgba(224, 121, 153, .1);
 
 }
+
 
 
 .tab-panel[data-tab-panel="career"] {
@@ -3229,6 +3228,7 @@ body {
 
 
 .history-list {
+
 
     position: absolute;
 
@@ -4972,6 +4972,8 @@ body {
 
 
     color: #d7b45a;
+
+
 
     font-size: 15px;
 
@@ -7656,4 +7658,70 @@ body[data-bg="classic"] {
 .spread-card.align-spread .card-name {
     min-height: 3.6em;
     line-height: 1.2;
+}
+
+
+/* подсказка новичку на мобильной главной */
+
+.hint-arrow {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .topbar-menu.hint-pulse {
+        animation: hintPulse 2.6s ease-in-out infinite;
+    }
+
+    .topbar .hint-arrow {
+        display: block;
+        position: absolute;
+        left: 58px;
+        top: 41px;
+        width: 9px;
+        height: 9px;
+        border-top: 1.5px solid rgba(240, 215, 140, .85);
+        border-left: 1.5px solid rgba(240, 215, 140, .85);
+        transform: rotate(45deg);
+        pointer-events: none;
+        animation: hintBob 2.2s ease-in-out infinite;
+    }
+}
+
+@keyframes hintPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(232, 200, 120, 0);
+        border-color: rgba(215, 180, 90, .32);
+    }
+
+    50% {
+        box-shadow: 0 0 8px 1px rgba(232, 200, 120, .38);
+        border-color: rgba(240, 215, 140, .7);
+    }
+}
+
+@keyframes hintBob {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(45deg);
+        opacity: .55;
+    }
+
+    50% {
+        transform: translateY(5px) rotate(45deg);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .topbar-menu.hint-pulse {
+        animation: none;
+        border-color: rgba(240, 215, 140, .7);
+    }
+
+    .topbar .hint-arrow {
+        animation: none;
+    }
 }

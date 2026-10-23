@@ -1646,6 +1646,27 @@ document
     .querySelector("#topbar-menu")
     .onclick = () => layoutEl.classList.toggle("menu-open")
 
+// подсказка новичку: «Расклады» мягко пульсирует и под кнопкой качается
+// стрелка — до первого выбора расклада (флаг хранится на устройстве)
+
+function hintSeen() {
+    try { return localStorage.getItem("tarot.hintSeen") === "1" } catch (e) { return false }
+}
+
+function dismissStartHint() {
+    try { localStorage.setItem("tarot.hintSeen", "1") } catch (e) { }
+    document.querySelector("#topbar-menu")?.classList.remove("hint-pulse")
+    document.querySelector("#topbar .hint-arrow")?.remove()
+}
+
+if (!hintSeen()) {
+    document.querySelector("#topbar-menu").classList.add("hint-pulse")
+    const arrow = document.createElement("span")
+    arrow.className = "hint-arrow"
+    arrow.setAttribute("aria-hidden", "true")
+    document.querySelector("#topbar").appendChild(arrow)
+}
+
 document
     .querySelector("#menu-backdrop")
     .onclick = closeMenu
@@ -1657,6 +1678,7 @@ document
     .querySelector("#menu-panel")
     .addEventListener("click", (e) => {
 
+        if (e.target.closest(".spread-button")) dismissStartHint()
         if (e.target.closest(".action-button, .spread-button")) closeMenu()
 
     })
@@ -3112,6 +3134,7 @@ function fitSpreadToViewport(canvas, pts, spreadWidth, spreadHeight, margin, bas
 
 
     // плашка с вопросом и кнопка 📝 лежат над нижней панелью
+
     const q =
         document.querySelector(".spread-question")
 
@@ -4885,7 +4908,6 @@ async function renderRecordImage(record, onStage) {
                 return
 
             }
-
             const rot = ((it.position.rotation || 0) + (it.isReversed ? 180 : 0)) * Math.PI / 180
 
             if (withLabels && it.position.name) {
@@ -5574,6 +5596,7 @@ async function shareSaved(saved, blob, fileName) {
         }
 
         catch (e) {
+
             if (!e || e.name !== "AbortError") showToast(t("Не удалось поделиться"))
 
         }
